@@ -1,0 +1,28 @@
+import { Component, OnInit } from '@angular/core';
+import { version } from '../../../package.json';
+import ApiService from '../shared/api/api.service';
+
+@Component({
+    selector: 'app-statistics',
+    templateUrl: './statistics.component.html',
+    styleUrls: ['./statistics.component.less']
+})
+export default class StatisticsComponent implements OnInit {
+
+    public appVersion?: string;
+    public interfaceVersion?: string;
+    public uniqueSessions?: string;
+
+    constructor(
+        private apiService: ApiService,
+    ) { }
+
+    ngOnInit(): void {
+        this.apiService.getServerStatus(data => {
+            this.appVersion = data.version;
+            this.uniqueSessions = data.uniqueSessions;
+            this.interfaceVersion = version;
+        });
+    }
+
+}

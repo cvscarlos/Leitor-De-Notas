@@ -1,0 +1,89 @@
+<!-- Errors messages -->
+<div *ngIf="noteErrors.length">
+  <div class="mt-3 p-3 bg-warning bg-gradient-warning small-font" >
+    <h3>Log</h3>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-warning" *ngFor="let note of noteErrors">
+        Página: <strong>{{note._page}}</strong> | Arquivo: <strong>{{note.fileName}}</strong> | Nota: <strong>{{note.number}}</strong>
+        <ul>
+          <li *ngFor="let msg of note._messages">{{msg}}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Detalhes da nota -->
+<div *ngFor="let note of noteDetails;">
+  <div class="note small-font" [class.bg-danger.text-white]="!note.proofIsValid" *ngIf="note.showNote">
+    <hr />
+    <div class="row">
+      <div class="col-xs col-md-4">
+        <div class="note-data">
+          <h4>Dados da Nota</h4>
+          <table class="table table-sm">
+            <tbody>
+              <tr> <td>Nr. nota</td>          <td>{{ note.number }}</td> </tr>
+              <tr> <td>Data pregão</td>       <td>{{ note.date }}</td> </tr>
+              <tr> <td>Corretora</td>         <td>{{ note.broker }}</td> </tr>
+              <tr> <td>CPF/CNPJ</td>          <td>{{ note.cpf }}</td> </tr>
+              <tr> <td>Nome do arquivo</td>   <td>{{ note.fileName }}</td> </tr>
+              <tr> <td>Prova real</td>        <td>{{ note.proofIsValid ? 'Válida' : 'Inválida' }}</td> </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="financial-summary">
+          <h4>Resumo Financeiro</h4>
+          <table class="table table-sm">
+            <tbody>
+              <tr><td>Valor líquido das operações</td>	<td>{{ this.numberFormatService.br(note.netAmount) }}</td></tr>
+              <tr><td>Taxa de liquidação</td>				    <td>{{ this.numberFormatService.br(note.settlementTax) }}</td></tr>
+              <tr><td>Taxa de Registro</td>				      <td>{{ this.numberFormatService.br(note.registrationTax) }}</td></tr>
+              <tr><td>Taxa de termo/opções</td>		    	<td>{{ this.numberFormatService.br(note.optionsTax) }}</td></tr>
+              <tr><td>Taxa A.N.A</td>					        	<td>{{ this.numberFormatService.br(note.ANATax) }}</td></tr>
+              <tr><td>Emolumentos</td>			        		<td>{{ this.numberFormatService.br(note.emolument) }}</td></tr>
+              <tr><td>Total Bovespa / Soma</td>		    	<td>{{ this.numberFormatService.br(note.bovespaTotal) }}</td></tr>
+              <tr><td>Corretagem</td>					        	<td>{{ this.numberFormatService.br(note.clearing) }}</td></tr>
+              <tr><td>Impostos / ISS</td>			      		<td>{{ this.numberFormatService.br(note.ISSTax) }}</td></tr>
+              <tr><td>I.R.R.F.</td>					          	<td>{{ this.numberFormatService.br(note.IRRF) }}</td></tr>
+              <tr><td>Outras Bovespa</td>				      	<td>{{ this.numberFormatService.br(note.bovespaOthers) }}</td></tr>
+              <tr><td>Total corretagem/Despesas</td>		<td>{{ this.numberFormatService.br(note.brokerageTax) }}</td></tr>
+              <tr><td>Líquido D+x</td>				        	<td>{{ this.numberFormatService.br(note.futureNetAmount) }}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-xs col-md-8">
+        <h4>Negócios realizados </h4>
+        <table class="table table-sm table-striped trades">
+          <thead>
+            <tr>
+              <th>C/V</th>
+              <th>Tipo mercado</th>
+              <th>Prazo</th>
+              <th>Especificação do título</th>
+              <th>Obs. (*)</th>
+              <th>Quantidade</th>
+              <th>Preço / Ajuste</th>
+              <th>Valor Operação / Ajuste</th>
+              <th>D/C</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let trade of note.trades;">
+              <td>{{ trade.BS }}</td>
+              <td>{{ trade.marketType }}</td>
+              <td>{{ trade.time }}</td>
+              <td>{{ trade.securities }} <span *ngIf="trade.originalSecurities">({{ trade.originalSecurities }})</span></td>
+              <td>{{ trade.obs }}</td>
+              <td>{{ this.numberFormatService.br0(trade.quantity) }}</td>
+              <td>{{ this.numberFormatService.br(trade.price) }}</td>
+              <td>{{ this.numberFormatService.br(trade.itemTotal) }}</td>
+              <td>{{ trade.DC }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

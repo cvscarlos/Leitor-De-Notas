@@ -1,0 +1,49 @@
+<div class="custom-panel-md my-5">
+    <div class="row">
+        <div class="col">
+            <h3 class="text-center">Gerenciar membros</h3>
+            <p>Adicione ou consulte os membros de sua conta.</p>
+            
+            <div style="position: relative;">
+                <app-loading [show]="formLoading"></app-loading>
+
+                <form class="form" #f="ngForm" (ngSubmit)="submitMemberForm(f.form);" ngNativeValidate>
+                    <div class="form-row align-items-center">
+                        <div class="col-auto"> <label for="memberDoc" class="mb-2">Novo membro: </label> </div>
+                        <div class="col-auto">
+                            <input type="tel" class="form-control mb-2"
+                                id="memberDoc" 
+                                name="memberDoc" 
+                                required="true"
+                                placeholder="CPF (somente números)" 
+                                pattern="[0-9]{11}"
+                                onkeyup="this.value=this.value.trim()" 
+                                aria-describedby="memberDocHelp"
+                                ngModel />
+                            </div>
+                        <div class="col-md-auto col-sm">
+                            <button type="submit" class="btn btn-primary mb-2">Adicionar</button>
+                        </div>
+                        <small id="memberDocHelp" class="form-text text-muted">
+                            ATENÇÃO, certifique-se de adicionar o CPF corretamente, não será possível editar depois.
+                        </small>
+                    </div>
+                </form>
+            </div>
+
+            
+            
+            <hr />
+            <div class="members-list">
+                <h6>Lista de membros</h6>
+                <div class="members-list" style="position: relative;">
+                    <app-loading [show]="membersListLoading"></app-loading>
+                    <ul>
+                        <li *ngFor="let doc of membersList;">{{doc}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

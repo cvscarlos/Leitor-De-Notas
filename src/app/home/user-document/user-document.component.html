@@ -1,0 +1,39 @@
+<div class="custom-panel-sm my-5" style="position: relative;" *ngIf="showUserDocumentForm">
+    <app-loading [show]="loading"></app-loading>
+
+    <div class="row">
+        <div class="col">
+            <h5>Dados do usuário</h5>
+
+            <div>
+                <p>
+                    Olá, para continuar utilizando o sistema é necessário que você informe o CPF/CNPJ.
+                    Lembre-se que este será o mesmo CPF/CNPJ no qual as suas notas devem ser enviadas.
+                </p>
+                
+                <form class="form" #f="ngForm" (ngSubmit)="submitUserDocumentForm(f.form);" ngNativeValidate>
+                    <div class="form-group">
+                        <label for="userDoc">CPF/CNPJ <i>(somente números)</i></label>
+                        <input type="tel" class="form-control form-control-lg"
+                            required="true"
+                            placeholder="CPF/CNPJ (somente números)"
+                            pattern="[0-9]{11,14}"
+                            onkeyup="this.value=this.value.trim()"
+                            id="userDoc"
+                            name="userDoc"
+                            ngModel />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-block btn-primary">Salvar</button>
+                    </div>
+                </form>
+
+
+                <hr/>
+                <div class="text-center font-small">
+                    <a href="javascript:void(0);" (click)="accountDelete()" class="text-danger">excluir conta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

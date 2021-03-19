@@ -1,0 +1,55 @@
+
+<div class="row m-3 mb-5 p-2 bg-light rounded mx-auto text-center shadow border" id="login"
+    style="display: none;"
+    [appSlideToggle]="!sessionService.isAuthenticated"
+    (appSlideState)="loginSlideState = $event"
+    *ngIf="!sessionService.isAuthenticated || loginSlideState != 'hidden'" >
+
+    <div class="col">
+        <app-loading [show]="loading"></app-loading>
+
+        <h5 class="h3">Faça login</h5>
+
+        <div [appSlideToggle]="!emailFormSent">
+            <form class="form" [formGroup]="emailForm" (submit)="submitEmailForm()">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        required
+                        autofocus
+                        formControlName="email"
+                        [class.is-invalid]="!emailForm.get('email')?.valid && emailForm.get('email')?.touched"
+                        class="form-control form-control-lg"
+                        placeholder="examplo@email.com" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-block btn-primary">Entrar com email</button>
+                </div>
+            </form>
+        </div>
+
+        <div style="display: none;" [appSlideToggle]="emailFormSent" *ngIf="emailFormSent">
+            <form class="form" [formGroup]="tokenForm" (submit)="submitTokenForm()" action="#">
+                <p>Enviamos um código de acesso para o SEU E-MAIL.<br/>Pode ser que leve até 5 minutos para o e-mail chegar.</p>
+                <p>Informe no campo abaixo o código enviado em seu email.</p>
+                <div class="form-group">
+                    <label for="token"><strong>Token:</strong></label>
+                    <input type="tel" name="token" formControlName="token" class="form-control form-control-lg" required="true" placeholder="000000" autocomplete="off" appAutofocus>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-block btn-primary">Enviar</button>
+                </div>
+            </form>
+            <p style="display:none;" class="display-1 text-success"><i class="fas fa-check-circle"></i></p>
+        </div>
+        <hr />
+
+        <div>
+            <div class="form-group"> <button class="btn btn-light btn-lg border rounded border-primary" (click)="redirectToOAuth('google')"><img src="/assets/google.png" class="align-text-bottom" width="24"> | Entrar com Google</button> </div>
+            <div class="form-group"> <button class="btn btn-light btn-lg border rounded border-primary" (click)="redirectToOAuth('facebook')"><img src="/assets/facebook.png" class="align-text-bottom" width="24"> | Entrar com Facebook</button> </div>
+            <div class="form-group"> <button class="btn btn-light btn-lg border rounded border-primary" (click)="redirectToOAuth('microsoft')"><img src="/assets/microsoft.png" class="align-text-bottom" width="24"> | Entrar com Microsoft</button> </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+@use "bootstrap";
+
+.small-font {
+    &, .btn, .form-control { font-size: 0.75rem; }
+    .h4, h4 { font-size: 1.125rem; }
+    h3 { font-size: 1.3125rem; }
+}
+
+a {
+    text-decoration: underline;
+    svg { text-decoration: none; }
+}
+
+.custom-panel {
+    max-width: 980px;
+    @extend .rounded;
+    @extend .shadow-sm;
+    @extend .border;
+    @extend .my-1;
+    @extend .p-4;
+    @extend .mx-auto;
+}
+
+.custom-panel-sm {
+    @extend .custom-panel;
+    max-width: 500px;
+}
+
+.custom-panel-md {
+    @extend .custom-panel;
+    max-width: 800px;
+}
