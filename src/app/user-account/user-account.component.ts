@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import ApiService from '../shared/api/api.service';
+import {ApiService} from '../shared/api/api.service';
 import GenericObject from '../shared/generic-object.interface';
 import NotifyService from '../shared/notify/notify.service';
 import NumberFormatService from '../shared/number-format/number-format.service';

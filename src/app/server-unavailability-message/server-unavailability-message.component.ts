@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import ApiService from '../shared/api/api.service';
+import { ApiService } from '../shared/api/api.service';
 
 declare global {
     interface Window { dataLayer: any }
@@ -16,7 +16,7 @@ export default class ServerUnavailabilityMessageComponent implements OnInit {
     public serverStatus = 0;
 
     constructor(
-        private api: ApiService
+        public apiService: ApiService
     ) { }
 
     ngOnInit(): void {
@@ -46,7 +46,7 @@ export default class ServerUnavailabilityMessageComponent implements OnInit {
             this.gaCustomEvent([evtCat, '120 seg', '']);
         }, 120 * 1000);
 
-        this.api.getServerStatus(() => {
+        this.apiService.getServerStatus(() => {
             clearTimeout(msg30s);
             clearTimeout(msg60s);
             clearTimeout(msg90s);

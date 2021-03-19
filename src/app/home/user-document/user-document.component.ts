@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import ApiService from 'src/app/shared/api/api.service';
+import { ApiService } from 'src/app/shared/api/api.service';
 import NotifyService from 'src/app/shared/notify/notify.service';
 import SessionService from 'src/app/shared/session/session.service';
 import UserService from 'src/app/shared/user/user.service';
@@ -23,7 +23,7 @@ export default class UserDocumentComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.apiService.userMe().then(data => {
+        this.apiService.userMe().then((data: any) => {
             this.showUserDocumentForm = this.sessionService.isAuthenticated && !data.userDoc;
         });
     }

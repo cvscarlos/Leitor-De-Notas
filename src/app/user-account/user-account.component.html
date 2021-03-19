@@ -26,15 +26,16 @@
 
                 <ul class="list-group mb-4" *ngIf="userTransactions.results">
                     <li class="list-group-item" *ngFor="let tran of userTransactions.response">
-                        {{tran.desc}}<br/>
-                        <span *ngIf="tran.email">- <i>Associada ao email: {{tran.email}}</i></span>
-                        <span *ngIf="!tran.email">
+                        <div>{{tran.desc}}</div>
+                        <div *ngIf="tran.email">- <i>Associada ao email: {{tran.email}}</i></div>
+                        <div *ngIf="tran.lockedUserDoc">- <i>Limitado ao CPF/CNPJ: {{tran.lockedUserDoc}}</i></div>
+                        <div *ngIf="!tran.email && !tran.lockedUserDoc">
                             - <a href="javascript:void(0);" (click)="tpl.showConnectTransaction=true">Associar a outra conta</a>
                             <span class="alert alert-info" style="display:none" [appSlideToggle]="tpl.showConnectTransaction">
                                 Código: <input type="text" value={{tran.connectCode}} readonly onclick="this.select()">
                                 <p class="small-font">Copie e envie esse código para algém que você deseje que tenha a conta associada a esta transação.</p>
                             </span>
-                        </span>
+                        </div>
                     </li>
                 </ul>
 

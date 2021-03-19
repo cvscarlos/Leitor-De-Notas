@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import SharedModule from '../shared/shared.module';
 import UserAccountComponent from './user-account.component';
 import LoadingModule from '../loading/loading.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 
@@ -14,6 +15,7 @@ import LoadingModule from '../loading/loading.module';
         FormsModule,
         SharedModule,
         LoadingModule,
+        AppRoutingModule,
     ],
     exports: [UserAccountComponent]
 })

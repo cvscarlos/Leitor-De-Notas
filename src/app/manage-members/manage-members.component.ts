@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import ApiService from '../shared/api/api.service';
+import { ApiService } from '../shared/api/api.service';
 import NotifyService from '../shared/notify/notify.service';
 
 @Component({
@@ -37,7 +37,7 @@ export default class ManageMembersComponent implements OnInit {
 
     private getMembers() {
         this.membersListLoading = true;
-        this.apiService.userMembersList(data => {
+        this.apiService.userMembersList((data: any) => {
             this.membersList = data.members;
             this.membersListLoading = false;
         });

@@ -17,7 +17,7 @@ type RequestMethod = 'post' | 'delete' | 'patch' | 'get';
 @Injectable({
     providedIn: 'root'
 })
-export default class ApiService {
+export class ApiService {
     private cachedRequests: { [x: string]: ReplaySubject<any> } = {};
 
     constructor(

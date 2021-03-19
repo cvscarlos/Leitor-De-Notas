@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import ApiService from '../api/api.service';
+import {ApiService} from '../api/api.service';
 import NotifyService from '../notify/notify.service';
 import SessionService from '../session/session.service';
 

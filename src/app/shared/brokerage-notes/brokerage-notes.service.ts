@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import ApiService from '../api/api.service';
+import {ApiService} from '../api/api.service';
 import BrokerageNotes from './brokerage-notes.interface';
 
 type NotesArray = { notesList: BrokerageNotes[]; noteDetails: any[]; noteErrors: any[] };

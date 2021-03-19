@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import ApiService from '../shared/api/api.service';
+import { ApiService } from '../shared/api/api.service';
 import NotifyService from '../shared/notify/notify.service';
 import SessionService from '../shared/session/session.service';
 
@@ -20,7 +20,7 @@ export default class PrivacyComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.apiService.userMe().then(data => {
+        this.apiService.userMe().then((data: any) => {
             this.showAcceptTermsButton = !data.termsAccepted;
         });
     }

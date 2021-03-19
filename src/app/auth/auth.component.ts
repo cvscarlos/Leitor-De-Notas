@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import SessionService from '../shared/session/session.service';
-import ApiService, {OauthProvider} from '../shared/api/api.service';
+import {ApiService, OauthProvider} from '../shared/api/api.service';
 import NotifyService from '../shared/notify/notify.service';
+import SessionService from '../shared/session/session.service';
 
 @Component({
     selector: 'app-auth',
