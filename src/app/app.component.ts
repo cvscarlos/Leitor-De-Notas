@@ -14,7 +14,7 @@ export class AppComponent {
         if (routerTags.length) {
             window.scroll(
                 0,
-                Math.max(routerTags[0].offsetTop - 65, 0)
+                Math.max(routerTags[0].offsetTop - 110, 0)
             );
         }
         else {
