@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import AuthComponent from './auth.component';
-import SharedModule from '../shared/shared.module';
-import LoadingModule from '../loading/loading.module';
+import { AuthComponent } from './auth.component';
+import { SharedModule } from '../shared/shared.module';
+import { LoadingModule } from '../loading/loading.module';
 
 
 
@@ -18,4 +18,4 @@ import LoadingModule from '../loading/loading.module';
     ],
     exports: [AuthComponent]
 })
-export default class AuthModule { }
+export class AuthModule { }

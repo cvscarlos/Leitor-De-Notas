@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import LoadingComponent from './loading.component';
+import { LoadingComponent } from './loading.component';
 
 
 
@@ -9,4 +9,4 @@ import LoadingComponent from './loading.component';
     imports: [CommonModule],
     exports: [LoadingComponent]
 })
-export default class LoadingModule { }
+export class LoadingModule { }

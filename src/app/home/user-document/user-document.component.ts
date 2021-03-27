@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/shared/api/api.service';
-import NotifyService from 'src/app/shared/notify/notify.service';
-import SessionService from 'src/app/shared/session/session.service';
-import UserService from 'src/app/shared/user/user.service';
+import { NotifyService } from 'src/app/shared/notify/notify.service';
+import { SessionService } from 'src/app/shared/session/session.service';
+import { UserService } from 'src/app/shared/user/user.service';
 
 @Component({
     selector: 'app-user-document',
     templateUrl: './user-document.component.html',
     styleUrls: ['./user-document.component.less']
 })
-export default class UserDocumentComponent implements OnInit {
+export class UserDocumentComponent implements OnInit {
 
     public loading = false;
     public showUserDocumentForm = false;

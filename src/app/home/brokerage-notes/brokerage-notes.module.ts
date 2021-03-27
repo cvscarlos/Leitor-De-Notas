@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import BrokerageNotesComponent from './brokerage-notes.component';
-import SharedModule from '../../shared/shared.module';
+import { BrokerageNotesComponent } from './brokerage-notes.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 
@@ -17,4 +17,4 @@ import SharedModule from '../../shared/shared.module';
         BrokerageNotesComponent,
     ]
 })
-export default class BrokerageNotesModule { }
+export class BrokerageNotesModule { }

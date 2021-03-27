@@ -27,6 +27,7 @@
                 <ul class="list-group mb-4" *ngIf="userTransactions.results">
                     <li class="list-group-item" *ngFor="let tran of userTransactions.response">
                         <div>{{tran.desc}}</div>
+                        <div>{{tran.dateApproved | date:'dd/MM/yy'}} | <span class="text-secondary">{{tran.reference}}</span></div>
                         <div *ngIf="tran.email">- <i>Associada ao email: {{tran.email}}</i></div>
                         <div *ngIf="tran.lockedUserDoc">- <i>Limitado ao CPF/CNPJ: {{tran.lockedUserDoc}}</i></div>
                         <div *ngIf="!tran.email && !tran.lockedUserDoc">

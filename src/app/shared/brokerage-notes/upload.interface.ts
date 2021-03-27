@@ -1,4 +1,4 @@
-export default interface BrokerageNotes {
+export interface UploadInterface {
     filename: string;
     responseComplete: boolean;
     serverError: boolean;

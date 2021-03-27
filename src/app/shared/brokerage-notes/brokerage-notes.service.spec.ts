@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import BrokerageNotesService from './brokerage-notes.service';
+import { BrokerageNotesService } from './brokerage-notes.service';
 
 describe('BrokerageNotesService', () => {
   let service: BrokerageNotesService;

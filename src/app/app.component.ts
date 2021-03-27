@@ -5,11 +5,20 @@ import { Component } from '@angular/core';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.less']
 })
-export default class AppComponent {
+export class AppComponent {
 
     public headerMenuCollapsed = true;
 
     onActivate() {
-        window.scroll(0, 0);
+        const routerTags = document.getElementsByTagName('router-outlet') as HTMLCollectionOf<HTMLElement>;
+        if (routerTags.length) {
+            window.scroll(
+                0,
+                Math.max(routerTags[0].offsetTop - 65, 0)
+            );
+        }
+        else {
+            window.scroll(0, 0);
+        }
     }
 }

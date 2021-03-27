@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import {ApiService} from '../shared/api/api.service';
-import GenericObject from '../shared/generic-object.interface';
-import NotifyService from '../shared/notify/notify.service';
-import NumberFormatService from '../shared/number-format/number-format.service';
-import SessionService from '../shared/session/session.service';
-import UserService from '../shared/user/user.service';
-import UserComponent from '../user/user.component';
+import { ApiService } from '../shared/api/api.service';
+import { GenericObject } from '../shared/generic-object.interface';
+import { NotifyService } from '../shared/notify/notify.service';
+import { NumberFormatService } from '../shared/number-format/number-format.service';
+import { SessionService } from '../shared/session/session.service';
+import { UserService } from '../shared/user/user.service';
+import { UserComponent } from '../user/user.component';
 
 
 @Component({
@@ -15,12 +15,12 @@ import UserComponent from '../user/user.component';
     templateUrl: './user-account.component.html',
     styleUrls: ['./user-account.component.less']
 })
-export default class UserAccountComponent extends UserComponent implements OnInit {
+export class UserAccountComponent extends UserComponent implements OnInit {
     public tpl: GenericObject = {};
     public transactionLoading = false;
     public userTransactions: GenericObject = {};
     public userUsageHistory: GenericObject = {};
-    public accountDeleteLoading=false;
+    public accountDeleteLoading = false;
 
     constructor(
         private notifyService: NotifyService,

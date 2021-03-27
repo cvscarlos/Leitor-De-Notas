@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import SharedModule from '../../shared/shared.module';
-import ExportToolComponent from './export-tool.component';
+import { SharedModule } from '../../shared/shared.module';
+import { ExportToolComponent } from './export-tool.component';
 
 
 
@@ -18,4 +18,4 @@ import ExportToolComponent from './export-tool.component';
         ExportToolComponent
     ]
 })
-export default class ExportToolModule { }
+export class ExportToolModule { }

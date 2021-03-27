@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import {ApiService, OauthProvider} from '../shared/api/api.service';
-import NotifyService from '../shared/notify/notify.service';
-import SessionService from '../shared/session/session.service';
+import { ApiService, OauthProvider } from '../shared/api/api.service';
+import { NotifyService } from '../shared/notify/notify.service';
+import { SessionService } from '../shared/session/session.service';
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.less']
 })
-export default class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit {
     public emailForm!: FormGroup;
     public emailFormSent = false;
     public loading = false;
@@ -76,7 +76,7 @@ export default class AuthComponent implements OnInit {
 
     public redirectToOAuth(provider: OauthProvider) {
         this.api.oAuthUrl(provider, (data) => {
-            window.location.href=data.url;
+            window.location.href = data.url;
         });
     }
 

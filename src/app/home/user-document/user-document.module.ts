@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import UserDocumentComponent from './user-document.component';
-import LoadingModule from 'src/app/loading/loading.module';
+import { UserDocumentComponent } from './user-document.component';
+import { LoadingModule } from 'src/app/loading/loading.module';
 
 
 
@@ -15,4 +15,4 @@ import LoadingModule from 'src/app/loading/loading.module';
     ],
     exports: [UserDocumentComponent]
 })
-export default class UserDocumentModule { }
+export class UserDocumentModule { }

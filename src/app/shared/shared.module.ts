@@ -19,4 +19,4 @@ import SlideToggleDirective from './slide-toggle/slide-toggle.directive';
         AutofocusDirective,
     ]
 })
-export default class SharedModule { }
+export class SharedModule { }

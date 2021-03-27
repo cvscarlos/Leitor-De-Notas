@@ -7,18 +7,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { CookieService } from 'ngx-cookie-service';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
-import AppComponent from './app.component';
-import AuthModule from './auth/auth.module';
-import HomeModule from './home/home.module';
-import LoadingModule from './loading/loading.module';
-import ManageMembersModule from './manage-members/manage-members.module';
-import PageNotFoundComponent from './page-not-found/page-not-found.component';
-import PrivacyModule from './privacy/privacy.module';
-import ServerUnavailabilityMessageModule from './server-unavailability-message/server-unavailability-message.module';
-import StatisticsComponent from './statistics/statistics.component';
-import UserAccountModule from './user-account/user-account.module';
-import UserBarComponent from './user-bar/user-bar.component';
-import UserEmailModule from './user-email/user-mail.module';
+import { AppComponent } from './app.component';
+import { HomeModule } from './home/home.module';
+import { LoadingModule } from './loading/loading.module';
+import { ManageMembersModule } from './manage-members/manage-members.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PrivacyModule } from './privacy/privacy.module';
+import { ServerUnavailabilityMessageModule } from './server-unavailability-message/server-unavailability-message.module';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { UserAccountModule } from './user-account/user-account.module';
+import { UserBarComponent } from './user-bar/user-bar.component';
+import { UserEmailModule } from './user-email/user-email.module';
 
 
 
@@ -36,7 +35,6 @@ import UserEmailModule from './user-email/user-mail.module';
         CollapseModule.forRoot(),
         HttpClientModule,
 
-        AuthModule,
         HomeModule,
         LoadingModule,
         ManageMembersModule,

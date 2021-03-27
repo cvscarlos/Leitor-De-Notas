@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import BrokerageNotesService from '../../shared/brokerage-notes/brokerage-notes.service';
-import BrokerageNotes from '../../shared/brokerage-notes/brokerage-notes.interface';
-import NumberFormatService from '../../shared/number-format/number-format.service';
+import { BrokerageNotesService } from '../../shared/brokerage-notes/brokerage-notes.service';
+import { UploadInterface } from '../../shared/brokerage-notes/upload.interface';
+import { NumberFormatService } from '../../shared/number-format/number-format.service';
 
 @Component({
     selector: 'app-brokerage-notes',
     templateUrl: './brokerage-notes.component.html',
     styleUrls: ['./brokerage-notes.component.less']
 })
-export default class BrokerageNotesComponent implements OnInit {
+export class BrokerageNotesComponent implements OnInit {
     public noteDetails: any[] = [];
     public noteErrors: any[] = [];
-    public notes: BrokerageNotes[] = [];
+    public notes: UploadInterface[] = [];
 
     constructor(
         private notesService: BrokerageNotesService,

@@ -4,14 +4,14 @@ import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { share } from 'rxjs/operators';
 
-import GenericObject from '../generic-object.interface';
-import SessionService from '../session/session.service';
-import NotifyService from '../notify/notify.service';
+import { GenericObject } from '../generic-object.interface';
+import { SessionService } from '../session/session.service';
+import { NotifyService  } from '../notify/notify.service';
 
 
 
-type Callback = (data: any) => void;
 export type OauthProvider = 'google' | 'facebook' | 'microsoft';
+type Callback = (data: any) => void;
 type RequestMethod = 'post' | 'delete' | 'patch' | 'get';
 
 @Injectable({

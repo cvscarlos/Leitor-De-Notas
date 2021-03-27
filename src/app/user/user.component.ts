@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {ApiService} from '../shared/api/api.service';
-import GenericObject from '../shared/generic-object.interface';
-import SessionService from '../shared/session/session.service';
+import { ApiService } from '../shared/api/api.service';
+import { GenericObject } from '../shared/generic-object.interface';
+import { SessionService } from '../shared/session/session.service';
 
 @Component({
     selector: 'app-user',
     template: '<b>User Component</b>',
 })
-export default class UserComponent implements OnInit {
+export class UserComponent implements OnInit {
 
     public user: GenericObject = {};
     public loading = false;

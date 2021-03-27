@@ -1,3 +1,3 @@
-export default interface GenericObject {
+export interface GenericObject {
     [x: string]: any;
 }

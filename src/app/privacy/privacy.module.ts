@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import PrivacyComponent from './privacy.component';
-import LoadingModule from '../loading/loading.module';
+import { PrivacyComponent } from './privacy.component';
+import { LoadingModule } from '../loading/loading.module';
 
 
 
@@ -13,4 +13,4 @@ import LoadingModule from '../loading/loading.module';
     ],
     exports: [PrivacyComponent]
 })
-export default class PrivacyModule { }
+export class PrivacyModule { }

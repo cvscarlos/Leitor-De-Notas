@@ -1,11 +1,11 @@
-import { Directive, HostListener, HostBinding, Renderer2, ElementRef } from '@angular/core';
+import { Directive, HostListener, Renderer2, ElementRef } from '@angular/core';
 
-import BrokerageNotesService from '../../shared/brokerage-notes/brokerage-notes.service';
+import { BrokerageNotesService } from '../../shared/brokerage-notes/brokerage-notes.service';
 
 @Directive({
     selector: '[appUpload]'
 })
-export default class UploadDirective {
+export class UploadDirective {
 
     constructor(
         private notesService: BrokerageNotesService,

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import LoadingModule from '../loading/loading.module';
-import SharedModule from '../shared/shared.module';
-import UserEmailComponent from './user-email.component';
+import { LoadingModule } from '../loading/loading.module';
+import { SharedModule } from '../shared/shared.module';
+import { UserEmailComponent } from './user-email.component';
 
 
 
@@ -17,4 +17,4 @@ import UserEmailComponent from './user-email.component';
     ],
     exports: [UserEmailComponent]
 })
-export default class UserMailModule { }
+export class UserEmailModule { }

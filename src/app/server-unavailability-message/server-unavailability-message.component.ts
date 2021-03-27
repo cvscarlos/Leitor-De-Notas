@@ -11,7 +11,7 @@ declare global {
     templateUrl: './server-unavailability-message.component.html',
     styleUrls: ['./server-unavailability-message.component.less']
 })
-export default class ServerUnavailabilityMessageComponent implements OnInit {
+export class ServerUnavailabilityMessageComponent implements OnInit {
 
     public serverStatus = 0;
 

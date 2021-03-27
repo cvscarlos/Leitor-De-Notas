@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ApiService } from '../shared/api/api.service';
-import NotifyService from '../shared/notify/notify.service';
+import { NotifyService } from '../shared/notify/notify.service';
 
 @Component({
     selector: 'app-manage-members',
     templateUrl: './manage-members.component.html',
     styleUrls: ['./manage-members.component.less']
 })
-export default class ManageMembersComponent implements OnInit {
+export class ManageMembersComponent implements OnInit {
 
     public formLoading = false;
     public membersListLoading = false;

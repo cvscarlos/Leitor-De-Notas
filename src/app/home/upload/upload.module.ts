@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import UploadComponent from './upload.component';
-import UploadDirective from './upload.directive';
+import { UploadComponent } from './upload.component';
+import { UploadDirective } from './upload.directive';
 
 @NgModule({
     declarations: [
@@ -15,4 +15,4 @@ import UploadDirective from './upload.directive';
         UploadComponent
     ]
 })
-export default class UploadModule { }
+export class UploadModule { }

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, UrlSegment } from '@angular/router';
-import AuthService from './auth/auth.service';
-import HomeComponent from './home/home.component';
-import ManageMembersComponent from './manage-members/manage-members.component';
-import PageNotFoundComponent from './page-not-found/page-not-found.component';
-import PrivacyComponent from './privacy/privacy.component';
-import UsageLimitComponent from './usage-limit/usage-limit.component';
-import UserAccountComponent from './user-account/user-account.component';
-import UserEmailComponent from './user-email/user-email.component';
+import { AuthService } from './auth/auth.service';
+import { HomeComponent } from './home/home.component';
+import { ManageMembersComponent } from './manage-members/manage-members.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { UsageLimitComponent } from './usage-limit/usage-limit.component';
+import { UserAccountComponent } from './user-account/user-account.component';
+import { UserEmailComponent } from './user-email/user-email.component';
 
 
 const queryMatcher = (queryToMatch: string): boolean => {

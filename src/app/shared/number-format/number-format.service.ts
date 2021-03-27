@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export default class NumberFormatService {
+export class NumberFormatService {
 
     constructor() { }
 

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../shared/api/api.service';
-import NotifyService from '../shared/notify/notify.service';
-import SessionService from '../shared/session/session.service';
+import { NotifyService } from '../shared/notify/notify.service';
+import { SessionService } from '../shared/session/session.service';
 
 @Component({
     selector: 'app-privacy',
     templateUrl: './privacy.component.html',
     styleUrls: ['./privacy.component.less']
 })
-export default class PrivacyComponent implements OnInit {
+export class PrivacyComponent implements OnInit {
 
     public loading = false;
     public showAcceptTermsButton = false;

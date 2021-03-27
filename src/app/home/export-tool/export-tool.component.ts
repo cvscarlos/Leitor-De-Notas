@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import NP from 'number-precision';
 
-import BrokerageNotesService from '../../shared/brokerage-notes/brokerage-notes.service';
-import GenericObject from '../../shared/generic-object.interface';
-import NumberFormatService  from '../../shared/number-format/number-format.service';
+import { BrokerageNotesService } from '../../shared/brokerage-notes/brokerage-notes.service';
+import { GenericObject } from '../../shared/generic-object.interface';
+import { NumberFormatService } from '../../shared/number-format/number-format.service';
 
 
 
@@ -12,7 +12,7 @@ import NumberFormatService  from '../../shared/number-format/number-format.servi
     templateUrl: './export-tool.component.html',
     styleUrls: ['./export-tool.component.less']
 })
-export default class ExportToolComponent implements OnInit {
+export class ExportToolComponent implements OnInit {
     public dlombelloExportString = '';
     public excelExportString = '';
     public enableExport = false;
@@ -25,8 +25,12 @@ export default class ExportToolComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.notesService.noteCallback(note => {
+        this.notesService.noteCallback((note: GenericObject) => {
             try {
+                if (!note.trades) {
+                    return;
+                }
+
                 this.dlombelloParser(note);
                 this.excelParser(note);
                 this.enableExport = !!(this.dlombelloExportString.length || this.excelExportString.length);

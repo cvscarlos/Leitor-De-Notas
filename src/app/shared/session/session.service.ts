@@ -4,7 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 @Injectable({
     providedIn: 'root'
 })
-export default class SessionService {
+export class SessionService {
     private sessionId = '';
 
     constructor(

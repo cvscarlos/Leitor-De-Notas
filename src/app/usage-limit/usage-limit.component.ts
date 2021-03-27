@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-usage-limit',
-  templateUrl: './usage-limit.component.html',
-  styleUrls: ['./usage-limit.component.less']
+    selector: 'app-usage-limit',
+    templateUrl: './usage-limit.component.html',
+    styleUrls: ['./usage-limit.component.less']
 })
-export default class UsageLimitComponent implements OnInit {
+export class UsageLimitComponent implements OnInit {
 
-  constructor() { }
+    constructor() { }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

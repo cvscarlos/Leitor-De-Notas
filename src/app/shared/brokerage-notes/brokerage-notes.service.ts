@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import {ApiService} from '../api/api.service';
-import BrokerageNotes from './brokerage-notes.interface';
+import { ApiService } from '../api/api.service';
+import { UploadInterface } from './upload.interface';
 
-type NotesArray = { notesList: BrokerageNotes[]; noteDetails: any[]; noteErrors: any[] };
+type NotesArray = { notesList: UploadInterface[]; noteDetails: any[]; noteErrors: any[] };
 type NoteCallback = (note: { x: any }) => void;
 
 @Injectable({
     providedIn: 'root',
 })
-export default class BrokerageNotesService {
-    private notesList: BrokerageNotes[] = [];
+export class BrokerageNotesService {
+    private notesList: UploadInterface[] = [];
     private noteDetails: any[] = [];
     private noteErrors: any[] = [];
     private onNewNoteCallback: NoteCallback[] = [];
@@ -24,8 +24,7 @@ export default class BrokerageNotesService {
             return;
         }
 
-        // eslint-disable-next-line @typescript-eslint/prefer-for-of
-        for (let i = 0; i < files.length; i++) {
+        for (let i = 0; i < files.length; i++) { // eslint-disable-line @typescript-eslint/prefer-for-of
             this.upload(files[i]);
         }
     }
@@ -43,7 +42,7 @@ export default class BrokerageNotesService {
     }
 
     private upload(file: File): void {
-        const newFile: BrokerageNotes = {
+        const newFile: UploadInterface = {
             filename: file.name,
             responseComplete: false,
             serverError: false,
@@ -61,8 +60,13 @@ export default class BrokerageNotesService {
                 newFile.server = response;
                 this.parseDetails(response);
             })
-            .catch(err => { newFile.serverError = true; newFile.error = err; })
-            .finally(() => { newFile.responseComplete = true; });
+            .catch(err => {
+                newFile.serverError = true;
+                newFile.error = err;
+            })
+            .finally(() => {
+                newFile.responseComplete = true;
+            });
     }
 
     private parseDetails(serverResponse: any): void {
@@ -72,6 +76,7 @@ export default class BrokerageNotesService {
             }
 
             const note = serverResponse[n];
+
             note._error = note._error || false;
             note._messages = note._messages || [];
             note.showNote = note._noteReadCompletely && note.trades && note.trades.length;

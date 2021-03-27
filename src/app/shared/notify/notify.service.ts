@@ -6,7 +6,7 @@ type NotifyCallback = (result: SweetAlertResult) => void;
 @Injectable({
     providedIn: 'root'
 })
-export default class NotifyService {
+export class NotifyService {
 
     private queue: Array<{ options: SweetAlertOptions; callback: null | NotifyCallback }> = [];
 

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {ApiService} from '../shared/api/api.service';
-import NotifyService from '../shared/notify/notify.service';
-import SessionService from '../shared/session/session.service';
+import { NotifyService  } from '../shared/notify/notify.service';
+import { SessionService } from '../shared/session/session.service';
 
 @Component({
     selector: 'app-user-email',
     templateUrl: './user-email.component.html',
     styleUrls: ['./user-email.component.less']
 })
-export default class UserEmailComponent implements OnInit {
+export class UserEmailComponent implements OnInit {
 
     public loading = false;
     public tokenRequested = false;

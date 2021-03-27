@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
-import BrokerageNotes from '../../shared/brokerage-notes/brokerage-notes.interface';
-import BrokerageNotesService from '../../shared/brokerage-notes/brokerage-notes.service';
-import SessionService from '../../shared/session/session.service';
+import { UploadInterface } from '../../shared/brokerage-notes/upload.interface';
+import { BrokerageNotesService } from '../../shared/brokerage-notes/brokerage-notes.service';
+import { SessionService } from '../../shared/session/session.service';
 
 @Component({
     selector: 'app-upload',
     templateUrl: './upload.component.html',
     styleUrls: ['./upload.component.less']
 })
-export default class UploadComponent implements OnInit {
-    public notes: BrokerageNotes[] = [];
+export class UploadComponent implements OnInit {
+    public uploads: UploadInterface[] = [];
 
     constructor(
         public sessionService: SessionService,
@@ -18,7 +18,7 @@ export default class UploadComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.notes = this.notesService.getNotes().notesList;
+        this.uploads = this.notesService.getNotes().notesList;
     }
 
     public hasNotes(): boolean {
@@ -26,8 +26,11 @@ export default class UploadComponent implements OnInit {
     }
 
     public handleFileInput(event: Event): void {
-        const target = event.target as HTMLInputElement;
-        const files = target.files as FileList;
+        const input = event.target as HTMLInputElement;
+
+        const files = input.files as FileList;
         this.notesService.uploadFiles(files);
+
+        input.value = '';
     }
 }
