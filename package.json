@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "5.1.1-27.Mar",
+  "version": "5.2.0-08.Abr",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -23,6 +23,7 @@
     "bootstrap": "^4.6.0",
     "ngx-bootstrap": "^6.2.0",
     "ngx-cookie-service": "^11.0.2",
+    "ngx-mask": "^11.1.5",
     "number-precision": "^1.5.0",
     "rxjs": "^6.6.6",
     "sweetalert2": "^10.15.5",
@@ -42,7 +43,6 @@
     "@types/node": "^14.14.33",
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
-    "codelyzer": "^6.0.0",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",

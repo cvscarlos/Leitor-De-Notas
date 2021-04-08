@@ -14,6 +14,7 @@ export class UserDocumentComponent implements OnInit {
 
     public loading = false;
     public showUserDocumentForm = false;
+    public valid = true;
 
     constructor(
         private apiService: ApiService,
@@ -35,15 +36,25 @@ export class UserDocumentComponent implements OnInit {
     }
 
     public submitUserDocumentForm(form: FormGroup) {
-        this.loading = true;
+        if (form.status !== 'VALID') {
+            this.notifyService.error('CPF/CNPJ inválido');
+            return;
+        }
 
+        this.loading = true;
         this.apiService.userDocumentSave(form.value.userDoc, data => {
             if (data.error) {
-                this.notifyService.success(data._messages.join('\n'), () => { window.location.reload(); });
+                this.notifyService.success(
+                    data._messages.join('\n'),
+                    () => { window.location.reload(); }
+                );
             }
             else {
-                this.notifyService.success('Dados atualizados com sucesso!', () => { window.location.reload(); });
+                this.notifyService.success(
+                    'Dados atualizados com sucesso!',
+                    () => { window.location.reload(); }
+                );
             }
-        });
+        }).finally(() => { this.loading = false; });
     }
 }

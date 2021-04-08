@@ -78,7 +78,7 @@ export class ApiService {
     }
 
     public userDocumentSave(userDoc: string, callback: Callback) {
-        return this.post('pvt/user/me', { userDoc }, 'patch').subscribe(data => { callback(data); });
+        return this.returnPromise(this.post('pvt/user/me', { userDoc }, 'patch'), callback);
     }
 
     public userTransactionSave(code: string, callback: Callback) {
@@ -93,8 +93,8 @@ export class ApiService {
         return this.post('pvt/user/list-members').subscribe(data => { callback(data); });
     }
 
-    public userMemberSave(memberDoc: string) {
-        return this.post('pvt/user/add-member-document', { memberDoc });
+    public userMemberSave(memberDoc: string, callback: Callback) {
+        return this.returnPromise(this.post('pvt/user/add-member-document', { memberDoc }), callback);
     }
 
     public userNewEmailSave(newEmail: string) {
@@ -103,6 +103,18 @@ export class ApiService {
 
     public userNewEmailToken(newEmailToken: string) {
         return this.post('pvt/user/new-email-token', { newEmailToken });
+    }
+
+    private returnPromise(httpRequest: Observable<any>, callback: Callback): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            httpRequest.subscribe(
+                data => {
+                    callback(data);
+                    resolve(data);
+                },
+                err => { reject(err); }
+            );
+        });
     }
 
     private post(

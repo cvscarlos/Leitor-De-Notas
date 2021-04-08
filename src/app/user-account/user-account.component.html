@@ -10,7 +10,7 @@
                 <h5>Dados</h5>
                 <p>
                     Email: {{user.email}} (<a routerLink="/editar-email"><i>editar</i></a>)<br />
-                    CPF: {{user.userDoc}}<br />
+                    CPF: {{user.userDoc | mask: '000.000.000-00||00.000.000/0000-00'}}<br />
                     Limite: {{user.limit}}
                 </p>
                 <p *ngIf="user.allowManageMembers">

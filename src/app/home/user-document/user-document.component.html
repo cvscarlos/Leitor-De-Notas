@@ -15,12 +15,11 @@
                     <div class="form-group">
                         <label for="userDoc">CPF/CNPJ <i>(somente números)</i></label>
                         <input type="tel" class="form-control form-control-lg"
-                            required="true"
-                            placeholder="CPF/CNPJ (somente números)"
-                            pattern="[0-9]{11,14}"
-                            onkeyup="this.value=this.value.trim()"
                             id="userDoc"
+                            mask="000.000.000-00||00.000.000/0000-00"
                             name="userDoc"
+                            placeholder="CPF / CNPJ"
+                            required
                             ngModel />
                     </div>
                     <div class="form-group">

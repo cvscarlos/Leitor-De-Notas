@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { LoadingModule } from '../loading/loading.module';
 import { ManageMembersComponent } from './manage-members.component';
+import { NgModule } from '@angular/core';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -12,6 +13,7 @@ import { ManageMembersComponent } from './manage-members.component';
         CommonModule,
         FormsModule,
         LoadingModule,
+        NgxMaskModule.forRoot(),
     ],
     exports: [ManageMembersComponent]
 })

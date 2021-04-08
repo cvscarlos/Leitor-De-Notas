@@ -24,15 +24,21 @@ export class ManageMembersComponent implements OnInit {
     }
 
     public submitMemberForm(form: FormGroup) {
-        this.formLoading = true;
+        if (form.status !== 'VALID') {
+            this.notifyService.error('CPF/CNPJ inválido');
+            return;
+        }
 
-        this.apiService.userMemberSave(form.value.memberDoc.trim()).subscribe(() => {
+        this.formLoading = true;
+        this.apiService.userMemberSave(form.value.memberDoc.trim(), () => {
             this.notifyService.success('Membro adicionado', () => {
                 this.getMembers();
             });
             this.formLoading = false;
             form.reset();
-        }, () => { this.formLoading = false; });
+        }).finally(() => {
+            this.formLoading = false;
+        });
     }
 
     private getMembers() {
