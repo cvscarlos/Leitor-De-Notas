@@ -43,7 +43,7 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     public submitConnectTransactionForm(form: FormGroup): void {
         this.transactionLoading = true;
 
-        this.apiService.userTransactionSave(form.value.connectCode, data => {
+        this.apiService.userTransactionConnect(form.value.connectCode, data => {
             if (data.success) {
                 this.notifyService.success('A transação foi associada com o seu email', '', () => { window.location.reload(); });
             }

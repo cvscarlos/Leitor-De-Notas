@@ -81,8 +81,8 @@ export class ApiService {
         return this.returnPromise(this.post('pvt/user/me', { userDoc }, 'patch'), callback);
     }
 
-    public userTransactionSave(code: string, callback: Callback) {
-        return this.post('pvt/user/transactions', { code }).subscribe(data => { callback(data); });
+    public userTransactionConnect(code: string, callback: Callback) {
+        return this.post('pvt/user/connect-transaction', { code }).subscribe(data => { callback(data); });
     }
 
     public userAcceptTerms(callback: Callback) {
