@@ -30,3 +30,7 @@ a {
     @extend .custom-panel;
     max-width: 800px;
 }
+
+::placeholder {
+    font-style: italic;
+}

@@ -85,6 +85,10 @@ export class ApiService {
         return this.post('pvt/user/connect-transaction', { code }).subscribe(data => { callback(data); });
     }
 
+    public userMercadoPagoConnect(reference: string, callback: Callback) {
+        return this.post('pvt/user/connect-mp-transaction', { reference }).subscribe(data => { callback(data); });
+    }
+
     public userAcceptTerms(callback: Callback) {
         return this.post('pvt/user/me/terms-accepted').subscribe(data => { callback(data); });
     }

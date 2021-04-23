@@ -4,7 +4,7 @@ import { AnimationBuilder, AnimationFactory, AnimationPlayer, animate, style } f
 @Directive({
     selector: '[appSlideToggle]'
 })
-export default class SlideToggleDirective {
+export class SlideToggleDirective {
 
     @Input('appSlideToggle') set setState(state: string | boolean | null | undefined) {
         if (state === true || state === 'show') {

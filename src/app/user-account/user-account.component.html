@@ -49,8 +49,8 @@
 
                     <form class="alert alert-info" style="display: none;" action="#"
                         ngNativeValidate
-                        #f="ngForm"
-                        (ngSubmit)="submitConnectTransactionForm(f.form);"
+                        #connectTransactionF="ngForm"
+                        (ngSubmit)="submitConnectTransactionForm(connectTransactionF.form);"
                         [appSlideToggle]="tpl.connectTransaction">
                         <div class="form-group">
                             <label for="connectCode">Código:</label>
@@ -67,9 +67,38 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Salvar</button>
                     </form>
-                    <hr>
                 </div>
 
+                <div style="position: relative;">
+                    <app-loading [show]="mpOperationNumberLoading"></app-loading>
+
+                    <span>Possui um número de pagamento do Mercado Pago? <a href="javascript:void(0)" (click)="tpl.mpOperationNumber=true">Informar MP</a></span>
+
+                    <form class="alert alert-info" style="display: none;" action="#"
+                        ngNativeValidate
+                        #mpOperationNumberF="ngForm"
+                        (ngSubmit)="submitMpOperationNumber(mpOperationNumberF.form);"
+                        [appSlideToggle]="tpl.mpOperationNumber">
+                        <div class="form-group">
+                            <label for="connectCode">Referência de pagamento:</label>
+                            <input type="tel" class="form-control"
+                                placeholder="12312312312"
+                                autocomplete="false"
+                                required
+                                minlength="11"
+                                maxlength="11"
+                                id="mpOperationNumber"
+                                name="mpOperationNumber"
+                                ngModel />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Associar</button>
+                        <p class="mb-0 mt-2">Dúvidas onde localizar esse número? <a href="https://leitordenotas.customerly.help/minha-conta/como-localizar-o-numero-de-pagamento-do-mercado-pago" target="_blank">Clique aqui</a></p>
+                    </form>
+                    <hr>
+                </div>
+            </div>
+
+            <div>
                 <div *ngIf="userUsageHistory.result?.length">
                     <h5>Histórico de uso</h5>
 
