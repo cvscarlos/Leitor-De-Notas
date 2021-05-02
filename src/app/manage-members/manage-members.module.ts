@@ -4,11 +4,15 @@ import { LoadingModule } from '../loading/loading.module';
 import { ManageMembersComponent } from './manage-members.component';
 import { NgModule } from '@angular/core';
 import { NgxMaskModule } from 'ngx-mask';
+import { CpfCnpjPipe } from '../pipes/cpf-cnpj/cpf-cnpj.pipe';
 
 
 
 @NgModule({
-    declarations: [ManageMembersComponent],
+    declarations: [
+        ManageMembersComponent,
+        CpfCnpjPipe,
+    ],
     imports: [
         CommonModule,
         FormsModule,

@@ -1,6 +1,6 @@
 import { Directive, HostListener, Renderer2, ElementRef } from '@angular/core';
 
-import { BrokerageNotesService } from '../../shared/brokerage-notes/brokerage-notes.service';
+import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
 
 @Directive({
     selector: '[appUpload]'

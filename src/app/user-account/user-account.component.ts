@@ -1,13 +1,13 @@
-import { ApiService } from '../shared/api/api.service';
+import { ApiService } from '../services/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { GenericObject } from '../shared/generic-object.interface';
-import { NotifyService } from '../shared/notify/notify.service';
-import { NumberFormatService } from '../shared/number-format/number-format.service';
+import { GenericObject } from '../services/generic-object.interface';
+import { NotifyService } from '../services/notify/notify.service';
+import { NumberFormatService } from '../services/number-format/number-format.service';
 import { Router } from '@angular/router';
-import { SessionService } from '../shared/session/session.service';
+import { SessionService } from '../services/session/session.service';
 import { UserComponent } from '../user/user.component';
-import { UserService } from '../shared/user/user.service';
+import { UserService } from '../services/user/user.service';
 
 
 @Component({

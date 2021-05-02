@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../shared/api/api.service';
-import { NotifyService } from '../shared/notify/notify.service';
-import { SessionService } from '../shared/session/session.service';
+import { ApiService } from '../services/api/api.service';
+import { NotifyService } from '../services/notify/notify.service';
+import { SessionService } from '../services/session/session.service';
 
 @Component({
     selector: 'app-privacy',

@@ -1,21 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { SharedModule } from '../../shared/shared.module';
+import { DirectivesModule } from 'src/app/directives/directives.module';
 import { ExportToolComponent } from './export-tool.component';
+import { NgModule } from '@angular/core';
 
 
 
 @NgModule({
-    declarations: [
-        ExportToolComponent
-    ],
+    declarations: [ExportToolComponent],
     imports: [
         CommonModule,
-        SharedModule
+        DirectivesModule,
     ],
-    exports: [
-        ExportToolComponent
-    ]
+    exports: [ExportToolComponent]
 })
 export class ExportToolModule { }

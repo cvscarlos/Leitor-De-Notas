@@ -1,6 +1,6 @@
 import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { SessionService } from '../shared/session/session.service';
+import { SessionService } from '../services/session/session.service';
 
 @Injectable()
 export class AuthService implements CanActivate {

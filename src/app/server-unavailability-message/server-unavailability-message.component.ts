@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../shared/api/api.service';
+import { ApiService } from '../services/api/api.service';
 
 declare global {
     interface Window { dataLayer: any }

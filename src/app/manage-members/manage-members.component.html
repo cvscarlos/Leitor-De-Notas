@@ -3,7 +3,7 @@
         <div class="col">
             <h3 class="text-center">Gerenciar membros</h3>
             <p>Adicione ou consulte os membros de sua conta.</p>
-            
+
             <div style="position: relative;">
                 <app-loading [show]="formLoading"></app-loading>
 
@@ -13,10 +13,10 @@
                         <div class="col-auto">
                             <input type="tel" class="form-control mb-2"
                                 aria-describedby="memberDocHelp"
-                                id="memberDoc" 
+                                id="memberDoc"
                                 mask="000.000.000-00||00.000.000/0000-00"
-                                name="memberDoc" 
-                                placeholder="CPF / CNPJ" 
+                                name="memberDoc"
+                                placeholder="CPF / CNPJ"
                                 required
                                 ngModel />
                             </div>
@@ -30,16 +30,14 @@
                 </form>
             </div>
 
-            
-            
             <hr />
             <div class="members-list">
                 <h6>Lista de membros</h6>
                 <div class="members-list" style="position: relative;">
                     <app-loading [show]="membersListLoading"></app-loading>
-                    <ul>
-                        <li *ngFor="let doc of membersList;">{{doc | mask: '000.000.000-00||00.000.000/0000-00'}}</li>
-                    </ul>
+                    <ol>
+                        <li *ngFor="let doc of membersList;">{{doc | cpfCnpj}}</li>
+                    </ol>
                 </div>
             </div>
         </div>

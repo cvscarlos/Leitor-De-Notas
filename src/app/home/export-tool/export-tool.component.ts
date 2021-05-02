@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import NP from 'number-precision';
 
-import { BrokerageNotesService } from '../../shared/brokerage-notes/brokerage-notes.service';
-import { GenericObject } from '../../shared/generic-object.interface';
-import { NumberFormatService } from '../../shared/number-format/number-format.service';
+import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
+import { GenericObject } from '../../services/generic-object.interface';
+import { NumberFormatService } from '../../services/number-format/number-format.service';
 
 
 

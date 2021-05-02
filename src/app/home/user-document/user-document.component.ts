@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ApiService } from 'src/app/shared/api/api.service';
-import { NotifyService } from 'src/app/shared/notify/notify.service';
-import { SessionService } from 'src/app/shared/session/session.service';
-import { UserService } from 'src/app/shared/user/user.service';
+import { ApiService } from 'src/app/services/api/api.service';
+import { NotifyService } from 'src/app/services/notify/notify.service';
+import { SessionService } from 'src/app/services/session/session.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
     selector: 'app-user-document',

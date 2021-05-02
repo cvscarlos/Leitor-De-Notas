@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { AuthComponent } from './auth.component';
-import { SharedModule } from '../shared/shared.module';
+import { CommonModule } from '@angular/common';
+import { DirectivesModule } from '../directives/directives.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule } from '../loading/loading.module';
+import { NgModule } from '@angular/core';
 
 
 
@@ -11,10 +11,10 @@ import { LoadingModule } from '../loading/loading.module';
     declarations: [AuthComponent],
     imports: [
         CommonModule,
+        DirectivesModule,
         FormsModule,
-        ReactiveFormsModule,
-        SharedModule,
         LoadingModule,
+        ReactiveFormsModule,
     ],
     exports: [AuthComponent]
 })
