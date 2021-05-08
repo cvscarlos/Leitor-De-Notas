@@ -1,5 +1,7 @@
 @use "bootstrap";
 
+@import "./app/usage-limit/usage-limit.component.scss";
+
 .small-font {
     &, .btn, .form-control { font-size: 0.75rem; }
     .h4, h4 { font-size: 1.125rem; }

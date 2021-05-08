@@ -6,7 +6,6 @@ import { SessionService } from '../services/session/session.service';
 @Component({
     selector: 'app-usage-limit',
     templateUrl: './usage-limit.component.html',
-    styleUrls: ['./usage-limit.component.scss']
 })
 export class UsageLimitComponent implements OnInit {
     public loading = false;
