@@ -1,5 +1,5 @@
 <div class="custom-panel">
-    <div>
+    <div class="row">
         <div class="col">
             <h3 class="text-center">Limites de uso</h3>
 
@@ -9,39 +9,100 @@
                 <li>As 10 primeiras notas não possuem limite.</li>
             </ul>
 
-            <h6>Uso Ilimitado por 1 ano ( R$ 49,99 ) </h6>
-            <ul>
-                <li>Volume mensal de operações ilimitado.</li>
-                <li><a href="https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2072688-6cacf69e-8c23-4e99-8c38-0de88f37c2d1">Escolher este</a></li>
-            </ul>
+            <div style="position: relative;">
+                <app-loading [show]="loading"></app-loading>
 
-            <h6>Uso Ilimitado x3 CPFs por 1 ano ( R$ 104,97 ) </h6>
-            <ul>
-                <li>Volume mensal de operações ilimitado.</li>
-                <li>Até 3 CPFs na mesma conta.</li>
-                <li><a href="https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2072688-3a17ec36-8abf-484e-a8d7-392feebe4322">Escolher este</a></li>
-            </ul>
+                <div class="limit-box">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <h6>Uso Ilimitado por 1 ano ( R$ 49,99 ) </h6>
+                            <ul>
+                                <li>Volume mensal de operações ilimitado.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <div class="float-right text-center">
+                                <p class="h6"> R$ 49,99</p>
+                                <button class="btn btn-primary" (click)="getOptionLink('LN_001_ILM_A')">Escolher este</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <h6>Uso Ilimitado x5 CPFs por 1 ano ( R$ 149,97 ) </h6>
-            <ul>
-                <li>Volume mensal de operações ilimitado.</li>
-                <li>Até 5 CPFs na mesma conta.</li>
-                <li><a href="https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2072688-5e9ddedc-40a3-4aa8-9e68-e88d854f7daa">Escolher este</a></li>
-            </ul>
+                <div class="limit-box">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <h6>Uso Ilimitado x3 CPFs por 1 ano ( R$ 104,97 ) </h6>
+                            <ul>
+                                <li>Volume mensal de operações ilimitado;</li>
+                                <li>Até 3 CPFs na mesma conta.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <div class="float-right text-center">
+                                <p class="h6">R$ 104,97</p>
+                                <button class="btn btn-primary" (click)="getOptionLink('LN_003_ILM_A')">Escolher este</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <h6>Uso Ilimitado por 1 ano + Dlombello Planilhas Alpha ( R$ 64,99 ) </h6>
-            <ul>
-                <li>Volume mensal de operações ilimitado.</li>
-                <li>Vantagens de se tornar um usuário Alpha das planilhas Dlombello.</li>
-                <li><a href="https://www.dlombelloplanilhas.com/apoie-me/usu%C3%A1rio-alpha">Escolher este</a></li>
-            </ul>
+                <div class="limit-box">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <h6>Uso Ilimitado x5 CPFs por 1 ano ( R$ 149,97 ) </h6>
+                            <ul>
+                                <li>Volume mensal de operações ilimitado;</li>
+                                <li>Até 5 CPFs na mesma conta.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <div class="float-right text-center">
+                                <p class="h6">R$ 149,97</p>
+                                <button class="btn btn-primary" (click)="getOptionLink('LN_005_ILM_A')">Escolher este</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            <h6>Uso Empresarial ( consulte )</h6>
-            <ul>
-                <li>Volume mensal de operações ilimitado.</li>
-                <li>Leitura de notas com CPF/CNPJ do titular e terceiros</li>
-                <li><a href="https://bit.ly/leitor-de-notas-suporte">Entrar em contato</a></li>
-            </ul>
+                <div class="limit-box">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <h6>Uso Ilimitado por 1 ano + Dlombello Planilhas Alpha ( R$ 64,99 ) </h6>
+                            <ul>
+                                <li>Volume mensal de operações ilimitado;</li>
+                                <li>Vantagens de se tornar um usuário Alpha das planilhas Dlombello.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <div class="float-right text-center">
+                                <p class="h6">R$ 64,99</p>
+                                <a class="btn btn-primary" href="https://www.dlombelloplanilhas.com/apoie-me/usu%C3%A1rio-alpha#h.2x3nx1fbgnc7">Escolher este</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="limit-box">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <h6>Uso Empresarial ( consulte )</h6>
+                            <ul>
+                                <li>Volume mensal de operações ilimitado;</li>
+                                <li>Leitura de notas com CPF/CNPJ do titular e terceiros;</li>
+                                <li>Acesso a API.</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <div class="float-right text-center">
+                                <p class="h6">fale conosco</p>
+                                <a class="btn btn-primary" href="https://bit.ly/leitor-de-notas-suporte">Entrar em contato</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <hr/>
 
             <h6>Atenção!</h6>

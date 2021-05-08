@@ -18,6 +18,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { UserAccountModule } from './user-account/user-account.module';
 import { UserBarComponent } from './user-bar/user-bar.component';
 import { UserEmailModule } from './user-email/user-email.module';
+import { UsageLimitModule } from './usage-limit/usage-limit.module';
 
 
 
@@ -42,6 +43,7 @@ import { UserEmailModule } from './user-email/user-email.module';
         ServerUnavailabilityMessageModule,
         UserAccountModule,
         UserEmailModule,
+        UsageLimitModule,
     ],
     providers: [CookieService],
     bootstrap: [AppComponent]

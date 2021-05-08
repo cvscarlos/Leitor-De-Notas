@@ -21,6 +21,10 @@ export class NotifyService {
         this.addToQueue('error', title, messageOrCallback, callback);
     }
 
+    public info(title: string, messageOrCallback: null | string | NotifyCallback = null, callback: null | NotifyCallback = null): void {
+        this.addToQueue('info', title, messageOrCallback, callback);
+    }
+
     public notify(options: SweetAlertOptions, callback: null | NotifyCallback = null): void {
         this.queue.push({
             options,
