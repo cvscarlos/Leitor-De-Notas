@@ -24,6 +24,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Easynvest Corretora                   | ✔️              |                |
 | Genial Investimentos Corretora        | ✔️              | ✔️             |
 | Guide Corretora                       | ✔️              |                |
+| Kirton Corretora                      | ✔️              |                |
 | Mirae Corretora                       | ✔️              |                |
 | Modal Corretora                       | ✔️              | ✔️             |
 | ModalMais Corretora                   | ✔️              |                |

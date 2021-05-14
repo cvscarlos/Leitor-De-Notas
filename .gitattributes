@@ -1,2 +1,19 @@
-# Auto detect text files and perform LF normalization
-*        text=auto
+*                   text=auto eol=lf
+
+*.css               text
+*.html              text
+*.js                text
+*.json              text
+*.md                text
+*.svg               text
+*.yml               text
+*.txt               text
+*.ts                text
+.browserslistrc     text
+.editorconfig       text
+.gitattributes      text
+.gitignore          text
+Procfile            text
+
+*.pdf               binary
+*.png               binary
