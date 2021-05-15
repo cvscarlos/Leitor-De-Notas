@@ -109,8 +109,8 @@ export class ApiService {
         return this.post('pvt/user/new-email-token', { newEmailToken });
     }
 
-    public getMercadoPagoLink(linkType: string, callback: Callback) {
-        return this.post('pvt/mercado-pago/link/' + linkType).subscribe(data => { callback(data); });
+    public getMercadoPagoLink(linkType: string, quantity: number, callback: Callback) {
+        return this.post(`pvt/mercado-pago/link/${linkType}?quantity=${quantity}`).subscribe(data => { callback(data); });
     }
 
     private returnPromise(httpRequest: Observable<any>, callback: Callback): Promise<any> {

@@ -5,7 +5,7 @@
             <p>Adicione ou consulte os membros de sua conta.</p>
 
             <div style="position: relative;">
-                <app-loading [show]="formLoading"></app-loading>
+                <app-loading [show]="loading"></app-loading>
 
                 <form class="form" #f="ngForm" (ngSubmit)="submitMemberForm(f.form);" ngNativeValidate>
                     <div class="form-row align-items-center">
@@ -34,10 +34,32 @@
             <div class="members-list">
                 <h6>Lista de membros</h6>
                 <div class="members-list" style="position: relative;">
-                    <app-loading [show]="membersListLoading"></app-loading>
-                    <ol>
-                        <li *ngFor="let doc of membersList;">{{doc | cpfCnpj}}</li>
-                    </ol>
+                    <app-loading [show]="loading"></app-loading>
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">CPF / CNPJ</th>
+                                <th scope="col">Validade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let member of membersList; let ndx = index;">
+                                <th scope="row">{{ndx+1}}</th>
+                                <td>{{member.cpf | cpfCnpj}}</td>
+                                <td>{{member.expires | date: 'dd/MM/yyyy'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div *ngIf="pendingMembers" style="position: relative;">
+                        <app-loading [show]="loading"></app-loading>
+                        <hr />
+                        <button class="btn btn-success" (click)="getOptionLink()">
+                            <img src="https://www.mercadopago.com.br/favicon.ico" style="max-height: 24px;"> -
+                            Adicionar Limite p/ <strong>{{pendingMembers}}</strong> membros avulsos
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
