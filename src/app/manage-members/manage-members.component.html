@@ -38,9 +38,10 @@
                     <table class="table table-striped table-hover table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">CPF / CNPJ</th>
-                                <th scope="col">Validade</th>
+                                <th class="align-middle" scope="col">#</th>
+                                <th class="align-middle" scope="col">CPF / CNPJ</th>
+                                <th class="align-middle" scope="col">Validade</th>
+                                <th class="align-middle text-center" scope="col" *ngIf="pendingMembers">+ limite</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,6 +49,9 @@
                                 <th scope="row">{{ndx+1}}</th>
                                 <td>{{member.cpf | cpfCnpj}}</td>
                                 <td>{{member.expires | date: 'dd/MM/yyyy'}}</td>
+                                <td *ngIf="pendingMembers" class="text-center">
+                                    <input *ngIf="member.expires?.length" checked type="checkbox" (change)="membersListToggle($event, member.cpf)" />
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -55,9 +59,9 @@
                     <div *ngIf="pendingMembers" style="position: relative;">
                         <app-loading [show]="loading"></app-loading>
                         <hr />
-                        <button class="btn btn-success" (click)="getOptionLink()">
+                        <button class="btn btn-success" (click)="getOptionLink()" [disabled]="!membersCpfList.size">
                             <img src="https://www.mercadopago.com.br/favicon.ico" style="max-height: 24px;"> -
-                            Adicionar Limite p/ <strong>{{pendingMembers}}</strong> membros avulsos
+                            Adicionar Limite p/ <strong>{{membersCpfList.size}}</strong> membros avulsos
                         </button>
                     </div>
                 </div>

@@ -13,6 +13,7 @@ export class ManageMembersComponent implements OnInit {
 
     public loading = false;
     public membersList: GenericObject[] = [];
+    public membersCpfList: Set<string> = new Set();
     public pendingMembers = 0;
 
     constructor(
@@ -44,9 +45,18 @@ export class ManageMembersComponent implements OnInit {
 
     public getOptionLink() {
         this.loading = true;
-        this.apiService.getMercadoPagoLink('LN_001_EMA_A', this.pendingMembers, (data) => {
+        this.apiService.getMercadoPagoLink('LN_001_EMA_A', this.membersCpfList.size, this.membersCpfList, (data) => {
             location.href = data.link;
         });
+    }
+
+    public membersListToggle(event: Event, cpf: string) {
+        const elem = event.target as HTMLInputElement;
+        if (elem?.checked) {
+            this.membersCpfList.add(cpf);
+        } else {
+            this.membersCpfList.delete(cpf);
+        }
     }
 
     private getMembers() {
@@ -55,6 +65,8 @@ export class ManageMembersComponent implements OnInit {
             this.membersList = data.members;
             this.pendingMembers = data.pendingPayment;
             this.loading = false;
+
+            this.membersList.forEach(item => this.membersCpfList.add(item.cpf));
         });
     }
 }

@@ -22,7 +22,7 @@ export class UsageLimitComponent implements OnInit {
     public getOptionLink(limitType: string) {
         if (this.sessionService.isAuthenticated) {
             this.loading = true;
-            this.api.getMercadoPagoLink(limitType, 1, (data) => {
+            this.api.getMercadoPagoLink(limitType, 1, null, (data) => {
                 location.href = data.link;
             });
         }
