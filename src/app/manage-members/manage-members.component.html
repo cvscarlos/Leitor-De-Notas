@@ -50,7 +50,7 @@
                                 <td>{{member.cpf | cpfCnpj}}</td>
                                 <td>{{member.expires | date: 'dd/MM/yyyy'}}</td>
                                 <td *ngIf="pendingMembers" class="text-center">
-                                    <input *ngIf="member.expires?.length" checked type="checkbox" (change)="membersListToggle($event, member.cpf)" />
+                                    <input *ngIf="!member.expires?.length" checked type="checkbox" (change)="membersListToggle($event, member.cpf)" />
                                 </td>
                             </tr>
                         </tbody>

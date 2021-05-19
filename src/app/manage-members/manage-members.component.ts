@@ -66,7 +66,11 @@ export class ManageMembersComponent implements OnInit {
             this.pendingMembers = data.pendingPayment;
             this.loading = false;
 
-            this.membersList.forEach(item => this.membersCpfList.add(item.cpf));
+            this.membersList.forEach(item => {
+                if (!item.expires?.length) {
+                    this.membersCpfList.add(item.cpf);
+                }
+            });
         });
     }
 }
