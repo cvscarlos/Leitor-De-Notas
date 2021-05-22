@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { DirectivesModule } from '../directives/directives.module';
+import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
 import { NgModule } from '@angular/core';
 import { ServerUnavailabilityMessageComponent } from './server-unavailability-message.component';
 
@@ -9,7 +9,7 @@ import { ServerUnavailabilityMessageComponent } from './server-unavailability-me
     declarations: [ServerUnavailabilityMessageComponent],
     imports: [
         CommonModule,
-        DirectivesModule,
+        SharedDirectivesModule,
     ],
     exports: [ServerUnavailabilityMessageComponent]
 })

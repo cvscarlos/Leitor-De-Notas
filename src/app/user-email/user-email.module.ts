@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { LoadingModule } from '../loading/loading.module';
 import { UserEmailComponent } from './user-email.component';
-import { DirectivesModule } from '../directives/directives.module';
+import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
 
 
 
@@ -12,7 +12,7 @@ import { DirectivesModule } from '../directives/directives.module';
         UserEmailComponent,
     ],
     imports: [
-        DirectivesModule,
+        SharedDirectivesModule,
         CommonModule,
         FormsModule,
         LoadingModule,

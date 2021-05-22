@@ -20,7 +20,7 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     public transactionLoading = false;
     public mpOperationNumberLoading = false;
     public userTransactions: GenericObject = {};
-    public userUsageHistory: GenericObject = {};
+    public userUsageHistory: GenericObject | null = null;
     public accountDeleteLoading = false;
 
     constructor(
@@ -38,7 +38,7 @@ export class UserAccountComponent extends UserComponent implements OnInit {
         super.ngOnInit();
 
         this.apiService.userTransactions((data) => { this.userTransactions = data; });
-        this.apiService.userUsageHistory((data) => { this.userUsageHistory = data; });
+        this.apiService.userUsageHistory((data) => { this.userUsageHistory = data.result as GenericObject; });
     }
 
     public submitConnectTransactionForm(form: FormGroup): void {

@@ -14,6 +14,7 @@ export class ManageMembersComponent implements OnInit {
     public loading = false;
     public membersList: GenericObject[] = [];
     public membersCpfList: Set<string> = new Set();
+    public membersLimit = 1;
     public pendingMembers = 0;
 
     constructor(
@@ -64,6 +65,7 @@ export class ManageMembersComponent implements OnInit {
         this.apiService.userMembersList((data: any) => {
             this.membersList = data.members;
             this.pendingMembers = data.pendingPayment;
+            this.membersLimit = data.membersLimit;
             this.loading = false;
 
             this.membersList.forEach(item => {

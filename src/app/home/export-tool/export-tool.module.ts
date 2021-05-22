@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { DirectivesModule } from 'src/app/directives/directives.module';
+import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directives.module';
 import { ExportToolComponent } from './export-tool.component';
 import { NgModule } from '@angular/core';
 
@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
     declarations: [ExportToolComponent],
     imports: [
         CommonModule,
-        DirectivesModule,
+        SharedDirectivesModule,
     ],
     exports: [ExportToolComponent]
 })

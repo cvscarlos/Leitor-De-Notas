@@ -1,6 +1,6 @@
 import { AuthComponent } from './auth.component';
 import { CommonModule } from '@angular/common';
-import { DirectivesModule } from '../directives/directives.module';
+import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoadingModule } from '../loading/loading.module';
 import { NgModule } from '@angular/core';
@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
     declarations: [AuthComponent],
     imports: [
         CommonModule,
-        DirectivesModule,
+        SharedDirectivesModule,
         FormsModule,
         LoadingModule,
         ReactiveFormsModule,

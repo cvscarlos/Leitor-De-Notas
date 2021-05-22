@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col">
             <h3 class="text-center">Gerenciar membros</h3>
-            <p>Adicione ou consulte os membros de sua conta.</p>
 
-            <div style="position: relative;">
+            <div *ngIf="membersLimit > membersList.length" style="position: relative;">
                 <app-loading [show]="loading"></app-loading>
+                <p>Adicione ou consulte os membros de sua conta.</p>
 
                 <form class="form" #f="ngForm" (ngSubmit)="submitMemberForm(f.form);" ngNativeValidate>
                     <div class="form-row align-items-center">
