@@ -70,7 +70,7 @@ export class ExportToolComponent implements OnInit {
                 this.numberFormatService.br(excelTrade.itemTotal),
                 excelTrade.DC,
                 excelTrade.type,
-                note.broker,
+                note.brokerName,
                 note.number,
                 note.date,
                 this.numberFormatService.br(excelTrade.netAmount),
@@ -113,7 +113,7 @@ export class ExportToolComponent implements OnInit {
                 // Preço / Ajuste
                 price: trade.price,
                 // Corretora
-                brokerage: note.broker,
+                brokerage: note.brokerName,
                 // Tipo de operação: compra ou venda
                 BS: trade.BS, // eslint-disable-line @typescript-eslint/naming-convention
             };
