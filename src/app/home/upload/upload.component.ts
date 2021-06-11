@@ -10,7 +10,7 @@ import { SessionService } from '../../services/session/session.service';
     styleUrls: ['./upload.component.less']
 })
 export class UploadComponent implements OnInit {
-    public uploads: UploadInterface[] = [];
+    public uploads?: UploadInterface[];
 
     constructor(
         public sessionService: SessionService,

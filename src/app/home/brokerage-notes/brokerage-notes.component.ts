@@ -10,9 +10,10 @@ import { NumberFormatService } from '../../services/number-format/number-format.
     styleUrls: ['./brokerage-notes.component.less']
 })
 export class BrokerageNotesComponent implements OnInit {
-    public noteDetails: any[] = [];
-    public noteErrors: any[] = [];
-    public notes: UploadInterface[] = [];
+    public noteDetails?: any[];
+    public noteErrors?: any[];
+    public notes?: UploadInterface[];
+    public hasAnyNote = false;
 
     constructor(
         private notesService: BrokerageNotesService,
@@ -24,5 +25,11 @@ export class BrokerageNotesComponent implements OnInit {
         this.notes = notesService.notesList;
         this.noteDetails = notesService.noteDetails;
         this.noteErrors = notesService.noteErrors;
+
+        this.notesService.noteCallback((note) => {
+            if (!this.hasAnyNote) {
+                this.hasAnyNote = !!note?.showNote;
+            }
+        });
     }
 }

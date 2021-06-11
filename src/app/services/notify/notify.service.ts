@@ -25,6 +25,10 @@ export class NotifyService {
         this.addToQueue('info', title, messageOrCallback, callback);
     }
 
+    public warning(title: string, messageOrCallback: null | string | NotifyCallback = null, callback: null | NotifyCallback = null): void {
+        this.addToQueue('warning', title, messageOrCallback, callback);
+    }
+
     public notify(options: SweetAlertOptions, callback: null | NotifyCallback = null): void {
         this.queue.push({
             options,
@@ -44,7 +48,7 @@ export class NotifyService {
             options: {
                 icon: type,
                 title,
-                text: typeof messageOrCallback == 'string' ? messageOrCallback : ''
+                html: typeof messageOrCallback == 'string' ? messageOrCallback : ''
             },
             callback: typeof messageOrCallback == 'function' ? messageOrCallback : callback
         });

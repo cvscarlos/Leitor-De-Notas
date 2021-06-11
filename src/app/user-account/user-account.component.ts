@@ -56,7 +56,6 @@ export class UserAccountComponent extends UserComponent implements OnInit {
 
     public submitMpOperationNumber(form: FormGroup): void {
         this.mpOperationNumberLoading = true;
-        console.log(form.value);
 
         this.apiService.userMercadoPagoConnect(form.value.mpOperationNumber, data => {
             if (data.success) {

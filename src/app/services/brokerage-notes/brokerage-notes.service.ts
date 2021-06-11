@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { ApiService } from '../api/api.service';
+import { GenericObject } from '../generic-object.interface';
 import { UploadInterface } from './upload.interface';
 
 type NotesArray = { notesList: UploadInterface[]; noteDetails: any[]; noteErrors: any[] };
-type NoteCallback = (note: { x: any }) => void;
+type NoteCallback = (note: GenericObject) => void;
 
 @Injectable({
     providedIn: 'root',
@@ -39,6 +40,12 @@ export class BrokerageNotesService {
 
     public noteCallback(onNewNoteCallback: NoteCallback): void {
         this.onNewNoteCallback.push(onNewNoteCallback);
+    }
+
+    public clean(): void {
+        this.notesList.splice(0, this.notesList.length);
+        this.noteDetails.splice(0, this.noteDetails.length);
+        this.noteErrors.splice(0, this.noteErrors.length);
     }
 
     private upload(file: File): void {

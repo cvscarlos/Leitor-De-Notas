@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import NP from 'number-precision';
+import { ApiService } from 'src/app/services/api/api.service';
+import { NotifyService } from 'src/app/services/notify/notify.service';
 
 import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
 import { GenericObject } from '../../services/generic-object.interface';
@@ -16,12 +18,17 @@ export class ExportToolComponent implements OnInit {
     public dlombelloExportString = '';
     public excelExportString = '';
     public enableExport = false;
+    public provisionedIrrfDT = false;
+    public provisionedIrrfST = false;
     private dlombelloExport: GenericObject[] = [];
     private notNumberRegex = /[^0-9]+/g;
+    private provIrrfMsg = false;
 
     constructor(
         private notesService: BrokerageNotesService,
         private numberFormatService: NumberFormatService,
+        private notifyService: NotifyService,
+        private apiService: ApiService,
     ) { }
 
     ngOnInit(): void {
@@ -38,11 +45,44 @@ export class ExportToolComponent implements OnInit {
                 console.error(error);
             }
         });
+
+        this.apiService.userMe().then((data) => {
+            this.provisionedIrrfDT = !!data.settings?.provisionedIrrfDT;
+            this.provisionedIrrfST = !!data.settings?.provisionedIrrfST;
+        });
     }
 
     public copyFn(textarea: HTMLTextAreaElement): void {
         textarea.select();
         document.execCommand('copy', false);
+    }
+
+    public cleanNotes(): void {
+        this.notesService.clean();
+        this.dlombelloExport = [];
+        this.dlombelloExportString = '';
+    }
+
+    public provisionedIRRF({ dayTrade, swingTrade }: { [x: string]: Event }): void {
+        if (dayTrade) {
+            this.provisionedIrrfDT = !!(dayTrade.target as HTMLInputElement)?.checked;
+            this.provisionedIrrfMsg(this.provisionedIrrfDT);
+        }
+        else if (swingTrade) {
+            this.provisionedIrrfST = !!(swingTrade.target as HTMLInputElement)?.checked;
+            this.provisionedIrrfMsg(this.provisionedIrrfST);
+        }
+
+        if (dayTrade || swingTrade) {
+            this.apiService.userSettings({ provisionedIrrfST: this.provisionedIrrfST, provisionedIrrfDT: this.provisionedIrrfDT });
+        }
+    }
+
+    private provisionedIrrfMsg(enabled: boolean): void {
+        if (enabled && !this.provIrrfMsg) {
+            this.notifyService.warning('Atenção', 'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitordenotas.customerly.help/leitura-de-notas/irrf-provisionado" target="_blank">clicando aqui</a>.');
+            this.provIrrfMsg = true;
+        }
     }
 
     private excelParser(note: GenericObject): void {
@@ -52,8 +92,7 @@ export class ExportToolComponent implements OnInit {
         Object.assign(
             excelTrades[0],
             note,
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            { trades: null, fullText: null, IR: (note.IRRF < 0 ? note.IRRF : '') }
+            { trades: null, fullText: null, IR: (note.IRRF < 0 ? note.IRRF : '') } // eslint-disable-line @typescript-eslint/naming-convention
         );
 
         // Gerando o valor da textarea usada para exportar pra planilha
@@ -73,24 +112,38 @@ export class ExportToolComponent implements OnInit {
                 note.brokerName,
                 note.number,
                 note.date,
-                this.numberFormatService.br(excelTrade.netAmount),
-                this.numberFormatService.br(excelTrade.settlementTax),
-                this.numberFormatService.br(excelTrade.registrationTax),
-                this.numberFormatService.br(excelTrade.CBLC),
-                this.numberFormatService.br(excelTrade.optionsTax),
-                this.numberFormatService.br(excelTrade.ANATax),
-                this.numberFormatService.br(excelTrade.emolument),
-                this.numberFormatService.br(excelTrade.bovespaTotal),
-                this.numberFormatService.br(excelTrade.clearing),
+                this.numberFormatService.br(excelTrade.allFees),
                 this.numberFormatService.br(excelTrade.ISSTax),
                 this.numberFormatService.br(excelTrade.IRRF),
-                this.numberFormatService.br(excelTrade.bovespaOthers),
-                this.numberFormatService.br(excelTrade.brokerageTax),
-                this.numberFormatService.br(excelTrade.futureNetAmount),
+                this.numberFormatService.br(excelTrade.irrfDtProvisioned),
+                this.numberFormatService.br(excelTrade.irrfStProvisioned),
             ].join('\t'));
         });
 
-        this.excelExportString += (this.excelExportString.length ? '\n' : '') + excelStrings.join('\n');
+        if (!this.excelExportString.length) {
+            this.excelExportString += [
+                'C/V',
+                'Tipo Mercado',
+                'Prazo',
+                'Título',
+                'Obs',
+                'Quantidade',
+                'Preço',
+                'Valor Operação',
+                'D/C',
+                'Nota Tipo',
+                'Corretora',
+                'Nota',
+                'Data',
+                'Taxas',
+                'ISS',
+                'IRRF',
+                'IRRF provisionado DT',
+                'IRRF provisionado ST',
+            ].join('\t');
+        }
+
+        this.excelExportString += '\n' + excelStrings.join('\n');
     }
 
     private dlombelloParser(note: GenericObject): void {
@@ -149,8 +202,10 @@ export class ExportToolComponent implements OnInit {
         groupedTrades[tgFirst].tax = Math.round((noteTax - taxVol) * 100) / 100;
 
         // Colocando dos dados da nota no primeiro item negociado
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Object.assign(groupedTrades[tgFirst], { IR: (note.IRRF < 0 ? note.IRRF * -1 : null) });
+        let irrf = note.IRRF < 0 ? note.IRRF * -1 : 0;
+        if (this.provisionedIrrfDT) { irrf += -note.irrfDtProvisioned; }
+        if (this.provisionedIrrfST) { irrf += -note.irrfStProvisioned; }
+        groupedTrades[tgFirst].IR = irrf || null;
 
         // Adicionando os novos negócios a lista já existete
         this.dlombelloExport = this.dlombelloExport.concat(Object.values(groupedTrades));

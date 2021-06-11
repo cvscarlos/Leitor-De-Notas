@@ -109,6 +109,10 @@ export class ApiService {
         return this.post('pvt/user/new-email-token', { newEmailToken });
     }
 
+    public userSettings(settings: GenericObject) {
+        return this.post('pvt/user/settings', { settings });
+    }
+
     public getMercadoPagoLink(linkType: string, quantity: number, cpfList: Set<string> | null, callback: Callback) {
         return this.post(`pvt/mercado-pago/link/${linkType}`, {
             quantity,
