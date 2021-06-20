@@ -32,19 +32,7 @@ export class ExportToolComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.notesService.noteCallback((note: GenericObject) => {
-            try {
-                if (!note.trades) {
-                    return;
-                }
-
-                this.dlombelloParser(note);
-                this.excelParser(note);
-                this.enableExport = !!(this.dlombelloExportString.length || this.excelExportString.length);
-            } catch (error) {
-                console.error(error);
-            }
-        });
+        this.notesService.noteCallback((note) => this.noteParser(note));
 
         this.apiService.userMe().then((data) => {
             this.provisionedIrrfDT = !!data.settings?.provisionedIrrfDT;
@@ -59,8 +47,7 @@ export class ExportToolComponent implements OnInit {
 
     public cleanNotes(): void {
         this.notesService.clean();
-        this.dlombelloExport = [];
-        this.dlombelloExportString = '';
+        this.localCleanNotes();
     }
 
     public provisionedIRRF({ dayTrade, swingTrade }: { [x: string]: Event }): void {
@@ -75,6 +62,33 @@ export class ExportToolComponent implements OnInit {
 
         if (dayTrade || swingTrade) {
             this.apiService.userSettings({ provisionedIrrfST: this.provisionedIrrfST, provisionedIrrfDT: this.provisionedIrrfDT });
+        }
+
+        this.recalcNotes();
+    }
+
+    private localCleanNotes(): void {
+        this.dlombelloExport = [];
+        this.dlombelloExportString = '';
+        this.excelExportString = '';
+    }
+
+    private recalcNotes(): void {
+        this.localCleanNotes();
+        this.notesService.getNotes().noteDetails.forEach(note => this.noteParser(note));
+    }
+
+    private noteParser(note: GenericObject): void {
+        try {
+            if (!note.trades) {
+                return;
+            }
+
+            this.dlombelloParser(note);
+            this.excelParser(note);
+            this.enableExport = !!(this.dlombelloExportString.length || this.excelExportString.length);
+        } catch (error) {
+            console.error(error);
         }
     }
 
@@ -202,9 +216,9 @@ export class ExportToolComponent implements OnInit {
         groupedTrades[tgFirst].tax = Math.round((noteTax - taxVol) * 100) / 100;
 
         // Colocando dos dados da nota no primeiro item negociado
-        let irrf = note.IRRF < 0 ? note.IRRF * -1 : 0;
-        if (this.provisionedIrrfDT) { irrf += -note.irrfDtProvisioned; }
-        if (this.provisionedIrrfST) { irrf += -note.irrfStProvisioned; }
+        let irrf = note.IRRF < 0 ? Math.abs(note.IRRF) : 0;
+        if (this.provisionedIrrfDT) { irrf += Math.abs(note.irrfDtProvisioned); }
+        if (this.provisionedIrrfST) { irrf += Math.abs(note.irrfStProvisioned); }
         groupedTrades[tgFirst].IR = irrf || null;
 
         // Adicionando os novos negócios a lista já existete
