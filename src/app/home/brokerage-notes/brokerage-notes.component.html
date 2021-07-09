@@ -55,12 +55,12 @@
     <div class="row mt-5" *ngIf="note.showNote">
         <div class="col small-font">
             <div class="card" [class.bg-danger]="!note.proofIsValid">
-                <h4 class="card-header">Nota: nº{{ note.number }} de {{ note.date }} | Corretora: {{ note.brokerName }}</h4>
+                <h4 class="card-header">Nota: nº {{ note.number }} de {{ note.date }} | Corretora: {{ note.brokerName }}</h4>
 
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xs col-md-4">
-                            <h4>Resumo Financeiro</h4>z
+                            <h4>Resumo Financeiro</h4>
                             <table class="table table-sm">
                                 <tbody>
                                     <tr> <td>CPF/CNPJ:</td>                   <td>{{ note.cpf }}</td> </tr>
