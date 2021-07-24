@@ -237,11 +237,33 @@ export class ExportToolComponent implements OnInit {
         }
         groupedTrades[tgFirst].tax = Math.round((noteTax - taxVol) * 100) / 100;
 
-        // Colocando dos dados da nota no primeiro item negociado
-        let irrf = note.IRRF < 0 ? Math.abs(note.IRRF) : 0;
-        if (this.provisionedIrrfDT) { irrf += Math.abs(note.irrfDtProvisioned); }
-        if (this.provisionedIrrfST) { irrf += Math.abs(note.irrfStProvisioned); }
-        groupedTrades[tgFirst].IR = irrf || null;
+        // Incluindo o valor do IR, separado por DT e ST
+        let firstSellRow = null;
+        let firstDTRow = null;
+        for (const g in groupedTrades) {
+            if (
+                Object.prototype.hasOwnProperty.call(groupedTrades, g) &&
+                groupedTrades[g].BS === 'V'
+            ) {
+                if (!firstDTRow && groupedTrades[g].operationType === 'DT') {
+                    firstDTRow = groupedTrades[g];
+                }
+                else if (!firstSellRow) {
+                    firstSellRow = groupedTrades[g];
+                }
+
+                if (firstSellRow && firstDTRow) { break; };
+            }
+        }
+        const irrf = note.IRRF < 0 ? Math.abs(note.IRRF) : 0;
+        const provIrrfDT = this.provisionedIrrfDT ? Math.abs(note.irrfDtProvisioned) : 0;
+        const provIrrfST = this.provisionedIrrfST ? Math.abs(note.irrfStProvisioned) : 0;
+        if (firstDTRow && provIrrfDT) {
+            firstDTRow.IR = provIrrfDT;
+        }
+        if (firstSellRow) {
+            firstSellRow.IR = (irrf + provIrrfST + (firstDTRow ? 0 : provIrrfDT)) || null;
+        }
 
         // Adicionando os novos negócios a lista já existete
         this.dlombelloExport = this.dlombelloExport.concat(Object.values(groupedTrades));

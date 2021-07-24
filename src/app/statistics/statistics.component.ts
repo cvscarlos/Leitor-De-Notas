@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { version } from '../../../package.json';
+import packageJson from '../../../package.json';
 import { ApiService } from '../services/api/api.service';
 
 @Component({
@@ -18,10 +18,11 @@ export class StatisticsComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.interfaceVersion = packageJson.version;
+
         this.apiService.getServerStatus(data => {
             this.appVersion = data.version;
             this.uniqueSessions = data.uniqueSessions;
-            this.interfaceVersion = version;
         });
     }
 
