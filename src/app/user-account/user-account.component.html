@@ -30,13 +30,13 @@
                         <div>{{tran.dateApproved | date:'dd/MM/yy'}} | <span class="text-secondary">{{tran.reference}}</span></div>
                         <div *ngIf="tran.email">- <i>Associada ao email: {{tran.email}}</i></div>
                         <div *ngIf="tran.lockedUserDoc">- <i>Limitado ao CPF/CNPJ: {{tran.lockedUserDoc}}</i></div>
-                        <div *ngIf="!tran.email && !tran.lockedUserDoc">
+                        <!-- <div *ngIf="!tran.email && !tran.lockedUserDoc">
                             - <a href="javascript:void(0);" (click)="tpl.showConnectTransaction=true">Associar a outra conta</a>
                             <span class="alert alert-info" style="display:none" [appSlideToggle]="tpl.showConnectTransaction">
                                 Código: <input type="text" value={{tran.connectCode}} readonly onclick="this.select()">
                                 <p class="small-font">Copie e envie esse código para algém que você deseje que tenha a conta associada a esta transação.</p>
                             </span>
-                        </div>
+                        </div> -->
                     </li>
                 </ul>
 
@@ -45,7 +45,7 @@
                 <div style="position: relative;">
                     <app-loading [show]="transactionLoading"></app-loading>
 
-                    <span>Possui um código? <a href="javascript:void(0)" (click)="tpl.connectTransaction=true">Associar transação</a></span>
+                    <!-- <span>Possui um código? <a href="javascript:void(0)" (click)="tpl.connectTransaction=true">Associar transação</a></span> -->
 
                     <form class="alert alert-info" style="display: none;" action="#"
                         ngNativeValidate

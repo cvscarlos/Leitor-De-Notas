@@ -23,6 +23,7 @@ export class ExportToolComponent implements OnInit {
     private dlombelloExport: GenericObject[] = [];
     private notNumberRegex = /[^0-9]+/g;
     private provIrrfMsg = false;
+    private dlombelloTaxIgnoredTrades = ['AJ.POS'];
 
     constructor(
         private notesService: BrokerageNotesService,
@@ -210,7 +211,9 @@ export class ExportToolComponent implements OnInit {
             groupedTrades[tradesGroupId].quantity += trade.quantity;
             groupedTrades[tradesGroupId].itemTotal += trade.itemTotal;
 
-            tradesVol = NP.plus(tradesVol, Math.abs(trade.itemTotal));
+            if (groupedTrades[tradesGroupId].operationType.indexOf(this.dlombelloTaxIgnoredTrades) < 0) {
+                tradesVol = NP.plus(tradesVol, Math.abs(trade.itemTotal));
+            }
         });
 
         // Dividindo a taxa da nota proporcionalmente aos ativos agrupados
@@ -223,6 +226,11 @@ export class ExportToolComponent implements OnInit {
             if (!Object.prototype.hasOwnProperty.call(groupedTrades, g)) {
                 continue;
             }
+            const TG = groupedTrades[g];
+
+            if (TG.operationType.indexOf(this.dlombelloTaxIgnoredTrades)) {
+                continue;
+            }
 
             counter++;
             // ignoro o cálculo da taxa para o primeiro item
@@ -231,7 +239,6 @@ export class ExportToolComponent implements OnInit {
                 continue;
             }
 
-            const TG = groupedTrades[g];
             TG.tax = Math.round((NP.times(Math.abs(TG.itemTotal), noteTax) / tradesVol) * 100) / 100;
             taxVol += TG.tax;
         }
