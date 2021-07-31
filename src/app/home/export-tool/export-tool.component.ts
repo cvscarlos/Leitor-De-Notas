@@ -228,7 +228,7 @@ export class ExportToolComponent implements OnInit {
             }
             const TG = groupedTrades[g];
 
-            if (TG.operationType.indexOf(this.dlombelloTaxIgnoredTrades)) {
+            if (TG.operationType.indexOf(this.dlombelloTaxIgnoredTrades) > -1) {
                 continue;
             }
 
