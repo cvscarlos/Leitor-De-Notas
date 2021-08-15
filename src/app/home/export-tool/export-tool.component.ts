@@ -242,7 +242,9 @@ export class ExportToolComponent implements OnInit {
             TG.tax = Math.round((NP.times(Math.abs(TG.itemTotal), noteTax) / tradesVol) * 100) / 100;
             taxVol += TG.tax;
         }
-        groupedTrades[tgFirst].tax = Math.round((noteTax - taxVol) * 100) / 100;
+        if(groupedTrades[tgFirst]){
+            groupedTrades[tgFirst].tax = Math.round((noteTax - taxVol) * 100) / 100;
+        }
 
         // Incluindo o valor do IR, separado por DT e ST
         let firstSellRow = null;
