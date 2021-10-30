@@ -306,8 +306,12 @@ export class ExportToolComponent implements OnInit {
             return exportTrade._sortKey;
         }
 
-        let out = exportTrade.date.split('/').reverse().join(''); // data
+        const operTypeOrder = { 'C': 1, 'V': 2, 'DT': 3 };
+
+        let out = '';
+        out += exportTrade.date.split('/').reverse().join(''); // data
         out += exportTrade.brokerage; // corretora
+        out += operTypeOrder[exportTrade.operationType as keyof typeof operTypeOrder] || '-'; // tipo de operação
         out += (exportTrade.BS === 'C' ? '+' : '-') + this.forceNumberSize(exportTrade.quantity); // quantidade
         out += ('__________' + exportTrade.securities).slice(-10); // papel/ação
         out += this.forceNumberSize(exportTrade.price); // preço
