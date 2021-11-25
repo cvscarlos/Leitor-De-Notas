@@ -21,7 +21,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | CEF Caixa Econômica Federal Corretora | ✔️              |                |
 | Clear Corretora                       | ✔️              | ✔️             |
 | CM Capital                            | ✔️              | ✔️             |
-| Easynvest Corretora                   | ✔️              | ✔️             |
+| NuInvest / Easynvest Corretora        | ✔️              | ✔️             |
 | Genial Investimentos Corretora        | ✔️              | ✔️             |
 | Guide Corretora                       | ✔️              |                |
 | Kirton Corretora                      | ✔️              |                |

@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "5.14.0-25.Nov",
+  "version": "5.14.1-25.Nov",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
