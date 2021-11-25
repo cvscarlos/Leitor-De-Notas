@@ -291,11 +291,11 @@ export class ExportToolComponent implements OnInit {
                 dlombelloTrade.securities,
                 dlombelloTrade.date,
                 dlombelloTrade.operationType,
-                this.numberFormatService.br(dlombelloTrade.BS === 'C' ? dlombelloTrade.quantity : -dlombelloTrade.quantity, 0),
-                this.numberFormatService.br(dlombelloTrade.price),
-                this.numberFormatService.br(dlombelloTrade.tax),
+                this.numberFormatService.d(dlombelloTrade.BS === 'C' ? dlombelloTrade.quantity : -dlombelloTrade.quantity, 0),
+                this.numberFormatService.d(dlombelloTrade.price),
+                this.numberFormatService.d(dlombelloTrade.tax),
                 dlombelloTrade.brokerage,
-                this.numberFormatService.br(dlombelloTrade.IR || null),
+                this.numberFormatService.d(dlombelloTrade.IR || null),
             ].join('\t'));
         });
         this.dlombelloExportString = dlombelloStrings.join('\n');

@@ -21,4 +21,8 @@ export class NumberFormatService {
     public br0(numberValue: number): string {
         return this.br(numberValue, 0);
     }
+
+    public d(numberValue: number, decimal = 2) {
+        return this.br(numberValue, decimal).replace(/\./g, '');
+    }
 }
