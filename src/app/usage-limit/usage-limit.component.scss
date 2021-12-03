@@ -1,4 +1,4 @@
-.limit-box{
+.limit-box {
     background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
     align-items: center;
     transition: ease-in-out 0.1s;
@@ -9,11 +9,15 @@
     @extend .border;
     @extend .shadow-sm;
 
-    &:hover{
+    &:hover {
         transform: scale(1.015);
     }
 
-    ul{
+    ul {
         margin-bottom: 0;
+    }
+
+    a {
+        text-decoration: none;
     }
 }
