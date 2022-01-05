@@ -264,15 +264,10 @@ export class ExportToolComponent implements OnInit {
                 if (firstSellRow && firstDTRow) { break; };
             }
         }
-        const irrf = note.IRRF < 0 ? Math.abs(note.IRRF) : 0;
-        const provIrrfDT = this.provisionedIrrfDT ? Math.abs(note.irrfDtProvisioned) : 0;
-        const provIrrfST = this.provisionedIrrfST ? Math.abs(note.irrfStProvisioned) : 0;
-        if (firstDTRow && provIrrfDT) {
-            firstDTRow.IR = provIrrfDT;
-        }
-        if (firstSellRow) {
-            firstSellRow.IR = (irrf + provIrrfST + (firstDTRow ? 0 : provIrrfDT)) || null;
-        }
+        if (firstDTRow) firstDTRow.IR = this.provisionedIrrfDT ? Math.abs(note.irrfDtProvisioned) : 0;
+        if (firstSellRow) firstSellRow.IR = this.provisionedIrrfST ? Math.abs(note.irrfStProvisioned) : 0;
+        if (firstSellRow || firstDTRow)
+            (firstSellRow || firstDTRow).IR += note.IRRF < 0 ? Math.abs(note.IRRF) : 0;
 
         // Adicionando os novos negócios a lista já existete
         this.dlombelloExport = this.dlombelloExport.concat(Object.values(groupedTrades));
@@ -296,9 +291,9 @@ export class ExportToolComponent implements OnInit {
                 this.numberFormatService.d(dlombelloTrade.tax),
                 dlombelloTrade.brokerage,
                 this.numberFormatService.d(dlombelloTrade.IR || null),
-            ].join('\t'));
+            ].join('\t').trim());
         });
-        this.dlombelloExportString = dlombelloStrings.join('\n');
+        this.dlombelloExportString = dlombelloStrings.join('\n').trim();
     }
 
     private generateSortStr(exportTrade: GenericObject): string {
