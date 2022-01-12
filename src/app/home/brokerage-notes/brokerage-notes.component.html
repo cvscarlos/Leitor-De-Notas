@@ -98,7 +98,7 @@
                                         <td>{{ trade.time }}</td>
                                         <td>{{ trade.securities }} <span *ngIf="trade.originalSecurities">({{ trade.originalSecurities }})</span></td>
                                         <td>{{ trade.obs }}</td>
-                                        <td>{{ this.numberFormatService.br0(trade.quantity) }}</td>
+                                        <td>{{ this.numberFormatService.brNoDecimal(trade.quantity) }}</td>
                                         <td>{{ this.numberFormatService.br(trade.price) }}</td>
                                         <td>{{ this.numberFormatService.br(trade.itemTotal) }}</td>
                                         <td>{{ trade.DC }}</td>

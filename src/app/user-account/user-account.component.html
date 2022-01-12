@@ -117,7 +117,7 @@
                                     <tr *ngFor="let histoty of cpfUsageHistory.value">
                                         <td scope="row">{{histoty.formatedDate}}</td>
                                         <td scope="row">R$ {{numberFormat.br(histoty.value)}}</td>
-                                        <td scope="row">{{numberFormat.br0(histoty.quantity)}}</td>
+                                        <td scope="row">{{numberFormat.brNoDecimal(histoty.quantity)}}</td>
                                     </tr>
                                 </tbody>
                             </table>

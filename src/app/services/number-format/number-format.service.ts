@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class NumberFormatService {
 
-    constructor() { }
+  constructor() { }
 
-    public br(numberValue: number, decimal = 2): string {
-        if (numberValue == null) {
-            return '';
-        }
-
-        return new Intl.NumberFormat('pt-BR', {
-            minimumFractionDigits: decimal,
-            maximumFractionDigits: decimal
-        }).format(numberValue);
+  public br(numberValue: number, decimal = 2, minDecimal?: number): string {
+    if (numberValue == null) {
+      return '';
     }
 
-    public br0(numberValue: number): string {
-        return this.br(numberValue, 0);
-    }
+    return new Intl.NumberFormat('pt-BR', {
+      minimumFractionDigits: minDecimal === undefined ? decimal : minDecimal,
+      maximumFractionDigits: decimal
+    }).format(numberValue);
+  }
 
-    public d(numberValue: number, decimal = 2) {
-        return this.br(numberValue, decimal).replace(/\./g, '');
-    }
+  public brNoDecimal(numberValue: number): string {
+    return this.br(numberValue, 0);
+  }
+
+  public commaOnly(numberValue: number, decimal = 2, minDecimal?: number) {
+    return this.br(numberValue, decimal, minDecimal).replace(/\./g, '');
+  }
 }

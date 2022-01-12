@@ -27,7 +27,7 @@ export class ExportToolComponent implements OnInit {
 
     constructor(
         private notesService: BrokerageNotesService,
-        private numberFormatService: NumberFormatService,
+        private numberFmt: NumberFormatService,
         private notifyService: NotifyService,
         private apiService: ApiService,
     ) { }
@@ -43,7 +43,7 @@ export class ExportToolComponent implements OnInit {
 
     public copyFn(textarea: HTMLTextAreaElement): void {
         textarea.select();
-        document.execCommand('copy', false);
+        navigator.clipboard.writeText(textarea.value);
     }
 
     public cleanNotes(): void {
@@ -107,42 +107,46 @@ export class ExportToolComponent implements OnInit {
         Object.assign(
             excelTrades[0],
             note,
-            { trades: null, fullText: null, IR: (note.IRRF < 0 ? note.IRRF : '') } // eslint-disable-line @typescript-eslint/naming-convention
+            { trades: null, IR: (note.IRRF < 0 ? note.IRRF : '') } // eslint-disable-line @typescript-eslint/naming-convention
         );
 
         // Gerando o valor da textarea usada para exportar pra planilha
         const excelStrings: string[] = [];
+        const type = excelTrades[0].type;
         excelTrades.forEach(excelTrade => {
+            const { brokerageTax, tran, others } = excelTrade.fees || {};
+
             excelStrings.push([
                 excelTrade.BS,
                 excelTrade.marketType,
                 excelTrade.time,
                 excelTrade.securities,
                 excelTrade.obs,
-                this.numberFormatService.br(excelTrade.BS === 'C' ? excelTrade.quantity : -excelTrade.quantity, 0),
-                this.numberFormatService.br(excelTrade.price),
-                this.numberFormatService.br(excelTrade.itemTotal),
+                this.numberFmt.br(excelTrade.BS === 'C' ? excelTrade.quantity : -excelTrade.quantity, 10, 0),
+                this.numberFmt.br(excelTrade.price, 10, 2),
+                this.numberFmt.br(excelTrade.itemTotal),
                 excelTrade.DC,
-                excelTrade.type,
+                type,
                 note.brokerName,
                 note.number,
                 note.date,
-                this.numberFormatService.br(excelTrade.netAmount),
-                this.numberFormatService.br(excelTrade.settlementTax),
-                this.numberFormatService.br(excelTrade.registrationTax),
-                this.numberFormatService.br(excelTrade.CBLC),
-                this.numberFormatService.br(excelTrade.optionsTax),
-                this.numberFormatService.br(excelTrade.ANATax),
-                this.numberFormatService.br(excelTrade.emolument),
-                this.numberFormatService.br(excelTrade.bovespaTotal),
-                this.numberFormatService.br(excelTrade.clearing),
-                this.numberFormatService.br(excelTrade.ISSTax),
-                this.numberFormatService.br(excelTrade.IRRF),
-                this.numberFormatService.br(excelTrade.bovespaOthers),
-                this.numberFormatService.br(excelTrade.brokerageTax),
-                this.numberFormatService.br(excelTrade.futureNetAmount),
-                this.numberFormatService.br(excelTrade.irrfDtProvisioned),
-                this.numberFormatService.br(excelTrade.irrfStProvisioned),
+                this.numberFmt.br(excelTrade.netAmount),
+                this.numberFmt.br(tran !== undefined ? tran : excelTrade.settlementTax),
+                this.numberFmt.br(excelTrade.registrationTax),
+                this.numberFmt.br(excelTrade.CBLC),
+                this.numberFmt.br(excelTrade.optionsTax),
+                this.numberFmt.br(excelTrade.ANATax),
+                this.numberFmt.br(excelTrade.emolument),
+                this.numberFmt.br(excelTrade.bovespaTotal),
+                this.numberFmt.br(brokerageTax !== undefined ? brokerageTax : excelTrade.clearing),
+                this.numberFmt.br(excelTrade.ISSTax),
+                this.numberFmt.br(excelTrade.IRRF),
+                this.numberFmt.br(others !== undefined ? others : excelTrade.bovespaOthers),
+                brokerageTax !== undefined ? '' : this.numberFmt.br(excelTrade.brokerageTax),
+                this.numberFmt.br(excelTrade.futureNetAmount),
+                this.numberFmt.br(excelTrade.irrfDtProvisioned),
+                this.numberFmt.br(excelTrade.irrfStProvisioned),
+                note.currency,
             ].join('\t'));
         });
 
@@ -177,6 +181,7 @@ export class ExportToolComponent implements OnInit {
                 '$ Líquido p/ D+x',
                 'IRRF provisionado DT',
                 'IRRF provisionado ST',
+                'Moeda',
             ].join('\t');
         }
 
@@ -189,8 +194,10 @@ export class ExportToolComponent implements OnInit {
         const groupedTrades: GenericObject = {};
         note.trades.forEach((trade: GenericObject) => {
             const tradesGroupId = trade.marketType + trade.BS + trade.securities + trade.price + trade.obs;
+            const { brokerageTax, tran, others } = trade.fees || {};
 
             groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {
+                tax: brokerageTax !== undefined ? (brokerageTax + tran + others) : 0,
                 itemTotal: 0,
                 // Cód. do Ativo
                 securities: trade.securities,
@@ -216,34 +223,8 @@ export class ExportToolComponent implements OnInit {
             }
         });
 
-        // Dividindo a taxa da nota proporcionalmente aos ativos agrupados
-        let tgFirst = '---';
-        let counter = 0;
-        let taxVol = 0;
-        const noteTax = Math.abs(note.allFees + (note.ISSTax < 0 ? note.ISSTax : 0));
-
-        for (const g in groupedTrades) {
-            if (!Object.prototype.hasOwnProperty.call(groupedTrades, g)) {
-                continue;
-            }
-            const TG = groupedTrades[g];
-
-            if (TG.operationType.indexOf(this.dlombelloTaxIgnoredTrades) > -1) {
-                continue;
-            }
-
-            counter++;
-            // ignoro o cálculo da taxa para o primeiro item
-            if (counter === 1) {
-                tgFirst = g;
-                continue;
-            }
-
-            TG.tax = Math.round((NP.times(Math.abs(TG.itemTotal), noteTax) / tradesVol) * 100) / 100;
-            taxVol += TG.tax;
-        }
-        if(groupedTrades[tgFirst]){
-            groupedTrades[tgFirst].tax = Math.round((noteTax - taxVol) * 100) / 100;
+        if (!note.trades?.[0]?.fees) {
+            this.dlombelloTaxCalculator(groupedTrades, note, tradesVol);
         }
 
         // Incluindo o valor do IR, separado por DT e ST
@@ -286,14 +267,47 @@ export class ExportToolComponent implements OnInit {
                 dlombelloTrade.securities,
                 dlombelloTrade.date,
                 dlombelloTrade.operationType,
-                this.numberFormatService.d(dlombelloTrade.BS === 'C' ? dlombelloTrade.quantity : -dlombelloTrade.quantity, 0),
-                this.numberFormatService.d(dlombelloTrade.price),
-                this.numberFormatService.d(dlombelloTrade.tax),
+                this.numberFmt.commaOnly(dlombelloTrade.BS === 'C' ? dlombelloTrade.quantity : -dlombelloTrade.quantity, 10, 0),
+                this.numberFmt.commaOnly(dlombelloTrade.price),
+                this.numberFmt.commaOnly(dlombelloTrade.tax),
                 dlombelloTrade.brokerage,
-                this.numberFormatService.d(dlombelloTrade.IR || null),
+                this.numberFmt.commaOnly(dlombelloTrade.IR || ''),
+                note.currency,
             ].join('\t').trim());
         });
         this.dlombelloExportString = dlombelloStrings.join('\n').trim();
+    }
+
+    // Dividindo a taxa da nota proporcionalmente aos ativos agrupados
+    private dlombelloTaxCalculator(groupedTrades: GenericObject, note: GenericObject, tradesVol: number): void {
+        let tgFirst = '---';
+        let counter = 0;
+        let taxVol = 0;
+        const noteTax = Math.abs(note.allFees + (note.ISSTax < 0 ? note.ISSTax : 0));
+
+        for (const g in groupedTrades) {
+            if (!Object.prototype.hasOwnProperty.call(groupedTrades, g)) {
+                continue;
+            }
+            const TG = groupedTrades[g];
+
+            if (TG.operationType.indexOf(this.dlombelloTaxIgnoredTrades) > -1) {
+                continue;
+            }
+
+            counter++;
+            // ignoro o cálculo da taxa para o primeiro item
+            if (counter === 1) {
+                tgFirst = g;
+                continue;
+            }
+
+            TG.tax = Math.round((NP.times(Math.abs(TG.itemTotal), noteTax) / tradesVol) * 100) / 100;
+            taxVol += TG.tax;
+        }
+        if (groupedTrades[tgFirst]) {
+            groupedTrades[tgFirst].tax = Math.round((noteTax - taxVol) * 100) / 100;
+        }
     }
 
     private generateSortStr(exportTrade: GenericObject): string {
