@@ -198,6 +198,7 @@ export class ExportToolComponent implements OnInit {
 
             groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {
                 tax: brokerageTax !== undefined ? (brokerageTax + tran + others) : 0,
+                currency: note.currency,
                 itemTotal: 0,
                 // Cód. do Ativo
                 securities: trade.securities,
@@ -272,7 +273,7 @@ export class ExportToolComponent implements OnInit {
                 this.numberFmt.commaOnly(dlombelloTrade.tax),
                 dlombelloTrade.brokerage,
                 this.numberFmt.commaOnly(dlombelloTrade.IR || ''),
-                note.currency,
+                dlombelloTrade.currency,
             ].join('\t').trim());
         });
         this.dlombelloExportString = dlombelloStrings.join('\n').trim();
