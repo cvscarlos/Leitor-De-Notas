@@ -136,6 +136,7 @@
   },
   "defaultProject": "leitor-de-notas",
   "cli": {
-    "analytics": "b053b037-81ec-4083-94e9-a5d30b1d72de"
+    "analytics": "b053b037-81ec-4083-94e9-a5d30b1d72de",
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

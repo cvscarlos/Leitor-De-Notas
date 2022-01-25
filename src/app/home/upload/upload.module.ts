@@ -4,15 +4,15 @@ import { UploadComponent } from './upload.component';
 import { UploadDirective } from './upload.directive';
 
 @NgModule({
-    declarations: [
-        UploadComponent,
-        UploadDirective,
-    ],
-    imports: [
-        CommonModule,
-    ],
-    exports: [
-        UploadComponent
-    ]
+  declarations: [
+    UploadComponent,
+    UploadDirective,
+  ],
+  imports: [
+    CommonModule,
+  ],
+  exports: [
+    UploadComponent
+  ]
 })
 export class UploadModule { }

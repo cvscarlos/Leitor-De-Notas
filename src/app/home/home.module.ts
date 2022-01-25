@@ -11,15 +11,15 @@ import { UserDocumentModule } from './user-document/user-document.module';
 
 
 @NgModule({
-    declarations: [HomeComponent],
-    imports: [
-        AuthModule,
-        BrokerageNotesModule,
-        CommonModule,
-        ExportToolModule,
-        UploadModule,
-        UserDocumentModule,
-    ],
-    exports: [HomeComponent]
+  declarations: [HomeComponent],
+  imports: [
+    AuthModule,
+    BrokerageNotesModule,
+    CommonModule,
+    ExportToolModule,
+    UploadModule,
+    UserDocumentModule,
+  ],
+  exports: [HomeComponent]
 })
 export class HomeModule { }

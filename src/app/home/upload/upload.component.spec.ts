@@ -10,7 +10,7 @@ describe('UploadComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ UploadComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

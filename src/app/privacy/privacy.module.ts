@@ -6,11 +6,11 @@ import { LoadingModule } from '../loading/loading.module';
 
 
 @NgModule({
-    declarations: [PrivacyComponent],
-    imports: [
-        CommonModule,
-        LoadingModule,
-    ],
-    exports: [PrivacyComponent]
+  declarations: [PrivacyComponent],
+  imports: [
+    CommonModule,
+    LoadingModule,
+  ],
+  exports: [PrivacyComponent]
 })
 export class PrivacyModule { }

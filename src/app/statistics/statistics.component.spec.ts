@@ -10,7 +10,7 @@ describe('StatisticsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ StatisticsComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

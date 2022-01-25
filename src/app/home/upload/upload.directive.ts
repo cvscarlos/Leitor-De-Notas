@@ -3,44 +3,44 @@ import { Directive, HostListener, Renderer2, ElementRef } from '@angular/core';
 import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
 
 @Directive({
-    selector: '[appUpload]'
+  selector: '[appUpload]'
 })
 export class UploadDirective {
 
-    constructor(
+  constructor(
         private notesService: BrokerageNotesService,
         private renderer: Renderer2,
         private hostElement: ElementRef
-    ) { }
+  ) { }
 
     @HostListener('dragover', ['$event']) public onDragOver(evt: DragEvent): void {
-        evt.preventDefault();
-        evt.stopPropagation();
-        this.overClass();
-    }
+    evt.preventDefault();
+    evt.stopPropagation();
+    this.overClass();
+  }
 
     @HostListener('dragleave', ['$event']) public onDragLeave(evt: DragEvent): void {
-        evt.preventDefault();
-        evt.stopPropagation();
-        this.leaveClass();
+      evt.preventDefault();
+      evt.stopPropagation();
+      this.leaveClass();
     }
 
     @HostListener('drop', ['$event']) public onDrop(evt: DragEvent): void {
-        evt.preventDefault();
-        evt.stopPropagation();
+      evt.preventDefault();
+      evt.stopPropagation();
 
-        if (evt.dataTransfer != null) {
-            this.notesService.uploadFiles(evt.dataTransfer.files);
-        }
+      if (evt.dataTransfer != null) {
+        this.notesService.uploadFiles(evt.dataTransfer.files);
+      }
 
-        this.leaveClass();
+      this.leaveClass();
     }
 
     private overClass(): void {
-        this.renderer.addClass(this.hostElement.nativeElement, 'file-over');
+      this.renderer.addClass(this.hostElement.nativeElement, 'file-over');
     }
 
     private leaveClass(): void {
-        this.renderer.removeClass(this.hostElement.nativeElement, 'file-over');
+      this.renderer.removeClass(this.hostElement.nativeElement, 'file-over');
     }
 }

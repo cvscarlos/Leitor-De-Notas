@@ -6,11 +6,11 @@ import { ServerUnavailabilityMessageComponent } from './server-unavailability-me
 
 
 @NgModule({
-    declarations: [ServerUnavailabilityMessageComponent],
-    imports: [
-        CommonModule,
-        SharedDirectivesModule,
-    ],
-    exports: [ServerUnavailabilityMessageComponent]
+  declarations: [ServerUnavailabilityMessageComponent],
+  imports: [
+    CommonModule,
+    SharedDirectivesModule,
+  ],
+  exports: [ServerUnavailabilityMessageComponent]
 })
 export class ServerUnavailabilityMessageModule { }

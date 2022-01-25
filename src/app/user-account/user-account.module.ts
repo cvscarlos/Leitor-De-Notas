@@ -11,16 +11,16 @@ import { UserAccountComponent } from './user-account.component';
 
 
 @NgModule({
-    declarations: [UserAccountComponent],
-    imports: [
-        AppRoutingModule,
-        CommonModule,
-        SharedDirectivesModule,
-        FormsModule,
-        LoadingModule,
-        NgxMaskModule.forRoot(),
-        SharedPipesModule,
-    ],
-    exports: [UserAccountComponent]
+  declarations: [UserAccountComponent],
+  imports: [
+    AppRoutingModule,
+    CommonModule,
+    SharedDirectivesModule,
+    FormsModule,
+    LoadingModule,
+    NgxMaskModule.forRoot(),
+    SharedPipesModule,
+  ],
+  exports: [UserAccountComponent]
 })
 export class UserAccountModule { }

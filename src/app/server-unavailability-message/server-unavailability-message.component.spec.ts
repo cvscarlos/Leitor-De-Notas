@@ -10,7 +10,7 @@ describe('ServerUnavailabilityMessageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ServerUnavailabilityMessageComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

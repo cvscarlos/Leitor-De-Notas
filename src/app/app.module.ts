@@ -19,33 +19,37 @@ import { UserAccountModule } from './user-account/user-account.module';
 import { UserBarComponent } from './user-bar/user-bar.component';
 import { UserEmailModule } from './user-email/user-email.module';
 import { UsageLimitModule } from './usage-limit/usage-limit.module';
+import { ModalComponent } from './modal/modal.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        PageNotFoundComponent,
-        StatisticsComponent,
-        UserBarComponent,
-    ],
-    imports: [
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        BrowserModule,
-        CollapseModule.forRoot(),
-        HttpClientModule,
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    StatisticsComponent,
+    UserBarComponent,
+    ModalComponent,
+  ],
+  imports: [
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    CollapseModule.forRoot(),
+    HttpClientModule,
+    ModalModule.forRoot(),
 
-        HomeModule,
-        LoadingModule,
-        ManageMembersModule,
-        PrivacyModule,
-        ServerUnavailabilityMessageModule,
-        UserAccountModule,
-        UserEmailModule,
-        UsageLimitModule,
-    ],
-    providers: [CookieService],
-    bootstrap: [AppComponent]
+    HomeModule,
+    LoadingModule,
+    ManageMembersModule,
+    PrivacyModule,
+    ServerUnavailabilityMessageModule,
+    UserAccountModule,
+    UserEmailModule,
+    UsageLimitModule,
+  ],
+  providers: [CookieService],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

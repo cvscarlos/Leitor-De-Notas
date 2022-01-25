@@ -11,29 +11,29 @@ import { UserEmailComponent } from './user-email/user-email.component';
 
 
 const queryMatcher = (queryToMatch: string): boolean => {
-    const a = document.createElement('a');
-    a.href = window.location.href;
-    return a.search.indexOf(queryToMatch) > -1;
+  const a = document.createElement('a');
+  a.href = window.location.href;
+  return a.search.indexOf(queryToMatch) > -1;
 };
 
 const routes: Routes = [
-    { redirectTo: 'privacidade-termos', matcher: (url: UrlSegment[]) => queryMatcher('privacidade-termos') ? { consumed: url } : null },
-    { redirectTo: 'limites-uso', matcher: (url: UrlSegment[]) => queryMatcher('limites-uso') ? { consumed: url } : null },
+  { redirectTo: 'privacidade-termos', matcher: (url: UrlSegment[]) => queryMatcher('privacidade-termos') ? { consumed: url } : null },
+  { redirectTo: 'limites-uso', matcher: (url: UrlSegment[]) => queryMatcher('limites-uso') ? { consumed: url } : null },
 
-    { path: '', component: HomeComponent },
-    { path: 'index.html', component: HomeComponent },
-    { path: 'minha-conta', component: UserAccountComponent, canActivate: [AuthService] },
-    { path: 'editar-email', component: UserEmailComponent, canActivate: [AuthService] },
-    { path: 'gerenciar-membros', component: ManageMembersComponent, canActivate: [AuthService] },
-    { path: 'privacidade-termos', component: PrivacyComponent },
-    { path: 'limites-uso', component: UsageLimitComponent },
+  { path: '', component: HomeComponent },
+  { path: 'index.html', component: HomeComponent },
+  { path: 'minha-conta', component: UserAccountComponent, canActivate: [AuthService] },
+  { path: 'editar-email', component: UserEmailComponent, canActivate: [AuthService] },
+  { path: 'gerenciar-membros', component: ManageMembersComponent, canActivate: [AuthService] },
+  { path: 'privacidade-termos', component: PrivacyComponent },
+  { path: 'limites-uso', component: UsageLimitComponent },
 
-    { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
-    providers: [AuthService],
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+  providers: [AuthService],
 })
 export class AppRoutingModule { }

@@ -5,30 +5,30 @@ import { GenericObject } from '../services/generic-object.interface';
 import { SessionService } from '../services/session/session.service';
 
 @Component({
-    selector: 'app-user',
-    template: '<b>User Component</b>',
+  selector: 'app-user',
+  template: '<b>User Component</b>',
 })
 export class UserComponent implements OnInit {
 
-    public user: GenericObject = {};
-    public loading = false;
+  public user: GenericObject = {};
+  public loading = false;
 
-    constructor(
-        protected apiService: ApiService,
-        public sessionService: SessionService,
-        protected router: Router,
-    ) { }
+  constructor(
+    protected apiService: ApiService,
+    public sessionService: SessionService,
+    protected router: Router,
+  ) { }
 
-    ngOnInit(): void {
-        this.loading = true;
+  ngOnInit(): void {
+    this.loading = true;
 
-        this.apiService.userMe().then((data: GenericObject) => {
-            this.user = data;
-            this.loading = false;
+    this.apiService.userMe().then((data: GenericObject) => {
+      this.user = data;
+      this.loading = false;
 
-            if (this.sessionService.isAuthenticated && !data.termsAccepted) {
-                this.router.navigate(['privacidade-termos']);
-            }
-        });
-    }
+      if (this.sessionService.isAuthenticated && !data.termsAccepted) {
+        this.router.navigate(['privacidade-termos']);
+      }
+    });
+  }
 }

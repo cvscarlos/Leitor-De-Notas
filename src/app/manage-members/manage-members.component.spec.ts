@@ -10,7 +10,7 @@ describe('ManageMembersComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ManageMembersComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

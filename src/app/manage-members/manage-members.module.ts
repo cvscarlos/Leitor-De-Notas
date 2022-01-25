@@ -9,14 +9,14 @@ import { SharedPipesModule } from '../shared-pipes/shared-pipes.module';
 
 
 @NgModule({
-    declarations: [ ManageMembersComponent ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        LoadingModule,
-        NgxMaskModule.forRoot(),
-        SharedPipesModule,
-    ],
-    exports: [ManageMembersComponent]
+  declarations: [ ManageMembersComponent ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    LoadingModule,
+    NgxMaskModule.forRoot(),
+    SharedPipesModule,
+  ],
+  exports: [ManageMembersComponent]
 })
 export class ManageMembersModule { }

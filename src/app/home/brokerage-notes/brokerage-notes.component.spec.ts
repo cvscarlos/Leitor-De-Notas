@@ -10,7 +10,7 @@ describe('BrokerageNotesComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ BrokerageNotesComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

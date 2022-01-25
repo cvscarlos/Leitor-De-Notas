@@ -4,17 +4,17 @@ import { SessionService } from '../services/session/session.service';
 
 @Injectable()
 export class AuthService implements CanActivate {
-    constructor(
+  constructor(
         private sessionService: SessionService,
         private router: Router
-    ) { }
+  ) { }
 
-    canActivate(): boolean {
-        if (!this.sessionService.isAuthenticated) {
-            this.router.navigate(['']);
-            return false;
-        }
-
-        return true;
+  canActivate(): boolean {
+    if (!this.sessionService.isAuthenticated) {
+      this.router.navigate(['']);
+      return false;
     }
+
+    return true;
+  }
 }

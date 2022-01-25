@@ -10,7 +10,7 @@ describe('ExportToolComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ ExportToolComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

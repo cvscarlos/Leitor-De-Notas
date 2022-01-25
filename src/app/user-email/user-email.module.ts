@@ -8,15 +8,15 @@ import { SharedDirectivesModule } from '../shared-directives/shared-directives.m
 
 
 @NgModule({
-    declarations: [
-        UserEmailComponent,
-    ],
-    imports: [
-        SharedDirectivesModule,
-        CommonModule,
-        FormsModule,
-        LoadingModule,
-    ],
-    exports: [UserEmailComponent]
+  declarations: [
+    UserEmailComponent,
+  ],
+  imports: [
+    SharedDirectivesModule,
+    CommonModule,
+    FormsModule,
+    LoadingModule,
+  ],
+  exports: [UserEmailComponent]
 })
 export class UserEmailModule { }

@@ -5,14 +5,14 @@ import { BrokerageNotesComponent } from './brokerage-notes.component';
 
 
 @NgModule({
-    declarations: [
-        BrokerageNotesComponent,
-    ],
-    imports: [
-        CommonModule,
-    ],
-    exports: [
-        BrokerageNotesComponent,
-    ]
+  declarations: [
+    BrokerageNotesComponent,
+  ],
+  imports: [
+    CommonModule,
+  ],
+  exports: [
+    BrokerageNotesComponent,
+  ]
 })
 export class BrokerageNotesModule { }

@@ -6,10 +6,10 @@ import { LoadingModule } from '../loading/loading.module';
 
 
 @NgModule({
-    declarations: [UsageLimitComponent],
-    imports: [
-        CommonModule,
-        LoadingModule
-    ]
+  declarations: [UsageLimitComponent],
+  imports: [
+    CommonModule,
+    LoadingModule
+  ]
 })
 export class UsageLimitModule { }

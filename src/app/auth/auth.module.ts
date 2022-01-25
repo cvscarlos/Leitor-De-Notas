@@ -8,14 +8,14 @@ import { NgModule } from '@angular/core';
 
 
 @NgModule({
-    declarations: [AuthComponent],
-    imports: [
-        CommonModule,
-        SharedDirectivesModule,
-        FormsModule,
-        LoadingModule,
-        ReactiveFormsModule,
-    ],
-    exports: [AuthComponent]
+  declarations: [AuthComponent],
+  imports: [
+    CommonModule,
+    SharedDirectivesModule,
+    FormsModule,
+    LoadingModule,
+    ReactiveFormsModule,
+  ],
+  exports: [AuthComponent]
 })
 export class AuthModule { }

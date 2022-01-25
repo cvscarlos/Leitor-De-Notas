@@ -7,12 +7,12 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 @NgModule({
-    declarations: [ExportToolComponent],
-    imports: [
-        CommonModule,
-        SharedDirectivesModule,
-        TabsModule.forRoot(),
-    ],
-    exports: [ExportToolComponent]
+  declarations: [ExportToolComponent],
+  imports: [
+    CommonModule,
+    SharedDirectivesModule,
+    TabsModule.forRoot(),
+  ],
+  exports: [ExportToolComponent]
 })
 export class ExportToolModule { }

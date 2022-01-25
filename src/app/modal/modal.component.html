@@ -1,0 +1,31 @@
+<div *ngIf="showAvenueModal" bsModal #autoShownModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  [config]="{ show: true, backdrop: 'static', keyboard: false }">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cadastro Avenue</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Para realizar a leitura de notas da Avenue você precisa
+          primeiro associar sua conta Avenue com o seu CPF.
+        </p>
+        <p>
+          Caso sua conta possua mais de 1 CPF, escolha qual CPF deve ser associado a cada conta Avenue.
+        </p>
+        <p>
+          ATENÇÃO, você só poderá fazer essa associação uma única vez, portanto verifique todos os dados antes
+          de prosseguir. Assegure-se de que o número da conta Avenue exibido abaixo é o mesmo que consta em
+          sua nota.
+          <br />
+          Não é possível desfazer ou editar uma associação entre conta Avenue e CPF no futuro.
+        </p>
+        <p>Conta Avenue desta nota: <strong>{{avenueAccount}}</strong></p>
+
+        <div style="position: relative;">
+          <app-loading [show]="loading"></app-loading>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
