@@ -9,6 +9,7 @@ import { NumberFormatService } from '../../services/number-format/number-format.
 
 
 type DlombelloExport = {
+  _sortKey?: string,
   brokerage: Note['brokerName'],
   BS: NoteTrade['BS'],
   currency: Note['currency'],
@@ -19,7 +20,6 @@ type DlombelloExport = {
   quantity: NoteTrade['quantity'],
   securities: NoteTrade['securities'],
   tax: number,
-  _sortKey?: string,
 };
 type GroupedTrades = {
   [groupId: string]: {
@@ -54,10 +54,10 @@ export class ExportToolComponent implements OnInit {
   private dlombelloTaxIgnoredTrades = ['AJ.POS'];
 
   constructor(
-        private notesService: BrokerageNotesService,
-        private numberFmt: NumberFormatService,
-        private notifyService: NotifyService,
-        private apiService: ApiService,
+    private notesService: BrokerageNotesService,
+    private numberFmt: NumberFormatService,
+    private notifyService: NotifyService,
+    private apiService: ApiService,
   ) { }
 
   ngOnInit(): void {
@@ -289,6 +289,7 @@ export class ExportToolComponent implements OnInit {
     // Gerando o valor da textarea usada para exportar pra planilha
     const dlombelloStrings: string[] = [];
     this.dlombelloExport.forEach((dlombelloTrade) => {
+      console.log(dlombelloTrade.tax);
       dlombelloStrings.push([
         dlombelloTrade.securities,
         dlombelloTrade.date,
@@ -311,22 +312,24 @@ export class ExportToolComponent implements OnInit {
     let taxVol = 0;
     const noteTax = Math.abs(note.allFees + (note.ISSTax < 0 ? note.ISSTax : 0));
 
-    for (const g in groupedTrades) {
-      if (!Object.prototype.hasOwnProperty.call(groupedTrades, g)) continue;
-      const TG = groupedTrades[g];
+    for (const gKey in groupedTrades) {
+      if (!Object.prototype.hasOwnProperty.call(groupedTrades, gKey)) continue;
+      const gTrade = groupedTrades[gKey];
 
-      if (this.dlombelloTaxIgnoredTrades.includes(TG.operationType || '---')) continue;
+      if (this.dlombelloTaxIgnoredTrades.includes(gTrade.operationType || '---')) continue;
 
       counter++;
       // ignoro o cálculo da taxa para o primeiro item
       if (counter === 1) {
-        tgFirst = g;
+        tgFirst = gKey;
         continue;
       }
 
-      TG.tax = Math.round((NP.times(Math.abs(TG.itemTotal), noteTax) / tradesVol) * 100) / 100;
-      taxVol += TG.tax;
+      console.log(gTrade.itemTotal);
+      gTrade.tax = Math.round((NP.times(Math.abs(gTrade.itemTotal), noteTax) / tradesVol) * 100) / 100;
+      taxVol += gTrade.tax;
     }
+
     if (groupedTrades[tgFirst]) {
       groupedTrades[tgFirst].tax = Math.round((noteTax - taxVol) * 100) / 100;
     }
