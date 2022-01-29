@@ -24,6 +24,21 @@
 
         <div style="position: relative;">
           <app-loading [show]="loading"></app-loading>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>CPF/CNPJ</th>
+                <th>Avenue</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let member of membersList">
+                <td > {{member.cpf | cpfCnpj}} </td>
+                <td > {{member.avenueAccount}} </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

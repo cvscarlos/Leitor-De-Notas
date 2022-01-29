@@ -19,8 +19,9 @@ import { UserAccountModule } from './user-account/user-account.module';
 import { UserBarComponent } from './user-bar/user-bar.component';
 import { UserEmailModule } from './user-email/user-email.module';
 import { UsageLimitModule } from './usage-limit/usage-limit.module';
-import { ModalComponent } from './modal/modal.component';
+import { AvenueModalComponent } from './avenue-modal/avenue-modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SharedPipesModule } from './shared-pipes/shared-pipes.module';
 
 
 
@@ -30,7 +31,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     PageNotFoundComponent,
     StatisticsComponent,
     UserBarComponent,
-    ModalComponent,
+    AvenueModalComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -39,6 +40,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     CollapseModule.forRoot(),
     HttpClientModule,
     ModalModule.forRoot(),
+    SharedPipesModule,
 
     HomeModule,
     LoadingModule,

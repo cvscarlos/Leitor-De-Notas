@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AccountMember } from 'src/types';
 import { ApiService } from '../services/api/api.service';
-import { GenericObject } from '../services/generic-object.interface';
 import { NotifyService } from '../services/notify/notify.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { NotifyService } from '../services/notify/notify.service';
 export class ManageMembersComponent implements OnInit {
 
   public loading = false;
-  public membersList: GenericObject[] = [];
+  public membersList: AccountMember[] = [];
   public membersCpfList: Set<string> = new Set();
   public membersLimit = 1;
   public pendingMembers = 0;

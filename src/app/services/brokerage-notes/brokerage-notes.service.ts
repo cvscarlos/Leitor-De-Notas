@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-
+import { Note } from 'src/types';
 import { ApiService } from '../api/api.service';
-import { GenericObject } from '../generic-object.interface';
 import { UploadInterface } from './upload.interface';
 
+
+
 type NotesArray = { notesList: UploadInterface[]; noteDetails: any[]; noteErrors: any[] };
-type NoteCallback = (note: GenericObject) => void;
+type NoteCallback = (note: Note) => void;
 
 @Injectable({
   providedIn: 'root',

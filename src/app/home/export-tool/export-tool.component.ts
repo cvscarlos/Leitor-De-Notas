@@ -2,12 +2,40 @@ import { Component, OnInit } from '@angular/core';
 import NP from 'number-precision';
 import { ApiService } from 'src/app/services/api/api.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
-
+import { Note, NoteTrade } from 'src/types';
 import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
-import { GenericObject } from '../../services/generic-object.interface';
 import { NumberFormatService } from '../../services/number-format/number-format.service';
 
 
+
+type DlombelloExport = {
+  brokerage: Note['brokerName'],
+  BS: NoteTrade['BS'],
+  currency: Note['currency'],
+  date: Note['date'],
+  IR?: number,
+  operationType: NoteTrade['dlombelloOperationType'],
+  price: NoteTrade['price'],
+  quantity: NoteTrade['quantity'],
+  securities: NoteTrade['securities'],
+  tax: number,
+  _sortKey?: string,
+};
+type GroupedTrades = {
+  [groupId: string]: {
+    brokerage: Note['brokerName'],
+    BS: NoteTrade['BS'],
+    currency: Note['currency'],
+    date: Note['date'],
+    IR?: number,
+    itemTotal: NoteTrade['itemTotal'],
+    operationType: NoteTrade['dlombelloOperationType'],
+    price: NoteTrade['price'],
+    quantity: NoteTrade['quantity'],
+    securities: NoteTrade['securities'],
+    tax: number,
+  }
+};
 
 @Component({
   selector: 'app-export-tool',
@@ -20,7 +48,7 @@ export class ExportToolComponent implements OnInit {
   public enableExport = false;
   public provisionedIrrfDT = false;
   public provisionedIrrfST = false;
-  private dlombelloExport: GenericObject[] = [];
+  private dlombelloExport: DlombelloExport[] = [];
   private notNumberRegex = /[^0-9]+/g;
   private provIrrfMsg = false;
   private dlombelloTaxIgnoredTrades = ['AJ.POS'];
@@ -36,8 +64,8 @@ export class ExportToolComponent implements OnInit {
     this.notesService.noteCallback((note) => this.noteParser(note));
 
     this.apiService.userMe().then((data) => {
-      this.provisionedIrrfDT = !!data.settings?.provisionedIrrfDT;
-      this.provisionedIrrfST = !!data.settings?.provisionedIrrfST;
+      this.provisionedIrrfDT = !!data?.settings?.provisionedIrrfDT;
+      this.provisionedIrrfST = !!data?.settings?.provisionedIrrfST;
     });
   }
 
@@ -79,7 +107,7 @@ export class ExportToolComponent implements OnInit {
     this.notesService.getNotes().noteDetails.forEach(note => this.noteParser(note));
   }
 
-  private noteParser(note: GenericObject): void {
+  private noteParser(note: Note): void {
     try {
       if (!note.trades) {
         return;
@@ -100,19 +128,19 @@ export class ExportToolComponent implements OnInit {
     }
   }
 
-  private excelParser(note: GenericObject): void {
-    const excelTrades = [...note.trades];
+  private excelParser(note: Note): void {
+    const excelTrades = [...note.trades] as Array<NoteTrade & Partial<Omit<Note, 'trades'>>>
 
     // Colocando dos dados da nota no primeiro item negociado
     Object.assign(
       excelTrades[0],
       note,
-      { trades: null, IR: (note.IRRF < 0 ? note.IRRF : '') } // eslint-disable-line @typescript-eslint/naming-convention
+      { trades: undefined, IR: (note.IRRF < 0 ? note.IRRF : '') }
     );
 
     // Gerando o valor da textarea usada para exportar pra planilha
     const excelStrings: string[] = [];
-    const type = excelTrades[0].type;
+    const type = note.type;
     excelTrades.forEach(excelTrade => {
       const { brokerageTax, tran, others } = excelTrade.fees || {};
 
@@ -188,16 +216,16 @@ export class ExportToolComponent implements OnInit {
     this.excelExportString += '\n' + excelStrings.join('\n');
   }
 
-  private dlombelloParser(note: GenericObject): void {
+  private dlombelloParser(note: Note): void {
     // Agrupando os negócios pelo ativo e tipo de operação para simplificar as linhas na planilha
     let tradesVol = 0;
-    const groupedTrades: GenericObject = {};
-    note.trades.forEach((trade: GenericObject) => {
-      const tradesGroupId = trade.marketType + trade.BS + trade.securities + trade.price + trade.obs;
+    const groupedTrades: GroupedTrades = {};
+    note.trades.forEach((trade: NoteTrade) => {
+      const tradesGroupId = trade.marketType + trade.BS + trade.securities + trade.price + trade.obs as keyof GroupedTrades;
       const { brokerageTax, tran, others } = trade.fees || {};
 
       groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {
-        tax: brokerageTax !== undefined ? (brokerageTax + tran + others) : 0,
+        tax: brokerageTax !== undefined ? (brokerageTax + (tran || 0) + (others || 0)) : 0,
         currency: note.currency,
         itemTotal: 0,
         // Cód. do Ativo
@@ -219,7 +247,7 @@ export class ExportToolComponent implements OnInit {
       groupedTrades[tradesGroupId].quantity += trade.quantity;
       groupedTrades[tradesGroupId].itemTotal += trade.itemTotal;
 
-      if (groupedTrades[tradesGroupId].operationType.indexOf(this.dlombelloTaxIgnoredTrades) < 0) {
+      if (this.dlombelloTaxIgnoredTrades.includes(groupedTrades[tradesGroupId].operationType || '---')) {
         tradesVol = NP.plus(tradesVol, Math.abs(trade.itemTotal));
       }
     });
@@ -232,10 +260,7 @@ export class ExportToolComponent implements OnInit {
     let firstSellRow = null;
     let firstDTRow = null;
     for (const g in groupedTrades) {
-      if (
-        Object.prototype.hasOwnProperty.call(groupedTrades, g) &&
-                groupedTrades[g].BS === 'V'
-      ) {
+      if (Object.prototype.hasOwnProperty.call(groupedTrades, g) && groupedTrades[g].BS === 'V') {
         if (!firstDTRow && groupedTrades[g].operationType === 'DT') {
           firstDTRow = groupedTrades[g];
         }
@@ -248,8 +273,8 @@ export class ExportToolComponent implements OnInit {
     }
     if (firstDTRow) firstDTRow.IR = this.provisionedIrrfDT ? Math.abs(note.irrfDtProvisioned) : 0;
     if (firstSellRow) firstSellRow.IR = this.provisionedIrrfST ? Math.abs(note.irrfStProvisioned) : 0;
-    if (firstSellRow || firstDTRow)
-      (firstSellRow || firstDTRow).IR += note.IRRF < 0 ? Math.abs(note.IRRF) : 0;
+    const anyFirstRow = (firstSellRow || firstDTRow);
+    if (anyFirstRow) anyFirstRow.IR = (anyFirstRow.IR || 0) + (note.IRRF < 0 ? Math.abs(note.IRRF) : 0);
 
     // Adicionando os novos negócios a lista já existete
     this.dlombelloExport = this.dlombelloExport.concat(Object.values(groupedTrades));
@@ -263,7 +288,7 @@ export class ExportToolComponent implements OnInit {
 
     // Gerando o valor da textarea usada para exportar pra planilha
     const dlombelloStrings: string[] = [];
-    this.dlombelloExport.forEach((dlombelloTrade: GenericObject) => {
+    this.dlombelloExport.forEach((dlombelloTrade) => {
       dlombelloStrings.push([
         dlombelloTrade.securities,
         dlombelloTrade.date,
@@ -272,7 +297,7 @@ export class ExportToolComponent implements OnInit {
         this.numberFmt.commaOnly(dlombelloTrade.price),
         this.numberFmt.commaOnly(dlombelloTrade.tax),
         dlombelloTrade.brokerage,
-        this.numberFmt.commaOnly(dlombelloTrade.IR || ''),
+        this.numberFmt.commaOnly(dlombelloTrade.IR || null),
         dlombelloTrade.currency,
       ].join('\t').trim());
     });
@@ -280,21 +305,17 @@ export class ExportToolComponent implements OnInit {
   }
 
   // Dividindo a taxa da nota proporcionalmente aos ativos agrupados
-  private dlombelloTaxCalculator(groupedTrades: GenericObject, note: GenericObject, tradesVol: number): void {
+  private dlombelloTaxCalculator(groupedTrades: GroupedTrades, note: Note, tradesVol: number): void {
     let tgFirst = '---';
     let counter = 0;
     let taxVol = 0;
     const noteTax = Math.abs(note.allFees + (note.ISSTax < 0 ? note.ISSTax : 0));
 
     for (const g in groupedTrades) {
-      if (!Object.prototype.hasOwnProperty.call(groupedTrades, g)) {
-        continue;
-      }
+      if (!Object.prototype.hasOwnProperty.call(groupedTrades, g)) continue;
       const TG = groupedTrades[g];
 
-      if (TG.operationType.indexOf(this.dlombelloTaxIgnoredTrades) > -1) {
-        continue;
-      }
+      if (this.dlombelloTaxIgnoredTrades.includes(TG.operationType || '---')) continue;
 
       counter++;
       // ignoro o cálculo da taxa para o primeiro item
@@ -311,7 +332,7 @@ export class ExportToolComponent implements OnInit {
     }
   }
 
-  private generateSortStr(exportTrade: GenericObject): string {
+  private generateSortStr(exportTrade: DlombelloExport): string {
     if (exportTrade._sortKey) {
       return exportTrade._sortKey;
     }

@@ -16,8 +16,8 @@ export class BrokerageNotesComponent implements OnInit {
   public hasAnyNote = false;
 
   constructor(
-        private notesService: BrokerageNotesService,
-        public numberFormatService: NumberFormatService,
+    private notesService: BrokerageNotesService,
+    public numberFormatService: NumberFormatService,
   ) { }
 
   ngOnInit(): void {

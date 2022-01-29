@@ -3,10 +3,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 import { share } from 'rxjs/operators';
-
-import { GenericObject } from '../generic-object.interface';
 import { SessionService } from '../session/session.service';
 import { NotifyService  } from '../notify/notify.service';
+import { UserData } from 'src/types';
 
 
 
@@ -46,10 +45,10 @@ export class ApiService {
     return this.post('oauth/' + provider).subscribe(data => { callback(data); });
   }
 
-  public userMe(): Promise<GenericObject> {
+  public userMe(): Promise<UserData | undefined> {
     return new Promise((resolve, reject) => {
       if (!this.sessionService.isAuthenticated) {
-        return resolve({});
+        return resolve(undefined);
       }
 
       this.cachedPost('pvt/user/me', false).subscribe(
@@ -109,7 +108,7 @@ export class ApiService {
     return this.post('pvt/user/new-email-token', { newEmailToken });
   }
 
-  public userSettings(settings: GenericObject) {
+  public userSettings(settings: UserData['settings']) {
     return this.post('pvt/user/settings', { settings });
   }
 

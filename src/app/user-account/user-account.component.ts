@@ -1,7 +1,6 @@
 import { ApiService } from '../services/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { GenericObject } from '../services/generic-object.interface';
 import { NotifyService } from '../services/notify/notify.service';
 import { NumberFormatService } from '../services/number-format/number-format.service';
 import { Router } from '@angular/router';
@@ -10,17 +9,36 @@ import { UserComponent } from '../user/user.component';
 import { UserService } from '../services/user/user.service';
 
 
+
+type UserTransactions = {
+  results: boolean,
+  response: {
+    desc: string,
+    dateApproved: string,
+    email: string,
+    lockedUserDoc: string,
+    reference: string,
+  }[]
+};
+type UserUsageHistory = {
+  [cpfCnpj: string]: {
+    formatedDate: string,
+    value: number,
+    quantity: number,
+  }[]
+};
+
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
   styleUrls: ['./user-account.component.less']
 })
 export class UserAccountComponent extends UserComponent implements OnInit {
-  public tpl: GenericObject = {};
+  public tpl = { mpOperationNumber: false, connectTransaction: false };
   public transactionLoading = false;
   public mpOperationNumberLoading = false;
-  public userTransactions: GenericObject = {};
-  public userUsageHistory: GenericObject | null = null;
+  public userTransactions: UserTransactions = { results: false, response: [] }
+  public userUsageHistory?: UserUsageHistory;
   public accountDeleteLoading = false;
 
   constructor(
@@ -38,7 +56,7 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     super.ngOnInit();
 
     this.apiService.userTransactions((data) => { this.userTransactions = data; });
-    this.apiService.userUsageHistory((data) => { this.userUsageHistory = data.result as GenericObject; });
+    this.apiService.userUsageHistory((data) => { this.userUsageHistory = data.result; });
   }
 
   public submitConnectTransactionForm(form: FormGroup): void {

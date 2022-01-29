@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserData } from 'src/types';
 import { ApiService } from '../services/api/api.service';
-import { GenericObject } from '../services/generic-object.interface';
 import { SessionService } from '../services/session/session.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { SessionService } from '../services/session/session.service';
 })
 export class UserComponent implements OnInit {
 
-  public user: GenericObject = {};
+  public user?: UserData;
   public loading = false;
 
   constructor(
@@ -22,11 +22,11 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
 
-    this.apiService.userMe().then((data: GenericObject) => {
+    this.apiService.userMe().then((data) => {
       this.user = data;
       this.loading = false;
 
-      if (this.sessionService.isAuthenticated && !data.termsAccepted) {
+      if (this.sessionService.isAuthenticated && !data?.termsAccepted) {
         this.router.navigate(['privacidade-termos']);
       }
     });
