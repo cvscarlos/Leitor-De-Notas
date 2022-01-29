@@ -7,13 +7,13 @@ import { SessionService } from '../services/session/session.service';
   selector: 'app-usage-limit',
   templateUrl: './usage-limit.component.html',
 })
-export class UsageLimitComponent  {
+export class UsageLimitComponent {
   public loading = false;
 
   constructor(
-        private api: ApiService,
-        private notifyService: NotifyService,
-        private sessionService: SessionService,
+    private api: ApiService,
+    private notifyService: NotifyService,
+    private sessionService: SessionService,
   ) { }
 
   public getOptionLink(limitType: string) {
@@ -24,9 +24,8 @@ export class UsageLimitComponent  {
       });
     }
     else {
-      this.notifyService.info('Por favor, faça login antes de escolher o plano', () => {
-        location.href = '/';
-      });
+      this.notifyService.info('Por favor, faça login antes de escolher o plano')
+        .then(() => location.href = '/');
     }
   }
 }

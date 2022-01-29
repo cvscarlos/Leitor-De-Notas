@@ -247,7 +247,7 @@ export class ExportToolComponent implements OnInit {
       groupedTrades[tradesGroupId].quantity += trade.quantity;
       groupedTrades[tradesGroupId].itemTotal += trade.itemTotal;
 
-      if (this.dlombelloTaxIgnoredTrades.includes(groupedTrades[tradesGroupId].operationType || '---')) {
+      if (!this.dlombelloTaxIgnoredTrades.includes(groupedTrades[tradesGroupId].operationType || '---')) {
         tradesVol = NP.plus(tradesVol, Math.abs(trade.itemTotal));
       }
     });
@@ -261,14 +261,10 @@ export class ExportToolComponent implements OnInit {
     let firstDTRow = null;
     for (const g in groupedTrades) {
       if (Object.prototype.hasOwnProperty.call(groupedTrades, g) && groupedTrades[g].BS === 'V') {
-        if (!firstDTRow && groupedTrades[g].operationType === 'DT') {
-          firstDTRow = groupedTrades[g];
-        }
-        else if (!firstSellRow) {
-          firstSellRow = groupedTrades[g];
-        }
+        if (!firstDTRow && groupedTrades[g].operationType === 'DT') firstDTRow = groupedTrades[g];
+        else if (!firstSellRow) firstSellRow = groupedTrades[g];
 
-        if (firstSellRow && firstDTRow) { break; };
+        if (firstSellRow && firstDTRow) break;
       }
     }
     if (firstDTRow) firstDTRow.IR = this.provisionedIrrfDT ? Math.abs(note.irrfDtProvisioned) : 0;
@@ -287,10 +283,8 @@ export class ExportToolComponent implements OnInit {
     });
 
     // Gerando o valor da textarea usada para exportar pra planilha
-    const dlombelloStrings: string[] = [];
-    this.dlombelloExport.forEach((dlombelloTrade) => {
-      console.log(dlombelloTrade.tax);
-      dlombelloStrings.push([
+    this.dlombelloExportString = this.dlombelloExport.map((dlombelloTrade) => {
+      return ([
         dlombelloTrade.securities,
         dlombelloTrade.date,
         dlombelloTrade.operationType,
@@ -301,8 +295,7 @@ export class ExportToolComponent implements OnInit {
         this.numberFmt.commaOnly(dlombelloTrade.IR || null),
         dlombelloTrade.currency,
       ].join('\t').trim());
-    });
-    this.dlombelloExportString = dlombelloStrings.join('\n').trim();
+    }).join('\n').trim();
   }
 
   // Dividindo a taxa da nota proporcionalmente aos ativos agrupados
@@ -325,8 +318,7 @@ export class ExportToolComponent implements OnInit {
         continue;
       }
 
-      console.log(gTrade.itemTotal);
-      gTrade.tax = Math.round((NP.times(Math.abs(gTrade.itemTotal), noteTax) / tradesVol) * 100) / 100;
+      gTrade.tax = Math.round(((Math.abs(gTrade.itemTotal)* noteTax) / tradesVol) * 100) / 100;
       taxVol += gTrade.tax;
     }
 
@@ -358,5 +350,4 @@ export class ExportToolComponent implements OnInit {
     val = val.toString().replace(this.notNumberRegex, '');
     return ('0000000000' + val).slice(-10);
   }
-
 }

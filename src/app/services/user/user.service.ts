@@ -9,9 +9,9 @@ import { SessionService } from '../session/session.service';
 export class UserService {
 
   constructor(
-        private apiService: ApiService,
-        private notifyService: NotifyService,
-        private sessionService: SessionService,
+    private apiService: ApiService,
+    private notifyService: NotifyService,
+    private sessionService: SessionService,
   ) { }
 
   public accountDelete(confirmedCallback: () => void): void {
@@ -20,12 +20,12 @@ export class UserService {
       showCancelButton: true,
       confirmButtonText: 'Excluir',
       cancelButtonText: 'Cancelar',
-    }, (result) => {
+    }).then((result) => {
       if (result.isConfirmed) {
         confirmedCallback();
 
         this.apiService.userDeleteAccount(() => {
-          this.notifyService.success('Sua conta foi excluída!', () => {
+          this.notifyService.success('Sua conta foi excluída!').then(() => {
             this.sessionService.logout();
             window.location.href = '/';
           });

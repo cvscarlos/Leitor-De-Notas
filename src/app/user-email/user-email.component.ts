@@ -9,7 +9,7 @@ import { SessionService } from '../services/session/session.service';
   templateUrl: './user-email.component.html',
   styleUrls: ['./user-email.component.less']
 })
-export class UserEmailComponent  {
+export class UserEmailComponent {
 
   public loading = false;
   public tokenRequested = false;
@@ -24,23 +24,28 @@ export class UserEmailComponent  {
     this.loading = true;
 
     if (this.tokenRequested) {
-      this.apiService.userNewEmailToken(form.value.newEmailToken).subscribe(() => {
-        this.loading = false;
-        this.notifyService.success(
-          'Seu email foi alterado',
-          'A página será recarregada e você deverá se autenticar novamente',
-          () => {
+      this.apiService.userNewEmailToken(form.value.newEmailToken).subscribe({
+        next: () => {
+          this.loading = false;
+          this.notifyService.success(
+            'Seu email foi alterado',
+            'A página será recarregada e você deverá se autenticar novamente',
+          ).then(() => {
             this.sessionService.logout();
             window.location.href = '/';
-          }
-        );
-      }, () => { this.loading = false; });
+          });
+        },
+        error: () => this.loading = false,
+      });
     }
     else {
-      this.apiService.userNewEmailSave(form.value.newEmail).subscribe(() => {
-        this.tokenRequested = true;
-        this.loading = false;
-      }, () => { this.loading = false; });
+      this.apiService.userNewEmailSave(form.value.newEmail).subscribe({
+        next: () => {
+          this.tokenRequested = true;
+          this.loading = false;
+        },
+        error: () => this.loading = false,
+      });
     }
   }
 }

@@ -64,10 +64,10 @@ export class UserAccountComponent extends UserComponent implements OnInit {
 
     this.apiService.userTransactionConnect(form.value.connectCode, data => {
       if (data.success) {
-        this.notifyService.success('A transação foi associada com o seu email', '', () => { window.location.reload(); });
+        this.notifyService.success('A transação foi associada com o seu email').then(() => window.location.reload());
       }
       else {
-        this.notifyService.error('Essa transação não pôde ser associada a sua conta', '', () => { window.location.reload(); });
+        this.notifyService.error('Essa transação não pôde ser associada a sua conta').then(() => window.location.reload());
       }
     });
   }
@@ -77,10 +77,10 @@ export class UserAccountComponent extends UserComponent implements OnInit {
 
     this.apiService.userMercadoPagoConnect(form.value.mpOperationNumber, data => {
       if (data.success) {
-        this.notifyService.success('A transação foi associada com o seu email', '', () => { window.location.reload(); });
+        this.notifyService.success('A transação foi associada com o seu email').then(() => window.location.reload());
       }
       else {
-        this.notifyService.error('Essa transação não pôde ser associada a sua conta', '', () => { window.location.reload(); });
+        this.notifyService.error('Essa transação não pôde ser associada a sua conta').then(() => window.location.reload());
       }
     });
   }

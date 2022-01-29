@@ -8,73 +8,65 @@ type NotifyCallback = (result: SweetAlertResult) => void;
 })
 export class NotifyService {
 
-  private queue: Array<{ options: SweetAlertOptions; callback: null | NotifyCallback }> = [];
+  private queue: { options: SweetAlertOptions; callback: NotifyCallback }[] = [];
 
-  constructor(
-  ) { }
+  constructor() { }
 
-  public success(title: string, messageOrCallback: null | string | NotifyCallback = null, callback: null | NotifyCallback = null): void {
-    this.addToQueue('success', title, messageOrCallback, callback);
+  public success(title: string, message?: string) {
+    return this.addToQueue('success', title, message);
   }
 
-  public error(title: string, messageOrCallback: null | string | NotifyCallback = null, callback: null | NotifyCallback = null): void {
-    this.addToQueue('error', title, messageOrCallback, callback);
+  public error(title: string, message?: string) {
+    return this.addToQueue('error', title, message);
   }
 
-  public info(title: string, messageOrCallback: null | string | NotifyCallback = null, callback: null | NotifyCallback = null): void {
-    this.addToQueue('info', title, messageOrCallback, callback);
+  public info(title: string, message?: string) {
+    return this.addToQueue('info', title, message);
   }
 
-  public warning(title: string, messageOrCallback: null | string | NotifyCallback = null, callback: null | NotifyCallback = null): void {
-    this.addToQueue('warning', title, messageOrCallback, callback);
+  public warning(title: string, message?: string) {
+    return this.addToQueue('warning', title, message);
   }
 
-  public notify(options: SweetAlertOptions, callback: null | NotifyCallback = null): void {
-    this.queue.push({
+  public notify(options: SweetAlertOptions) {
+    const prom = new Promise<SweetAlertResult>((callback) => this.queue.push({
       options,
-      callback: typeof callback == 'function' ? callback : null
-    });
+      callback
+    }));
 
     this.triggerQueue();
+    return prom;
   }
 
   private addToQueue(
     type: SweetAlertIcon,
     title: string,
-    messageOrCallback: null | string | NotifyCallback = null,
-    callback: null | NotifyCallback = null
-  ): void {
-    this.queue.push({
+    message?: string,
+  ) {
+    const prom = new Promise<SweetAlertResult>((callback) => this.queue.push({
       options: {
         icon: type,
         title,
-        html: typeof messageOrCallback == 'string' ? messageOrCallback : ''
+        html: message || ''
       },
-      callback: typeof messageOrCallback == 'function' ? messageOrCallback : callback
-    });
+      callback,
+    }));
 
     this.triggerQueue();
+    return prom;
   }
 
   private triggerQueue(): void {
-    if (!this.queue.length || Swal.isVisible()) {
-      return;
-    }
+    if (!this.queue.length || Swal.isVisible()) return;
 
     const queueItem = this.queue.shift();
-    if (!queueItem) {
-      return;
-    }
+    if (!queueItem) return;
 
     const options = queueItem.options;
-    options.didClose = () => {
-      this.triggerQueue();
-    };
+    options.didClose = () => this.triggerQueue();
 
     Swal.fire(options).then(result => {
-      if (queueItem.callback) {
-        queueItem.callback(result);
-      }
+      if (queueItem.callback) queueItem.callback(result);
     });
   }
 }

@@ -1,7 +1,6 @@
+import { ApiService, OauthProvider } from '../services/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { ApiService, OauthProvider } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
 import { SessionService } from '../services/session/session.service';
 
@@ -19,10 +18,10 @@ export class AuthComponent implements OnInit {
   private sessionId = '';
 
   constructor(
-        private api: ApiService,
-        private formBuilder: FormBuilder,
-        private notifyService: NotifyService,
-        public sessionService: SessionService,
+    private api: ApiService,
+    private formBuilder: FormBuilder,
+    private notifyService: NotifyService,
+    public sessionService: SessionService,
   ) { }
 
   ngOnInit(): void {
@@ -41,14 +40,15 @@ export class AuthComponent implements OnInit {
 
     this.loading = true;
 
-    this.api.login(this.emailForm.value).subscribe((data: any) => {
-      this.emailFormSent = true;
-      this.loading = false;
-      this.sessionId = data.session;
-    }, () => {
-      this.notifyService.error('Houve um problema ao tentar enviar sua mensagem', 'Por favor tente novamente.', () => {
-        window.location.reload();
-      });
+    this.api.login(this.emailForm.value).subscribe({
+      next: (data: any) => {
+        this.emailFormSent = true;
+        this.loading = false;
+        this.sessionId = data.session;
+      },
+      error: () => this.notifyService
+        .error('Houve um problema ao tentar enviar sua mensagem', 'Por favor tente novamente.')
+        .then(() => window.location.reload())
     });
   }
 
@@ -64,13 +64,14 @@ export class AuthComponent implements OnInit {
 
     this.loading = true;
 
-    this.api.token(this.tokenForm.value, this.sessionId).subscribe(() => {
-      this.sessionService.id = this.sessionId;
-      window.location.reload();
-    }, () => {
-      this.notifyService.error('Não foi possível validar o seu TOKEN', 'Por favor tente novamente.', () => {
+    this.api.token(this.tokenForm.value, this.sessionId).subscribe({
+      next: () => {
+        this.sessionService.id = this.sessionId;
         window.location.reload();
-      });
+      },
+      error: () => this.notifyService
+        .error('Não foi possível validar o seu TOKEN', 'Por favor tente novamente.')
+        .then(() => window.location.reload())
     });
   }
 

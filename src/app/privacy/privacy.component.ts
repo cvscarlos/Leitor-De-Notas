@@ -14,9 +14,9 @@ export class PrivacyComponent implements OnInit {
   public showAcceptTermsButton = false;
 
   constructor(
-        private apiService: ApiService,
-        private notifyService: NotifyService,
-        public sessionService: SessionService,
+    private apiService: ApiService,
+    private notifyService: NotifyService,
+    public sessionService: SessionService,
   ) { }
 
   ngOnInit(): void {
@@ -29,9 +29,8 @@ export class PrivacyComponent implements OnInit {
     this.loading = true;
 
     this.apiService.userAcceptTerms(() => {
-      this.notifyService.success('Obrigado por aceitar os termos', 'Sua página será recarregada', () => {
-        window.location.href = '/';
-      });
+      this.notifyService.success('Obrigado por aceitar os termos', 'Sua página será recarregada')
+        .then(() => window.location.href = '/');
     });
   }
 }

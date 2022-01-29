@@ -18,8 +18,8 @@ export class ManageMembersComponent implements OnInit {
   public pendingMembers = 0;
 
   constructor(
-        private apiService: ApiService,
-        private notifyService: NotifyService,
+    private apiService: ApiService,
+    private notifyService: NotifyService,
   ) { }
 
   ngOnInit(): void {
@@ -33,15 +33,14 @@ export class ManageMembersComponent implements OnInit {
     }
 
     this.loading = true;
-    this.apiService.userMemberSave(form.value.memberDoc.trim(), () => {
-      this.notifyService.success('Membro adicionado', () => {
-        this.getMembers();
-      });
-      this.loading = false;
-      form.reset();
-    }).finally(() => {
-      this.loading = false;
-    });
+    this.apiService
+      .userMemberSave(form.value.memberDoc.trim())
+      .then(() => {
+        this.notifyService.success('Membro adicionado').then(() => this.getMembers());
+        this.loading = false;
+        form.reset();
+      })
+      .finally(() => this.loading = false);
   }
 
   public getOptionLink() {

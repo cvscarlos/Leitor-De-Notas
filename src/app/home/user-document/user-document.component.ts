@@ -17,10 +17,10 @@ export class UserDocumentComponent implements OnInit {
   public valid = true;
 
   constructor(
-        private apiService: ApiService,
-        private notifyService: NotifyService,
-        private userService: UserService,
-        public sessionService: SessionService,
+    private apiService: ApiService,
+    private notifyService: NotifyService,
+    private userService: UserService,
+    public sessionService: SessionService,
   ) { }
 
   ngOnInit(): void {
@@ -42,19 +42,14 @@ export class UserDocumentComponent implements OnInit {
     }
 
     this.loading = true;
-    this.apiService.userDocumentSave(form.value.userDoc, data => {
-      if (data.error) {
-        this.notifyService.success(
-          data._messages.join('\n'),
-          () => { window.location.reload(); }
-        );
-      }
-      else {
-        this.notifyService.success(
-          'Dados atualizados com sucesso!',
-          () => { window.location.reload(); }
-        );
-      }
-    }).finally(() => { this.loading = false; });
+    this.apiService
+      .userDocumentSave(form.value.userDoc)
+      .then(data => {
+        if (data.error)
+          this.notifyService.success(data._messages.join('\n')).then(() => window.location.reload());
+        else
+          this.notifyService.success('Dados atualizados com sucesso!').then(() => window.location.reload());
+      })
+      .finally(() => { this.loading = false; });
   }
 }

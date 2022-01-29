@@ -33,4 +33,12 @@ export class AvenueModalComponent implements OnInit {
       });
     });
   }
+
+  public associateAccount(member: AccountMember) {
+    if(!this.avenueAccount) return;
+    
+    this.apiService.associateAvenueAccount(member.cpf, this.avenueAccount).then(() => {
+      alert('associateAccount');
+    });
+  }
 }
