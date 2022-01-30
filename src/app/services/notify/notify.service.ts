@@ -28,28 +28,29 @@ export class NotifyService {
     return this.addToQueue('warning', title, message);
   }
 
-  public notify(options: SweetAlertOptions) {
+  public confirm(title: string, message?: string, confirmButtonText?: string) {
+    return this.notify({
+      title,
+      html: message || '',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: confirmButtonText || 'Sim',
+      cancelButtonText: confirmButtonText ? 'Cancelar' : 'Não'
+    });
+  }
+
+  private addToQueue(type: SweetAlertIcon, title: string, message?: string): Promise<SweetAlertResult> {
+    return this.notify({
+      icon: type,
+      title,
+      html: message || ''
+    });
+  }
+
+  private notify(options: SweetAlertOptions) {
     const prom = new Promise<SweetAlertResult>((callback) => this.queue.push({
       options,
       callback
-    }));
-
-    this.triggerQueue();
-    return prom;
-  }
-
-  private addToQueue(
-    type: SweetAlertIcon,
-    title: string,
-    message?: string,
-  ) {
-    const prom = new Promise<SweetAlertResult>((callback) => this.queue.push({
-      options: {
-        icon: type,
-        title,
-        html: message || ''
-      },
-      callback,
     }));
 
     this.triggerQueue();
@@ -65,8 +66,6 @@ export class NotifyService {
     const options = queueItem.options;
     options.didClose = () => this.triggerQueue();
 
-    Swal.fire(options).then(result => {
-      if (queueItem.callback) queueItem.callback(result);
-    });
+    Swal.fire(options).then(r => queueItem.callback(r));
   }
 }

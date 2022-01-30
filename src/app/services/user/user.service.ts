@@ -15,12 +15,7 @@ export class UserService {
   ) { }
 
   public accountDelete(confirmedCallback: () => void): void {
-    this.notifyService.notify({
-      title: 'Você deseja mesmo EXCLUIR esta conta?',
-      showCancelButton: true,
-      confirmButtonText: 'Excluir',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
+    this.notifyService.confirm('Você deseja mesmo EXCLUIR esta conta?', '', 'Excluir').then((result) => {
       if (result.isConfirmed) {
         confirmedCallback();
 

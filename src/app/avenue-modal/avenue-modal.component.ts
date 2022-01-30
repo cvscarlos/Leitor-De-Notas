@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { AccountMember } from 'src/types';
 import { ApiService } from '../services/api/api.service';
 import { BrokerageNotesService } from '../services/brokerage-notes/brokerage-notes.service';
+import { NotifyService } from '../services/notify/notify.service';
+import { CpfCnpjPipe } from '../shared-pipes/cpf-cnpj/cpf-cnpj.pipe';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './avenue-modal.component.html',
-  styleUrls: ['./avenue-modal.component.less']
+  styleUrls: ['./avenue-modal.component.less'],
+  providers: [CpfCnpjPipe]
 })
 export class AvenueModalComponent implements OnInit {
 
@@ -17,7 +20,9 @@ export class AvenueModalComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
+    private cpfCnpj: CpfCnpjPipe,
     private notesService: BrokerageNotesService,
+    private notifyService: NotifyService,
   ) { }
 
   ngOnInit(): void {
@@ -34,11 +39,15 @@ export class AvenueModalComponent implements OnInit {
     });
   }
 
-  public associateAccount(member: AccountMember) {
-    if(!this.avenueAccount) return;
-    
-    this.apiService.associateAvenueAccount(member.cpf, this.avenueAccount).then(() => {
-      alert('associateAccount');
-    });
+  public async associateAccount(member: AccountMember) {
+    if (!this.avenueAccount) return;
+
+    const confirm = await this.notifyService.confirm(
+      'Você deseja mesmo associar esta conta?',
+      'CPF: ' + this.cpfCnpj.transform(member.cpf) + '<br/>Avenue: ' + this.avenueAccount
+    );
+    if (!confirm.isConfirmed) return;
+
+    await this.apiService.associateAvenueAccount(member.cpf, this.avenueAccount);
   }
 }
