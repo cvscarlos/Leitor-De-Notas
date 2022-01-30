@@ -5,8 +5,8 @@ import { SessionService } from '../services/session/session.service';
 @Injectable()
 export class AuthService implements CanActivate {
   constructor(
-        private sessionService: SessionService,
-        private router: Router
+    private sessionService: SessionService,
+    private router: Router,
   ) { }
 
   canActivate(): boolean {

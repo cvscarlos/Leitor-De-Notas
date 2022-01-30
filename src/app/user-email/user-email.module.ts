@@ -17,6 +17,6 @@ import { SharedDirectivesModule } from '../shared-directives/shared-directives.m
     FormsModule,
     LoadingModule,
   ],
-  exports: [UserEmailComponent]
+  exports: [UserEmailComponent],
 })
 export class UserEmailModule { }

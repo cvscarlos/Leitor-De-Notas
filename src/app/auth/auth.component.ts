@@ -7,7 +7,7 @@ import { SessionService } from '../services/session/session.service';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.less']
+  styleUrls: ['./auth.component.less'],
 })
 export class AuthComponent implements OnInit {
   public emailForm!: FormGroup;
@@ -48,7 +48,7 @@ export class AuthComponent implements OnInit {
       },
       error: () => this.notifyService
         .error('Houve um problema ao tentar enviar sua mensagem', 'Por favor tente novamente.')
-        .then(() => window.location.reload())
+        .then(() => window.location.reload()),
     });
   }
 
@@ -71,7 +71,7 @@ export class AuthComponent implements OnInit {
       },
       error: () => this.notifyService
         .error('Não foi possível validar o seu TOKEN', 'Por favor tente novamente.')
-        .then(() => window.location.reload())
+        .then(() => window.location.reload()),
     });
   }
 
@@ -83,11 +83,11 @@ export class AuthComponent implements OnInit {
 
   private buildForms(): void {
     this.emailForm = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email, Validators.minLength(5)]]
+      email: [null, [Validators.required, Validators.email, Validators.minLength(5)]],
     });
 
     this.tokenForm = this.formBuilder.group({
-      token: [null, [Validators.required, Validators.pattern('^[0-9]{6}$')]]
+      token: [null, [Validators.required, Validators.pattern('^[0-9]{6}$')]],
     });
   }
 }

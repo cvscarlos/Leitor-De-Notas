@@ -11,6 +11,6 @@ import { LoadingModule } from '../loading/loading.module';
     CommonModule,
     LoadingModule,
   ],
-  exports: [PrivacyComponent]
+  exports: [PrivacyComponent],
 })
 export class PrivacyModule { }

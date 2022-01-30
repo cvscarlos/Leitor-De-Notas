@@ -11,6 +11,6 @@ import { ServerUnavailabilityMessageComponent } from './server-unavailability-me
     CommonModule,
     SharedDirectivesModule,
   ],
-  exports: [ServerUnavailabilityMessageComponent]
+  exports: [ServerUnavailabilityMessageComponent],
 })
 export class ServerUnavailabilityMessageModule { }

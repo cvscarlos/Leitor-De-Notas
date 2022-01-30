@@ -13,6 +13,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     SharedDirectivesModule,
     TabsModule.forRoot(),
   ],
-  exports: [ExportToolComponent]
+  exports: [ExportToolComponent],
 })
 export class ExportToolModule { }

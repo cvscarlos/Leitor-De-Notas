@@ -2,11 +2,11 @@ import { Directive, Input, ElementRef, Renderer2, Output, EventEmitter } from '@
 import { AnimationBuilder, AnimationFactory, AnimationPlayer, animate, style } from '@angular/animations';
 
 @Directive({
-  selector: '[appSlideToggle]'
+  selector: '[appSlideToggle]',
 })
 export class SlideToggleDirective {
 
-    @Input('appSlideToggle') set setState(state: string | boolean | null | undefined) {
+  @Input('appSlideToggle') set setState(state: string | boolean | null | undefined) {
     if (state === true || state === 'show') {
       this.state = 'down';
     } else if (state === false || state === 'hide') {
@@ -18,55 +18,56 @@ export class SlideToggleDirective {
     this.animate();
   }
 
-    @Output() appSlideState = new EventEmitter<string>();
+  @Output() appSlideState = new EventEmitter<string>();
 
-    private state = '';
-    private player: AnimationPlayer | undefined;
+  private state = '';
 
-    constructor(
-        private animBuilder: AnimationBuilder,
-        private elemRef: ElementRef,
-        private renderer2: Renderer2
-    ) { }
+  private player: AnimationPlayer | undefined;
 
-    animate(): void {
-      let factory: AnimationFactory;
-      const elem = this.elemRef.nativeElement;
+  constructor(
+    private animBuilder: AnimationBuilder,
+    private elemRef: ElementRef,
+    private renderer2: Renderer2,
+  ) { }
 
-      if (this.state === 'down') {
-        this.appSlideState.emit('showing');
-        this.renderer2.setStyle(elem, 'display', 'block');
-        factory = this.animBuilder.build([
-          style({ height: '0', overflow: 'hidden' }),
-          animate(400, style({ height: '*' }))
-        ]);
-      } else if (this.state === 'up') {
-        factory = this.animBuilder.build([
-          style({ height: '*', overflow: 'hidden' }),
-          animate(400, style({ height: '0'})),
-        ]);
-      } else {
-        return;
-      }
+  animate(): void {
+    let factory: AnimationFactory;
+    const elem = this.elemRef.nativeElement;
 
-      if (this.player) {
-        this.player.destroy();
-      }
-      this.player = factory.create(elem);
-
-      this.player.onDone(() => {
-        if (this.state === 'up') {
-          this.renderer2.setStyle(elem, 'display', 'none');
-
-          this.appSlideState.emit('hidden');
-        }
-
-        if (this.state === 'down' && this.player) {
-          this.player.reset();
-          this.appSlideState.emit('showed');
-        }
-      });
-
-      this.player.play();
+    if (this.state === 'down') {
+      this.appSlideState.emit('showing');
+      this.renderer2.setStyle(elem, 'display', 'block');
+      factory = this.animBuilder.build([
+        style({ height: '0', overflow: 'hidden' }),
+        animate(400, style({ height: '*' })),
+      ]);
+    } else if (this.state === 'up') {
+      factory = this.animBuilder.build([
+        style({ height: '*', overflow: 'hidden' }),
+        animate(400, style({ height: '0' })),
+      ]);
+    } else {
+      return;
     }
+
+    if (this.player) {
+      this.player.destroy();
+    }
+    this.player = factory.create(elem);
+
+    this.player.onDone(() => {
+      if (this.state === 'up') {
+        this.renderer2.setStyle(elem, 'display', 'none');
+
+        this.appSlideState.emit('hidden');
+      }
+
+      if (this.state === 'down' && this.player) {
+        this.player.reset();
+        this.appSlideState.emit('showed');
+      }
+    });
+
+    this.player.play();
+  }
 }

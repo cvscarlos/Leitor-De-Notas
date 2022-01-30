@@ -18,7 +18,7 @@ export class BrokerageNotesService {
   private onNewNoteCallback: NoteCallback[] = [];
 
   constructor(
-      private api: ApiService
+    private api: ApiService,
   ) { }
 
   public uploadFiles(files: FileList | null): void {
@@ -56,7 +56,7 @@ export class BrokerageNotesService {
       serverError: false,
       noteDetails: [],
       error: {},
-      server: {}
+      server: {},
     };
     this.notesList.push(newFile);
 

@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SessionService {
   private sessionId = '';
 
   constructor(
-        private cookies: CookieService
+    private cookies: CookieService,
   ) { }
 
   get isAuthenticated(): boolean {
@@ -39,8 +39,7 @@ export class SessionService {
 
     if (this.sessionId.length) {
       value = this.sessionId;
-    }
-    else {
+    } else {
       value = this.cookies.get('bggg-session') || '';
       value = value.trim();
 

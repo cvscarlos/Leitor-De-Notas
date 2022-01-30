@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'cpfCnpj'
+  name: 'cpfCnpj',
 })
 export class CpfCnpjPipe implements PipeTransform {
 
@@ -10,7 +10,7 @@ export class CpfCnpjPipe implements PipeTransform {
   private notNumberRegex = /[^0-9]+/g;
 
   transform(value: string | unknown): string {
-    let doc = (value + '').trim().replace(this.notNumberRegex, '');
+    let doc = (`${value}`).trim().replace(this.notNumberRegex, '');
 
     doc = doc.length > 11 ?
       doc.padStart(14, '0') :

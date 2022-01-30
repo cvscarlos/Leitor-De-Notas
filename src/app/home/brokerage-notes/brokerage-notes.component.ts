@@ -7,7 +7,7 @@ import { NumberFormatService } from '../../services/number-format/number-format.
 @Component({
   selector: 'app-brokerage-notes',
   templateUrl: './brokerage-notes.component.html',
-  styleUrls: ['./brokerage-notes.component.less']
+  styleUrls: ['./brokerage-notes.component.less'],
 })
 export class BrokerageNotesComponent implements OnInit {
   public noteDetails?: any[];

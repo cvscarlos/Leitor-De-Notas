@@ -9,7 +9,7 @@ import { LoadingModule } from '../loading/loading.module';
   declarations: [UsageLimitComponent],
   imports: [
     CommonModule,
-    LoadingModule
-  ]
+    LoadingModule,
+  ],
 })
 export class UsageLimitModule { }

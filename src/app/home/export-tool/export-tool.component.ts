@@ -6,8 +6,6 @@ import { Note, NoteTrade } from 'src/types';
 import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
 import { NumberFormatService } from '../../services/number-format/number-format.service';
 
-
-
 type DlombelloExport = {
   _sortKey?: string,
   brokerage: Note['brokerName'],
@@ -40,7 +38,7 @@ type GroupedTrades = {
 @Component({
   selector: 'app-export-tool',
   templateUrl: './export-tool.component.html',
-  styleUrls: ['./export-tool.component.less']
+  styleUrls: ['./export-tool.component.less'],
 })
 export class ExportToolComponent implements OnInit {
   public dlombelloExportString = '';
@@ -83,8 +81,7 @@ export class ExportToolComponent implements OnInit {
     if (dayTrade) {
       this.provisionedIrrfDT = !!(dayTrade.target as HTMLInputElement)?.checked;
       this.provisionedIrrfMsg(this.provisionedIrrfDT);
-    }
-    else if (swingTrade) {
+    } else if (swingTrade) {
       this.provisionedIrrfST = !!(swingTrade.target as HTMLInputElement)?.checked;
       this.provisionedIrrfMsg(this.provisionedIrrfST);
     }
@@ -129,13 +126,13 @@ export class ExportToolComponent implements OnInit {
   }
 
   private excelParser(note: Note): void {
-    const excelTrades = [...note.trades] as Array<NoteTrade & Partial<Omit<Note, 'trades'>>>
+    const excelTrades = [...note.trades] as Array<NoteTrade & Partial<Omit<Note, 'trades'>>>;
 
     // Colocando dos dados da nota no primeiro item negociado
     Object.assign(
       excelTrades[0],
       note,
-      { trades: undefined, IR: (note.IRRF < 0 ? note.IRRF : '') }
+      { trades: undefined, IR: (note.IRRF < 0 ? note.IRRF : '') },
     );
 
     // Gerando o valor da textarea usada para exportar pra planilha
@@ -213,7 +210,7 @@ export class ExportToolComponent implements OnInit {
       ].join('\t');
     }
 
-    this.excelExportString += '\n' + excelStrings.join('\n');
+    this.excelExportString += `\n${excelStrings.join('\n')}`;
   }
 
   private dlombelloParser(note: Note): void {
@@ -318,7 +315,7 @@ export class ExportToolComponent implements OnInit {
         continue;
       }
 
-      gTrade.tax = Math.round(((Math.abs(gTrade.itemTotal)* noteTax) / tradesVol) * 100) / 100;
+      gTrade.tax = Math.round(((Math.abs(gTrade.itemTotal) * noteTax) / tradesVol) * 100) / 100;
       taxVol += gTrade.tax;
     }
 
@@ -339,7 +336,7 @@ export class ExportToolComponent implements OnInit {
     out += exportTrade.brokerage; // corretora
     out += operTypeOrder[exportTrade.operationType as keyof typeof operTypeOrder] || '-'; // tipo de operação
     out += (exportTrade.BS === 'C' ? '+' : '-') + this.forceNumberSize(exportTrade.quantity); // quantidade
-    out += ('__________' + exportTrade.securities).slice(-10); // papel/ação
+    out += (`__________${exportTrade.securities}`).slice(-10); // papel/ação
     out += this.forceNumberSize(exportTrade.price); // preço
     exportTrade._sortKey = out.toUpperCase();
 
@@ -348,6 +345,6 @@ export class ExportToolComponent implements OnInit {
 
   private forceNumberSize(val: number | string): string {
     val = val.toString().replace(this.notNumberRegex, '');
-    return ('0000000000' + val).slice(-10);
+    return (`0000000000${val}`).slice(-10);
   }
 }

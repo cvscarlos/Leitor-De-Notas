@@ -8,7 +8,7 @@ import { UserService } from 'src/app/services/user/user.service';
 @Component({
   selector: 'app-user-document',
   templateUrl: './user-document.component.html',
-  styleUrls: ['./user-document.component.less']
+  styleUrls: ['./user-document.component.less'],
 })
 export class UserDocumentComponent implements OnInit {
 

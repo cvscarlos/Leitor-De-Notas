@@ -31,13 +31,13 @@ type UserUsageHistory = {
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
-  styleUrls: ['./user-account.component.less']
+  styleUrls: ['./user-account.component.less'],
 })
 export class UserAccountComponent extends UserComponent implements OnInit {
   public tpl = { mpOperationNumber: false, connectTransaction: false };
   public transactionLoading = false;
   public mpOperationNumberLoading = false;
-  public userTransactions: UserTransactions = { results: false, response: [] }
+  public userTransactions: UserTransactions = { results: false, response: [] };
   public userUsageHistory?: UserUsageHistory;
   public accountDeleteLoading = false;
 
@@ -65,8 +65,7 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     this.apiService.userTransactionConnect(form.value.connectCode, data => {
       if (data.success) {
         this.notifyService.success('A transação foi associada com o seu email').then(() => window.location.reload());
-      }
-      else {
+      } else {
         this.notifyService.error('Essa transação não pôde ser associada a sua conta').then(() => window.location.reload());
       }
     });
@@ -78,8 +77,7 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     this.apiService.userMercadoPagoConnect(form.value.mpOperationNumber, data => {
       if (data.success) {
         this.notifyService.success('A transação foi associada com o seu email').then(() => window.location.reload());
-      }
-      else {
+      } else {
         this.notifyService.error('Essa transação não pôde ser associada a sua conta').then(() => window.location.reload());
       }
     });

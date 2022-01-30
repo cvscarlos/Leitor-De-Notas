@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 
-
-
 type NumberValue = number | null | undefined;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NumberFormatService {
-
-  constructor() { }
 
   public br(numberValue: NumberValue, decimal = 2, minDecimal?: number): string {
     if (numberValue == null || numberValue === undefined) {
@@ -18,7 +14,7 @@ export class NumberFormatService {
 
     return new Intl.NumberFormat('pt-BR', {
       minimumFractionDigits: minDecimal === undefined ? decimal : minDecimal,
-      maximumFractionDigits: decimal
+      maximumFractionDigits: decimal,
     }).format(numberValue);
   }
 

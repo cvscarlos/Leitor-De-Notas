@@ -8,7 +8,7 @@ describe('ManageMembersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageMembersComponent ]
+      declarations: [ ManageMembersComponent ],
     })
       .compileComponents();
   });

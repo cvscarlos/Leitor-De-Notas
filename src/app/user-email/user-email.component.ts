@@ -7,11 +7,12 @@ import { SessionService } from '../services/session/session.service';
 @Component({
   selector: 'app-user-email',
   templateUrl: './user-email.component.html',
-  styleUrls: ['./user-email.component.less']
+  styleUrls: ['./user-email.component.less'],
 })
 export class UserEmailComponent {
 
   public loading = false;
+
   public tokenRequested = false;
 
   constructor(
@@ -37,8 +38,7 @@ export class UserEmailComponent {
         },
         error: () => this.loading = false,
       });
-    }
-    else {
+    } else {
       this.apiService.userNewEmailSave(form.value.newEmail).subscribe({
         next: () => {
           this.tokenRequested = true;

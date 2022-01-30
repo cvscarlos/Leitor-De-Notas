@@ -20,6 +20,6 @@ import { UserDocumentModule } from './user-document/user-document.module';
     UploadModule,
     UserDocumentModule,
   ],
-  exports: [HomeComponent]
+  exports: [HomeComponent],
 })
 export class HomeModule { }

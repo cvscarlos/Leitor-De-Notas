@@ -18,6 +18,6 @@ import { SlideToggleDirective } from './slide-toggle/slide-toggle.directive';
   exports: [
     AutofocusDirective,
     SlideToggleDirective,
-  ]
+  ],
 })
 export class SharedDirectivesModule { }

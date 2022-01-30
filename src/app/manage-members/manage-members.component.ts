@@ -7,7 +7,7 @@ import { NotifyService } from '../services/notify/notify.service';
 @Component({
   selector: 'app-manage-members',
   templateUrl: './manage-members.component.html',
-  styleUrls: ['./manage-members.component.less']
+  styleUrls: ['./manage-members.component.less'],
 })
 export class ManageMembersComponent implements OnInit {
 

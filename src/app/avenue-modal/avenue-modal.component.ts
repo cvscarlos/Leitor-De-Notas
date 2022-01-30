@@ -9,7 +9,7 @@ import { CpfCnpjPipe } from '../shared-pipes/cpf-cnpj/cpf-cnpj.pipe';
   selector: 'app-modal',
   templateUrl: './avenue-modal.component.html',
   styleUrls: ['./avenue-modal.component.less'],
-  providers: [CpfCnpjPipe]
+  providers: [CpfCnpjPipe],
 })
 export class AvenueModalComponent implements OnInit {
 
@@ -44,7 +44,7 @@ export class AvenueModalComponent implements OnInit {
 
     const confirm = await this.notifyService.confirm(
       'Você deseja mesmo associar esta conta?',
-      'CPF: ' + this.cpfCnpj.transform(member.cpf) + '<br/>Avenue: ' + this.avenueAccount
+      `CPF: ${this.cpfCnpj.transform(member.cpf)}<br/>Avenue: ${this.avenueAccount}`,
     );
     if (!confirm.isConfirmed) return;
 

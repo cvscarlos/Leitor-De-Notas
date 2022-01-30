@@ -8,7 +8,7 @@ describe('AuthComponent', () => {
 
   beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [AuthComponent]
+      declarations: [AuthComponent],
     })
       .compileComponents();
   }));

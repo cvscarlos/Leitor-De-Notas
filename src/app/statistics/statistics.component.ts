@@ -5,7 +5,7 @@ import { ApiService } from '../services/api/api.service';
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.less']
+  styleUrls: ['./statistics.component.less'],
 })
 export class StatisticsComponent implements OnInit {
 
@@ -14,7 +14,7 @@ export class StatisticsComponent implements OnInit {
   public uniqueSessions?: string;
 
   constructor(
-        private apiService: ApiService,
+    private apiService: ApiService,
   ) { }
 
   ngOnInit(): void {

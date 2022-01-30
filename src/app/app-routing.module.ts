@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, UrlSegment } from '@angular/router';
+import { RouterModule, Routes, UrlSegment } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import { ManageMembersComponent } from './manage-members/manage-members.component';
@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'privacidade-termos', component: PrivacyComponent },
   { path: 'limites-uso', component: UsageLimitComponent },
 
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

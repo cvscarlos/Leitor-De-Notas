@@ -12,7 +12,7 @@ import { UploadDirective } from './upload.directive';
     CommonModule,
   ],
   exports: [
-    UploadComponent
-  ]
+    UploadComponent,
+  ],
 })
 export class UploadModule { }

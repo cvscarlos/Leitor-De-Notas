@@ -14,7 +14,7 @@ type Callback = (data: any) => void;
 type RequestMethod = 'post' | 'delete' | 'patch' | 'get';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   private requestCache: { [endpoint: string]: ReplaySubject<any> } = {};
@@ -42,7 +42,7 @@ export class ApiService {
   }
 
   public oAuthUrl(provider: OauthProvider, callback: Callback) {
-    return this.post('oauth/' + provider).subscribe(data => callback(data));
+    return this.post(`oauth/${provider}`).subscribe(data => callback(data));
   }
 
   public userMe(): Promise<UserData | undefined> {
@@ -115,7 +115,7 @@ export class ApiService {
   public getMercadoPagoLink(linkType: string, quantity: number, cpfList: Set<string> | null, callback: Callback) {
     return this.post(`pvt/mercado-pago/link/${linkType}`, {
       quantity,
-      cpfList: (cpfList ? [...cpfList] : [])
+      cpfList: (cpfList ? [...cpfList] : []),
     }).subscribe(data => callback(data));
   }
 
@@ -127,7 +127,7 @@ export class ApiService {
     return new Promise<any>((resolve, reject) => {
       httpRequest.subscribe({
         next: data => resolve(data),
-        error: err => reject(err)
+        error: err => reject(err),
       });
     });
   }
@@ -137,11 +137,11 @@ export class ApiService {
     payload: any = null,
     method: RequestMethod = 'post',
     handleError: boolean = true,
-    sessionId: string | null = null
+    sessionId: string | null = null,
   ): Observable<any> {
-    const httpReq = this.http.request(method, environment.apiServer + '/' + endpoint, {
+    const httpReq = this.http.request(method, `${environment.apiServer}/${endpoint}`, {
       body: payload,
-      headers: { 'x-bggg-session': sessionId || this.sessionService.id }
+      headers: { 'x-bggg-session': sessionId || this.sessionService.id },
     }).pipe(share());
 
     if (handleError) {

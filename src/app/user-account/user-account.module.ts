@@ -21,6 +21,6 @@ import { UserAccountComponent } from './user-account.component';
     NgxMaskModule.forRoot(),
     SharedPipesModule,
   ],
-  exports: [UserAccountComponent]
+  exports: [UserAccountComponent],
 })
 export class UserAccountModule { }

@@ -16,6 +16,6 @@ import { NgModule } from '@angular/core';
     LoadingModule,
     ReactiveFormsModule,
   ],
-  exports: [AuthComponent]
+  exports: [AuthComponent],
 })
 export class AuthModule { }

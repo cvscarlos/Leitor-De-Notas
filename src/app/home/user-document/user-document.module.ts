@@ -17,6 +17,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     NgxMaskModule.forRoot(),
     ModalModule.forRoot(),
   ],
-  exports: [UserDocumentComponent]
+  exports: [UserDocumentComponent],
 })
 export class UserDocumentModule { }

@@ -7,7 +7,7 @@ import { UserComponent } from '../user/user.component';
 @Component({
   selector: 'app-user-bar',
   templateUrl: './user-bar.component.html',
-  styleUrls: ['./user-bar.component.less']
+  styleUrls: ['./user-bar.component.less'],
 })
 export class UserBarComponent extends UserComponent implements OnInit {
 

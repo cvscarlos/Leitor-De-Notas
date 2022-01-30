@@ -4,7 +4,7 @@ import { NotifyService } from '../notify/notify.service';
 import { SessionService } from '../session/session.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
 

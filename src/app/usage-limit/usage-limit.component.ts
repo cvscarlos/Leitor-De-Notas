@@ -22,8 +22,7 @@ export class UsageLimitComponent {
       this.api.getMercadoPagoLink(limitType, 1, null, (data) => {
         location.href = data.link;
       });
-    }
-    else {
+    } else {
       this.notifyService.info('Por favor, faça login antes de escolher o plano')
         .then(() => location.href = '/');
     }

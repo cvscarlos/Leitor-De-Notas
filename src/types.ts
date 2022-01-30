@@ -2,7 +2,7 @@ export type AccountMember = {
   avenueAccount?: string,
   cpf: string,
   expires: string,
-}
+};
 
 export type UserData = {
   allowManageMembers: boolean,
@@ -11,7 +11,7 @@ export type UserData = {
   settings?: { provisionedIrrfDT: boolean, provisionedIrrfST: boolean }
   termsAccepted: boolean,
   userDoc: string,
-}
+};
 
 export type NoteTrade = {
   BS: 'C' | 'V',
@@ -25,7 +25,7 @@ export type NoteTrade = {
   quantity: number,
   securities: string,
   time: string,
-}
+};
 
 export type Note = {
   _errorCode?: number,
@@ -54,4 +54,4 @@ export type Note = {
   showNote: boolean,
   trades: NoteTrade[],
   type: 'Bovespa' | 'BMF' | 'Avenue',
-}
+};

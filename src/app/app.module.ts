@@ -52,6 +52,6 @@ import { SharedPipesModule } from './shared-pipes/shared-pipes.module';
     UsageLimitModule,
   ],
   providers: [CookieService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

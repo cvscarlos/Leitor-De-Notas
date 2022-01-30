@@ -4,13 +4,11 @@ import Swal, { SweetAlertIcon, SweetAlertOptions, SweetAlertResult } from 'sweet
 type NotifyCallback = (result: SweetAlertResult) => void;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotifyService {
 
   private queue: { options: SweetAlertOptions; callback: NotifyCallback }[] = [];
-
-  constructor() { }
 
   public success(title: string, message?: string) {
     return this.addToQueue('success', title, message);
@@ -35,7 +33,7 @@ export class NotifyService {
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: confirmButtonText || 'Sim',
-      cancelButtonText: confirmButtonText ? 'Cancelar' : 'Não'
+      cancelButtonText: confirmButtonText ? 'Cancelar' : 'Não',
     });
   }
 
@@ -43,14 +41,14 @@ export class NotifyService {
     return this.notify({
       icon: type,
       title,
-      html: message || ''
+      html: message || '',
     });
   }
 
   private notify(options: SweetAlertOptions) {
     const prom = new Promise<SweetAlertResult>((callback) => this.queue.push({
       options,
-      callback
+      callback,
     }));
 
     this.triggerQueue();

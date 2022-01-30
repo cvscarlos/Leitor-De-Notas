@@ -7,14 +7,14 @@ import { SessionService } from '../../services/session/session.service';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.less']
+  styleUrls: ['./upload.component.less'],
 })
 export class UploadComponent implements OnInit {
   public uploads?: UploadInterface[];
 
   constructor(
-        public sessionService: SessionService,
-        private notesService: BrokerageNotesService
+    public sessionService: SessionService,
+    private notesService: BrokerageNotesService,
   ) { }
 
   ngOnInit(): void {

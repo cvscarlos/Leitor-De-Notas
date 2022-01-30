@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrokerageNotesComponent } from './brokerage-notes.component';
 
-
-
 @NgModule({
   declarations: [
     BrokerageNotesComponent,
@@ -13,6 +11,6 @@ import { BrokerageNotesComponent } from './brokerage-notes.component';
   ],
   exports: [
     BrokerageNotesComponent,
-  ]
+  ],
 })
 export class BrokerageNotesModule { }

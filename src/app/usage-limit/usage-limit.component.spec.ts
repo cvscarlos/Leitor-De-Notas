@@ -8,7 +8,7 @@ describe('UsageLimitComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UsageLimitComponent ]
+      declarations: [ UsageLimitComponent ],
     })
       .compileComponents();
   });

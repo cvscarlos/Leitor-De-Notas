@@ -17,6 +17,6 @@ import { SharedPipesModule } from '../shared-pipes/shared-pipes.module';
     NgxMaskModule.forRoot(),
     SharedPipesModule,
   ],
-  exports: [ManageMembersComponent]
+  exports: [ManageMembersComponent],
 })
 export class ManageMembersModule { }
