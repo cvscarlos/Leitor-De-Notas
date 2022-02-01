@@ -48,6 +48,15 @@ export class AvenueModalComponent implements OnInit {
     );
     if (!confirm.isConfirmed) return;
 
-    await this.apiService.associateAvenueAccount(member.cpf, this.avenueAccount);
+    this.loading = true;
+    this.apiService.connectAvenueAccount(member.cpf, this.avenueAccount)
+      .then(() => {
+        this.notifyService.success('Conta associada com sucesso!', 'Sua página será atualizada.').then(() => {
+          window.location.reload();
+        });
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   }
 }

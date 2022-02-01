@@ -37,7 +37,7 @@
                 <td> {{member.cpf | cpfCnpj}} </td>
                 <td>
                   {{member.avenueAccount}}
-                  <a href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
+                  <a *ngIf="!member.avenueAccount" href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
                 </td>
               </tr>
             </tbody>

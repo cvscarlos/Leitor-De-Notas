@@ -119,8 +119,8 @@ export class ApiService {
     }).subscribe(data => callback(data));
   }
 
-  public associateAvenueAccount(cpfCnpj: string, avenueAccount: string) {
-    return this.returnPromise(this.post('pvt/user/associate-avenue-account', { cpfCnpj, avenueAccount }));
+  public connectAvenueAccount(cpfCnpj: string, avenueAccount: string) {
+    return this.returnPromise(this.post('pvt/user/connect-avenue-account', { cpfCnpj, avenueAccount }));
   }
 
   private returnPromise(httpRequest: Observable<any>): Promise<any> {

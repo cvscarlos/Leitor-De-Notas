@@ -1,21 +1,40 @@
 .wrapper {
-    width: 100%;
-    height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(255, 255, 255, 0.9);
-	z-index: 999;
-    text-align: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  text-align: center;
+  cursor: progress;
+  border-radius: 4px;
 
-	>div {
-		border-width: 0.50em;
-		width: 3rem;
-		height: 3rem;
-        position: relative;
-        top: 50%;
-        margin-top: -1.5em;
-	}
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 6%, rgba(150, 150, 150, 0.5) 15%, rgba(150, 150, 150, 0.5) 36%, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0) 56%, rgba(150, 150, 150, 0.5) 65%, rgba(150, 150, 150, 0.5) 86%, rgba(255, 255, 255, 0) 95%);
+  background-size: 200%;
+  animation: gradient 1.7s ease infinite;
+
+  >div {
+    border-width: 0.50em;
+    width: 3rem;
+    height: 3rem;
+    position: relative;
+    top: 50%;
+    margin-top: -1.5em;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }
