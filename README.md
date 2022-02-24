@@ -14,7 +14,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 |---------------------------------------|-----------------|----------------|
 | Ágora Corretora                       | ✔️              |                |
 | Banco do Brasil Investimentos         | ✔️              |                |
-| Banco Inter Corretora                 | ✔️              |                |
+| Banco Inter Corretora                 | ✔️              | ✔️             |
 | Banco Itaú                            | ✔️              |                |
 | BTG Pactual Corretora                 | ✔️              | ✔️             |
 | C6 Bank                               | ✔️              |                |
