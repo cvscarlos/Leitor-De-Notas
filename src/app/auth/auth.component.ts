@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotifyService } from '../services/notify/notify.service';
 import { SessionService } from '../services/session/session.service';
+import { IsIframeService } from '../services/is-iframe/is-iframe.service';
 
 @Component({
   selector: 'app-auth',
@@ -18,10 +19,11 @@ export class AuthComponent implements OnInit {
   private sessionId = '';
 
   constructor(
+    public sessionService: SessionService,
     private api: ApiService,
     private formBuilder: FormBuilder,
     private notifyService: NotifyService,
-    public sessionService: SessionService,
+    private isIframeService: IsIframeService,
   ) { }
 
   ngOnInit(): void {
@@ -77,7 +79,18 @@ export class AuthComponent implements OnInit {
 
   public redirectToOAuth(provider: OauthProvider) {
     this.api.oAuthUrl(provider, (data) => {
-      window.location.href = data.url;
+      if (!this.isIframeService.isIframe()) {
+        window.location.href = data.url;
+        return;
+      }
+
+      window.open(data.url);
+      const htmlSpin = '<div><div class="spinner-border" role="status"><span class="sr-only">Carregando...</span></div></div>';
+      this.notifyService.infoForceOpened('Aguardando a autorização', `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`);
+
+      setInterval(() => {
+        if (this.sessionService.isAuthenticated) window.location.reload();
+      }, 500);
     });
   }
 

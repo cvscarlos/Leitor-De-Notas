@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "5.19.0-25.Mar",
+  "version": "5.19.1-25.Mar",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -25,7 +25,6 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "bootstrap": "^4.6.0",
     "ngx-bootstrap": "^8.0.0",
-    "ngx-cookie-service": "13.1.2",
     "ngx-mask": "^13.1.1",
     "number-precision": "^1.5.2",
     "rxjs": "^7.5.5",
@@ -43,7 +42,7 @@
     "@angular/cli": "~13.3.0",
     "@angular/compiler-cli": "~13.3.0",
     "@types/jasmine": "^4.0.0",
-    "@types/node": "^17.0.21",
+    "@types/node": "^16.0.0",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
     "eslint": "^8.11.0",

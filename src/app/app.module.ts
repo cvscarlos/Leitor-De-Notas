@@ -6,7 +6,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 import { AppRoutingModule } from './app-routing.module';
-import { CookieService } from 'ngx-cookie-service';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 import { AppComponent } from './app.component';
@@ -54,7 +53,7 @@ import { SharedPipesModule } from './shared-pipes/shared-pipes.module';
     UserEmailModule,
     UsageLimitModule,
   ],
-  providers: [CookieService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

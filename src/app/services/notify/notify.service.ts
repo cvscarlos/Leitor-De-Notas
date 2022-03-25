@@ -22,6 +22,10 @@ export class NotifyService {
     return this.addToQueue('info', title, message);
   }
 
+  public infoForceOpened(title: string, message?: string) {
+    return this.addToQueue('info', title, message, { backdrop: 'rgba(0,0,123,0.4)', showConfirmButton: false });
+  }
+
   public warning(title: string, message?: string) {
     return this.addToQueue('warning', title, message);
   }
@@ -37,11 +41,12 @@ export class NotifyService {
     });
   }
 
-  private addToQueue(type: SweetAlertIcon, title: string, message?: string): Promise<SweetAlertResult> {
+  private addToQueue(type: SweetAlertIcon, title: string, message?: string, options = {}): Promise<SweetAlertResult> {
     return this.notify({
       icon: type,
       title,
       html: message || '',
+      ...options,
     });
   }
 

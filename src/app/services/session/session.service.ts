@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -7,18 +6,14 @@ import { CookieService } from 'ngx-cookie-service';
 export class SessionService {
   private sessionId = '';
 
-  constructor(
-    private cookies: CookieService,
-  ) { }
-
   get isAuthenticated(): boolean {
-    const cookie = this.getCookie();
-    return cookie.length > 0;
+    const session = this.getSessionData();
+    return session.length > 0;
   }
 
   set id(sessionId: string) {
     this.sessionId = sessionId;
-    this.setCookie();
+    this.setSessionData();
   }
 
   get id(): string {
@@ -27,27 +22,27 @@ export class SessionService {
 
   logout(): void {
     this.sessionId = '';
-    this.cookies.delete('bggg-session');
+    delete localStorage.bgggSessionExpires;
+    delete localStorage.bgggSessionId;
   }
 
-  private setCookie(): void {
-    this.cookies.set('bggg-session', this.sessionId, 14, '/');
+  private setSessionData(): void {
+    localStorage.setItem('bgggSessionId', this.sessionId);
+    localStorage.setItem('bgggSessionExpires', `${Date.now() + 1000 * 60 * 60 * 24 * 14}`);
   }
 
-  private getCookie(): string {
-    let value: string;
+  private getSessionData(): string {
+    let sessionId = '';
 
     if (this.sessionId.length) {
-      value = this.sessionId;
+      sessionId = this.sessionId;
     } else {
-      value = this.cookies.get('bggg-session') || '';
-      value = value.trim();
-
-      if (value.length) {
-        this.sessionId = value;
-      }
+      sessionId = parseInt(localStorage.bgggSessionExpires) > Date.now()
+        ? `${localStorage.bgggSessionId}`.trim()
+        : '';
+      if (sessionId.length) this.sessionId = sessionId;
     }
 
-    return value;
+    return sessionId;
   }
 }
