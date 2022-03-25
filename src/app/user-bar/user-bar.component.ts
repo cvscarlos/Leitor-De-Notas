@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiService } from '../services/api/api.service';
 import { SessionService } from '../services/session/session.service';
 import { UserComponent } from '../user/user.component';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-user-bar',
@@ -10,6 +11,7 @@ import { UserComponent } from '../user/user.component';
   styleUrls: ['./user-bar.component.less'],
 })
 export class UserBarComponent extends UserComponent implements OnInit {
+  public faPencilAlt = faPencilAlt;
 
   constructor(
     protected override apiService: ApiService,

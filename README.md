@@ -13,6 +13,8 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Corretora                             | Mercado à Vista | Mercado Futuro |
 |---------------------------------------|-----------------|----------------|
 | Ágora Corretora                       | ✔️              |                |
+| Ativa Investimentos                   | ✔️              |                |
+| Avenue (EUA)                          | ✔️              |                |
 | Banco do Brasil Investimentos         | ✔️              |                |
 | Banco Inter Corretora                 | ✔️              | ✔️             |
 | Banco Itaú                            | ✔️              |                |
@@ -25,7 +27,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Genial Investimentos Corretora        | ✔️              | ✔️             |
 | Guide Corretora                       | ✔️              |                |
 | Kirton Corretora                      | ✔️              |                |
-| Mirae Corretora                       | ✔️              |                |
+| Mirae Corretora                       | ✔️              | ✔️             |
 | Modal Corretora                       | ✔️              | ✔️             |
 | ModalMais Corretora                   | ✔️              |                |
 | Necton                                | ✔️              |                |
@@ -37,8 +39,8 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Terra Investimentos Corretora         | ✔️              | ✔️             |
 | Toro Corretora                        | ✔️              | ✔️             |
 | Vitreo Corretora                      | ✔️              |                |
-| XP Corretora                          | ✔️              | ✔️             |
 | Warren Corretora                      | ✔️              | ✔️             |
+| XP Corretora                          | ✔️              | ✔️             |
 
 ## Sobre este repositório
 - Este repositório contém apenas o código fonte da interface.

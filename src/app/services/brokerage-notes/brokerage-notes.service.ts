@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Note } from 'src/types';
+import { firstValueFrom } from 'rxjs';
+import { Note, NoteDetails, NoteError } from 'src/types';
 import { ApiService } from '../api/api.service';
 import { UploadInterface } from './upload.interface';
 
 
 
-type NotesArray = { notesList: UploadInterface[]; noteDetails: any[]; noteErrors: any[] };
-type NoteCallback = (note: Note) => void;
+type NotesArray = { notesList: UploadInterface[]; noteDetails: NoteDetails[]; noteErrors: NoteError[] };
+type NoteCallback = (note: NoteDetails) => void;
 
 @Injectable({
   providedIn: 'root',
 })
 export class BrokerageNotesService {
   private notesList: UploadInterface[] = [];
-  private noteDetails: any[] = [];
-  private noteErrors: any[] = [];
+  private noteDetails: NoteDetails[] = [];
+  private noteErrors: NoteError[] = [];
   private onNewNoteCallback: NoteCallback[] = [];
 
   constructor(
@@ -63,7 +64,7 @@ export class BrokerageNotesService {
     const formData = new FormData();
     formData.append('brokerageNote', file, file.name);
 
-    this.api.upload(formData).toPromise()
+    firstValueFrom(this.api.upload(formData))
       .then(response => {
         newFile.server = response;
         this.parseDetails(response);
@@ -79,15 +80,14 @@ export class BrokerageNotesService {
 
   private parseDetails(serverResponse: any): void {
     for (const n in serverResponse) {
-      if (!Object.prototype.hasOwnProperty.call(serverResponse, n)) {
-        continue;
-      }
+      if (!Object.prototype.hasOwnProperty.call(serverResponse, n)) continue;
 
-      const note = serverResponse[n];
+      const noteApiResponse = serverResponse[n] as Note;
 
-      note._error = note._error || false;
-      note._messages = note._messages || [];
-      note.showNote = note._noteReadCompletely && note.trades && note.trades.length;
+      const noteError = noteApiResponse._error || false;
+      const noteMessages = noteApiResponse._messages || [];
+      const showNote = !!(noteApiResponse._noteReadCompletely && noteApiResponse.trades && noteApiResponse.trades.length);
+      const note: NoteDetails = { ...noteApiResponse, _error: noteError, _messages: noteMessages, showNote };
       this.noteDetails.push(note);
 
       if (note._messages.length) {
@@ -95,7 +95,7 @@ export class BrokerageNotesService {
           _messages: note._messages,
           _page: note._page,
           fileName: note.fileName,
-          number: note.number, // eslint-disable-line id-blacklist
+          number: note.number,
         });
       }
 

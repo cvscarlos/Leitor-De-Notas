@@ -21,6 +21,7 @@ export type NoteTrade = {
   itemTotal: number,
   marketType: string,
   obs: string,
+  originalSecurities?: string,
   price: number,
   quantity: number,
   securities: string,
@@ -28,7 +29,11 @@ export type NoteTrade = {
 };
 
 export type Note = {
+  _error: boolean,
   _errorCode?: number,
+  _messages: string[],
+  _noteReadCompletely: boolean,
+  _page?: number,
   allFees: number,
   ANATax: number,
   avenueAccount?: string,
@@ -38,9 +43,11 @@ export type Note = {
   brokerName: string,
   CBLC: number,
   clearing: number,
+  cpf: string,
   currency: 'BRL' | 'USD',
   date: string,
   emolument: number,
+  fileName: string;
   futureNetAmount: number,
   IRRF: number,
   irrfDtProvisioned: number,
@@ -49,9 +56,15 @@ export type Note = {
   netAmount: number,
   number: string,
   optionsTax: number,
+  proofIsValid: boolean,
   registrationTax: number,
   settlementTax: number,
   showNote: boolean,
   trades: NoteTrade[],
+  tradesTotal: number,
   type: 'Bovespa' | 'BMF' | 'Avenue',
 };
+
+export type NoteDetails = Note & { showNote: boolean };
+
+export type NoteError = Pick<Note, '_messages' | '_page' | 'fileName' | 'number'>;

@@ -5,15 +5,15 @@ import { HomeComponent } from './home/home.component';
 import { ManageMembersComponent } from './manage-members/manage-members.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { IsIframeService } from './services/is-iframe/is-iframe.service';
 import { UsageLimitComponent } from './usage-limit/usage-limit.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserEmailComponent } from './user-email/user-email.component';
 
 
 const queryMatcher = (queryToMatch: string): boolean => {
-  const a = document.createElement('a');
-  a.href = window.location.href;
-  return a.search.indexOf(queryToMatch) > -1;
+  const url = new URL(window.location.href);
+  return url.search.indexOf(queryToMatch) > -1;
 };
 
 const routes: Routes = [
@@ -22,11 +22,11 @@ const routes: Routes = [
 
   { path: '', component: HomeComponent },
   { path: 'index.html', component: HomeComponent },
-  { path: 'minha-conta', component: UserAccountComponent, canActivate: [AuthService] },
-  { path: 'editar-email', component: UserEmailComponent, canActivate: [AuthService] },
-  { path: 'gerenciar-membros', component: ManageMembersComponent, canActivate: [AuthService] },
-  { path: 'privacidade-termos', component: PrivacyComponent },
-  { path: 'limites-uso', component: UsageLimitComponent },
+  { path: 'minha-conta', component: UserAccountComponent, canActivate: [AuthService, IsIframeService] },
+  { path: 'editar-email', component: UserEmailComponent, canActivate: [AuthService, IsIframeService] },
+  { path: 'gerenciar-membros', component: ManageMembersComponent, canActivate: [AuthService, IsIframeService] },
+  { path: 'privacidade-termos', component: PrivacyComponent, canActivate: [IsIframeService] },
+  { path: 'limites-uso', component: UsageLimitComponent, canActivate: [IsIframeService] },
 
   { path: '**', component: PageNotFoundComponent },
 ];
@@ -34,6 +34,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthService],
+  providers: [AuthService, IsIframeService],
 })
 export class AppRoutingModule { }

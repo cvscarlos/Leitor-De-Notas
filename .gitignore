@@ -2,8 +2,8 @@
 
 # compiled output
 /dist
-/tmp
 /out-tsc
+/tmp
 # Only exists if Bazel was run
 /bazel-out
 
@@ -15,21 +15,21 @@ chrome-profiler-events*.json
 speed-measure-plugin*.json
 
 # IDEs and editors
-/.idea
-.project
-.classpath
 .c9/
-*.launch
+.classpath
+.project
 .settings/
+*.launch
 *.sublime-workspace
+/.idea
 
 # IDE - VSCode
+.history/*
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
 
 # misc
 /.angular/cache
@@ -37,10 +37,10 @@ speed-measure-plugin*.json
 /connect.lock
 /coverage
 /libpeerconnection.log
-npm-debug.log
-yarn-error.log
-testem.log
 /typings
+npm-debug.log
+testem.log
+yarn-error.log
 
 # System Files
 .DS_Store

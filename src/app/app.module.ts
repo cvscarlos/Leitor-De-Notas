@@ -2,6 +2,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { CookieService } from 'ngx-cookie-service';
@@ -41,6 +43,7 @@ import { SharedPipesModule } from './shared-pipes/shared-pipes.module';
     HttpClientModule,
     ModalModule.forRoot(),
     SharedPipesModule,
+    FontAwesomeModule,
 
     HomeModule,
     LoadingModule,

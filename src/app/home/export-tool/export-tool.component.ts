@@ -3,8 +3,10 @@ import NP from 'number-precision';
 import { ApiService } from 'src/app/services/api/api.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { Note, NoteTrade } from 'src/types';
-import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
-import { NumberFormatService } from '../../services/number-format/number-format.service';
+import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
+import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
+import { faCopy, faTrashAlt, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
+import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
 
 type DlombelloExport = {
   _sortKey?: string,
@@ -18,6 +20,17 @@ type DlombelloExport = {
   quantity: NoteTrade['quantity'],
   securities: NoteTrade['securities'],
   tax: number,
+};
+type DlombelloExportObject = {
+  ticker: NoteTrade['securities'],
+  date: Note['date'],
+  type: NoteTrade['dlombelloOperationType'],
+  quantity: number,
+  price: number,
+  tax: number,
+  broker: Note['brokerName'],
+  irrf: number,
+  currency: Note['currency'],
 };
 type GroupedTrades = {
   [groupId: string]: {
@@ -41,22 +54,31 @@ type GroupedTrades = {
   styleUrls: ['./export-tool.component.less'],
 })
 export class ExportToolComponent implements OnInit {
+  public faCopy = faCopy;
+  public faTrashAlt = faTrashAlt;
+  public faSquarePlus = faSquarePlus;
+
   public dlombelloExportString = '';
   public excelExportString = '';
   public enableExport = false;
   public provisionedIrrfDT = false;
   public provisionedIrrfST = false;
+  public isIframe = false;
   private dlombelloExport: DlombelloExport[] = [];
   private notNumberRegex = /[^0-9]+/g;
   private provIrrfMsg = false;
   private dlombelloTaxIgnoredTrades = ['AJ.POS'];
+  private dlombelloExportObjects: DlombelloExportObject[] = [];
 
   constructor(
     private notesService: BrokerageNotesService,
     private numberFmt: NumberFormatService,
     private notifyService: NotifyService,
     private apiService: ApiService,
-  ) { }
+    private isIframeService: IsIframeService,
+  ) {
+    this.isIframe = this.isIframeService.isIframe();
+  }
 
   ngOnInit(): void {
     this.notesService.noteCallback((note) => this.noteParser(note));
@@ -91,6 +113,15 @@ export class ExportToolComponent implements OnInit {
     }
 
     this.recalcNotes();
+  }
+
+  sendJsonMessage(): void {
+    try {
+      window.parent.postMessage(JSON.stringify(this.dlombelloExportObjects), '*');
+    } catch (error) {
+      this.notifyService.error('Algo saiu errado ao tentar enviar os dados!', 'A operação não foi completada.');
+      console.error(error);
+    }
   }
 
   private localCleanNotes(): void {
@@ -281,16 +312,29 @@ export class ExportToolComponent implements OnInit {
 
     // Gerando o valor da textarea usada para exportar pra planilha
     this.dlombelloExportString = this.dlombelloExport.map((dlombelloTrade) => {
+      const exportObject:DlombelloExportObject = {
+        ticker: dlombelloTrade.securities,
+        date: dlombelloTrade.date,
+        type: dlombelloTrade.operationType,
+        quantity: dlombelloTrade.BS === 'C' ? dlombelloTrade.quantity : -dlombelloTrade.quantity,
+        price: dlombelloTrade.price,
+        tax: dlombelloTrade.tax,
+        broker: dlombelloTrade.brokerage,
+        irrf: dlombelloTrade.IR || 0,
+        currency: dlombelloTrade.currency,
+      };
+      this.dlombelloExportObjects.push(exportObject);
+
       return ([
-        dlombelloTrade.securities,
-        dlombelloTrade.date,
-        dlombelloTrade.operationType,
-        this.numberFmt.commaOnly(dlombelloTrade.BS === 'C' ? dlombelloTrade.quantity : -dlombelloTrade.quantity, 10, 0),
-        this.numberFmt.commaOnly(dlombelloTrade.price),
-        this.numberFmt.commaOnly(dlombelloTrade.tax),
-        dlombelloTrade.brokerage,
-        this.numberFmt.commaOnly(dlombelloTrade.IR || null),
-        dlombelloTrade.currency,
+        exportObject.ticker,
+        exportObject.date,
+        exportObject.type,
+        this.numberFmt.commaOnly(exportObject.quantity, 10, 0),
+        this.numberFmt.commaOnly(exportObject.price),
+        this.numberFmt.commaOnly(exportObject.tax),
+        exportObject.broker,
+        this.numberFmt.commaOnly(exportObject.irrf || null),
+        exportObject.currency,
       ].join('\t').trim());
     }).join('\n').trim();
   }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
+import { NoteDetails, NoteError } from 'src/types';
 
 import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
 import { UploadInterface } from '../../services/brokerage-notes/upload.interface';
@@ -9,9 +10,9 @@ import { NumberFormatService } from '../../services/number-format/number-format.
   templateUrl: './brokerage-notes.component.html',
   styleUrls: ['./brokerage-notes.component.less'],
 })
-export class BrokerageNotesComponent implements OnInit {
-  public noteDetails?: any[];
-  public noteErrors?: any[];
+export class BrokerageNotesComponent implements OnInit, DoCheck {
+  public noteDetails?: NoteDetails[];
+  public noteErrors?: NoteError[];
   public notes?: UploadInterface[];
   public hasAnyNote = false;
 
@@ -31,5 +32,9 @@ export class BrokerageNotesComponent implements OnInit {
         this.hasAnyNote = !!note?.showNote;
       }
     });
+  }
+
+  ngDoCheck(): void {
+    if (this.hasAnyNote) this.hasAnyNote = !!this.noteDetails?.some((note) => note.showNote);
   }
 }

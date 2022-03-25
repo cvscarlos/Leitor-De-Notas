@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "5.18.1-24.Fev",
+  "version": "5.19.0-25.Mar",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -20,15 +20,18 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "@fortawesome/angular-fontawesome": "^0.10.2",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "bootstrap": "^4.6.0",
     "ngx-bootstrap": "^8.0.0",
     "ngx-cookie-service": "13.1.2",
     "ngx-mask": "^13.1.1",
     "number-precision": "^1.5.2",
-    "rxjs": "~7.5.4",
-    "sweetalert2": "^11.4.4",
+    "rxjs": "^7.5.5",
+    "sweetalert2": "^11.4.6",
     "tslib": "^2.3.1",
-    "zone.js": "~0.11.4"
+    "zone.js": "^0.11.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.3.0",
@@ -39,20 +42,20 @@
     "@angular-eslint/template-parser": "13.1.0",
     "@angular/cli": "~13.3.0",
     "@angular/compiler-cli": "~13.3.0",
-    "@types/jasmine": "~3.10.3",
-    "@types/node": "^16.11.26",
-    "@typescript-eslint/eslint-plugin": "5.12.1",
-    "@typescript-eslint/parser": "5.12.1",
-    "eslint": "^8.9.0",
-    "eslint-config-airbnb-typescript": "^16.1.0",
+    "@types/jasmine": "^4.0.0",
+    "@types/node": "^17.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
+    "eslint": "^8.11.0",
+    "eslint-config-airbnb-typescript": "^16.1.3",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.25.4",
     "jasmine-core": "~4.0.1",
-    "karma": "~6.3.16",
-    "karma-chrome-launcher": "~3.1.0",
+    "karma": "^6.3.17",
+    "karma-chrome-launcher": "^3.1.1",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.5.5"
+    "typescript": "^4.6.2"
   }
 }
