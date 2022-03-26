@@ -40,7 +40,11 @@ export class SessionService {
       sessionId = parseInt(localStorage.bgggSessionExpires) > Date.now()
         ? `${localStorage.bgggSessionId}`.trim()
         : '';
-      if (sessionId.length) this.sessionId = sessionId;
+
+      if (sessionId.length) {
+        this.sessionId = sessionId;
+        localStorage.removeItem('bgggSessionIframe');
+      }
     }
 
     return sessionId;

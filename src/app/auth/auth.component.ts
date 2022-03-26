@@ -88,6 +88,8 @@ export class AuthComponent implements OnInit {
       const htmlSpin = '<div><div class="spinner-border" role="status"><span class="sr-only">Carregando...</span></div></div>';
       this.notifyService.infoForceOpened('Aguardando a autorização', `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`);
 
+      localStorage.setItem('bgggSessionIframe', 'yes');
+
       setInterval(() => {
         if (this.sessionService.isAuthenticated) window.location.reload();
       }, 500);
