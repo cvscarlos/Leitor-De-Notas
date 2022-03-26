@@ -63,14 +63,14 @@
               <h4>Resumo Financeiro</h4>
               <table class="table table-sm">
                 <tbody>
-                  <tr> <td>CPF/CNPJ:</td>           <td>{{ note.cpf }}</td> </tr>
-                  <tr> <td>Nome do arquivo:</td>      <td>{{ note.fileName }}</td> </tr>
-                  <tr> <td>Corretagem:</td>         <td>{{ this.numberFormatService.br(note.clearing) }}</td></tr>
-                  <tr> <td>Taxas:</td>            <td>{{ this.numberFormatService.br(note.allFees + note.ISSTax) }}</td></tr>
-                  <tr> <td>I.R.R.F.:</td>           <td>{{ this.numberFormatService.br(note.IRRF) }}</td></tr>
-                  <tr> <td>I.R.R.F. prov. Day Trade:</td>   <td>{{ this.numberFormatService.br(note.irrfDtProvisioned) }}</td></tr>
-                  <tr> <td>I.R.R.F. prov. Swing Trade:</td> <td>{{ this.numberFormatService.br(note.irrfStProvisioned) }}</td></tr>
-                  <tr> <td>Prova real:</td>         <td>{{ note.proofIsValid ? 'Válida' : 'Inválida' }}</td> </tr>
+                  <tr> <td>CPF/CNPJ:</td>										<td>{{ note.cpf }}</td> </tr>
+                  <tr> <td>Nome do arquivo:</td>						<td>{{ note.fileName }}</td> </tr>
+                  <tr> <td>Corretagem:</td>									<td>{{ this.numberFormatService.br(note.clearing) }}</td></tr>
+                  <tr> <td>Taxas:</td>											<td>{{ this.numberFormatService.br(note.allFees + note.ISSTax) }}</td></tr>
+                  <tr> <td>I.R.R.F.:</td>										<td>{{ this.numberFormatService.br(note.IRRF) }}</td></tr>
+                  <tr> <td>I.R.R.F. prov. Day Trade:</td>		<td>{{ this.numberFormatService.br(note.irrfDtProvisioned) }}</td></tr>
+                  <tr> <td>I.R.R.F. prov. Swing Trade:</td>	<td>{{ this.numberFormatService.br(note.irrfStProvisioned) }}</td></tr>
+                  <tr> <td>Prova real:</td>									<td>{{ note.proofIsValid ? 'Válida' : 'Inválida' }}</td> </tr>
                 </tbody>
               </table>
             </div>
@@ -98,7 +98,7 @@
                     <td>{{ trade.time }}</td>
                     <td>{{ trade.securities }} <span *ngIf="trade.originalSecurities">({{ trade.originalSecurities }})</span></td>
                     <td>{{ trade.obs }}</td>
-                    <td>{{ this.numberFormatService.brNoDecimal(trade.quantity) }}</td>
+                    <td>{{ this.numberFormatService.br(trade.quantity, 10, 0) }}</td>
                     <td>{{ this.numberFormatService.br(trade.price) }}</td>
                     <td>{{ this.numberFormatService.br(trade.itemTotal) }}</td>
                     <td>{{ trade.DC }}</td>
