@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "5.20.0-26.Mar",
+  "version": "5.21.0-27.Mar",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "ghp": "sh ./bin/github-page.sh"
+    "deploy": "sh ./bin/github-page.sh"
   },
   "private": true,
   "dependencies": {

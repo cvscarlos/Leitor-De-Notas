@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import Swal, { SweetAlertIcon, SweetAlertOptions, SweetAlertResult } from 'sweetalert2';
+import { Injectable } from '@angular/core';
 
 type NotifyCallback = (result: SweetAlertResult) => void;
 

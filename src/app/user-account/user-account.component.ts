@@ -1,12 +1,12 @@
-import { ApiService } from '../services/api/api.service';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api/api.service';
 import { FormGroup } from '@angular/forms';
-import { NotifyService } from '../services/notify/notify.service';
-import { NumberFormatService } from '../services/number-format/number-format.service';
+import { NotifyService } from 'src/app/services/notify/notify.service';
+import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 import { Router } from '@angular/router';
-import { SessionService } from '../services/session/session.service';
-import { UserComponent } from '../user/user.component';
-import { UserService } from '../services/user/user.service';
+import { SessionService } from 'src/app/services/session/session.service';
+import { UserComponent } from 'src/app/user/user.component';
+import { UserService } from 'src/app/services/user/user.service';
 
 
 

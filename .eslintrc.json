@@ -26,7 +26,14 @@
         "no-trailing-spaces": "error",
         "no-underscore-dangle": "off",
         "prefer-template": "error",
-        "quotes": ["error", "single"]
+        "quotes": ["error", "single"],
+        "sort-imports": ["error", {
+          "ignoreCase": true,
+          "ignoreDeclarationSort": false,
+          "ignoreMemberSort": false,
+          "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
+          "allowSeparatedGroups": true
+        }]
       }
     },
     {

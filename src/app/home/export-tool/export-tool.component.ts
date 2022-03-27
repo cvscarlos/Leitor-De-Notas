@@ -1,51 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import NP from 'number-precision';
-import { ApiService } from 'src/app/services/api/api.service';
-import { NotifyService } from 'src/app/services/notify/notify.service';
+import { faCopy, faSquarePlus, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { Note, NoteTrade } from 'src/types';
+import { ApiService } from 'src/app/services/api/api.service';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
-import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
-import { faCopy, faTrashAlt, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
+import { NotifyService } from 'src/app/services/notify/notify.service';
+import NP from 'number-precision';
+import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 
-type DlombelloExport = {
-  _sortKey?: string,
-  brokerage: Note['brokerName'],
-  BS: NoteTrade['BS'],
-  currency: Note['currency'],
-  date: Note['date'],
-  IR?: number,
-  operationType: NoteTrade['dlombelloOperationType'],
-  price: NoteTrade['price'],
-  quantity: NoteTrade['quantity'],
-  securities: NoteTrade['securities'],
-  tax: number,
+type DlombelloTrade = {
+  brokerage: Note['brokerName'];
+  BS: NoteTrade['BS'];
+  currency: Note['currency'];
+  date: Note['date'];
+  IR?: number;
+  operationType: NoteTrade['dlombelloOperationType'];
+  price: NoteTrade['price'];
+  quantity: NoteTrade['quantity'];
+  securities: NoteTrade['securities'];
+  tax: number;
 };
+type DlombelloExport = DlombelloTrade & { _sortKey?: string };
+type GroupedTrades = { [groupId: string]: DlombelloTrade & { itemTotal: number, priceTotal: number } };
+
 type DlombelloExportObject = {
-  ticker: NoteTrade['securities'],
-  date: Note['date'],
-  type: NoteTrade['dlombelloOperationType'],
-  quantity: number,
-  price: number,
-  tax: number,
-  broker: Note['brokerName'],
-  irrf: number,
-  currency: Note['currency'],
-};
-type GroupedTrades = {
-  [groupId: string]: {
-    brokerage: Note['brokerName'],
-    BS: NoteTrade['BS'],
-    currency: Note['currency'],
-    date: Note['date'],
-    IR?: number,
-    itemTotal: NoteTrade['itemTotal'],
-    operationType: NoteTrade['dlombelloOperationType'],
-    price: NoteTrade['price'],
-    quantity: NoteTrade['quantity'],
-    securities: NoteTrade['securities'],
-    tax: number,
-  }
+  broker: Note['brokerName'];
+  currency: Note['currency'];
+  date: Note['date'];
+  irrf: number;
+  price: number;
+  quantity: number;
+  tax: number;
+  ticker: NoteTrade['securities'];
+  type: NoteTrade['dlombelloOperationType'];
 };
 
 @Component({
@@ -55,29 +42,32 @@ type GroupedTrades = {
 })
 export class ExportToolComponent implements OnInit {
   public faCopy = faCopy;
-  public faTrashAlt = faTrashAlt;
   public faSquarePlus = faSquarePlus;
+  public faTrashAlt = faTrashAlt;
 
   public dlombelloExportString = '';
-  public excelExportString = '';
   public enableExport = false;
+  public excelExportString = '';
+  public groupByTicker = false;
+  public groupByTickerMsg = false;
+  public isIframe = false;
   public provisionedIrrfDT = false;
   public provisionedIrrfST = false;
-  public isIframe = false;
   private dlombelloExport: DlombelloExport[] = [];
+  private dlombelloExportObjects: DlombelloExportObject[] = [];
+  private dlombelloTaxIgnoredTrades = ['AJ.POS'];
   private notNumberRegex = /[^0-9]+/g;
   private provIrrfMsg = false;
-  private dlombelloTaxIgnoredTrades = ['AJ.POS'];
-  private dlombelloExportObjects: DlombelloExportObject[] = [];
 
   constructor(
-    private notesService: BrokerageNotesService,
-    private numberFmt: NumberFormatService,
-    private notifyService: NotifyService,
     private apiService: ApiService,
     private isIframeService: IsIframeService,
+    private notesService: BrokerageNotesService,
+    private notifyService: NotifyService,
+    private numberFmt: NumberFormatService,
   ) {
     this.isIframe = this.isIframeService.isIframe();
+    NP.enableBoundaryChecking(false);
   }
 
   ngOnInit(): void {
@@ -86,6 +76,7 @@ export class ExportToolComponent implements OnInit {
     this.apiService.userMe().then((data) => {
       this.provisionedIrrfDT = !!data?.settings?.provisionedIrrfDT;
       this.provisionedIrrfST = !!data?.settings?.provisionedIrrfST;
+      this.groupByTicker = !!data?.settings?.groupByTicker;
     });
   }
 
@@ -99,18 +90,26 @@ export class ExportToolComponent implements OnInit {
     this.localCleanNotes();
   }
 
-  public provisionedIRRF({ dayTrade, swingTrade }: { [x: string]: Event }): void {
+  public settingsChange({ dayTrade, swingTrade, groupByTicker }: { [x: string]: Event }): void {
     if (dayTrade) {
       this.provisionedIrrfDT = !!(dayTrade.target as HTMLInputElement)?.checked;
       this.provisionedIrrfMsg(this.provisionedIrrfDT);
     } else if (swingTrade) {
       this.provisionedIrrfST = !!(swingTrade.target as HTMLInputElement)?.checked;
       this.provisionedIrrfMsg(this.provisionedIrrfST);
+    } else if (groupByTicker) {
+      this.groupByTicker = !!(groupByTicker.target as HTMLInputElement)?.checked;
+      if (this.groupByTicker && !this.groupByTickerMsg) {
+        this.notifyService.warning('Atenção', 'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitordenotas.customerly.help/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">clicando aqui</a>.');
+        this.groupByTickerMsg = true;
+      }
     }
 
-    if (dayTrade || swingTrade) {
-      this.apiService.userSettings({ provisionedIrrfST: this.provisionedIrrfST, provisionedIrrfDT: this.provisionedIrrfDT });
-    }
+    this.apiService.userSettings({
+      provisionedIrrfST: this.provisionedIrrfST,
+      provisionedIrrfDT: this.provisionedIrrfDT,
+      groupByTicker: this.groupByTicker,
+    });
 
     this.recalcNotes();
   }
@@ -249,13 +248,12 @@ export class ExportToolComponent implements OnInit {
     let tradesVol = 0;
     const groupedTrades: GroupedTrades = {};
     note.trades.forEach((trade: NoteTrade) => {
-      const tradesGroupId = trade.marketType + trade.BS + trade.securities + trade.price + trade.obs as keyof GroupedTrades;
+      const tradesGroupId = trade.marketType + trade.BS + trade.securities + (this.groupByTicker ? '_' : trade.price) + trade.obs;
       const { brokerageTax, tran, others } = trade.fees || {};
 
       groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {
         tax: brokerageTax !== undefined ? (brokerageTax + (tran || 0) + (others || 0)) : 0,
         currency: note.currency,
-        itemTotal: 0,
         // Cód. do Ativo
         securities: trade.securities,
         // Data da Transação
@@ -264,8 +262,10 @@ export class ExportToolComponent implements OnInit {
         operationType: trade.dlombelloOperationType,
         // Quantidade
         quantity: 0,
+        itemTotal: 0,
         // Preço / Ajuste
         price: trade.price,
+        priceTotal: 0,
         // Corretora
         brokerage: note.brokerName,
         // Tipo de operação: compra ou venda
@@ -274,11 +274,18 @@ export class ExportToolComponent implements OnInit {
 
       groupedTrades[tradesGroupId].quantity += trade.quantity;
       groupedTrades[tradesGroupId].itemTotal += trade.itemTotal;
+      groupedTrades[tradesGroupId].priceTotal += NP.times(trade.quantity, trade.price);
 
       if (!this.dlombelloTaxIgnoredTrades.includes(groupedTrades[tradesGroupId].operationType || '---')) {
         tradesVol = NP.plus(tradesVol, Math.abs(trade.itemTotal));
       }
     });
+
+    if (this.groupByTicker) {
+      Object.keys(groupedTrades).forEach(key => {
+        groupedTrades[key].price = NP.divide(groupedTrades[key].priceTotal, groupedTrades[key].quantity);
+      });
+    }
 
     if (!note.trades?.[0]?.fees) {
       this.dlombelloTaxCalculator(groupedTrades, note, tradesVol);
@@ -330,7 +337,7 @@ export class ExportToolComponent implements OnInit {
         exportObject.date,
         exportObject.type,
         this.numberFmt.commaOnly(exportObject.quantity, 10, 0),
-        this.numberFmt.commaOnly(exportObject.price),
+        this.numberFmt.commaOnly(exportObject.price, 6, 2),
         this.numberFmt.commaOnly(exportObject.tax),
         exportObject.broker,
         this.numberFmt.commaOnly(exportObject.irrf || null),

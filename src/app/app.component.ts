@@ -1,6 +1,6 @@
+import { faBug, faInfoCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Component } from '@angular/core';
 import { IsIframeService } from './services/is-iframe/is-iframe.service';
-import { faQuestionCircle, faInfoCircle, faBug } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',

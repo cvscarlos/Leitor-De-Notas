@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api/api.service';
 import packageJson from '../../../package.json';
-import { ApiService } from '../services/api/api.service';
 
 @Component({
   selector: 'app-statistics',

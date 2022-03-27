@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-import { UploadInterface } from '../../services/brokerage-notes/upload.interface';
-import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
-import { SessionService } from '../../services/session/session.service';
+import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
+import { SessionService } from 'src/app/services/session/session.service';
+import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interface';
 
 @Component({
   selector: 'app-upload',

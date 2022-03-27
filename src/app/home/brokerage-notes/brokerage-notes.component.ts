@@ -1,9 +1,8 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { NoteDetails, NoteError } from 'src/types';
-
-import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
-import { UploadInterface } from '../../services/brokerage-notes/upload.interface';
-import { NumberFormatService } from '../../services/number-format/number-format.service';
+import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
+import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
+import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interface';
 
 @Component({
   selector: 'app-brokerage-notes',

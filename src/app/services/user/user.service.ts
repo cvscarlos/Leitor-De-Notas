@@ -1,7 +1,7 @@
+import { ApiService } from 'src/app/services/api/api.service';
 import { Injectable } from '@angular/core';
-import { ApiService } from '../api/api.service';
-import { NotifyService } from '../notify/notify.service';
-import { SessionService } from '../session/session.service';
+import { NotifyService } from 'src/app/services/notify/notify.service';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directives.module';
 import { ExportToolComponent } from './export-tool.component';
-import { NgModule } from '@angular/core';
-import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgModule } from '@angular/core';
+import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directives.module';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 
 

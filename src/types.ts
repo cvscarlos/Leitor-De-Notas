@@ -8,7 +8,7 @@ export type UserData = {
   allowManageMembers: boolean,
   email: string,
   limit: string,
-  settings?: { provisionedIrrfDT: boolean, provisionedIrrfST: boolean }
+  settings?: { provisionedIrrfDT: boolean, provisionedIrrfST: boolean, groupByTicker: boolean },
   termsAccepted: boolean,
   userDoc: string,
 };

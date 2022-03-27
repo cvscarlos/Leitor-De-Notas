@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountMember } from 'src/types';
-import { ApiService } from '../services/api/api.service';
-import { BrokerageNotesService } from '../services/brokerage-notes/brokerage-notes.service';
-import { NotifyService } from '../services/notify/notify.service';
-import { CpfCnpjPipe } from '../shared-pipes/cpf-cnpj/cpf-cnpj.pipe';
+import { ApiService } from 'src/app/services/api/api.service';
+import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
+import { CpfCnpjPipe } from 'src/app/shared-pipes/cpf-cnpj/cpf-cnpj.pipe';
+import { NotifyService } from 'src/app/services/notify/notify.service';
 
 @Component({
   selector: 'app-modal',

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PrivacyComponent } from './privacy.component';
 import { LoadingModule } from '../loading/loading.module';
+import { NgModule } from '@angular/core';
+import { PrivacyComponent } from './privacy.component';
 
 
 

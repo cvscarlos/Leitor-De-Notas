@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
 import { Note, NoteDetails, NoteError } from 'src/types';
-import { ApiService } from '../api/api.service';
+import { ApiService } from 'src/app/services/api/api.service';
+import { firstValueFrom } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { UploadInterface } from './upload.interface';
 
 

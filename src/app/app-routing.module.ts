@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
 import { RouterModule, Routes, UrlSegment } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
+import { IsIframeService } from './services/is-iframe/is-iframe.service';
 import { ManageMembersComponent } from './manage-members/manage-members.component';
+import { NgModule } from '@angular/core';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
-import { IsIframeService } from './services/is-iframe/is-iframe.service';
 import { UsageLimitComponent } from './usage-limit/usage-limit.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserEmailComponent } from './user-email/user-email.component';

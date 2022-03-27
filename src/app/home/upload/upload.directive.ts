@@ -1,4 +1,4 @@
-import { Directive, HostListener, Renderer2, ElementRef } from '@angular/core';
+import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
 
 import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
 

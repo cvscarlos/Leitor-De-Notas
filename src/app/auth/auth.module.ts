@@ -1,9 +1,9 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth.component';
 import { CommonModule } from '@angular/common';
-import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoadingModule } from '../loading/loading.module';
+import { LoadingModule } from 'src/app/loading/loading.module';
 import { NgModule } from '@angular/core';
+import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directives.module';
 
 
 

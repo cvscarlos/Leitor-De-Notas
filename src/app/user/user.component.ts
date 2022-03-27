@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api/api.service';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/services/session/session.service';
 import { UserData } from 'src/types';
-import { ApiService } from '../services/api/api.service';
-import { SessionService } from '../services/session/session.service';
 
 @Component({
   selector: 'app-user',

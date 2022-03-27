@@ -1,8 +1,8 @@
+import { ApiService } from 'src/app/services/api/api.service';
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ApiService } from '../services/api/api.service';
-import { NotifyService } from '../services/notify/notify.service';
-import { SessionService } from '../services/session/session.service';
+import { NotifyService } from 'src/app/services/notify/notify.service';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-user-email',

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LoadingModule } from 'src/app/loading/loading.module';
+import { NgModule } from '@angular/core';
 import { UsageLimitComponent } from './usage-limit.component';
-import { LoadingModule } from '../loading/loading.module';
 
 
 

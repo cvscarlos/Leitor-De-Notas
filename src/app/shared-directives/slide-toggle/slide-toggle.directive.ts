@@ -1,5 +1,5 @@
-import { Directive, Input, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
 import { AnimationBuilder, AnimationFactory, AnimationPlayer, animate, style } from '@angular/animations';
+import { Directive, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appSlideToggle]',

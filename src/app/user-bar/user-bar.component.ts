@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api/api.service';
 import { Router } from '@angular/router';
-import { ApiService } from '../services/api/api.service';
-import { SessionService } from '../services/session/session.service';
-import { UserComponent } from '../user/user.component';
+import { SessionService } from 'src/app/services/session/session.service';
+import { UserComponent } from 'src/app/user/user.component';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({

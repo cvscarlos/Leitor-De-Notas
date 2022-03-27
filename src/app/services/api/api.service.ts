@@ -1,10 +1,10 @@
-import { environment } from 'src/environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Injectable } from '@angular/core';
+import { NotifyService } from 'src/app/services/notify/notify.service';
+import { SessionService } from 'src/app/services/session/session.service';
 import { share } from 'rxjs/operators';
-import { SessionService } from '../session/session.service';
-import { NotifyService } from '../notify/notify.service';
 import { UserData } from 'src/types';
 
 

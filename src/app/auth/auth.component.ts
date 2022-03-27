@@ -1,9 +1,9 @@
-import { ApiService, OauthProvider } from '../services/api/api.service';
+import { ApiService, OauthProvider } from 'src/app/services/api/api.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NotifyService } from '../services/notify/notify.service';
-import { SessionService } from '../services/session/session.service';
-import { IsIframeService } from '../services/is-iframe/is-iframe.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
+import { NotifyService } from 'src/app/services/notify/notify.service';
+import { SessionService } from 'src/app/services/session/session.service';
 
 @Component({
   selector: 'app-auth',

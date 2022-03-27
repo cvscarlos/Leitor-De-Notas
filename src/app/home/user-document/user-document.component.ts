@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ApiService } from 'src/app/services/api/api.service';
+import { FormGroup } from '@angular/forms';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { UserService } from 'src/app/services/user/user.service';
