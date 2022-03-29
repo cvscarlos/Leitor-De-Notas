@@ -243,12 +243,29 @@ export class ExportToolComponent implements OnInit {
     this.excelExportString += `\n${excelStrings.join('\n')}`;
   }
 
+  private marketTypeNormalizer(marketType: string): string {
+    marketType = marketType.toUpperCase();
+    if (marketType.includes('FRACION') || marketType.includes('VISTA') || marketType === 'FRA' || marketType === 'VIS') {
+      return 'VISTA';
+    }
+    return marketType;
+  }
+
+  private observationNormalizer(obs: string): string {
+    if (obs === '#' || obs === '#2') return '';
+    return obs;
+  }
+
   private dlombelloParser(note: Note): void {
     // Agrupando os negócios pelo ativo e tipo de operação para simplificar as linhas na planilha
     let tradesVol = 0;
     const groupedTrades: GroupedTrades = {};
     note.trades.forEach((trade: NoteTrade) => {
-      const tradesGroupId = trade.marketType + trade.BS + trade.securities + (this.groupByTicker ? '_' : trade.price) + trade.obs;
+      const tradesGroupId = this.marketTypeNormalizer(trade.marketType)
+        + trade.BS
+        + trade.securities
+        + (this.groupByTicker ? '_' : trade.price)
+        + this.observationNormalizer(trade.obs);
       const { brokerageTax, tran, others } = trade.fees || {};
 
       groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {
