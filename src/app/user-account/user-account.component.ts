@@ -60,27 +60,11 @@ export class UserAccountComponent extends UserComponent implements OnInit {
   }
 
   public submitConnectTransactionForm(form: FormGroup): void {
-    this.transactionLoading = true;
-
-    this.apiService.userTransactionConnect(form.value.connectCode, data => {
-      if (data.success) {
-        this.notifyService.success('A transação foi associada com o seu email').then(() => window.location.reload());
-      } else {
-        this.notifyService.error('Essa transação não pôde ser associada a sua conta').then(() => window.location.reload());
-      }
-    });
+    this.paymentAssociation(this.apiService.userTransactionConnect(form.value.connectCode));
   }
 
   public submitMpOperationNumber(form: FormGroup): void {
-    this.mpOperationNumberLoading = true;
-
-    this.apiService.userMercadoPagoConnect(form.value.mpOperationNumber, data => {
-      if (data.success) {
-        this.notifyService.success('A transação foi associada com o seu email').then(() => window.location.reload());
-      } else {
-        this.notifyService.error('Essa transação não pôde ser associada a sua conta').then(() => window.location.reload());
-      }
-    });
+    this.paymentAssociation(this.apiService.userMercadoPagoConnect(form.value.mpOperationNumber));
   }
 
   public accountDelete(): void {
@@ -89,4 +73,19 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     });
   }
 
+  private paymentAssociation(httpPromise: Promise<any>) {
+    this.mpOperationNumberLoading = true;
+    this.transactionLoading = true;
+
+    httpPromise.then(data => {
+      const notification = data.success
+        ? this.notifyService.success('A transação foi associada com o seu email')
+        : this.notifyService.error('Essa transação não pôde ser associada a sua conta');
+      notification.then(() => window.location.reload());
+    }).catch(e => {
+      console.error(e);
+      this.mpOperationNumberLoading = false;
+      this.transactionLoading = false;
+    });
+  }
 }

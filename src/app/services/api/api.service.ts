@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, ReplaySubject } from 'rxjs';
+import { lastValueFrom, Observable, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { NotifyService } from 'src/app/services/notify/notify.service';
@@ -73,19 +73,19 @@ export class ApiService {
   }
 
   public userDeleteAccount(callback: Callback): void {
-    this.post('pvt/user/delete', null, 'delete').subscribe(data => callback(data));
+    this.post('pvt/user/delete', undefined, 'delete').subscribe(data => callback(data));
   }
 
   public userDocumentSave(userDoc: string) {
-    return this.returnPromise(this.post('pvt/user/me', { userDoc }, 'patch'));
+    return lastValueFrom(this.post('pvt/user/me', { userDoc }, 'patch'));
   }
 
-  public userTransactionConnect(code: string, callback: Callback) {
-    return this.post('pvt/user/connect-transaction', { code }).subscribe(data => callback(data));
+  public userTransactionConnect(code: string) {
+    return lastValueFrom(this.post('pvt/user/connect-transaction', { code }));
   }
 
-  public userMercadoPagoConnect(reference: string, callback: Callback) {
-    return this.post('pvt/user/connect-mp-transaction', { reference }).subscribe(data => callback(data));
+  public userMercadoPagoConnect(reference: string) {
+    return lastValueFrom(this.post('pvt/user/connect-mp-transaction', { reference }));
   }
 
   public userAcceptTerms(callback: Callback) {
@@ -97,7 +97,7 @@ export class ApiService {
   }
 
   public userMemberSave(memberDoc: string) {
-    return this.returnPromise(this.post('pvt/user/add-member-document', { memberDoc }));
+    return lastValueFrom(this.post('pvt/user/add-member-document', { memberDoc }));
   }
 
   public userNewEmailSave(newEmail: string) {
@@ -120,21 +120,12 @@ export class ApiService {
   }
 
   public connectAvenueAccount(cpfCnpj: string, avenueAccount: string) {
-    return this.returnPromise(this.post('pvt/user/connect-avenue-account', { cpfCnpj, avenueAccount }));
-  }
-
-  private returnPromise(httpRequest: Observable<any>): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      httpRequest.subscribe({
-        next: data => resolve(data),
-        error: err => reject(err),
-      });
-    });
+    return lastValueFrom(this.post('pvt/user/connect-avenue-account', { cpfCnpj, avenueAccount }));
   }
 
   private post(
     endpoint: string,
-    payload: any = null,
+    payload?: Record<string, unknown> | string,
     method: RequestMethod = 'post',
     handleError: boolean = true,
     sessionId: string | null = null,
@@ -144,16 +135,7 @@ export class ApiService {
       headers: { 'x-bggg-session': sessionId || this.sessionService.id },
     }).pipe(share());
 
-    if (handleError) {
-      httpReq.subscribe({
-        next: () => { },
-        error: (e: HttpErrorResponse) => {
-          const message = e.error && e.error._messages ? e.error && e.error._messages : [];
-          if (message.length) this.notifyService.error(message.join('\n'));
-          else this.notifyService.error('Erro inesperado!', 'Por favor, atualize sua página e tente novamente');
-        },
-      });
-    }
+    if (handleError) httpReq.subscribe({ error: (e) => this.requestErrorHandler(e) });
 
     return httpReq;
   }
@@ -162,12 +144,18 @@ export class ApiService {
     this.requestCache[endpoint] = this.requestCache[endpoint] || new ReplaySubject(1);
 
     if (!this.requestCache[endpoint].observed) {
-      this.post(endpoint, null, method, handleError).subscribe({
+      this.post(endpoint, undefined, method, handleError).subscribe({
         next: (n) => this.requestCache[endpoint].next(n),
         error: (e) => this.requestCache[endpoint].error(e),
       });
     }
 
     return this.requestCache[endpoint];
+  }
+
+  private requestErrorHandler(e: HttpErrorResponse) {
+    const message = e.error?._messages || [];
+    if (message.length) this.notifyService.error(message.join('\n'));
+    else this.notifyService.error('Erro inesperado!', 'Por favor, atualize sua página e tente novamente');
   }
 }
