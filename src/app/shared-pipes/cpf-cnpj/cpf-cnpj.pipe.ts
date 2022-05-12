@@ -10,17 +10,20 @@ export class CpfCnpjPipe implements PipeTransform {
   private notNumberRegex = /[^0-9]+/g;
 
   transform(value: string | unknown): string {
-    let doc = (`${value}`).trim().replace(this.notNumberRegex, '');
+    const valueStr = String(value || '').trim();
+    const docOnlyNumbers = valueStr.replace(this.notNumberRegex, '');
 
-    doc = doc.length > 11 ?
-      doc.padStart(14, '0') :
-      doc.padStart(11, '0');
+    if (!docOnlyNumbers.length) return valueStr;
 
-    doc = doc.length === 11 ?
-      doc.replace(this.cpfRegex, '$1.$2.$3-$4') :
-      doc.replace(this.cnpjRegex, '$1.$2.$3/$4-$5');
+    const docFixedLength = docOnlyNumbers.length > 11 ?
+      docOnlyNumbers.padStart(14, '0') :
+      docOnlyNumbers.padStart(11, '0');
 
-    return doc === '00.000.000/0001-91' ? '---' : doc;
+    const docFormatted = docFixedLength.length === 11 ?
+      docFixedLength.replace(this.cpfRegex, '$1.$2.$3-$4') :
+      docFixedLength.replace(this.cnpjRegex, '$1.$2.$3/$4-$5');
+
+    return docFormatted === '00.000.000/0001-91' ? '---' : docFormatted;
   }
 
 }

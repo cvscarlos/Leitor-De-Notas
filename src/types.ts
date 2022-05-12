@@ -11,6 +11,8 @@ export type UserData = {
   settings?: { provisionedIrrfDT: boolean, provisionedIrrfST: boolean, groupByTicker: boolean },
   termsAccepted: boolean,
   userDoc: string,
+  expiresIn: string,
+  isFreePlan: boolean,
 };
 
 export type NoteTrade = {

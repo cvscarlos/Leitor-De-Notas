@@ -335,8 +335,9 @@ export class ExportToolComponent implements OnInit {
     });
 
     // Gerando o valor da textarea usada para exportar pra planilha
+    const newDlombelloExportObjects: DlombelloExportObject[] = [];
     this.dlombelloExportString = this.dlombelloExport.map((dlombelloTrade) => {
-      const exportObject:DlombelloExportObject = {
+      const exportObject: DlombelloExportObject = {
         ticker: dlombelloTrade.securities,
         date: dlombelloTrade.date,
         type: dlombelloTrade.operationType,
@@ -347,7 +348,7 @@ export class ExportToolComponent implements OnInit {
         irrf: dlombelloTrade.IR || 0,
         currency: dlombelloTrade.currency,
       };
-      this.dlombelloExportObjects.push(exportObject);
+      newDlombelloExportObjects.push(exportObject);
 
       return ([
         exportObject.ticker,
@@ -361,6 +362,8 @@ export class ExportToolComponent implements OnInit {
         exportObject.currency,
       ].join('\t').trim());
     }).join('\n').trim();
+
+    this.dlombelloExportObjects = newDlombelloExportObjects;
   }
 
   // Dividindo a taxa da nota proporcionalmente aos ativos agrupados

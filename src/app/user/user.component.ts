@@ -10,8 +10,16 @@ import { UserData } from 'src/types';
 })
 export class UserComponent implements OnInit {
 
-  public user?: UserData;
   public loading = false;
+  public user: UserData = {
+    allowManageMembers: false,
+    email: '',
+    limit: '',
+    termsAccepted: false,
+    userDoc: '',
+    expiresIn: '',
+    isFreePlan: true,
+  };
 
   constructor(
     protected apiService: ApiService,
@@ -23,7 +31,7 @@ export class UserComponent implements OnInit {
     this.loading = true;
 
     this.apiService.userMe().then((data) => {
-      this.user = data;
+      if (data) this.user = data;
       this.loading = false;
 
       if (this.sessionService.isAuthenticated && !data?.termsAccepted) {

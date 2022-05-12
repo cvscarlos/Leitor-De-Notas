@@ -10,11 +10,12 @@
         <div>
           <h4>Dados</h4>
           <p>
-            Email: {{user?.email}} (<a routerLink="/editar-email"><i>editar</i></a>)<br />
-            CPF: {{user?.userDoc | cpfCnpj}}<br />
-            Limite: {{user?.limit}}
+            Email: {{user.email}} (<a routerLink="/editar-email"><i>editar</i></a>)<br />
+            CPF: {{user.userDoc | cpfCnpj}}<br />
+            Limite: {{user.limit}}
+            <span *ngIf="!user.isFreePlan && user.expiresIn" style="display:block">Expira em: {{user.expiresIn | date:'dd/MM/yyyy'}}</span>
           </p>
-          <p *ngIf="user?.allowManageMembers">
+          <p *ngIf="user.allowManageMembers">
             <a routerLink="/gerenciar-membros" class="btn btn-info">Gerenciar membros</a>
           </p>
           <div class="user-transactions"></div>
@@ -25,14 +26,27 @@
         <div>
           <h4>Transações</h4>
 
-          <ul class="list-group mb-4" *ngIf="userTransactions.results">
-            <li class="list-group-item" *ngFor="let tran of userTransactions.response">
-              <div>{{tran.desc}}</div>
-              <div>{{tran.dateApproved | date:'dd/MM/yy'}} | <span class="text-secondary">{{tran.reference}}</span></div>
-              <div *ngIf="tran.email">- <i>Associada ao email: {{tran.email}}</i></div>
-              <div *ngIf="tran.lockedUserDoc">- <i>Limitado ao CPF/CNPJ: {{tran.lockedUserDoc}}</i></div>
-            </li>
-          </ul>
+          <table *ngIf="userTransactions.results" class="table table-responsive-sm table-sm table-bordered">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Código</th>
+                <th>Usuário</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let transaction of userTransactions.response">
+                <td>{{transaction.dateApproved | date:'dd/MM/yy'}}</td>
+                <td>{{transaction.desc}} <sup class="badge badge-light font-weight-light">{{transaction.reference}}</sup></td>
+                <td>{{transaction.paymentNumber}}</td>
+                <td>
+                  <span>{{transaction.email}}</span>
+                  <span>{{transaction.lockedUserDoc | cpfCnpj}}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <p *ngIf="!userTransactions.results"><i>Você não possui nenhuma transação.</i></p>
 

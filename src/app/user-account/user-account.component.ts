@@ -17,6 +17,7 @@ type UserTransactions = {
     dateApproved: string,
     email: string,
     lockedUserDoc: string,
+    paymentNumber: number,
     reference: string,
   }[]
 };
