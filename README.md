@@ -30,6 +30,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Mirae Corretora                       | ✔️              | ✔️             |
 | Modal Corretora                       | ✔️              | ✔️             |
 | ModalMais Corretora                   | ✔️              |                |
+| MyCAP                                 | ✔️              |                |
 | Necton                                | ✔️              |                |
 | Nova Futura                           | ✔️              | ✔️             |
 | Órama Corretora                       | ✔️              | ✔️             |
