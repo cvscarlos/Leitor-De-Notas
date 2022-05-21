@@ -9,6 +9,7 @@ rm -f ../leitordenotas.github.io-MASTER/polyfills.*
 rm -f ../leitordenotas.github.io-MASTER/runtime.*
 
 cp -r ./dist/leitor-de-notas/* ../leitordenotas.github.io-MASTER/
+cp README.md ../leitordenotas.github.io-MASTER/README.md
 cd ../leitordenotas.github.io-MASTER/
 cp index.html 404.html
 
