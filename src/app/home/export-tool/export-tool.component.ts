@@ -80,9 +80,9 @@ export class ExportToolComponent implements OnInit {
     });
   }
 
-  public copyFn(textarea: HTMLTextAreaElement): void {
+  public async copyFn(textarea: HTMLTextAreaElement): Promise<void> {
     textarea.select();
-    navigator.clipboard.writeText(textarea.value);
+    await navigator.clipboard.writeText(textarea.value);
   }
 
   public cleanNotes(): void {
