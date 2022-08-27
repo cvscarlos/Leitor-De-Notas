@@ -78,15 +78,18 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     this.mpOperationNumberLoading = true;
     this.transactionLoading = true;
 
-    httpPromise.then(data => {
-      const notification = data.success
-        ? this.notifyService.success('A transação foi associada com o seu email')
-        : this.notifyService.error('Essa transação não pôde ser associada a sua conta');
-      notification.then(() => window.location.reload());
-    }).catch(e => {
-      console.error(e);
-      this.mpOperationNumberLoading = false;
-      this.transactionLoading = false;
-    });
+    httpPromise
+      .then(data => {
+        if (data.success) return this.notifyService.success('A transação foi associada com o seu email');
+
+        const msg = data.emailAssociated ? `Pagamento já associado ao email ${data.emailAssociated}` : undefined;
+        return this.notifyService.error('Essa transação não pôde ser associada a sua conta', msg);
+      })
+      .then(() => window.location.reload())
+      .catch(e => {
+        console.error(e);
+        this.mpOperationNumberLoading = false;
+        this.transactionLoading = false;
+      });
   }
 }
