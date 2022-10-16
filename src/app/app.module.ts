@@ -1,6 +1,6 @@
+import { ApexModalComponent } from './avenue-modal/avenue-modal.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AvenueModalComponent } from './avenue-modal/avenue-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
@@ -29,7 +29,7 @@ import { UserEmailModule } from './user-email/user-email.module';
     PageNotFoundComponent,
     StatisticsComponent,
     UserBarComponent,
-    AvenueModalComponent,
+    ApexModalComponent,
   ],
   imports: [
     AppRoutingModule,

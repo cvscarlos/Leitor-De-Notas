@@ -11,10 +11,10 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
   styleUrls: ['./avenue-modal.component.less'],
   providers: [CpfCnpjPipe],
 })
-export class AvenueModalComponent implements OnInit {
+export class ApexModalComponent implements OnInit {
 
-  public showAvenueModal = false;
-  public avenueAccount?: string;
+  public showApexModal = false;
+  public apexAccount?: string;
   public membersList: AccountMember[] = [];
   public loading = true;
 
@@ -27,10 +27,10 @@ export class AvenueModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.notesService.noteCallback((note) => {
-      if (this.showAvenueModal) return;
+      if (this.showApexModal) return;
 
-      this.showAvenueModal = note._errorCode == 1101;
-      this.avenueAccount = note.avenueAccount;
+      this.showApexModal = note._errorCode == 1101;
+      this.apexAccount = note.apexAccount;
 
       this.apiService.userMembersList((data: any) => {
         this.membersList = data.members;
@@ -40,16 +40,16 @@ export class AvenueModalComponent implements OnInit {
   }
 
   public async associateAccount(member: AccountMember) {
-    if (!this.avenueAccount) return;
+    if (!this.apexAccount) return;
 
     const confirm = await this.notifyService.confirm(
       'Você deseja mesmo associar esta conta?',
-      `CPF: ${this.cpfCnpj.transform(member.cpf)}<br/>Avenue: ${this.avenueAccount}`,
+      `CPF: ${this.cpfCnpj.transform(member.cpf)}<br/>Apex: ${this.apexAccount}`,
     );
     if (!confirm.isConfirmed) return;
 
     this.loading = true;
-    this.apiService.connectAvenueAccount(member.cpf, this.avenueAccount)
+    this.apiService.connectApexAccount(member.cpf, this.apexAccount)
       .then(() => {
         this.notifyService.success('Conta associada com sucesso!', 'Sua página será atualizada.').then(() => {
           window.location.reload();

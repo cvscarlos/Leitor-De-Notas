@@ -1,5 +1,5 @@
 export type AccountMember = {
-  avenueAccount?: string,
+  apexAccount?: string,
   cpf: string,
   expires: string,
 };
@@ -38,7 +38,7 @@ export type Note = {
   _page?: number,
   allFees: number,
   ANATax: number,
-  avenueAccount?: string,
+  apexAccount?: string,
   bovespaOthers: number,
   bovespaTotal: number,
   brokerageTax: number,
@@ -64,7 +64,7 @@ export type Note = {
   showNote: boolean,
   trades: NoteTrade[],
   tradesTotal: number,
-  type: 'Bovespa' | 'BMF' | 'Avenue',
+  type: 'Bovespa' | 'BMF' | 'Apex',
 };
 
 export type NoteDetails = Note & { showNote: boolean };

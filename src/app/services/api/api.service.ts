@@ -119,8 +119,8 @@ export class ApiService {
     }).subscribe(data => callback(data));
   }
 
-  public connectAvenueAccount(cpfCnpj: string, avenueAccount: string) {
-    return lastValueFrom(this.post('pvt/user/connect-avenue-account', { cpfCnpj, avenueAccount }));
+  public connectApexAccount(cpfCnpj: string, apexAccount: string) {
+    return lastValueFrom(this.post('pvt/user/connect-apex-account', { cpfCnpj, apexAccount }));
   }
 
   private post(

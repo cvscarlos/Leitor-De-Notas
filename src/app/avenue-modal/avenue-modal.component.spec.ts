@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AvenueModalComponent } from './avenue-modal.component';
+import { ApexModalComponent } from './avenue-modal.component';
 
 describe('ModalComponent', () => {
-  let component: AvenueModalComponent;
-  let fixture: ComponentFixture<AvenueModalComponent>;
+  let component: ApexModalComponent;
+  let fixture: ComponentFixture<ApexModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AvenueModalComponent ],
+      declarations: [ ApexModalComponent ],
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AvenueModalComponent);
+    fixture = TestBed.createComponent(ApexModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

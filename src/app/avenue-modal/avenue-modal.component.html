@@ -1,26 +1,26 @@
-<div *ngIf="showAvenueModal" bsModal #autoShownModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+<div *ngIf="showApexModal" bsModal #autoShownModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
   [config]="{ show: true }">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Cadastro Avenue</h5>
+        <h5 class="modal-title">Cadastro Apex</h5>
       </div>
       <div class="modal-body">
         <p>
-          Para realizar a leitura de notas da Avenue você precisa
-          primeiro associar sua conta Avenue com o seu CPF.
+          Para realizar a leitura de notas da Apex você precisa
+          primeiro associar sua conta Apex com o seu CPF.
         </p>
         <p>
-          Caso sua conta possua mais de 1 CPF, escolha qual CPF deve ser associado a cada conta Avenue.
+          Caso sua conta possua mais de 1 CPF, escolha qual CPF deve ser associado a cada conta Apex.
         </p>
         <p>
           ATENÇÃO, você só poderá fazer essa associação uma única vez, portanto verifique todos os dados antes
-          de prosseguir. Assegure-se de que o número da conta Avenue exibido abaixo é o mesmo que consta em
+          de prosseguir. Assegure-se de que o número da conta Apex exibido abaixo é o mesmo que consta em
           sua nota.
           <br />
-          Não é possível desfazer ou editar uma associação entre conta Avenue e CPF no futuro.
+          Não é possível desfazer ou editar uma associação entre conta Apex e CPF no futuro.
         </p>
-        <p>Conta Avenue desta nota: <strong>{{avenueAccount}}</strong></p>
+        <p>Conta Apex desta nota: <strong>{{apexAccount}}</strong></p>
 
         <div style="position: relative;">
           <app-loading [show]="loading"></app-loading>
@@ -29,15 +29,15 @@
             <thead>
               <tr>
                 <th>CPF/CNPJ</th>
-                <th>Avenue</th>
+                <th>Apex</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let member of membersList">
                 <td> {{member.cpf | cpfCnpj}} </td>
                 <td>
-                  {{member.avenueAccount}}
-                  <a *ngIf="!member.avenueAccount" href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
+                  {{member.apexAccount}}
+                  <a *ngIf="!member.apexAccount" href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
                 </td>
               </tr>
             </tbody>
