@@ -7,8 +7,8 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
 
 @Component({
   selector: 'app-modal',
-  templateUrl: './avenue-modal.component.html',
-  styleUrls: ['./avenue-modal.component.less'],
+  templateUrl: './apex-modal.component.html',
+  styleUrls: ['./apex-modal.component.less'],
   providers: [CpfCnpjPipe],
 })
 export class ApexModalComponent implements OnInit {

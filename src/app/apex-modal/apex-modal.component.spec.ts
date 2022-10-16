@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApexModalComponent } from './avenue-modal.component';
+import { ApexModalComponent } from './apex-modal.component';
 
 describe('ModalComponent', () => {
   let component: ApexModalComponent;

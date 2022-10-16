@@ -1,4 +1,4 @@
-import { ApexModalComponent } from './avenue-modal/avenue-modal.component';
+import { ApexModalComponent } from './apex-modal/apex-modal.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
