@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -35,7 +35,7 @@ export class UserDocumentComponent implements OnInit {
     });
   }
 
-  public submitUserDocumentForm(form: FormGroup) {
+  public submitUserDocumentForm(form: UntypedFormGroup) {
     if (form.status !== 'VALID') {
       this.notifyService.error('CPF/CNPJ inválido');
       return;

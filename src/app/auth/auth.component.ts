@@ -1,6 +1,6 @@
 import { ApiService, OauthProvider } from 'src/app/services/api/api.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
@@ -11,17 +11,17 @@ import { SessionService } from 'src/app/services/session/session.service';
   styleUrls: ['./auth.component.less'],
 })
 export class AuthComponent implements OnInit {
-  public emailForm!: FormGroup;
+  public emailForm!: UntypedFormGroup;
   public emailFormSent = false;
   public loading = false;
   public loginSlideState = '';
-  public tokenForm!: FormGroup;
+  public tokenForm!: UntypedFormGroup;
   private sessionId = '';
 
   constructor(
     public sessionService: SessionService,
     private api: ApiService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private notifyService: NotifyService,
     private isIframeService: IsIframeService,
   ) { }

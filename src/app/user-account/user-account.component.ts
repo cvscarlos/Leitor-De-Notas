@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 import { Router } from '@angular/router';
@@ -60,11 +60,11 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     this.apiService.userUsageHistory((data) => { this.userUsageHistory = data.result; });
   }
 
-  public submitConnectTransactionForm(form: FormGroup): void {
+  public submitConnectTransactionForm(form: UntypedFormGroup): void {
     this.paymentAssociation(this.apiService.userTransactionConnect(form.value.connectCode));
   }
 
-  public submitMpOperationNumber(form: FormGroup): void {
+  public submitMpOperationNumber(form: UntypedFormGroup): void {
     this.paymentAssociation(this.apiService.userMercadoPagoConnect(form.value.mpOperationNumber));
   }
 

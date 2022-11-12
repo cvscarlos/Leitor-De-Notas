@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountMember } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class ManageMembersComponent implements OnInit {
     this.getMembers();
   }
 
-  public submitMemberForm(form: FormGroup) {
+  public submitMemberForm(form: UntypedFormGroup) {
     if (form.status !== 'VALID') {
       this.notifyService.error('CPF/CNPJ inválido');
       return;

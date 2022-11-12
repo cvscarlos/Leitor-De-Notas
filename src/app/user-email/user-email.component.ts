@@ -1,6 +1,6 @@
 import { ApiService } from 'src/app/services/api/api.service';
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
 
@@ -21,7 +21,7 @@ export class UserEmailComponent {
     private sessionService: SessionService,
   ) { }
 
-  public submitUserEmailForm(form: FormGroup) {
+  public submitUserEmailForm(form: UntypedFormGroup) {
     this.loading = true;
 
     if (this.tokenRequested) {
