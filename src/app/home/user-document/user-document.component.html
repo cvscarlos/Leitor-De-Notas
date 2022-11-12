@@ -3,14 +3,16 @@
     <h5 class="modal-title">Dados do usuário</h5>
   </div>
   <div class="modal-body">
+    <app-loading [show]="loading"></app-loading>
+
     <p>
       Olá, para continuar utilizando o sistema é necessário que você informe o CPF/CNPJ.
       Lembre-se que este será o mesmo CPF/CNPJ no qual as suas notas devem ser enviadas.
     </p>
 
     <form class="form" #f="ngForm" (ngSubmit)="submitUserDocumentForm(f.form);" ngNativeValidate>
-      <div class="form-group">
-        <label for="userDoc">CPF/CNPJ <i>(somente números)</i></label>
+      <div class="mb-3">
+        <label class="form-label" for="userDoc">CPF/CNPJ <i>(somente números)</i></label>
         <input type="tel" class="form-control form-control-lg"
           id="userDoc"
           mask="000.000.000-00||00.000.000/0000-00"
@@ -19,8 +21,8 @@
           required
           ngModel />
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-lg btn-block btn-primary">Salvar</button>
+      <div class="mb-3 d-grid">
+        <button type="submit" class="btn btn-lg btn-primary">Salvar</button>
       </div>
     </form>
 

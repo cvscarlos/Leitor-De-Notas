@@ -36,12 +36,12 @@
         <tr *ngFor="let note of noteDetails">
           <td>{{ note.brokerName }}</td>
           <td>{{ note.number }}</td>
-          <td class="text-right">{{ this.numberFormatService.br(note.tradesTotal) }}</td>
-          <td class="text-right">{{ this.numberFormatService.br(note.allFees + note.ISSTax) }}</td>
-          <td class="text-right">{{ this.numberFormatService.br(note.IRRF) }}</td>
-          <td class="text-right">{{ this.numberFormatService.br(note.irrfDtProvisioned) }}</td>
-          <td class="text-right">{{ this.numberFormatService.br(note.irrfStProvisioned) }}</td>
-          <td class="text-right">{{ this.numberFormatService.br(note.futureNetAmount) }}</td>
+          <td class="text-end">{{ this.numberFormatService.br(note.tradesTotal) }}</td>
+          <td class="text-end">{{ this.numberFormatService.br(note.allFees + note.ISSTax) }}</td>
+          <td class="text-end">{{ this.numberFormatService.br(note.IRRF) }}</td>
+          <td class="text-end">{{ this.numberFormatService.br(note.irrfDtProvisioned) }}</td>
+          <td class="text-end">{{ this.numberFormatService.br(note.irrfStProvisioned) }}</td>
+          <td class="text-end">{{ this.numberFormatService.br(note.futureNetAmount) }}</td>
         </tr>
       </tbody>
     </table>

@@ -36,3 +36,7 @@ a {
 ::placeholder {
     font-style: italic;
 }
+
+.form-control[readonly] {
+    background-color: #e9ecef;
+}

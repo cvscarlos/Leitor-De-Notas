@@ -61,7 +61,7 @@
         <div class="row">
           <div class="col pure-text-field click-to-copy">
             <h4 class="text-center my-3">Copiar para Excel</h4>
-            <div class="mb-3"><textarea class="text-to-excel form-control" readonly=1 #excelTextarea>{{excelExportString}}</textarea></div>
+            <div class="mb-3"><textarea class="text-to-excel form-control" readonly #excelTextarea>{{excelExportString}}</textarea></div>
             <button class="btn btn-primary" (click)="copyFn(excelTextarea)"><fa-icon [icon]="faCopy"></fa-icon> Copiar</button>
           </div>
         </div>

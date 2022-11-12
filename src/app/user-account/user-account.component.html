@@ -58,8 +58,8 @@
               #connectTransactionF="ngForm"
               (ngSubmit)="submitConnectTransactionForm(connectTransactionF.form);"
               [appSlideToggle]="tpl.connectTransaction">
-              <div class="form-group">
-                <label for="connectCode">Código:</label>
+              <div class="mb-3">
+                <label class="form-label" for="connectCode">Código:</label>
                 <input type="text" class="form-control"
                   placeholder="ABC123-ABC123-ABC123-ABC123"
                   pattern="([A-Za-z0-9]{6}-?){4}"
@@ -85,8 +85,8 @@
               #mpOperationNumberF="ngForm"
               (ngSubmit)="submitMpOperationNumber(mpOperationNumberF.form);"
               [appSlideToggle]="tpl.mpOperationNumber">
-              <div class="form-group">
-                <label for="connectCode">Referência de pagamento:</label>
+              <div class="mb-3">
+                <label class="form-label" for="connectCode">Referência de pagamento:</label>
                 <input type="tel" class="form-control"
                   placeholder="12312312312"
                   autocomplete="false"
