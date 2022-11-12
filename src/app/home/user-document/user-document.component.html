@@ -1,37 +1,32 @@
-<div *ngIf="showUserDocumentForm" bsModal #autoShownModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-  [config]="{ show: true, backdrop: 'static', keyboard: false }">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Dados do usuário</h5>
-      </div>
-      <div class="modal-body">
-        <p>
-          Olá, para continuar utilizando o sistema é necessário que você informe o CPF/CNPJ.
-          Lembre-se que este será o mesmo CPF/CNPJ no qual as suas notas devem ser enviadas.
-        </p>
+<ng-template #modalContent let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Dados do usuário</h5>
+  </div>
+  <div class="modal-body">
+    <p>
+      Olá, para continuar utilizando o sistema é necessário que você informe o CPF/CNPJ.
+      Lembre-se que este será o mesmo CPF/CNPJ no qual as suas notas devem ser enviadas.
+    </p>
 
-        <form class="form" #f="ngForm" (ngSubmit)="submitUserDocumentForm(f.form);" ngNativeValidate>
-          <div class="form-group">
-            <label for="userDoc">CPF/CNPJ <i>(somente números)</i></label>
-            <input type="tel" class="form-control form-control-lg"
-              id="userDoc"
-              mask="000.000.000-00||00.000.000/0000-00"
-              name="userDoc"
-              placeholder="CPF / CNPJ"
-              required
-              ngModel />
-          </div>
-          <div class="form-group">
-            <button type="submit" class="btn btn-lg btn-block btn-primary">Salvar</button>
-          </div>
-        </form>
-
-        <hr/>
-        <div class="text-center font-small">
-          <a href="javascript:void(0);" (click)="accountDelete()" class="text-danger">excluir conta</a>
-        </div>
+    <form class="form" #f="ngForm" (ngSubmit)="submitUserDocumentForm(f.form);" ngNativeValidate>
+      <div class="form-group">
+        <label for="userDoc">CPF/CNPJ <i>(somente números)</i></label>
+        <input type="tel" class="form-control form-control-lg"
+          id="userDoc"
+          mask="000.000.000-00||00.000.000/0000-00"
+          name="userDoc"
+          placeholder="CPF / CNPJ"
+          required
+          ngModel />
       </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-block btn-primary">Salvar</button>
+      </div>
+    </form>
+
+    <hr/>
+    <div class="text-center font-small">
+      <a href="javascript:void(0);" (click)="accountDelete()" class="text-danger">excluir conta</a>
     </div>
   </div>
-</div>
+</ng-template>

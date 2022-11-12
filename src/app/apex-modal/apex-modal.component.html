@@ -1,50 +1,45 @@
-<div *ngIf="showApexModal" bsModal #autoShownModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
-  [config]="{ show: true }">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Cadastro Apex</h5>
-      </div>
-      <div class="modal-body">
-        <p>
-          Para realizar a leitura de notas da Apex você precisa
-          primeiro associar sua conta Apex com o seu CPF.
-        </p>
-        <p>
-          Caso sua conta possua mais de 1 CPF, escolha qual CPF deve ser associado a cada conta Apex.
-        </p>
-        <p>
-          ATENÇÃO, você só poderá fazer essa associação uma única vez, portanto verifique todos os dados antes
-          de prosseguir. Assegure-se de que o número da conta Apex exibido abaixo é o mesmo que consta em
-          sua nota.
-        </p>
-        <p>
-          Não é possível desfazer ou editar uma associação entre conta Apex e CPF no futuro.
-        </p>
-        <p>Conta Apex desta nota: <strong>{{apexAccount}}</strong></p>
+<ng-template #modalContent let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title">Cadastro Apex</h5>
+  </div>
+  <div class="modal-body">
+    <p>
+      Para realizar a leitura de notas da Apex você precisa
+      primeiro associar sua conta Apex com o seu CPF.
+    </p>
+    <p>
+      Caso sua conta possua mais de 1 CPF, escolha qual CPF deve ser associado a cada conta Apex.
+    </p>
+    <p>
+      ATENÇÃO, você só poderá fazer essa associação uma única vez, portanto verifique todos os dados antes
+      de prosseguir. Assegure-se de que o número da conta Apex exibido abaixo é o mesmo que consta em
+      sua nota.
+    </p>
+    <p>
+      Não é possível desfazer ou editar uma associação entre conta Apex e CPF no futuro.
+    </p>
+    <p>Conta Apex desta nota: <strong>{{apexAccount}}</strong></p>
 
-        <div style="position: relative;">
-          <app-loading [show]="loading"></app-loading>
- 
-          <table class="table table-hover w-auto">
-            <thead>
-              <tr>
-                <th>CPF/CNPJ</th>
-                <th>Apex</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let member of membersList">
-                <td> {{member.cpf | cpfCnpj}} </td>
-                <td>
-                  {{member.apexAccount}}
-                  <a *ngIf="!member.apexAccount" href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+    <div style="position: relative;">
+      <app-loading [show]="loading"></app-loading>
+
+      <table class="table table-hover w-auto">
+        <thead>
+          <tr>
+            <th>CPF/CNPJ</th>
+            <th>Apex</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let member of membersList">
+            <td> {{member.cpf | cpfCnpj}} </td>
+            <td>
+              {{member.apexAccount}}
+              <a *ngIf="!member.apexAccount" href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-</div>
+</ng-template>

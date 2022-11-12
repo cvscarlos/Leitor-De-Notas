@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AccountMember } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
 import { CpfCnpjPipe } from 'src/app/shared-pipes/cpf-cnpj/cpf-cnpj.pipe';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
   providers: [CpfCnpjPipe],
 })
 export class ApexModalComponent implements OnInit {
+  @ViewChild('modalContent') modalContent: ElementRef | undefined;
 
   public showApexModal = false;
   public apexAccount?: string;
@@ -23,6 +25,7 @@ export class ApexModalComponent implements OnInit {
     private cpfCnpj: CpfCnpjPipe,
     private notesService: BrokerageNotesService,
     private notifyService: NotifyService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit(): void {
@@ -30,12 +33,18 @@ export class ApexModalComponent implements OnInit {
       if (this.showApexModal) return;
 
       this.showApexModal = note._errorCode == 1101;
+      if (!this.showApexModal) return;
+
       this.apexAccount = note.apexAccount;
 
       this.apiService.userMembersList((data: any) => {
         this.membersList = data.members;
         this.loading = false;
       });
+
+      if (this.showApexModal) {
+        this.modalService.open(this.modalContent);
+      }
     });
   }
 

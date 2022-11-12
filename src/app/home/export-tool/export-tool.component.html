@@ -7,58 +7,67 @@
     </div>
   </div>
 
-  <tabset>
-    <tab heading="Dlombello" class="small-font border border-top-0 p-3 pt-0">
-      <div class="row">
-        <div class="col">
-          <h4 class="text-center mt-3 mb-4 border-b">Copiar para Dlombello® Planilhas</h4>
-        </div>
-      </div>
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Dlombello</a>
 
-      <div class="row">
-        <div class="col-md">
-          <h6>Configurações</h6>
-          <div class="form-group form-check">
-            <label class="d-block">
-              <input type="checkbox" [checked]="provisionedIrrfDT" (change)="settingsChange({dayTrade: $event})" />
-              Incluir o IRRF DayTrade provisionado (<a href="https://leitordenotas.customerly.help/leitura-de-notas/irrf-provisionado" target="_blank">saiba mais</a>).
-            </label>
-
-            <label class="d-block">
-              <input type="checkbox" [checked]="provisionedIrrfST" (change)="settingsChange({swingTrade: $event})" />
-              Incluir o IRRF SwingTrade provisionado (<a href="https://leitordenotas.customerly.help/leitura-de-notas/irrf-provisionado" target="_blank">saiba mais</a>).
-            </label>
-
-            <label class="d-block">
-              <input type="checkbox" [checked]="groupByTicker" (change)="settingsChange({groupByTicker: $event})" />
-              Agrupar pelo nome do ativo (<a href="https://leitordenotas.customerly.help/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">saiba mais</a>).
-            </label>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="col">
+            <h4 class="text-center mt-3 mb-4 border-b">Copiar para Dlombello Planilhas</h4>
           </div>
         </div>
 
-        <div class="col-md pure-text-field click-to-copy">
-          <div class="form-group">
-            <textarea class="text-to-dlombello form-control" readonly=1 #dlombelloTextarea>{{dlombelloExportString}}</textarea>
+        <div class="row">
+          <div class="col-md">
+            <h6>Configurações</h6>
+            <div class="mb-3 form-check">
+              <label class="d-block">
+                <input type="checkbox" [checked]="provisionedIrrfDT" (change)="settingsChange({dayTrade: $event})" />
+                Incluir o IRRF DayTrade provisionado (<a href="https://leitordenotas.customerly.help/leitura-de-notas/irrf-provisionado" target="_blank">saiba mais</a>).
+              </label>
+
+              <label class="d-block">
+                <input type="checkbox" [checked]="provisionedIrrfST" (change)="settingsChange({swingTrade: $event})" />
+                Incluir o IRRF SwingTrade provisionado (<a href="https://leitordenotas.customerly.help/leitura-de-notas/irrf-provisionado" target="_blank">saiba mais</a>).
+              </label>
+
+              <label class="d-block">
+                <input type="checkbox" [checked]="groupByTicker" (change)="settingsChange({groupByTicker: $event})" />
+                Agrupar pelo nome do ativo (<a href="https://leitordenotas.customerly.help/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">saiba mais</a>).
+              </label>
+            </div>
           </div>
-          <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(dlombelloTextarea)"><fa-icon [icon]="faCopy"></fa-icon> Copiar</button>
-        </div>
-      </div>
 
-      <div class="row" *ngIf="isIframe">
-        <div class="col text-center">
-          <button class="btn btn-success btn-lg mt-4" style="font-size: 1.25rem;" (click)="sendJsonMessage()"><fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações</button>
+          <div class="col-md pure-text-field click-to-copy">
+            <div class="mb-3">
+              <textarea class="text-to-dlombello form-control" readonly #dlombelloTextarea>{{dlombelloExportString}}</textarea>
+            </div>
+            <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(dlombelloTextarea)"><fa-icon [icon]="faCopy"></fa-icon> Copiar</button>
+          </div>
         </div>
-      </div>
-    </tab>
 
-    <tab heading="Excel" class="small-font border border-top-0 p-3 pt-0">
-      <div class="row">
-        <div class="col pure-text-field click-to-copy">
-          <h4 class="text-center my-3">Copiar para Excel</h4>
-          <div class="form-group"><textarea class="text-to-excel form-control" readonly=1 #excelTextarea>{{excelExportString}}</textarea></div>
-          <button class="btn btn-primary" (click)="copyFn(excelTextarea)"><fa-icon [icon]="faCopy"></fa-icon> Copiar</button>
+        <div class="row" *ngIf="isIframe">
+          <div class="col text-center">
+            <button class="btn btn-success btn-lg mt-4" style="font-size: 1.25rem;" (click)="sendJsonMessage()"><fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações</button>
+          </div>
         </div>
-      </div>
-    </tab>
-  </tabset>
+      </ng-template>
+    </li>
+
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>Excel</a>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="col pure-text-field click-to-copy">
+            <h4 class="text-center my-3">Copiar para Excel</h4>
+            <div class="mb-3"><textarea class="text-to-excel form-control" readonly=1 #excelTextarea>{{excelExportString}}</textarea></div>
+            <button class="btn btn-primary" (click)="copyFn(excelTextarea)"><fa-icon [icon]="faCopy"></fa-icon> Copiar</button>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="small-font border border-top-0 p-3 pt-0"></div>
 </div>

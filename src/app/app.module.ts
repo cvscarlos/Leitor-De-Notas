@@ -1,15 +1,14 @@
+import { NgbCollapseModule, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApexModalComponent } from './apex-modal/apex-modal.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingModule } from './loading/loading.module';
 import { ManageMembersModule } from './manage-members/manage-members.module';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgModule } from '@angular/core';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PrivacyModule } from './privacy/privacy.module';
@@ -35,11 +34,11 @@ import { UserEmailModule } from './user-email/user-email.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    CollapseModule.forRoot(),
-    HttpClientModule,
-    ModalModule.forRoot(),
-    SharedPipesModule,
     FontAwesomeModule,
+    HttpClientModule,
+    NgbCollapseModule,
+    NgbModalModule,
+    SharedPipesModule,
 
     HomeModule,
     LoadingModule,
@@ -49,6 +48,7 @@ import { UserEmailModule } from './user-email/user-email.module';
     UserAccountModule,
     UserEmailModule,
     UsageLimitModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
