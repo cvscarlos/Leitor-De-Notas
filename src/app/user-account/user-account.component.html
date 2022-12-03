@@ -38,7 +38,7 @@
             <tbody>
               <tr *ngFor="let transaction of userTransactions.response">
                 <td>{{transaction.dateApproved | date:'dd/MM/yy'}}</td>
-                <td>{{transaction.desc}} <sup class="badge badge-light font-weight-light">{{transaction.reference}}</sup></td>
+                <td>{{transaction.desc}} <sup class="badge fw-light text-bg-light">{{transaction.reference}}</sup></td>
                 <td>{{transaction.paymentNumber}}</td>
                 <td>
                   <span>{{transaction.email}}</span>
