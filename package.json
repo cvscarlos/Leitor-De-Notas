@@ -1,10 +1,10 @@
 {
   "name": "leitor-de-notas",
-  "version": "6.1.0-10.Dez",
+  "version": "6.2.0-10.Dez",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",

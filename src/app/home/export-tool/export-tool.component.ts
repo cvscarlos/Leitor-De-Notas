@@ -33,6 +33,7 @@ type DlombelloExportObject = {
   tax: number;
   ticker: NoteTrade['symbol'];
   type: NoteTrade['dlombelloOperationType'];
+  noteNumber: string;
 };
 
 @Component({
@@ -116,6 +117,7 @@ export class ExportToolComponent implements OnInit {
 
   sendJsonMessage(): void {
     try {
+      console.log(this.dlombelloExportObjects);
       window.parent.postMessage(JSON.stringify(this.dlombelloExportObjects), '*');
     } catch (error) {
       this.notifyService.error('Algo saiu errado ao tentar enviar os dados!', 'A operação não foi completada.');
@@ -347,6 +349,7 @@ export class ExportToolComponent implements OnInit {
         broker: dlombelloTrade.brokerage,
         irrf: dlombelloTrade.IR || 0,
         currency: dlombelloTrade.currency,
+        noteNumber: this.getDlombelloNoteNumber(note),
       };
       newDlombelloExportObjects.push(exportObject);
 
@@ -360,6 +363,7 @@ export class ExportToolComponent implements OnInit {
         exportObject.broker,
         this.numberFmt.commaOnly(exportObject.irrf || null),
         exportObject.currency,
+        `NC:${this.getDlombelloNoteNumber(note)}`,
       ].join('\t').trim());
     }).join('\n').trim();
 
@@ -417,5 +421,10 @@ export class ExportToolComponent implements OnInit {
   private forceNumberSize(val: number | string): string {
     val = val.toString().replace(this.notNumberRegex, '');
     return (`0000000000${val}`).slice(-10);
+  }
+
+  private getDlombelloNoteNumber(note: Note): string {
+    if (note.isFakeNumber) return 'N/D';
+    return note.number;
   }
 }

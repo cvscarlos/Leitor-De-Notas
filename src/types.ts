@@ -65,6 +65,7 @@ export type Note = {
   trades: NoteTrade[],
   tradesTotal: number,
   type: 'Bovespa' | 'BMF' | 'Apex',
+  isFakeNumber?: boolean,
 };
 
 export type NoteDetails = Note & { showNote: boolean };

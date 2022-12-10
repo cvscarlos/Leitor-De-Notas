@@ -1,7 +1,6 @@
 #!/bin/bash
 rm -rf ./dist/leitor-de-notas/
-ng build --configuration production
-# ng build --prod
+npm run build
 
 # rm -f ../leitordenotas.github.io-MASTER/main.*
 # rm -f ../leitordenotas.github.io-MASTER/styles.*
