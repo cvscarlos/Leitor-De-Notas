@@ -23,10 +23,10 @@ export type NoteTrade = {
   itemTotal: number,
   marketType: string,
   obs: string,
-  originalSecurities?: string,
+  originalSymbol?: string,
   price: number,
   quantity: number,
-  securities: string,
+  symbol: string,
   time: string,
 };
 

@@ -17,7 +17,7 @@ type DlombelloTrade = {
   operationType: NoteTrade['dlombelloOperationType'];
   price: NoteTrade['price'];
   quantity: NoteTrade['quantity'];
-  securities: NoteTrade['securities'];
+  symbol: NoteTrade['symbol'];
   tax: number;
 };
 type DlombelloExport = DlombelloTrade & { _sortKey?: string };
@@ -31,7 +31,7 @@ type DlombelloExportObject = {
   price: number;
   quantity: number;
   tax: number;
-  ticker: NoteTrade['securities'];
+  ticker: NoteTrade['symbol'];
   type: NoteTrade['dlombelloOperationType'];
 };
 
@@ -175,7 +175,7 @@ export class ExportToolComponent implements OnInit {
         excelTrade.BS,
         excelTrade.marketType,
         excelTrade.time,
-        excelTrade.securities,
+        excelTrade.symbol,
         excelTrade.obs,
         this.numberFmt.br(excelTrade.BS === 'C' ? excelTrade.quantity : -excelTrade.quantity, 10, 0),
         this.numberFmt.br(excelTrade.price, 10, 2),
@@ -263,7 +263,7 @@ export class ExportToolComponent implements OnInit {
     note.trades.forEach((trade: NoteTrade) => {
       const tradesGroupId = this.marketTypeNormalizer(trade.marketType)
         + trade.BS
-        + trade.securities
+        + trade.symbol
         + (this.groupByTicker ? '_' : trade.price)
         + this.observationNormalizer(trade.obs);
       const { brokerageTax, tran, others } = trade.fees || {};
@@ -272,7 +272,7 @@ export class ExportToolComponent implements OnInit {
         tax: brokerageTax !== undefined ? (brokerageTax + (tran || 0) + (others || 0)) : 0,
         currency: note.currency,
         // Cód. do Ativo
-        securities: trade.securities,
+        symbol: trade.symbol,
         // Data da Transação
         date: note.date,
         // Tipo de Operação
@@ -338,7 +338,7 @@ export class ExportToolComponent implements OnInit {
     const newDlombelloExportObjects: DlombelloExportObject[] = [];
     this.dlombelloExportString = this.dlombelloExport.map((dlombelloTrade) => {
       const exportObject: DlombelloExportObject = {
-        ticker: dlombelloTrade.securities,
+        ticker: dlombelloTrade.symbol,
         date: dlombelloTrade.date,
         type: dlombelloTrade.operationType,
         quantity: dlombelloTrade.BS === 'C' ? dlombelloTrade.quantity : -dlombelloTrade.quantity,
@@ -407,7 +407,7 @@ export class ExportToolComponent implements OnInit {
     out += exportTrade.brokerage; // corretora
     out += operTypeOrder[exportTrade.operationType as keyof typeof operTypeOrder] || '-'; // tipo de operação
     out += (exportTrade.BS === 'C' ? '+' : '-') + this.forceNumberSize(exportTrade.quantity); // quantidade
-    out += (`__________${exportTrade.securities}`).slice(-10); // papel/ação
+    out += (`__________${exportTrade.symbol}`).slice(-10); // papel/ação
     out += this.forceNumberSize(exportTrade.price); // preço
     exportTrade._sortKey = out.toUpperCase();
 

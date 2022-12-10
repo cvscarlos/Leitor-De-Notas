@@ -96,7 +96,7 @@
                     <td>{{ trade.BS }}</td>
                     <td>{{ trade.marketType }}</td>
                     <td>{{ trade.time }}</td>
-                    <td>{{ trade.securities }} <span *ngIf="trade.originalSecurities">({{ trade.originalSecurities }})</span></td>
+                    <td>{{ trade.symbol }} <span *ngIf="trade.originalSymbol">({{ trade.originalSymbol }})</span></td>
                     <td>{{ trade.obs }}</td>
                     <td>{{ this.numberFormatService.br(trade.quantity, 10, 0) }}</td>
                     <td>{{ this.numberFormatService.br(trade.price) }}</td>
