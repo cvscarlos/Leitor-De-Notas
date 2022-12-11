@@ -42,7 +42,7 @@ export class ApiService {
   }
 
   public oAuthUrl(provider: OauthProvider, callback: Callback) {
-    return this.post(`oauth/${provider}`).subscribe(data => callback(data));
+    return this.post(`oauth/${provider}?domain=${location.host}`).subscribe(data => callback(data));
   }
 
   public userMe(): Promise<UserData | undefined> {

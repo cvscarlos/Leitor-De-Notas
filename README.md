@@ -1,6 +1,6 @@
 # Leitor de Notas de Corretagem
 
-### [https://leitordenotas.github.io/](https://leitordenotas.github.io/)
+### [https://www.leitordenotas.com.br](https://www.leitordenotas.com.br)
 
 Este é um Leitor de Notas de Corretagem Online e gratuito. Basta informar seu email e CPF e começar a utilizar! 🙂
 
@@ -47,10 +47,8 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 
 ## Sobre este repositório
 - Este repositório contém apenas o código fonte da interface.
-- O back-end e o front-end são totalmente separados e individualizados.
-- O código do servidor (back-end) não é público e não esta disponível no Github.
-
-Esta branch `master` contém o código do site pós processado pelo Angular CLI, para ver o código fonte original, você deve acessar a branch `dev` ([ver branch dev](/leitordenotas/leitordenotas.github.io/tree/dev)).
+- O backend e o frontend são totalmente separados e individualizados.
+- O código do servidor (backend) não é público e não esta disponível no Github.
 
 ## Como contribuir com o projeto
 
