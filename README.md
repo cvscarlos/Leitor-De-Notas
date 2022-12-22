@@ -24,7 +24,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | CEF Caixa Econômica Federal Corretora | ✔️              |                |
 | Clear Corretora                       | ✔️              | ✔️             |
 | CM Capital                            | ✔️              | ✔️             |
-| NuInvest / Easynvest Corretora        | ✔️              | ✔️             |
+| Empiricus / Vitreo Corretora          | ✔️              | ✔️             |
 | Genial Investimentos Corretora        | ✔️              | ✔️             |
 | Guide Corretora                       | ✔️              |                |
 | Kirton Corretora                      | ✔️              |                |
@@ -34,6 +34,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | MyCAP                                 | ✔️              |                |
 | Necton                                | ✔️              |                |
 | Nova Futura                           | ✔️              | ✔️             |
+| NuInvest / Easynvest Corretora        | ✔️              | ✔️             |
 | Órama Corretora                       | ✔️              | ✔️             |
 | Rico Corretora                        | ✔️              | ✔️             |
 | Santander Corretora                   | ✔️              |                |
@@ -41,7 +42,6 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Tastyworks (EUA)                      | ✔️              |                |
 | Terra Investimentos Corretora         | ✔️              | ✔️             |
 | Toro Corretora                        | ✔️              | ✔️             |
-| Vitreo Corretora                      | ✔️              |                |
 | Warren Corretora                      | ✔️              | ✔️             |
 | XP Corretora                          | ✔️              | ✔️             |
 

@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "6.2.1-11.Dez",
+  "version": "6.2.2-22.Dez",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -38,7 +38,7 @@
     "@angular-eslint/eslint-plugin": "^14.1.2",
     "@angular-eslint/eslint-plugin-template": "^14.1.2",
     "@angular-eslint/template-parser": "^14.1.2",
-    "@angular/cli": "^15.0.4",
+    "@angular/cli": "^14.2.9",
     "@angular/compiler-cli": "^14.2.10",
     "@angular/localize": "^14.2.10",
     "@types/jasmine": "^4.3.0",
