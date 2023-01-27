@@ -13,7 +13,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Corretora                             | Mercado à Vista | Mercado Futuro |
 |---------------------------------------|-----------------|----------------|
 | Ágora Corretora                       | ✅              |                |
-| Ativa Investimentos                   | ✅              |                |
+| Ativa Investimentos                   | ✅              | ✅             |
 | Apex (EUA)                            | ✅              |                |
 | Avenue (EUA)                          | ✅              |                |
 | Banco do Brasil Investimentos         | ✅              |                |
