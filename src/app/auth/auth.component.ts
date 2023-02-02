@@ -78,6 +78,8 @@ export class AuthComponent implements OnInit {
   }
 
   public redirectToOAuth(provider: OauthProvider) {
+    this.loading = true;
+
     this.api.oAuthUrl(provider, (data) => {
       if (!this.isIframeService.isIframe()) {
         window.location.href = data.url;

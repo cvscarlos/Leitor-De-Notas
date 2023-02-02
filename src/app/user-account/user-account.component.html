@@ -2,28 +2,33 @@
   <div class="custom-panel">
     <div class="row">
       <div class="col">
-        <app-loading [show]="loading"></app-loading>
+        <div style="position: relative;">
+          <app-loading [show]="loading"></app-loading>
 
-        <h2>Minha conta</h2>
-        <hr />
+          <h2>Minha conta</h2>
+          <hr />
 
-        <div>
-          <h4>Dados</h4>
-          <p>
-            Email: {{user.email}} (<a routerLink="/editar-email"><i>editar</i></a>)<br />
-            CPF: {{user.userDoc | cpfCnpj}}<br />
-            Limite: {{user.limit}}
-            <span *ngIf="!user.isFreePlan && user.expiresIn" style="display:block">Expira em: {{user.expiresIn | date:'dd/MM/yyyy'}}</span>
-          </p>
-          <p *ngIf="user.allowManageMembers">
-            <a routerLink="/gerenciar-membros" class="btn btn-info">Gerenciar membros</a>
-          </p>
-          <div class="user-transactions"></div>
-          <div class="usage-history"></div>
+          <div>
+            <h4>Dados</h4>
+            <p>
+              Email: {{user.email}} (<a routerLink="/editar-email"><i>editar</i></a>)<br />
+              CPF: {{user.userDoc | cpfCnpj}}<br />
+              Limite: {{user.limit}}
+              <span *ngIf="!user.isFreePlan && user.expiresIn" style="display:block">
+                Expira em: {{user.expiresIn | date:'dd/MM/yyyy'}}
+              </span>
+            </p>
+            <p *ngIf="user.allowManageMembers">
+              <a routerLink="/gerenciar-membros" class="btn btn-info">Gerenciar membros</a>
+            </p>
+          </div>
         </div>
+
         <hr />
 
-        <div>
+        <div style="position: relative;">
+          <app-loading [show]="transactionsLoading"></app-loading>
+
           <h4>Transações</h4>
 
           <table *ngIf="userTransactions.results" class="table table-responsive-sm table-sm table-bordered">
@@ -51,25 +56,16 @@
           <p *ngIf="!userTransactions.results"><i>Você não possui nenhuma transação.</i></p>
 
           <div style="position: relative;">
-            <app-loading [show]="transactionLoading"></app-loading>
+            <app-loading [show]="connectTransactionLoading"></app-loading>
 
-            <form class="alert alert-info" style="display: none;" action="#"
-              ngNativeValidate
-              #connectTransactionF="ngForm"
-              (ngSubmit)="submitConnectTransactionForm(connectTransactionF.form);"
+            <form class="alert alert-info" style="display: none;" action="#" ngNativeValidate
+              #connectTransactionF="ngForm" (ngSubmit)="submitConnectTransactionForm(connectTransactionF.form);"
               [appSlideToggle]="tpl.connectTransaction">
               <div class="mb-3">
                 <label class="form-label" for="connectCode">Código:</label>
-                <input type="text" class="form-control"
-                  placeholder="ABC123-ABC123-ABC123-ABC123"
-                  pattern="([A-Za-z0-9]{6}-?){4}"
-                  autocomplete="false"
-                  required
-                  minlength="27"
-                  maxlength="27"
-                  id="connectCode"
-                  name="connectCode"
-                  ngModel />
+                <input type="text" class="form-control" placeholder="ABC123-ABC123-ABC123-ABC123"
+                  pattern="([A-Za-z0-9]{6}-?){4}" autocomplete="false" required minlength="27" maxlength="27"
+                  id="connectCode" name="connectCode" ngModel />
               </div>
               <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
@@ -78,33 +74,31 @@
           <div style="position: relative;">
             <app-loading [show]="mpOperationNumberLoading"></app-loading>
 
-            <span>Possui um número de pagamento do Mercado Pago? <a href="javascript:void(0)" (click)="tpl.mpOperationNumber=true">Informar MP</a></span>
+            <span>Possui um número de pagamento do Mercado Pago? <a href="javascript:void(0)"
+                (click)="tpl.mpOperationNumber=true">Informar MP</a></span>
 
-            <form class="alert alert-info" style="display: none;" action="#"
-              ngNativeValidate
-              #mpOperationNumberF="ngForm"
-              (ngSubmit)="submitMpOperationNumber(mpOperationNumberF.form);"
+            <form class="alert alert-info" style="display: none;" action="#" ngNativeValidate
+              #mpOperationNumberF="ngForm" (ngSubmit)="submitMpOperationNumber(mpOperationNumberF.form);"
               [appSlideToggle]="tpl.mpOperationNumber">
               <div class="mb-3">
                 <label class="form-label" for="connectCode">Referência de pagamento:</label>
-                <input type="tel" class="form-control"
-                  placeholder="12312312312"
-                  autocomplete="false"
-                  required
-                  minlength="11"
-                  maxlength="11"
-                  id="mpOperationNumber"
-                  name="mpOperationNumber"
-                  ngModel />
+                <input type="tel" class="form-control" placeholder="12312312312" autocomplete="false" required
+                  minlength="11" maxlength="11" id="mpOperationNumber" name="mpOperationNumber" ngModel />
               </div>
               <button type="submit" class="btn btn-primary">Associar</button>
-              <p class="mb-0 mt-2">Dúvidas onde localizar esse número? <a href="https://leitordenotas.customerly.help/minha-conta/como-localizar-o-numero-de-pagamento-do-mercado-pago" target="_blank">Clique aqui</a></p>
+              <p class="mb-0 mt-2">
+                Dúvidas onde localizar esse número?
+                <a href="https://leitordenotas.customerly.help/minha-conta/como-localizar-o-numero-de-pagamento-do-mercado-pago"
+                  target="_blank">Clique aqui</a>
+              </p>
             </form>
-            <hr>
+            <hr />
           </div>
         </div>
 
-        <div>
+        <div style="position: relative;">
+          <app-loading [show]="userUsageHistoryLoading"></app-loading>
+
           <div *ngIf="userUsageHistory">
             <h4>Histórico de uso</h4>
 
@@ -129,14 +123,13 @@
                 </table>
               </div>
             </div>
-
             <hr />
           </div>
+        </div>
 
-          <div style="position: relative;">
-            <app-loading [show]="accountDeleteLoading"></app-loading>
-            <a href="javascript:void(0);" (click)="accountDelete()" class="text-danger">excluir conta</a>
-          </div>
+        <div style="position: relative;">
+          <app-loading [show]="accountDeleteLoading"></app-loading>
+          <a href="javascript:void(0);" (click)="accountDelete()" class="text-danger">excluir conta</a>
         </div>
       </div>
     </div>

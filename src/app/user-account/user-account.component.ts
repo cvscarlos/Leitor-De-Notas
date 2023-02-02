@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
-import { UntypedFormGroup } from '@angular/forms';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session/session.service';
+import { UntypedFormGroup } from '@angular/forms';
 import { UserComponent } from 'src/app/user/user.component';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -36,7 +36,9 @@ type UserUsageHistory = {
 })
 export class UserAccountComponent extends UserComponent implements OnInit {
   public tpl = { mpOperationNumber: false, connectTransaction: false };
-  public transactionLoading = false;
+  public transactionsLoading = false;
+  public connectTransactionLoading = false;
+  public userUsageHistoryLoading = false;
   public mpOperationNumberLoading = false;
   public userTransactions: UserTransactions = { results: false, response: [] };
   public userUsageHistory?: UserUsageHistory;
@@ -56,8 +58,17 @@ export class UserAccountComponent extends UserComponent implements OnInit {
   override ngOnInit() {
     super.ngOnInit();
 
-    this.apiService.userTransactions((data) => { this.userTransactions = data; });
-    this.apiService.userUsageHistory((data) => { this.userUsageHistory = data.result; });
+    this.connectTransactionLoading = true;
+    this.apiService.userTransactions((data) => {
+      this.userTransactions = data;
+      this.connectTransactionLoading = false;
+    });
+
+    this.userUsageHistoryLoading = true;
+    this.apiService.userUsageHistory((data) => {
+      this.userUsageHistory = data.result;
+      this.userUsageHistoryLoading = false;
+    });
   }
 
   public submitConnectTransactionForm(form: UntypedFormGroup): void {
@@ -76,7 +87,7 @@ export class UserAccountComponent extends UserComponent implements OnInit {
 
   private paymentAssociation(httpPromise: Promise<any>) {
     this.mpOperationNumberLoading = true;
-    this.transactionLoading = true;
+    this.connectTransactionLoading = true;
 
     httpPromise
       .then(data => {
@@ -89,7 +100,7 @@ export class UserAccountComponent extends UserComponent implements OnInit {
       .catch(e => {
         console.error(e);
         this.mpOperationNumberLoading = false;
-        this.transactionLoading = false;
+        this.connectTransactionLoading = false;
       });
   }
 }

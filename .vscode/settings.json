@@ -1,4 +1,17 @@
 {
+  "workbench.colorCustomizations": {
+    // Title bar
+    "titleBar.activeForeground": "#000",
+    "titleBar.activeBackground": "#00C0FF",
+
+    // Side bar
+    "activityBar.background": "#00C0FF",
+    "activityBar.activeBackground": "#728BE7",
+    
+    // Side bar icons
+    "activityBar.foreground": "#000",
+    "activityBar.inactiveForeground": "#374955",
+  },
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
