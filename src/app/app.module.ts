@@ -10,6 +10,7 @@ import { LoadingModule } from './loading/loading.module';
 import { ManageMembersModule } from './manage-members/manage-members.module';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
+import { OauthModule } from './oauth/oauth.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PrivacyModule } from './privacy/privacy.module';
 import { ServerUnavailabilityMessageModule } from './server-unavailability-message/server-unavailability-message.module';
@@ -47,6 +48,7 @@ import { UserEmailModule } from './user-email/user-email.module';
     UserAccountModule,
     UserEmailModule,
     UsageLimitModule,
+    OauthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -45,6 +45,10 @@ export class ApiService {
     return this.post(`oauth/${provider}?domain=${location.host}`).subscribe(data => callback(data));
   }
 
+  public oAuthToken(provider: OauthProvider, oauthProviderQuerystring: string) {
+    return this.post(`oauth/${provider}/callback${oauthProviderQuerystring}&domain=${location.host}`);
+  }
+
   public userMe(): Promise<UserData | undefined> {
     return new Promise((resolve, reject) => {
       if (!this.sessionService.isAuthenticated) {

@@ -117,7 +117,6 @@ export class ExportToolComponent implements OnInit {
 
   sendJsonMessage(): void {
     try {
-      console.log(this.dlombelloExportObjects);
       window.parent.postMessage(JSON.stringify(this.dlombelloExportObjects), '*');
     } catch (error) {
       this.notifyService.error('Algo saiu errado ao tentar enviar os dados!', 'A operação não foi completada.');

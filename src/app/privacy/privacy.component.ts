@@ -6,7 +6,6 @@ import { SessionService } from '../services/session/session.service';
 @Component({
   selector: 'app-privacy',
   templateUrl: './privacy.component.html',
-  styleUrls: ['./privacy.component.less'],
 })
 export class PrivacyComponent implements OnInit {
 

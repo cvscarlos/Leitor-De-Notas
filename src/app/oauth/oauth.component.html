@@ -1,0 +1,14 @@
+<div class="position-fixed w-100 h-100 bg-white top-0">
+  <div class="position-absolute top-50 start-50 translate-middle h2">
+    <div *ngIf="message?.length">
+      {{message}}
+    </div>
+
+    <div *ngIf="!message?.length">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Carregando...</span>
+      </div>
+      <p>Carregando ...</p>
+    </div>
+  </div>
+</div>

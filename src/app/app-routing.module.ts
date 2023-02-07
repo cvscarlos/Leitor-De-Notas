@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { IsIframeService } from './services/is-iframe/is-iframe.service';
 import { ManageMembersComponent } from './manage-members/manage-members.component';
 import { NgModule } from '@angular/core';
+import { OauthComponent } from './oauth/oauth.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { UsageLimitComponent } from './usage-limit/usage-limit.component';
@@ -27,7 +28,7 @@ const routes: Routes = [
   { path: 'gerenciar-membros', component: ManageMembersComponent, canActivate: [AuthService, IsIframeService] },
   { path: 'privacidade-termos', component: PrivacyComponent, canActivate: [IsIframeService] },
   { path: 'limites-uso', component: UsageLimitComponent, canActivate: [IsIframeService] },
-
+  { path: 'oauth.html', component: OauthComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 
