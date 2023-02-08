@@ -12,22 +12,18 @@ export class SessionService {
 
   set id(sessionId: string) {
     this.sessionId = sessionId;
-    this.setSessionData();
+    localStorage.setItem('bgggSessionId', sessionId);
+    localStorage.setItem('bgggSessionExpires', `${Date.now() + 1000 * 60 * 60 * 24 * 14}`);
   }
 
   get id(): string {
-    return this.sessionId;
+    return this.getSessionId();
   }
 
   logout(): void {
     this.sessionId = '';
     delete localStorage.bgggSessionExpires;
     delete localStorage.bgggSessionId;
-  }
-
-  private setSessionData(): void {
-    localStorage.setItem('bgggSessionId', this.sessionId);
-    localStorage.setItem('bgggSessionExpires', `${Date.now() + 1000 * 60 * 60 * 24 * 14}`);
   }
 
   private getSessionId(): string {

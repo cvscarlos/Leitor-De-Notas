@@ -7,8 +7,7 @@ import { SessionService } from '../services/session/session.service';
   templateUrl: './oauth.component.html',
 })
 export class OauthComponent implements OnInit {
-
-  message = '';
+  public message = '';
 
   constructor(
     private api: ApiService,
