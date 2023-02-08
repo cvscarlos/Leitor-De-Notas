@@ -92,8 +92,11 @@ export class AuthComponent implements OnInit {
       const htmlSpin = '<div><div class="spinner-border" role="status"><span class="sr-only">Carregando...</span></div></div>';
       this.notifyService.infoForceOpened('Aguardando a autorização', `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`);
 
-      setInterval(() => {
-        if (this.sessionService.isAuthenticated || loginWindow?.closed) window.location.reload();
+      const intervalId = setInterval(() => {
+        if (this.sessionService.isAuthenticated || loginWindow?.closed) {
+          clearInterval(intervalId);
+          window.location.reload();
+        }
       }, 500);
     });
   }
