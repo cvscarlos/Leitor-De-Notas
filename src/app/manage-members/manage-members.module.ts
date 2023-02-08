@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { LoadingModule } from '../loading/loading.module';
 import { ManageMembersComponent } from './manage-members.component';
 import { NgModule } from '@angular/core';
-import { NgxMaskModule } from 'ngx-mask';
 import { SharedPipesModule } from '../shared-pipes/shared-pipes.module';
 
 
@@ -14,7 +13,6 @@ import { SharedPipesModule } from '../shared-pipes/shared-pipes.module';
     CommonModule,
     FormsModule,
     LoadingModule,
-    NgxMaskModule.forRoot(),
     SharedPipesModule,
   ],
   exports: [ManageMembersComponent],

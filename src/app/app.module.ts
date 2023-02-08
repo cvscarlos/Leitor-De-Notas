@@ -13,6 +13,7 @@ import { NgModule } from '@angular/core';
 import { OauthModule } from './oauth/oauth.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PrivacyModule } from './privacy/privacy.module';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { ServerUnavailabilityMessageModule } from './server-unavailability-message/server-unavailability-message.module';
 import { SharedPipesModule } from './shared-pipes/shared-pipes.module';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -50,7 +51,9 @@ import { UserEmailModule } from './user-email/user-email.module';
     UsageLimitModule,
     OauthModule,
   ],
-  providers: [],
+  providers: [
+    provideEnvironmentNgxMask(),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
