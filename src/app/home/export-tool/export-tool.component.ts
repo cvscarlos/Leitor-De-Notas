@@ -10,6 +10,7 @@ import { NumberFormatService } from 'src/app/services/number-format/number-forma
 
 type DlombelloTrade = {
   brokerage: Note['brokerName'];
+  noteNumber: string;
   BS: NoteTrade['BS'];
   currency: Note['currency'];
   date: Note['date'];
@@ -272,6 +273,7 @@ export class ExportToolComponent implements OnInit {
       groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {
         tax: brokerageTax !== undefined ? (brokerageTax + (tran || 0) + (others || 0)) : 0,
         currency: note.currency,
+        noteNumber: note.isFakeNumber ? 'N/D' : note.number,
         // Cód. do Ativo
         symbol: trade.symbol,
         // Data da Transação
@@ -348,7 +350,7 @@ export class ExportToolComponent implements OnInit {
         broker: dlombelloTrade.brokerage,
         irrf: dlombelloTrade.IR || 0,
         currency: dlombelloTrade.currency,
-        noteNumber: this.getDlombelloNoteNumber(note),
+        noteNumber: dlombelloTrade.noteNumber,
       };
       newDlombelloExportObjects.push(exportObject);
 
@@ -362,7 +364,7 @@ export class ExportToolComponent implements OnInit {
         exportObject.broker,
         this.numberFmt.commaOnly(exportObject.irrf || null),
         exportObject.currency,
-        `NC:${this.getDlombelloNoteNumber(note)}`,
+        `NC:${exportObject.noteNumber}`,
       ].join('\t').trim());
     }).join('\n').trim();
 
@@ -420,10 +422,5 @@ export class ExportToolComponent implements OnInit {
   private forceNumberSize(val: number | string): string {
     val = val.toString().replace(this.notNumberRegex, '');
     return (`0000000000${val}`).slice(-10);
-  }
-
-  private getDlombelloNoteNumber(note: Note): string {
-    if (note.isFakeNumber) return 'N/D';
-    return note.number;
   }
 }
