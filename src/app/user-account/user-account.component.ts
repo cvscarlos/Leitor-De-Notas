@@ -37,7 +37,6 @@ type UserUsageHistory = {
 export class UserAccountComponent extends UserComponent implements OnInit {
   public tpl = { mpOperationNumber: false, connectTransaction: false };
   public transactionsLoading = false;
-  public connectTransactionLoading = false;
   public userUsageHistoryLoading = false;
   public mpOperationNumberLoading = false;
   public userTransactions: UserTransactions = { results: false, response: [] };
@@ -58,10 +57,8 @@ export class UserAccountComponent extends UserComponent implements OnInit {
   override ngOnInit() {
     super.ngOnInit();
 
-    this.connectTransactionLoading = true;
     this.apiService.userTransactions((data) => {
       this.userTransactions = data;
-      this.connectTransactionLoading = false;
     });
 
     this.userUsageHistoryLoading = true;
@@ -69,10 +66,6 @@ export class UserAccountComponent extends UserComponent implements OnInit {
       this.userUsageHistory = data.result;
       this.userUsageHistoryLoading = false;
     });
-  }
-
-  public submitConnectTransactionForm(form: UntypedFormGroup): void {
-    this.paymentAssociation(this.apiService.userTransactionConnect(form.value.connectCode));
   }
 
   public submitMpOperationNumber(form: UntypedFormGroup): void {
@@ -87,7 +80,6 @@ export class UserAccountComponent extends UserComponent implements OnInit {
 
   private paymentAssociation(httpPromise: Promise<any>) {
     this.mpOperationNumberLoading = true;
-    this.connectTransactionLoading = true;
 
     httpPromise
       .then(data => {
@@ -100,7 +92,6 @@ export class UserAccountComponent extends UserComponent implements OnInit {
       .catch(e => {
         console.error(e);
         this.mpOperationNumberLoading = false;
-        this.connectTransactionLoading = false;
       });
   }
 }

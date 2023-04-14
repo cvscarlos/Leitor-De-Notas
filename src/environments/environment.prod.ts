@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiServer: 'https://leitordenotas3.herokuapp.com',
+  apiServer: 'https://api-2.leitordenotas.com.br',
 };

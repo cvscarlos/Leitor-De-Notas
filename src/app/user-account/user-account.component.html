@@ -56,22 +56,6 @@
           <p *ngIf="!userTransactions.results"><i>Você não possui nenhuma transação.</i></p>
 
           <div style="position: relative;">
-            <app-loading [show]="connectTransactionLoading"></app-loading>
-
-            <form class="alert alert-info" style="display: none;" action="#" ngNativeValidate
-              #connectTransactionF="ngForm" (ngSubmit)="submitConnectTransactionForm(connectTransactionF.form);"
-              [appSlideToggle]="tpl.connectTransaction">
-              <div class="mb-3">
-                <label class="form-label" for="connectCode">Código:</label>
-                <input type="text" class="form-control" placeholder="ABC123-ABC123-ABC123-ABC123"
-                  pattern="([A-Za-z0-9]{6}-?){4}" autocomplete="false" required minlength="27" maxlength="27"
-                  id="connectCode" name="connectCode" ngModel />
-              </div>
-              <button type="submit" class="btn btn-primary">Salvar</button>
-            </form>
-          </div>
-
-          <div style="position: relative;">
             <app-loading [show]="mpOperationNumberLoading"></app-loading>
 
             <span>Possui um número de pagamento do Mercado Pago? <a href="javascript:void(0)"
