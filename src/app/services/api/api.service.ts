@@ -1,10 +1,10 @@
+import { concatMap, share } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { lastValueFrom, Observable, ReplaySubject } from 'rxjs';
+import { lastValueFrom, Observable, of, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
-import { share } from 'rxjs/operators';
 import { UserData } from 'src/types';
 
 
@@ -27,6 +27,17 @@ export class ApiService {
 
   public upload(requestBody: any): Observable<any> {
     return this.post('pvt/upload', requestBody, undefined, false);
+  }
+
+  public uploadDualRequests(requestBody: any): Observable<any> {
+    return this.post('pvt/upload/set-content', requestBody, undefined, false).pipe(
+      concatMap((data: any) => {
+        if (Boolean(data.noteContentId))
+          return this.post(`pvt/upload/content-id/${data.noteContentId}`, undefined, undefined, false);
+
+        return of(data);
+      }),
+    );
   }
 
   public token(token: string, sessionId: string): Observable<any> {
