@@ -55,7 +55,10 @@
   <div class="row mt-5" *ngIf="note.showNote">
     <div class="col small-font">
       <div class="card" [class.bg-danger]="!note.proofIsValid">
-        <h4 class="card-header">Nota: nº {{ note.number }} de {{ note.date }} | Corretora: {{ note.brokerName }}</h4>
+        <div class="card-header">
+          <h4 class="mb-0">Nota: nº {{ note.number }} de {{ note.date }} | Corretora: {{ note.brokerName }}</h4>
+          <span>Arquivo: {{ note.fileName }}</span>
+        </div>
 
         <div class="card-body">
           <div class="row">
@@ -64,7 +67,6 @@
               <table class="table table-sm">
                 <tbody>
                   <tr> <td>CPF/CNPJ:</td>										<td>{{ note.cpf }}</td> </tr>
-                  <tr> <td>Nome do arquivo:</td>						<td>{{ note.fileName }}</td> </tr>
                   <tr> <td>Corretagem:</td>									<td>{{ this.numberFormatService.br(note.clearing) }}</td></tr>
                   <tr> <td>Taxas:</td>											<td>{{ this.numberFormatService.br(note.allFees + note.ISSTax) }}</td></tr>
                   <tr> <td>I.R.R.F.:</td>										<td>{{ this.numberFormatService.br(note.IRRF) }}</td></tr>
