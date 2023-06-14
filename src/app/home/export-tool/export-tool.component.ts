@@ -109,8 +109,9 @@ export class ExportToolComponent implements OnInit {
       }
     } else if (removeOptionDT) {
       this.removeOptionDT = Boolean((removeOptionDT.target as HTMLInputElement)?.checked);
-      this.notifyService.info('Atenção', 'A página será recarregada para aplicar esta configuração.');
-      window.location.reload();
+      this.notifyService.info('Atenção', 'A página será recarregada para aplicar esta configuração.').finally(() => {
+        window.location.reload();
+      });
     }
 
     this.apiService.userSettings({
