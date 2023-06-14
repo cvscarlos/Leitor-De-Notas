@@ -36,6 +36,11 @@
                 <input type="checkbox" [checked]="groupByTicker" (change)="settingsChange({groupByTicker: $event})" />
                 Agrupar pelo nome do ativo (<a href="https://leitordenotas.customerly.help/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">saiba mais</a>).
               </label>
+
+              <label class="d-block">
+                <input type="checkbox" [checked]="removeOptionDT" (change)="settingsChange({removeOptionDT: $event})" />
+                Não considerar Day Trade em Opções (<a href="https://leitordenotas.customerly.help/en/leitura-de-notas/desconsiderar-a-informacao-de-day-trade-nos-exercicios-de-opcoes" target="_blank">saiba mais</a>).
+              </label>
             </div>
           </div>
 

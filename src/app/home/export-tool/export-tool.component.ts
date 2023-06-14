@@ -51,6 +51,7 @@ export class ExportToolComponent implements OnInit {
   public enableExport = false;
   public excelExportString = '';
   public groupByTicker = false;
+  public removeOptionDT = false;
   public groupByTickerMsg = false;
   public isIframe = false;
   public provisionedIrrfDT = false;
@@ -76,9 +77,10 @@ export class ExportToolComponent implements OnInit {
     this.notesService.noteCallback((note) => this.noteParser(note));
 
     this.apiService.userMe().then((data) => {
-      this.provisionedIrrfDT = !!data?.settings?.provisionedIrrfDT;
-      this.provisionedIrrfST = !!data?.settings?.provisionedIrrfST;
-      this.groupByTicker = !!data?.settings?.groupByTicker;
+      this.provisionedIrrfDT = Boolean(data?.settings?.provisionedIrrfDT);
+      this.provisionedIrrfST = Boolean(data?.settings?.provisionedIrrfST);
+      this.groupByTicker = Boolean(data?.settings?.groupByTicker);
+      this.removeOptionDT = Boolean(data?.settings?.removeOptionDT);
     });
   }
 
@@ -92,25 +94,30 @@ export class ExportToolComponent implements OnInit {
     this.localCleanNotes();
   }
 
-  public settingsChange({ dayTrade, swingTrade, groupByTicker }: { [x: string]: Event }): void {
+  public settingsChange({ dayTrade, swingTrade, groupByTicker, removeOptionDT }: { [x: string]: Event }): void {
     if (dayTrade) {
-      this.provisionedIrrfDT = !!(dayTrade.target as HTMLInputElement)?.checked;
+      this.provisionedIrrfDT = Boolean((dayTrade.target as HTMLInputElement)?.checked);
       this.provisionedIrrfMsg(this.provisionedIrrfDT);
     } else if (swingTrade) {
-      this.provisionedIrrfST = !!(swingTrade.target as HTMLInputElement)?.checked;
+      this.provisionedIrrfST = Boolean((swingTrade.target as HTMLInputElement)?.checked);
       this.provisionedIrrfMsg(this.provisionedIrrfST);
     } else if (groupByTicker) {
-      this.groupByTicker = !!(groupByTicker.target as HTMLInputElement)?.checked;
+      this.groupByTicker = Boolean((groupByTicker.target as HTMLInputElement)?.checked);
       if (this.groupByTicker && !this.groupByTickerMsg) {
         this.notifyService.warning('Atenção', 'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitordenotas.customerly.help/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">clicando aqui</a>.');
         this.groupByTickerMsg = true;
       }
+    } else if (removeOptionDT) {
+      this.removeOptionDT = Boolean((removeOptionDT.target as HTMLInputElement)?.checked);
+      this.notifyService.info('Atenção', 'A página será recarregada para aplicar esta configuração.');
+      window.location.reload();
     }
 
     this.apiService.userSettings({
       provisionedIrrfST: this.provisionedIrrfST,
       provisionedIrrfDT: this.provisionedIrrfDT,
       groupByTicker: this.groupByTicker,
+      removeOptionDT: this.removeOptionDT,
     });
 
     this.recalcNotes();
