@@ -1,9 +1,9 @@
-import { CanActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { SessionService } from '../services/session/session.service';
 
 @Injectable()
-export class AuthService implements CanActivate {
+export class AuthService  {
   constructor(
     private sessionService: SessionService,
     private router: Router,
