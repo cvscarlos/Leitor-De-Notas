@@ -55,45 +55,19 @@ export class DlombelloExportClass {
     note: Note,
     { groupByTicker, provisionedIrrfST, provisionedIrrfDT }: { groupByTicker: boolean, provisionedIrrfST: boolean, provisionedIrrfDT: boolean },
   ) {
-    // Agrupando os negócios pelo ativo e tipo de operação para simplificar as linhas na planilha
-    let tradesVol = 0;
+    let tradesVolume = 0;
     const groupedTrades: GroupedTrades = {};
     note.trades.forEach((trade: NoteTrade) => {
-      const tradesGroupId = this.marketTypeNormalizer(trade.marketType)
-        + trade.BS
-        + trade.symbol
-        + (groupByTicker ? '_' : trade.price)
-        + this.observationNormalizer(trade.obs);
-      const { brokerageTax, tran, others } = trade.fees || {};
+      const tradeGroupId = this.createTradeGroupId(trade, groupByTicker);
 
-      groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {
-        tax: brokerageTax !== undefined ? (brokerageTax + (tran || 0) + (others || 0)) : 0,
-        currency: note.currency,
-        noteNumber: note.isFakeNumber ? 'N/D' : note.number,
-        // Cód. do Ativo
-        symbol: trade.symbol,
-        // Data da Transação
-        date: note.date,
-        // Tipo de Operação
-        operationType: trade.dlombelloOperationType,
-        // Quantidade
-        quantity: 0,
-        itemTotal: 0,
-        // Preço / Ajuste
-        price: trade.price,
-        priceTotal: 0,
-        // Corretora
-        brokerage: note.brokerName,
-        // Tipo de operação: compra ou venda
-        BS: trade.BS, // eslint-disable-line @typescript-eslint/naming-convention
-      };
+      groupedTrades[tradeGroupId] = groupedTrades[tradeGroupId] || this.createGroupedTrade(trade, note);
 
-      groupedTrades[tradesGroupId].quantity += trade.quantity;
-      groupedTrades[tradesGroupId].itemTotal += trade.itemTotal;
-      groupedTrades[tradesGroupId].priceTotal += NP.times(trade.quantity, trade.price);
+      groupedTrades[tradeGroupId].quantity += trade.quantity;
+      groupedTrades[tradeGroupId].itemTotal += trade.itemTotal;
+      groupedTrades[tradeGroupId].priceTotal += NP.times(trade.quantity, trade.price);
 
-      if (!this.dlombelloTaxIgnoredTrades.includes(groupedTrades[tradesGroupId].operationType || '---')) {
-        tradesVol = NP.plus(tradesVol, Math.abs(trade.itemTotal));
+      if (!this.dlombelloTaxIgnoredTrades.includes(groupedTrades[tradeGroupId].operationType || '---')) {
+        tradesVolume = NP.plus(tradesVolume, Math.abs(trade.itemTotal));
       }
     });
 
@@ -103,10 +77,52 @@ export class DlombelloExportClass {
       });
     }
 
-    if (!note.trades?.[0]?.fees) {
-      this.dlombelloTaxCalculator(groupedTrades, note, tradesVol);
+    if (!note.trades[0]?.fees) {
+      this.dlombelloTaxCalculator(groupedTrades, note, tradesVolume);
     }
 
+    this.addIR(groupedTrades, note, provisionedIrrfST, provisionedIrrfDT);
+
+    this.dlombelloExportObjects = this.createExportObjects(groupedTrades);
+
+    return this.createExportString();
+  }
+
+  private createTradeGroupId(trade: NoteTrade, groupByTicker: boolean) {
+    return this.marketTypeNormalizer(trade.marketType)
+      + trade.BS
+      + trade.symbol
+      + (groupByTicker ? '_' : trade.price)
+      + this.observationNormalizer(trade.obs);
+  }
+
+  private createGroupedTrade(trade: NoteTrade, note: Note) {
+    const { brokerageTax, tran, others } = trade.fees || {};
+
+    return {
+      tax: brokerageTax !== undefined ? (brokerageTax + (tran || 0) + (others || 0)) : 0,
+      currency: note.currency,
+      noteNumber: note.isFakeNumber ? 'N/D' : note.number,
+      // Cód. do Ativo
+      symbol: trade.symbol,
+      // Data da Transação
+      date: note.date,
+      // Tipo de Operação
+      operationType: trade.dlombelloOperationType,
+      // Quantidade
+      quantity: 0,
+      itemTotal: 0,
+      // Preço / Ajuste
+      price: trade.price,
+      priceTotal: 0,
+      // Corretora
+      brokerage: note.brokerName,
+      // Tipo de operação: compra ou venda
+      BS: trade.BS, // eslint-disable-line @typescript-eslint/naming-convention
+    };
+  }
+
+  private addIR(groupedTrades: GroupedTrades, note: Note, provisionedIrrfST: boolean, provisionedIrrfDT: boolean) {
     // Incluindo o valor do IR, separado por DT e ST
     let firstSellRow = null;
     let firstDTRow = null;
@@ -122,7 +138,9 @@ export class DlombelloExportClass {
     if (firstSellRow) firstSellRow.IR = provisionedIrrfST ? Math.abs(note.irrfStProvisioned) : 0;
     const anyFirstRow = (firstSellRow || firstDTRow);
     if (anyFirstRow) anyFirstRow.IR = (anyFirstRow.IR || 0) + (note.IRRF < 0 ? Math.abs(note.IRRF) : 0);
+  }
 
+  private createExportObjects(groupedTrades: GroupedTrades): DlombelloExportObject[] {
     // Adicionando os novos negócios a lista já existete
     this.dlombelloExport = this.dlombelloExport.concat(Object.values(groupedTrades));
 
@@ -134,9 +152,8 @@ export class DlombelloExportClass {
     });
 
     // Gerando o valor da textarea usada para exportar pra planilha
-    const newDlombelloExportObjects: DlombelloExportObject[] = [];
-    const dlombelloExportString = this.dlombelloExport.map((dlombelloTrade) => {
-      const exportObject: DlombelloExportObject = {
+    return this.dlombelloExport.map((dlombelloTrade): DlombelloExportObject => {
+      return {
         ticker: dlombelloTrade.symbol,
         date: dlombelloTrade.date,
         type: dlombelloTrade.operationType,
@@ -148,8 +165,11 @@ export class DlombelloExportClass {
         currency: dlombelloTrade.currency,
         noteNumber: dlombelloTrade.noteNumber,
       };
-      newDlombelloExportObjects.push(exportObject);
+    });
+  }
 
+  private createExportString(): string {
+    const rows = this.dlombelloExportObjects.map((exportObject) => {
       return ([
         exportObject.ticker,
         exportObject.date,
@@ -162,11 +182,9 @@ export class DlombelloExportClass {
         exportObject.currency,
         `NC:${exportObject.noteNumber}`,
       ].join('\t').trim());
-    }).join('\n').trim();
+    });
 
-    this.dlombelloExportObjects = newDlombelloExportObjects;
-
-    return dlombelloExportString;
+    return rows.join('\n').trim();
   }
 
   // Dividindo a taxa da nota proporcionalmente aos ativos agrupados
