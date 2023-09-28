@@ -43,6 +43,7 @@ export class AuthComponent implements OnInit {
     this.loading = true;
 
     this.api.login(this.emailForm.value).subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (data: any) => {
         this.emailFormSent = true;
         this.loading = false;

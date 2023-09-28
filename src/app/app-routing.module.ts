@@ -1,5 +1,6 @@
 import { RouterModule, Routes, UrlSegment } from '@angular/router';
 import { AuthService } from './auth/auth.service';
+import { BinanceComponent } from './binance/binance.component';
 import { HomeComponent } from './home/home.component';
 import { IsIframeService } from './services/is-iframe/is-iframe.service';
 import { ManageMembersComponent } from './manage-members/manage-members.component';
@@ -14,7 +15,7 @@ import { UserEmailComponent } from './user-email/user-email.component';
 
 const queryMatcher = (queryToMatch: string): boolean => {
   const url = new URL(window.location.href);
-  return url.search.indexOf(queryToMatch) > -1;
+  return url.search.includes(queryToMatch);
 };
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'privacidade-termos', component: PrivacyComponent, canActivate: [IsIframeService] },
   { path: 'limites-uso', component: UsageLimitComponent, canActivate: [IsIframeService] },
   { path: 'oauth.html', component: OauthComponent },
+  { path: 'binance', component: BinanceComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

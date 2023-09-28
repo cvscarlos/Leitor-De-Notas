@@ -11,6 +11,7 @@
       <form class="form" [formGroup]="emailForm" (submit)="submitEmailForm()">
         <div class="mb-3">
           <label class="form-label" for="email">Email</label>
+          <!-- eslint-disable-next-line @angular-eslint/template/no-autofocus -->
           <input type="email" name="email" required autofocus formControlName="email"
             [class.is-invalid]="!emailForm.get('email')?.valid && emailForm.get('email')?.touched"
             class="form-control form-control-lg" placeholder="examplo@email.com" />
@@ -44,12 +45,12 @@
     <div>
       <div class="mb-3">
         <button class="btn btn-light btn-lg border rounded border-primary" (click)="redirectToOAuth('google')">
-          <img src="/assets/google.png" class="align-text-bottom" width="24" /> | Entrar com Google
+          <img src="/assets/google.png" alt="Google" class="align-text-bottom" width="24" /> | Entrar com Google
         </button>
       </div>
       <div class="mb-3">
         <button class="btn btn-light btn-lg border rounded border-primary" (click)="redirectToOAuth('microsoft')">
-          <img src="/assets/microsoft.png" class="align-text-bottom" width="24" /> | Entrar com Microsoft
+          <img src="/assets/microsoft.png" alt="Microsoft" class="align-text-bottom" width="24" /> | Entrar com Microsoft
         </button>
       </div>
     </div>

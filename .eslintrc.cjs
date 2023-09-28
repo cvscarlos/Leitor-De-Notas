@@ -1,103 +1,51 @@
-{
-  "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
-  "overrides": [
+module.exports = {
+  root: true,
+  ignorePatterns: ['projects/**/*'],
+  overrides: [
     {
-      "files": [
-        "*.ts"
+      files: ['*.{js, cjs}'],
+      extends: [
+        'eslint:recommended',
+        'airbnb-base'
+      ]
+    },
+    {
+      files: ['*.ts'],
+      extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@angular-eslint/recommended',
+        // This is required if you use inline templates in Components
+        'plugin:@angular-eslint/template/process-inline-templates'
       ],
-      "parserOptions": {
-        "project": [
-          "tsconfig.eslint.json"
+      rules: {
+        /**
+         * Any TypeScript source code (NOT TEMPLATE) related rules you wish to use/reconfigure over and above the
+         * recommended set provided by the @angular-eslint project would go here.
+         */
+        '@angular-eslint/directive-selector': [
+          'error',
+          { type: 'attribute', prefix: 'app', style: 'camelCase' }
         ],
-        "createDefaultProgram": true
-      },
-      "extends": [
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates",
-        "plugin:import/recommended",
-        "airbnb-typescript/base"
-      ],
-      "rules": {
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
+        '@angular-eslint/component-selector': [
+          'error',
+          { type: 'element', prefix: 'app', style: 'kebab-case' }
         ],
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ],
-        "@typescript-eslint/lines-between-class-members": [
-          "error",
-          "always",
-          {
-            "exceptAfterSingleLine": true
-          }
-        ],
-        "import/named": "off",
-        "import/no-named-as-default-member": "off",
-        "import/no-unresolved": "off",
-        "indent": [
-          "error",
-          2
-        ],
-        "max-len": "off",
-        "no-trailing-spaces": "error",
-        "no-underscore-dangle": "off",
-        "prefer-template": "error",
-        "quotes": [
-          "error",
-          "single"
-        ],
-        "sort-imports": [
-          "error",
-          {
-            "ignoreCase": true,
-            "ignoreDeclarationSort": false,
-            "ignoreMemberSort": false,
-            "memberSyntaxSortOrder": [
-              "none",
-              "all",
-              "multiple",
-              "single"
-            ],
-            "allowSeparatedGroups": true
-          }
-        ]
+        'no-extra-boolean-cast': 'off',
       }
     },
     {
-      "files": [
-        "*.html"
+      files: ['*.html'],
+      extends: [
+        'plugin:@angular-eslint/template/recommended',
+        'plugin:@angular-eslint/template/accessibility'
       ],
-      "plugins": [
-        "eslint-plugin-html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
-      "rules": {
-        "indent": [
-          "error",
-          2
-        ],
-        "max-len": "off",
-        "no-trailing-spaces": "error",
-        "quotes": [
-          "error",
-          "single"
-        ]
+      rules: {
+        /**
+         * Any template/HTML related rules you wish to use/reconfigure over and above the
+         * recommended set provided by the @angular-eslint project would go here.
+         */
       }
     }
   ]
-}
+};

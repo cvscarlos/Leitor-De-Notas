@@ -78,6 +78,7 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private paymentAssociation(httpPromise: Promise<any>) {
     this.mpOperationNumberLoading = true;
 

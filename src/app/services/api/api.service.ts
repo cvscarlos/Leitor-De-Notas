@@ -10,6 +10,7 @@ import { UserData } from 'src/types';
 
 
 export type OauthProvider = 'google' | 'facebook' | 'microsoft';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Callback = (data: any) => void;
 type RequestMethod = 'post' | 'delete' | 'patch' | 'get';
 
@@ -17,6 +18,7 @@ type RequestMethod = 'post' | 'delete' | 'patch' | 'get';
   providedIn: 'root',
 })
 export class ApiService {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private requestCache: { [endpoint: string]: ReplaySubject<any> } = {};
 
   constructor(
@@ -25,12 +27,15 @@ export class ApiService {
     private sessionService: SessionService,
   ) { }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public upload(requestBody: any): Observable<any> {
     return this.post('pvt/upload', requestBody, undefined, false);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public uploadDualRequests(requestBody: any): Observable<any> {
     return this.post('pvt/upload/set-content', requestBody, undefined, false).pipe(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       concatMap((data: any) => {
         if (Boolean(data.noteContentId))
           return this.post(`pvt/upload/content-id/${data.noteContentId}`, undefined, undefined, false);
@@ -40,10 +45,12 @@ export class ApiService {
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public token(token: string, sessionId: string): Observable<any> {
     return this.post('token', token, undefined, false, sessionId);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public login(email: string): Observable<any> {
     return this.post('login', email, undefined, false);
   }
@@ -144,7 +151,7 @@ export class ApiService {
     method: RequestMethod = 'post',
     handleError: boolean = true,
     sessionId: string | null = null,
-  ): Observable<any> {
+  ): Observable<any> { // eslint-disable-line @typescript-eslint/no-explicit-any
     const httpReq = this.http.request(method, `${environment.apiServer}/${endpoint}`, {
       body: payload,
       headers: { 'x-bggg-session': sessionId || this.sessionService.id },
@@ -155,6 +162,7 @@ export class ApiService {
     return httpReq;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private cachedPost(endpoint: string, handleError: boolean = true, method: RequestMethod = 'post'): ReplaySubject<any> {
     this.requestCache[endpoint] = this.requestCache[endpoint] || new ReplaySubject(1);
 

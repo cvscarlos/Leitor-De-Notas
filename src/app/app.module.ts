@@ -21,6 +21,7 @@ import { UsageLimitModule } from './usage-limit/usage-limit.module';
 import { UserAccountModule } from './user-account/user-account.module';
 import { UserBarComponent } from './user-bar/user-bar.component';
 import { UserEmailModule } from './user-email/user-email.module';
+import { BinanceComponent } from './binance/binance.component';
 
 
 
@@ -31,6 +32,7 @@ import { UserEmailModule } from './user-email/user-email.module';
     StatisticsComponent,
     UserBarComponent,
     ApexModalComponent,
+    BinanceComponent,
   ],
   imports: [
     AppRoutingModule,
