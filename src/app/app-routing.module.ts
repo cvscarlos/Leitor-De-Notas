@@ -30,6 +30,7 @@ const routes: Routes = [
   { path: 'privacidade-termos', component: PrivacyComponent, canActivate: [IsIframeService] },
   { path: 'limites-uso', component: UsageLimitComponent, canActivate: [IsIframeService] },
   { path: 'oauth.html', component: OauthComponent },
+  { path: 'oauth-i.html', component: OauthComponent },
   { path: 'binance', component: BinanceComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
