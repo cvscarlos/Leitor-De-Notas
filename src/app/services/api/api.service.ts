@@ -38,7 +38,8 @@ export class ApiService {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       concatMap((data: any) => {
         if (Boolean(data.noteContentId))
-          return this.post(`pvt/upload/content-id/${data.noteContentId}`, undefined, undefined, false);
+          return this
+            .post(`pvt/upload/content-id/${data.noteContentId}`, undefined, undefined, false);
 
         return of(data);
       }),
@@ -59,12 +60,15 @@ export class ApiService {
     return this.cachedPost('status', true, 'get').subscribe(data => callback(data));
   }
 
-  public oAuthUrl(provider: OauthProvider, callback: Callback) {
-    return this.post(`oauth/${provider}?domain=${location.host}`).subscribe(data => callback(data));
+  public oAuthUrl(provider: OauthProvider, isIframe: boolean, callback: Callback) {
+    return this
+      .post(`oauth/${provider}?domain=${location.host}&isIframe=${Number(isIframe)}`)
+      .subscribe(data => callback(data));
   }
 
   public oAuthToken(provider: OauthProvider, oauthProviderQuerystring: string) {
-    return this.post(`oauth/${provider}/callback${oauthProviderQuerystring}&domain=${location.host}`);
+    return this
+      .post(`oauth/${provider}/callback${oauthProviderQuerystring}&domain=${location.host}`);
   }
 
   public userMe(): Promise<UserData | undefined> {
@@ -134,7 +138,12 @@ export class ApiService {
     return this.post('pvt/user/settings', { settings });
   }
 
-  public getMercadoPagoLink(linkType: string, quantity: number, cpfList: Set<string> | null, callback: Callback) {
+  public getMercadoPagoLink(
+    linkType: string,
+    quantity: number,
+    cpfList: Set<string> | null,
+    callback: Callback
+  ) {
     return this.post(`pvt/mercado-pago/link/${linkType}`, {
       quantity,
       cpfList: (cpfList ? [...cpfList] : []),

@@ -80,14 +80,16 @@ export class AuthComponent implements OnInit {
 
   public redirectToOAuth(provider: OauthProvider) {
     this.loading = true;
+    const isIframe = this.isIframeService.isIframe();
 
-    this.api.oAuthUrl(provider, (data) => {
-      if (!this.isIframeService.isIframe()) {
+    if (isIframe===false) {
+      this.api.oAuthUrl(provider, isIframe, (data) => {
         window.location.href = data.url;
-        return;
-      }
+      })
+      return
+    }
 
-      localStorage.setItem('bgggSessionIframe', 'yes');
+    this.api.oAuthUrl(provider, isIframe, (data) => {
       const loginWindow = window.open(data.url);
 
       const htmlSpin = '<div><div class="spinner-border" role="status"><span class="sr-only">Carregando...</span></div></div>';
