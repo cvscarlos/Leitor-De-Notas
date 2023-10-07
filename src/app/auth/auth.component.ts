@@ -85,8 +85,8 @@ export class AuthComponent implements OnInit {
     if (isIframe===false) {
       this.api.oAuthUrl(provider, isIframe, (data) => {
         window.location.href = data.url;
-      })
-      return
+      });
+      return;
     }
 
     this.api.oAuthUrl(provider, isIframe, (data) => {
@@ -96,6 +96,9 @@ export class AuthComponent implements OnInit {
       this.notifyService.infoForceOpened('Aguardando a autorização', `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`);
 
       const intervalId = setInterval(() => {
+        const bgggSessionId = loginWindow?.localStorage?.getItem('bgggSessionId');
+        if (bgggSessionId) this.sessionService.id = bgggSessionId;
+
         if (this.sessionService.isAuthenticated || loginWindow?.closed) {
           clearInterval(intervalId);
           window.location.reload();

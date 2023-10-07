@@ -20,20 +20,18 @@ export class OauthComponent implements OnInit {
 
   private oAuthLogin(): void {
     const querystring = location.search.trim();
-    const isIframe = location.pathname.includes('oauth-i.html')
+    const isIframe = location.pathname.includes('oauth-i.html');
 
     if (querystring.length <= 1) {
       this.message = 'Error';
       return;
     }
 
-    let provider: OauthProvider = 'google';
-    if (querystring.includes('state=Facebook'))
-      provider = 'facebook';
-    else if (querystring.includes('state=microsoft'))
-      provider = 'microsoft';
+    const provider: OauthProvider = querystring.includes('state=microsoft')
+      ? 'microsoft'
+      : 'google';
 
-    const finalQuerystring = `${querystring}&isIframe=${Number(isIframe)}`
+    const finalQuerystring = `${querystring}&isIframe=${Number(isIframe)}`;
     this.api.oAuthToken(provider, finalQuerystring).subscribe({
       next: (data) => {
         this.sessionService.id = data.session;
