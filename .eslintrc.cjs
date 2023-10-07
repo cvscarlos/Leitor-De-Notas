@@ -3,6 +3,7 @@ module.exports = {
   ignorePatterns: ['projects/**/*'],
   rules: {
     'max-len': ['error', { code: 100, tabWidth: 2, ignoreStrings: true }],
+    'semi': ['error', 'always'],
   },
   overrides: [
     {
