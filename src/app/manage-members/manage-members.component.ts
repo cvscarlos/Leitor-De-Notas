@@ -61,6 +61,7 @@ export class ManageMembersComponent implements OnInit {
 
   private getMembers() {
     this.loading = true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.apiService.userMembersList((data: any) => {
       this.membersList = data.members;
       this.pendingMembers = data.pendingPayment;

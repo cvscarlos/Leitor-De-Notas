@@ -43,6 +43,7 @@ export class AuthComponent implements OnInit {
     this.loading = true;
 
     this.api.login(this.emailForm.value).subscribe({
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       next: (data: any) => {
         this.emailFormSent = true;
         this.loading = false;
@@ -79,20 +80,25 @@ export class AuthComponent implements OnInit {
 
   public redirectToOAuth(provider: OauthProvider) {
     this.loading = true;
+    const isIframe = this.isIframeService.isIframe();
 
-    this.api.oAuthUrl(provider, (data) => {
-      if (!this.isIframeService.isIframe()) {
+    if (isIframe===false) {
+      this.api.oAuthUrl(provider, isIframe, (data) => {
         window.location.href = data.url;
-        return;
-      }
+      });
+      return;
+    }
 
-      localStorage.setItem('bgggSessionIframe', 'yes');
+    this.api.oAuthUrl(provider, isIframe, (data) => {
       const loginWindow = window.open(data.url);
 
       const htmlSpin = '<div><div class="spinner-border" role="status"><span class="sr-only">Carregando...</span></div></div>';
       this.notifyService.infoForceOpened('Aguardando a autorização', `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`);
 
       const intervalId = setInterval(() => {
+        const bgggSessionId = loginWindow?.localStorage?.getItem('bgggSessionId');
+        if (bgggSessionId) this.sessionService.id = bgggSessionId;
+
         if (this.sessionService.isAuthenticated || loginWindow?.closed) {
           clearInterval(intervalId);
           window.location.reload();

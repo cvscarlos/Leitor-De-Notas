@@ -99,9 +99,9 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let histoty of cpfUsageHistory.value">
-                      <td scope="row">{{histoty.formatedDate}}</td>
-                      <td scope="row">R$ {{numberFormat.br(histoty.value)}}</td>
-                      <td scope="row">{{numberFormat.brNoDecimal(histoty.quantity)}}</td>
+                      <td>{{histoty.formatedDate}}</td>
+                      <td>R$ {{numberFormat.br(histoty.value)}}</td>
+                      <td>{{numberFormat.brNoDecimal(histoty.quantity)}}</td>
                     </tr>
                   </tbody>
                 </table>

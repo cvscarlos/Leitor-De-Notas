@@ -18,7 +18,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Avenue (EUA)                          | ✅              |                |
 | Banco do Brasil Investimentos         | ✅              |                |
 | Banco Inter Corretora                 | ✅              | ✅             |
-| Banco Itaú                            | ✅              |                |
+| Banco Itaú                            | ✅              | ✅             |
 | BTG Pactual Corretora                 | ✅              | ✅             |
 | C6 Bank                               | ✅              |                |
 | CEF Caixa Econômica Federal Corretora | ✅              |                |

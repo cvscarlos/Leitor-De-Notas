@@ -37,6 +37,7 @@ export class ApexModalComponent implements OnInit {
 
       this.apexAccount = note.apexAccount;
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.apiService.userMembersList((data: any) => {
         this.membersList = data.members;
         this.loading = false;

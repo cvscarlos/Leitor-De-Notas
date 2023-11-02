@@ -27,18 +27,12 @@ export class SessionService {
   }
 
   private getSessionId(): string {
-    if (Boolean(this.sessionId)) {
-      return this.sessionId;
-    }
+    if (Boolean(this.sessionId)) return this.sessionId;
 
     const sessionId = parseInt(localStorage.bgggSessionExpires) > Date.now()
       ? String(localStorage.bgggSessionId).trim()
       : '';
-    if (Boolean(sessionId)) {
-      localStorage.removeItem('bgggSessionIframe');
-      return sessionId;
-    }
-
-    return '';
+    
+    return Boolean(sessionId) ? sessionId : '';
   }
 }

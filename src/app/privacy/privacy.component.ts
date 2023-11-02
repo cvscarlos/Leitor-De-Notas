@@ -19,6 +19,7 @@ export class PrivacyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.apiService.userMe().then((data: any) => {
       this.showAcceptTermsButton = !data.termsAccepted;
     });

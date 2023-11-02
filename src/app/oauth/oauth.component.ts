@@ -20,24 +20,23 @@ export class OauthComponent implements OnInit {
 
   private oAuthLogin(): void {
     const querystring = location.search.trim();
+    const isIframe = location.pathname.includes('oauth-i.html');
 
     if (querystring.length <= 1) {
       this.message = 'Error';
       return;
     }
 
-    let provider: OauthProvider = 'google';
-    if (querystring.indexOf('state=Facebook') > -1)
-      provider = 'facebook';
-    else if (querystring.indexOf('state=microsoft') > -1)
-      provider = 'microsoft';
+    const provider: OauthProvider = querystring.includes('state=microsoft')
+      ? 'microsoft'
+      : 'google';
 
-    this.api.oAuthToken(provider, querystring).subscribe({
+    const finalQuerystring = `${querystring}&isIframe=${Number(isIframe)}`;
+    this.api.oAuthToken(provider, finalQuerystring).subscribe({
       next: (data) => {
         this.sessionService.id = data.session;
 
-        if (localStorage.getItem('bgggSessionIframe') === 'yes') {
-          localStorage.removeItem('bgggSessionIframe');
+        if (isIframe) {
           this.message = '✅ Sucesso! Você já pode fechar esta aba.';
           window.close();
         } else {

@@ -26,6 +26,7 @@ export class UserDocumentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.apiService.userMe().then((data: any) => {
       const showModal = this.sessionService.isAuthenticated && !data.userDoc;
       if (showModal) {

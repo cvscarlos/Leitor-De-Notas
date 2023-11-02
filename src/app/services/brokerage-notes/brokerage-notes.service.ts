@@ -78,6 +78,7 @@ export class BrokerageNotesService {
       });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private parseDetails(serverResponse: any): void {
     for (const n in serverResponse) {
       if (!Object.prototype.hasOwnProperty.call(serverResponse, n)) continue;
