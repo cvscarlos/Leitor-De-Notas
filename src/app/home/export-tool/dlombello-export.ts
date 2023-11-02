@@ -31,7 +31,15 @@ type DlombelloExportObject = {
   noteNumber: string;
 };
 
-type GroupedTrades = { [groupId: string]: DlombelloTrade & { itemTotal: number, priceTotal: number } };
+type GroupedTrades = {
+  [groupId: string]: DlombelloTrade & { itemTotal: number, priceTotal: number }
+};
+
+type DlombelloParams = {
+  groupByTicker: boolean,
+  provisionedIrrfST: boolean,
+  provisionedIrrfDT: boolean
+}
 
 export class DlombelloExportClass {
   private dlombelloExport: DlombelloExport[] = [];
@@ -53,14 +61,16 @@ export class DlombelloExportClass {
 
   public dlombelloParser(
     note: Note,
-    { groupByTicker, provisionedIrrfST, provisionedIrrfDT }: { groupByTicker: boolean, provisionedIrrfST: boolean, provisionedIrrfDT: boolean },
+    { groupByTicker, provisionedIrrfST, provisionedIrrfDT }: DlombelloParams,
   ) {
     let tradesVolume = 0;
     const groupedTrades: GroupedTrades = {};
     note.trades.forEach((trade: NoteTrade) => {
       const tradeGroupId = this.createTradeGroupId(trade, groupByTicker);
 
-      groupedTrades[tradeGroupId] = groupedTrades[tradeGroupId] || this.createGroupedTrade(trade, note);
+      groupedTrades[tradeGroupId] =
+        groupedTrades[tradeGroupId] ||
+        this.createGroupedTrade(trade, note);
 
       groupedTrades[tradeGroupId].quantity += trade.quantity;
       groupedTrades[tradeGroupId].itemTotal += trade.itemTotal;
@@ -73,7 +83,10 @@ export class DlombelloExportClass {
 
     if (groupByTicker) {
       Object.keys(groupedTrades).forEach(key => {
-        groupedTrades[key].price = NP.divide(groupedTrades[key].priceTotal, groupedTrades[key].quantity);
+        groupedTrades[key].price = NP.divide(
+          groupedTrades[key].priceTotal,
+          groupedTrades[key].quantity
+        );
       });
     }
 
@@ -122,7 +135,12 @@ export class DlombelloExportClass {
     };
   }
 
-  private addIR(groupedTrades: GroupedTrades, note: Note, provisionedIrrfST: boolean, provisionedIrrfDT: boolean) {
+  private addIR(
+    groupedTrades: GroupedTrades,
+    note: Note,
+    provisionedIrrfST: boolean,
+    provisionedIrrfDT: boolean
+  ) {
     // Incluindo o valor do IR, separado por DT e ST
     let firstSellRow = null;
     let firstDTRow = null;
@@ -137,7 +155,9 @@ export class DlombelloExportClass {
     if (firstDTRow) firstDTRow.IR = provisionedIrrfDT ? Math.abs(note.irrfDtProvisioned) : 0;
     if (firstSellRow) firstSellRow.IR = provisionedIrrfST ? Math.abs(note.irrfStProvisioned) : 0;
     const anyFirstRow = (firstSellRow || firstDTRow);
-    if (anyFirstRow) anyFirstRow.IR = (anyFirstRow.IR || 0) + (note.IRRF < 0 ? Math.abs(note.IRRF) : 0);
+    if (anyFirstRow) {
+      anyFirstRow.IR = (anyFirstRow.IR || 0) + (note.IRRF < 0 ? Math.abs(note.IRRF) : 0);
+    }
   }
 
   private createExportObjects(groupedTrades: GroupedTrades): DlombelloExportObject[] {
@@ -188,7 +208,11 @@ export class DlombelloExportClass {
   }
 
   // Dividindo a taxa da nota proporcionalmente aos ativos agrupados
-  private dlombelloTaxCalculator(groupedTrades: GroupedTrades, note: Note, tradesVol: number): void {
+  private dlombelloTaxCalculator(
+    groupedTrades: GroupedTrades,
+    note: Note,
+    tradesVol: number
+  ): void {
     let tgFirst = '---';
     let counter = 0;
     let taxVol = 0;
