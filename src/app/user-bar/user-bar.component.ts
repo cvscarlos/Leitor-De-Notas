@@ -8,7 +8,6 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-user-bar',
   templateUrl: './user-bar.component.html',
-  styleUrls: ['./user-bar.component.less'],
 })
 export class UserBarComponent extends UserComponent implements OnInit {
   public faPencilAlt = faPencilAlt;

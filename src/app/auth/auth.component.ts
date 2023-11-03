@@ -27,7 +27,13 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.buildForms();
+    this.emailForm = this.formBuilder.group({
+      email: [null, [Validators.required, Validators.email, Validators.minLength(5)]],
+    });
+
+    this.tokenForm = this.formBuilder.group({
+      token: [null, [Validators.required, Validators.pattern('^[0-9]{6}$')]],
+    });
   }
 
   public submitEmailForm(): void {
@@ -82,8 +88,8 @@ export class AuthComponent implements OnInit {
     this.loading = true;
     const isIframe = this.isIframeService.isIframe();
 
-    if (isIframe===false) {
-      this.api.oAuthUrl(provider, isIframe, (data) => {
+    if (!isIframe) {
+      this.api.oAuthUrl(provider, false, (data) => {
         window.location.href = data.url;
       });
       return;
@@ -104,16 +110,6 @@ export class AuthComponent implements OnInit {
           window.location.reload();
         }
       }, 500);
-    });
-  }
-
-  private buildForms(): void {
-    this.emailForm = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email, Validators.minLength(5)]],
-    });
-
-    this.tokenForm = this.formBuilder.group({
-      token: [null, [Validators.required, Validators.pattern('^[0-9]{6}$')]],
     });
   }
 }

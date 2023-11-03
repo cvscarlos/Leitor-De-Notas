@@ -11,10 +11,10 @@ import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directi
   declarations: [AuthComponent],
   imports: [
     CommonModule,
-    SharedDirectivesModule,
     FormsModule,
-    LoadingModule,
     ReactiveFormsModule,
+    LoadingModule,
+    SharedDirectivesModule,
   ],
   exports: [AuthComponent],
 })
