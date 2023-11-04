@@ -7,7 +7,6 @@ import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interfa
 @Component({
   selector: 'app-brokerage-notes',
   templateUrl: './brokerage-notes.component.html',
-  styleUrls: ['./brokerage-notes.component.less'],
 })
 export class BrokerageNotesComponent implements OnInit, DoCheck {
   public noteDetails?: NoteDetails[];
@@ -18,7 +17,7 @@ export class BrokerageNotesComponent implements OnInit, DoCheck {
   constructor(
     private notesService: BrokerageNotesService,
     public numberFormatService: NumberFormatService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const notesService = this.notesService.getNotes();

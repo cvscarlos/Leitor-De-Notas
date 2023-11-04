@@ -1,8 +1,88 @@
-<div class="row">
-  <div class="col">
-    <div class="text-center">
+<div class="container">
+  <div class="row">
+    <div class="col" style="position: relative;">
+      <app-loading [show]="loading"></app-loading>
+
       <h3>Binance</h3>
       <p>Funcionalidade em fase experimental.<br />Caso encontre problemas use o link de Reportar Problemas.</p>
+
+      <h6>Como obter a API Key e Secret Key:</h6>
+      <ul>
+        <li>Visite: <a href="https://www.binance.com/pt-BR/my/settings/api-management" target="_blank">https://www.binance.com/pt-BR/my/settings/api-management</a>;</li>
+        <li>Clique em "Criar API";</li>
+        <li>Escolha "Gerada pelo sistema" e clique em "Próximo";</li>
+        <li>Insira qualquer nome;</li>
+        <li>Pronto, basta copiar os dados e usar aqui no Leitor.</li>
+      </ul>
+      
+      <hr/>
+
+      <form class="form" [formGroup]="binanceForm" (submit)="submitBinanceForm()">
+        <div class="mb-3">
+          <label class="form-label" for="apiKey">Binance API Key</label>
+          <input type="text" name="apiKey" required formControlName="binanceApiKey" class="form-control form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="secretKey">Binance Secret Key</label>
+          <input type="password" name="secretKey" required formControlName="binanceSecretKey"
+            class="form-control form-control" />
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Obter extrato da Binance</button>
+        </div>
+      </form>
+
+      <div *ngIf="fiatTransactions.length">
+        <hr/>
+        <h5>Conta FIAT</h5>
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Data</th>
+              <th scope="col">Moeda</th>
+              <th scope="col">Cripto</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Comissão</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let transaction of fiatTransactions">
+                <td>{{ transaction.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>{{ transaction.sourceAmount }} {{ transaction.fiatCurrency }}</td>
+                <td>{{ transaction.obtainAmount }} {{ transaction.cryptoCurrency }}</td>
+                <td>{{ transaction.price }}</td>
+                <td>{{ transaction.totalFee }}</td>
+              </tr>
+        </table>
+      </div>
+
+      <div *ngIf="trades.length">
+        <hr/>
+        <h5>Transações</h5>
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">C/V</th>
+              <th scope="col">Data</th>
+              <th scope="col">Símbolo</th>
+              <th scope="col">Quantidade</th>
+              <th scope="col">Preço</th>
+              <th scope="col">Total</th>
+              <th scope="col">Taxa</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let trade of trades">
+                <td>{{ trade.isBuyer? 'C' : 'V' }}</td>
+                <td>{{ trade.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                <td>{{ trade.symbol }}</td>
+                <td>{{ trade.qtyN }}</td>
+                <td>{{ trade.priceN }}</td>
+                <td>{{ trade.quoteQtyN }}</td>
+                <td>{{ trade.commissionN }} {{ trade.commissionAsset }}</td>
+              </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>

@@ -7,12 +7,12 @@ import { ExportToolModule } from './export-tool/export-tool.module';
 import { HomeComponent } from './home.component';
 import { UploadModule } from './upload/upload.module';
 import { UserDocumentModule } from './user-document/user-document.module';
-
-
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [HomeComponent],
   imports: [
+    AppRoutingModule,
     AuthModule,
     BrokerageNotesModule,
     CommonModule,
@@ -22,4 +22,4 @@ import { UserDocumentModule } from './user-document/user-document.module';
   ],
   exports: [HomeComponent],
 })
-export class HomeModule { }
+export class HomeModule {}

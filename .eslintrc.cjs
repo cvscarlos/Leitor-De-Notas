@@ -8,13 +8,18 @@ module.exports = {
   overrides: [
     {
       files: ['*.{js, cjs}'],
+      "plugins": ["prettier"],
       extends: [
         'eslint:recommended',
         'airbnb-base'
-      ]
+      ],
+      rules: {
+        "prettier/prettier": "error",
+      }
     },
     {
       files: ['*.ts'],
+      "plugins": ["prettier"],
       extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -32,6 +37,7 @@ module.exports = {
           { type: 'element', prefix: 'app', style: 'kebab-case' }
         ],
         'no-extra-boolean-cast': 'off',
+        "prettier/prettier": "error",
       }
     },
     {

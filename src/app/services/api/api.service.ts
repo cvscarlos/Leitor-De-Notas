@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { concatMap, share } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { lastValueFrom, Observable, of, ReplaySubject } from 'rxjs';
@@ -7,83 +9,79 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { UserData } from 'src/types';
 
-
-
 export type OauthProvider = 'google' | 'facebook' | 'microsoft';
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Callback = (data: any) => void;
 type RequestMethod = 'post' | 'delete' | 'patch' | 'get';
+type BinanceCredentials = { binanceApiKey: string; binanceApiSecret: string };
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private requestCache: { [endpoint: string]: ReplaySubject<any> } = {};
 
   constructor(
     private http: HttpClient,
     private notifyService: NotifyService,
     private sessionService: SessionService,
-  ) { }
+  ) {}
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public upload(requestBody: any): Observable<any> {
     return this.post('pvt/upload', requestBody, undefined, false);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public uploadDualRequests(requestBody: any): Observable<any> {
     return this.post('pvt/upload/set-content', requestBody, undefined, false).pipe(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       concatMap((data: any) => {
-        if (Boolean(data.noteContentId))
-          return this
-            .post(`pvt/upload/content-id/${data.noteContentId}`, undefined, undefined, false);
+        if (!Boolean(data.noteContentId)) return of(data);
 
-        return of(data);
+        return this.post(
+          `pvt/upload/content-id/${data.noteContentId}`,
+          undefined,
+          undefined,
+          false,
+        );
       }),
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public token(token: string, sessionId: string): Observable<any> {
     return this.post('token', token, undefined, false, sessionId);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public login(email: string): Observable<any> {
     return this.post('login', email, undefined, false);
   }
 
   public getServerStatus(callback: Callback) {
-    return this.cachedPost('status', true, 'get').subscribe(data => callback(data));
+    return this.cachedPost('status', true, 'get').subscribe((data) => callback(data));
   }
 
   public oAuthUrl(provider: OauthProvider, isIframe: boolean, callback: Callback) {
-    return this
-      .post(`oauth/${provider}?domain=${location.host}&isIframe=${Number(isIframe)}`)
-      .subscribe(data => callback(data));
+    return this.post(
+      `oauth/${provider}?domain=${location.host}&isIframe=${Number(Boolean(isIframe))}`,
+    ).subscribe((data) => callback(data));
   }
 
   public oAuthToken(provider: OauthProvider, oauthProviderQuerystring: string) {
-    return this
-      .post(`oauth/${provider}/callback${oauthProviderQuerystring}&domain=${location.host}`);
+    return this.post(
+      `oauth/${provider}/callback${oauthProviderQuerystring}&domain=${location.host}`,
+    );
   }
 
   public userMe(): Promise<UserData | undefined> {
     return new Promise((resolve, reject) => {
-      if (!this.sessionService.isAuthenticated) {
-        return resolve(undefined);
-      }
+      if (!this.sessionService.isAuthenticated) return resolve(undefined);
 
       this.cachedPost('pvt/user/me', false).subscribe({
-        next: data => resolve(data),
-        error: error => {
-          this.notifyService.error('Não foi possível obter os dados do usuário.', 'Por atualize sua página').then(() => {
-            this.sessionService.logout();
-            window.location.href = '/';
-          });
+        next: (data) => resolve(data),
+        error: (error) => {
+          this.notifyService
+            .error('Não foi possível obter os dados do usuário.', 'Por atualize sua página')
+            .then(() => {
+              this.sessionService.logout();
+              window.location.href = '/';
+            });
           reject(error);
         },
       });
@@ -91,15 +89,15 @@ export class ApiService {
   }
 
   public userTransactions(callback: Callback): void {
-    this.post('pvt/user/transactions').subscribe(data => callback(data));
+    this.post('pvt/user/transactions').subscribe((data) => callback(data));
   }
 
   public userUsageHistory(callback: Callback): void {
-    this.post('pvt/user/usage-history').subscribe(data => callback(data));
+    this.post('pvt/user/usage-history').subscribe((data) => callback(data));
   }
 
   public userDeleteAccount(callback: Callback): void {
-    this.post('pvt/user/delete', undefined, 'delete').subscribe(data => callback(data));
+    this.post('pvt/user/delete', undefined, 'delete').subscribe((data) => callback(data));
   }
 
   public userDocumentSave(userDoc: string) {
@@ -115,11 +113,11 @@ export class ApiService {
   }
 
   public userAcceptTerms(callback: Callback) {
-    return this.post('pvt/user/me/terms-accepted').subscribe(data => callback(data));
+    return this.post('pvt/user/me/terms-accepted').subscribe((data) => callback(data));
   }
 
   public userMembersList(callback: Callback) {
-    return this.post('pvt/user/list-members').subscribe(data => callback(data));
+    return this.post('pvt/user/list-members').subscribe((data) => callback(data));
   }
 
   public userMemberSave(memberDoc: string) {
@@ -138,16 +136,29 @@ export class ApiService {
     return this.post('pvt/user/settings', { settings });
   }
 
+  public binanceFiatTransactions(
+    credentials: BinanceCredentials,
+  ): Promise<Record<string, string>[]> {
+    return lastValueFrom(this.post('pvt/binance/fiat', credentials));
+  }
+
+  public binanceTrades(credentials: BinanceCredentials): Promise<Record<string, string>[]> {
+    return lastValueFrom(this.post('pvt/binance/trades', credentials));
+  }
+
   public getMercadoPagoLink(
     linkType: string,
     quantity: number,
     cpfList: Set<string> | null,
-    callback: Callback
+    callback: Callback,
   ) {
-    return this.post(`pvt/mercado-pago/link/${linkType}`, {
+    const payload = {
       quantity,
-      cpfList: (cpfList ? [...cpfList] : []),
-    }).subscribe(data => callback(data));
+      cpfList: cpfList ? [...cpfList] : [],
+    };
+    return this.post(`pvt/mercado-pago/link/${linkType}`, payload).subscribe((data) =>
+      callback(data),
+    );
   }
 
   public connectApexAccount(cpfCnpj: string, apexAccount: string) {
@@ -160,19 +171,25 @@ export class ApiService {
     method: RequestMethod = 'post',
     handleError: boolean = true,
     sessionId: string | null = null,
-  ): Observable<any> { // eslint-disable-line @typescript-eslint/no-explicit-any
-    const httpReq = this.http.request(method, `${environment.apiServer}/${endpoint}`, {
+  ): Observable<any> {
+    const options = {
       body: payload,
       headers: { 'x-bggg-session': sessionId || this.sessionService.id },
-    }).pipe(share());
+    };
+    const httpReq = this.http
+      .request(method, `${environment.apiServer}/${endpoint}`, options)
+      .pipe(share());
 
     if (handleError) httpReq.subscribe({ error: (e) => this.requestErrorHandler(e) });
 
     return httpReq;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private cachedPost(endpoint: string, handleError: boolean = true, method: RequestMethod = 'post'): ReplaySubject<any> {
+  private cachedPost(
+    endpoint: string,
+    handleError: boolean = true,
+    method: RequestMethod = 'post',
+  ): ReplaySubject<any> {
     this.requestCache[endpoint] = this.requestCache[endpoint] || new ReplaySubject(1);
 
     if (!this.requestCache[endpoint].observed) {
@@ -188,6 +205,10 @@ export class ApiService {
   private requestErrorHandler(e: HttpErrorResponse) {
     const message = e.error?._messages || [];
     if (message.length) this.notifyService.error(message.join('\n'));
-    else this.notifyService.error('Erro inesperado!', 'Por favor, atualize sua página e tente novamente');
+    else
+      this.notifyService.error(
+        'Erro inesperado!',
+        'Por favor, atualize sua página e tente novamente',
+      );
   }
 }

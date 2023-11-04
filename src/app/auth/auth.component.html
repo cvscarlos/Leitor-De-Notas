@@ -2,7 +2,7 @@
   [appSlideToggle]="!sessionService.isAuthenticated" (appSlideState)="loginSlideState = $event"
   *ngIf="!sessionService.isAuthenticated || loginSlideState !== 'hidden'">
 
-  <div class="col">
+  <div class="col" style="position: relative;">
     <app-loading [show]="loading"></app-loading>
 
     <h5 class="h3">Faça login</h5>
