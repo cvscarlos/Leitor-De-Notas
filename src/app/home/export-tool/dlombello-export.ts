@@ -32,14 +32,14 @@ type DlombelloExportObject = {
 };
 
 type GroupedTrades = {
-  [groupId: string]: DlombelloTrade & { itemTotal: number, priceTotal: number }
+  [groupId: string]: DlombelloTrade & { itemTotal: number; priceTotal: number };
 };
 
 type DlombelloParams = {
-  groupByTicker: boolean,
-  provisionedIrrfST: boolean,
-  provisionedIrrfDT: boolean
-}
+  groupByTicker: boolean;
+  provisionedIrrfST: boolean;
+  provisionedIrrfDT: boolean;
+};
 
 export class DlombelloExportClass {
   private dlombelloExport: DlombelloExport[] = [];
@@ -47,9 +47,7 @@ export class DlombelloExportClass {
   private notNumberRegex = /[^0-9]+/g;
   private dlombelloExportObjects: DlombelloExportObject[] = [];
 
-  constructor(
-    private numberFmt: NumberFormatService,
-  ) { }
+  constructor(private numberFmt: NumberFormatService) {}
 
   public resetDlombelloExport() {
     this.dlombelloExport = [];
@@ -69,23 +67,24 @@ export class DlombelloExportClass {
       const tradeGroupId = this.createTradeGroupId(trade, groupByTicker);
 
       groupedTrades[tradeGroupId] =
-        groupedTrades[tradeGroupId] ||
-        this.createGroupedTrade(trade, note);
+        groupedTrades[tradeGroupId] || this.createGroupedTrade(trade, note);
 
       groupedTrades[tradeGroupId].quantity += trade.quantity;
       groupedTrades[tradeGroupId].itemTotal += trade.itemTotal;
       groupedTrades[tradeGroupId].priceTotal += NP.times(trade.quantity, trade.price);
 
-      if (!this.dlombelloTaxIgnoredTrades.includes(groupedTrades[tradeGroupId].operationType || '---')) {
+      if (
+        !this.dlombelloTaxIgnoredTrades.includes(groupedTrades[tradeGroupId].operationType || '---')
+      ) {
         tradesVolume = NP.plus(tradesVolume, Math.abs(trade.itemTotal));
       }
     });
 
     if (groupByTicker) {
-      Object.keys(groupedTrades).forEach(key => {
+      Object.keys(groupedTrades).forEach((key) => {
         groupedTrades[key].price = NP.divide(
           groupedTrades[key].priceTotal,
-          groupedTrades[key].quantity
+          groupedTrades[key].quantity,
         );
       });
     }
@@ -102,18 +101,20 @@ export class DlombelloExportClass {
   }
 
   private createTradeGroupId(trade: NoteTrade, groupByTicker: boolean) {
-    return this.marketTypeNormalizer(trade.marketType)
-      + trade.BS
-      + trade.symbol
-      + (groupByTicker ? '_' : trade.price)
-      + this.observationNormalizer(trade.obs);
+    return (
+      this.marketTypeNormalizer(trade.marketType) +
+      trade.BS +
+      trade.symbol +
+      (groupByTicker ? '_' : trade.price) +
+      this.observationNormalizer(trade.obs)
+    );
   }
 
   private createGroupedTrade(trade: NoteTrade, note: Note) {
     const { brokerageTax, tran, others } = trade.fees || {};
 
     return {
-      tax: brokerageTax !== undefined ? (brokerageTax + (tran || 0) + (others || 0)) : 0,
+      tax: brokerageTax !== undefined ? brokerageTax + (tran || 0) + (others || 0) : 0,
       currency: note.currency,
       noteNumber: note.isFakeNumber ? 'N/D' : note.number,
       // Cód. do Ativo
@@ -139,7 +140,7 @@ export class DlombelloExportClass {
     groupedTrades: GroupedTrades,
     note: Note,
     provisionedIrrfST: boolean,
-    provisionedIrrfDT: boolean
+    provisionedIrrfDT: boolean,
   ) {
     // Incluindo o valor do IR, separado por DT e ST
     let firstSellRow = null;
@@ -154,7 +155,7 @@ export class DlombelloExportClass {
     }
     if (firstDTRow) firstDTRow.IR = provisionedIrrfDT ? Math.abs(note.irrfDtProvisioned) : 0;
     if (firstSellRow) firstSellRow.IR = provisionedIrrfST ? Math.abs(note.irrfStProvisioned) : 0;
-    const anyFirstRow = (firstSellRow || firstDTRow);
+    const anyFirstRow = firstSellRow || firstDTRow;
     if (anyFirstRow) {
       anyFirstRow.IR = (anyFirstRow.IR || 0) + (note.IRRF < 0 ? Math.abs(note.IRRF) : 0);
     }
@@ -190,7 +191,7 @@ export class DlombelloExportClass {
 
   private createExportString(): string {
     const rows = this.dlombelloExportObjects.map((exportObject) => {
-      return ([
+      return [
         exportObject.ticker,
         exportObject.date,
         exportObject.type,
@@ -201,7 +202,9 @@ export class DlombelloExportClass {
         this.numberFmt.commaOnly(exportObject.irrf || null),
         exportObject.currency,
         `NC:${exportObject.noteNumber}`,
-      ].join('\t').trim());
+      ]
+        .join('\t')
+        .trim();
     });
 
     return rows.join('\n').trim();
@@ -211,7 +214,7 @@ export class DlombelloExportClass {
   private dlombelloTaxCalculator(
     groupedTrades: GroupedTrades,
     note: Note,
-    tradesVol: number
+    tradesVol: number,
   ): void {
     let tgFirst = '---';
     let counter = 0;
@@ -245,14 +248,14 @@ export class DlombelloExportClass {
       return exportTrade._sortKey;
     }
 
-    const operTypeOrder = { 'C': 1, 'V': 2, 'DT': 3 };
+    const operTypeOrder = { C: 1, V: 2, DT: 3 };
 
     let out = '';
     out += exportTrade.date.split('/').reverse().join(''); // data
     out += exportTrade.brokerage; // corretora
     out += operTypeOrder[exportTrade.operationType as keyof typeof operTypeOrder] || '-'; // tipo de operação
     out += (exportTrade.BS === 'C' ? '+' : '-') + this.forceNumberSize(exportTrade.quantity); // quantidade
-    out += (`__________${exportTrade.symbol}`).slice(-10); // papel/ação
+    out += `__________${exportTrade.symbol}`.slice(-10); // papel/ação
     out += this.forceNumberSize(exportTrade.price); // preço
     exportTrade._sortKey = out.toUpperCase();
 
@@ -261,7 +264,12 @@ export class DlombelloExportClass {
 
   private marketTypeNormalizer(marketType: string): string {
     marketType = marketType.toUpperCase();
-    if (marketType.includes('FRACION') || marketType.includes('VISTA') || marketType === 'FRA' || marketType === 'VIS') {
+    if (
+      marketType.includes('FRACION') ||
+      marketType.includes('VISTA') ||
+      marketType === 'FRA' ||
+      marketType === 'VIS'
+    ) {
       return 'VISTA';
     }
     return marketType;
@@ -274,6 +282,6 @@ export class DlombelloExportClass {
 
   private forceNumberSize(val: number | string): string {
     val = val.toString().replace(this.notNumberRegex, '');
-    return (`0000000000${val}`).slice(-10);
+    return `0000000000${val}`.slice(-10);
   }
 }

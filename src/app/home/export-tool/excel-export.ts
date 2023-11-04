@@ -2,58 +2,58 @@ import { Note, NoteTrade } from 'src/types';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 
 export class ExcelExport {
-  constructor(
-    private numberFmt: NumberFormatService,
-  ) { }
+  constructor(private numberFmt: NumberFormatService) {}
 
-  public excelParser(note: Note, excelExportString:string): string {
+  public excelParser(note: Note, excelExportString: string): string {
     const excelTrades = [...note.trades] as Array<NoteTrade & Partial<Omit<Note, 'trades'>>>;
 
     // Colocando dos dados da nota no primeiro item negociado
-    Object.assign(
-      excelTrades[0],
-      note,
-      { trades: undefined, IR: (note.IRRF < 0 ? note.IRRF : '') },
-    );
+    Object.assign(excelTrades[0], note, { trades: undefined, IR: note.IRRF < 0 ? note.IRRF : '' });
 
     // Gerando o valor da textarea usada para exportar pra planilha
     const excelStrings: string[] = [];
     const type = note.type;
-    excelTrades.forEach(excelTrade => {
+    excelTrades.forEach((excelTrade) => {
       const { brokerageTax, tran, others } = excelTrade.fees || {};
 
-      excelStrings.push([
-        excelTrade.BS,
-        excelTrade.marketType,
-        excelTrade.time,
-        excelTrade.symbol,
-        excelTrade.obs,
-        this.numberFmt.br(excelTrade.BS === 'C' ? excelTrade.quantity : -excelTrade.quantity, 10, 0),
-        this.numberFmt.br(excelTrade.price, 10, 2),
-        this.numberFmt.br(excelTrade.itemTotal),
-        excelTrade.DC,
-        type,
-        note.brokerName,
-        note.number,
-        note.date,
-        this.numberFmt.br(excelTrade.netAmount),
-        this.numberFmt.br(tran !== undefined ? tran : excelTrade.settlementTax),
-        this.numberFmt.br(excelTrade.registrationTax),
-        this.numberFmt.br(excelTrade.CBLC),
-        this.numberFmt.br(excelTrade.optionsTax),
-        this.numberFmt.br(excelTrade.ANATax),
-        this.numberFmt.br(excelTrade.emolument),
-        this.numberFmt.br(excelTrade.bovespaTotal),
-        this.numberFmt.br(brokerageTax !== undefined ? brokerageTax : excelTrade.clearing),
-        this.numberFmt.br(excelTrade.ISSTax),
-        this.numberFmt.br(excelTrade.IRRF),
-        this.numberFmt.br(others !== undefined ? others : excelTrade.bovespaOthers),
-        brokerageTax !== undefined ? '' : this.numberFmt.br(excelTrade.brokerageTax),
-        this.numberFmt.br(excelTrade.futureNetAmount),
-        this.numberFmt.br(excelTrade.irrfDtProvisioned),
-        this.numberFmt.br(excelTrade.irrfStProvisioned),
-        note.currency,
-      ].join('\t'));
+      excelStrings.push(
+        [
+          excelTrade.BS,
+          excelTrade.marketType,
+          excelTrade.time,
+          excelTrade.symbol,
+          excelTrade.obs,
+          this.numberFmt.br(
+            excelTrade.BS === 'C' ? excelTrade.quantity : -excelTrade.quantity,
+            10,
+            0,
+          ),
+          this.numberFmt.br(excelTrade.price, 10, 2),
+          this.numberFmt.br(excelTrade.itemTotal),
+          excelTrade.DC,
+          type,
+          note.brokerName,
+          note.number,
+          note.date,
+          this.numberFmt.br(excelTrade.netAmount),
+          this.numberFmt.br(tran !== undefined ? tran : excelTrade.settlementTax),
+          this.numberFmt.br(excelTrade.registrationTax),
+          this.numberFmt.br(excelTrade.CBLC),
+          this.numberFmt.br(excelTrade.optionsTax),
+          this.numberFmt.br(excelTrade.ANATax),
+          this.numberFmt.br(excelTrade.emolument),
+          this.numberFmt.br(excelTrade.bovespaTotal),
+          this.numberFmt.br(brokerageTax !== undefined ? brokerageTax : excelTrade.clearing),
+          this.numberFmt.br(excelTrade.ISSTax),
+          this.numberFmt.br(excelTrade.IRRF),
+          this.numberFmt.br(others !== undefined ? others : excelTrade.bovespaOthers),
+          brokerageTax !== undefined ? '' : this.numberFmt.br(excelTrade.brokerageTax),
+          this.numberFmt.br(excelTrade.futureNetAmount),
+          this.numberFmt.br(excelTrade.irrfDtProvisioned),
+          this.numberFmt.br(excelTrade.irrfStProvisioned),
+          note.currency,
+        ].join('\t'),
+      );
     });
 
     if (!excelExportString.length) {

@@ -10,8 +10,6 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
 import NP from 'number-precision';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 
-
-
 @Component({
   selector: 'app-export-tool',
   templateUrl: './export-tool.component.html',
@@ -71,7 +69,14 @@ export class ExportToolComponent implements OnInit {
     this.localCleanNotes();
   }
 
-  public settingsChange({ dayTrade, swingTrade, groupByTicker, removeOptionDT }: { [x: string]: Event }): void {
+  public settingsChange({
+    dayTrade,
+    swingTrade,
+    groupByTicker,
+    removeOptionDT,
+  }: {
+    [x: string]: Event;
+  }): void {
     if (dayTrade) {
       this.provisionedIrrfDT = Boolean((dayTrade.target as HTMLInputElement)?.checked);
       this.provisionedIrrfMsg(this.provisionedIrrfDT);
@@ -81,14 +86,19 @@ export class ExportToolComponent implements OnInit {
     } else if (groupByTicker) {
       this.groupByTicker = Boolean((groupByTicker.target as HTMLInputElement)?.checked);
       if (this.groupByTicker && !this.groupByTickerMsg) {
-        this.notifyService.warning('Atenção', 'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitordenotas.customerly.help/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">clicando aqui</a>.');
+        this.notifyService.warning(
+          'Atenção',
+          'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitordenotas.customerly.help/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">clicando aqui</a>.',
+        );
         this.groupByTickerMsg = true;
       }
     } else if (removeOptionDT) {
       this.removeOptionDT = Boolean((removeOptionDT.target as HTMLInputElement)?.checked);
-      this.notifyService.info('Atenção', 'A página será recarregada para aplicar esta configuração.').finally(() => {
-        window.location.reload();
-      });
+      this.notifyService
+        .info('Atenção', 'A página será recarregada para aplicar esta configuração.')
+        .finally(() => {
+          window.location.reload();
+        });
     }
 
     this.apiService.userSettings({
@@ -103,9 +113,15 @@ export class ExportToolComponent implements OnInit {
 
   sendJsonMessage(): void {
     try {
-      window.parent.postMessage(JSON.stringify(this.dlombelloExportClass.getDlombelloExportObjects()), '*');
+      window.parent.postMessage(
+        JSON.stringify(this.dlombelloExportClass.getDlombelloExportObjects()),
+        '*',
+      );
     } catch (error) {
-      this.notifyService.error('Algo saiu errado ao tentar enviar os dados!', 'A operação não foi completada.');
+      this.notifyService.error(
+        'Algo saiu errado ao tentar enviar os dados!',
+        'A operação não foi completada.',
+      );
       console.error(error);
     }
   }
@@ -118,7 +134,7 @@ export class ExportToolComponent implements OnInit {
 
   private recalcNotes(): void {
     this.localCleanNotes();
-    this.notesService.getNotes().noteDetails.forEach(note => this.noteParser(note));
+    this.notesService.getNotes().noteDetails.forEach((note) => this.noteParser(note));
   }
 
   private noteParser(note: Note): void {
@@ -141,7 +157,10 @@ export class ExportToolComponent implements OnInit {
 
   private provisionedIrrfMsg(enabled: boolean): void {
     if (enabled && !this.provIrrfMsg) {
-      this.notifyService.warning('Atenção', 'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitordenotas.customerly.help/leitura-de-notas/irrf-provisionado" target="_blank">clicando aqui</a>.');
+      this.notifyService.warning(
+        'Atenção',
+        'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitordenotas.customerly.help/leitura-de-notas/irrf-provisionado" target="_blank">clicando aqui</a>.',
+      );
       this.provIrrfMsg = true;
     }
   }
