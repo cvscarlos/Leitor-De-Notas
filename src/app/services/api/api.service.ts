@@ -203,12 +203,16 @@ export class ApiService {
   }
 
   private requestErrorHandler(e: HttpErrorResponse) {
-    const message = e.error?._messages || [];
-    if (message.length) this.notifyService.error(message.join('\n'));
-    else
-      this.notifyService.error(
-        'Erro inesperado!',
-        'Por favor, atualize sua página e tente novamente',
-      );
+    const messages = e.error?._messages;
+    if (messages?.length) {
+      const title = (messages || ['---']).shift;
+      const description = messages.join('\n');
+      return this.notifyService.error(title, description);
+    }
+
+    return this.notifyService.error(
+      'Erro inesperado!',
+      'Por favor, atualize sua página e tente novamente',
+    );
   }
 }
