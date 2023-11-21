@@ -205,7 +205,7 @@ export class ApiService {
   private requestErrorHandler(e: HttpErrorResponse) {
     const messages = e.error?._messages;
     if (messages?.length) {
-      const title = (messages || ['---']).shift;
+      const title = (messages || ['---']).shift();
       const description = messages.join('\n');
       return this.notifyService.error(title, description);
     }
