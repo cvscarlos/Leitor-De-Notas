@@ -8,25 +8,24 @@ import { UntypedFormGroup } from '@angular/forms';
 import { UserComponent } from 'src/app/user/user.component';
 import { UserService } from 'src/app/services/user/user.service';
 
-
-
 type UserTransactions = {
-  results: boolean,
+  results: boolean;
   response: {
-    desc: string,
-    dateApproved: string,
-    email: string,
-    lockedUserDoc: string,
-    paymentNumber: number,
-    reference: string,
-  }[]
+    desc: string;
+    dateApproved: string;
+    email: string;
+    lockedUserDoc: string;
+    paymentNumber: number;
+    reference: string;
+    inUse: boolean;
+  }[];
 };
 type UserUsageHistory = {
   [cpfCnpj: string]: {
-    formatedDate: string,
-    value: number,
-    quantity: number,
-  }[]
+    formatedDate: string;
+    value: number;
+    quantity: number;
+  }[];
 };
 
 @Component({
@@ -68,8 +67,12 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     });
   }
 
+  public apiConnectPayment(mercadoPagoId: string | number): void {
+    this.paymentAssociation(this.apiService.userMercadoPagoConnect(String(mercadoPagoId)));
+  }
+
   public submitMpOperationNumber(form: UntypedFormGroup): void {
-    this.paymentAssociation(this.apiService.userMercadoPagoConnect(form.value.mpOperationNumber));
+    this.apiConnectPayment(form.value.mpOperationNumber);
   }
 
   public accountDelete(): void {
@@ -83,14 +86,17 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     this.mpOperationNumberLoading = true;
 
     httpPromise
-      .then(data => {
-        if (data.success) return this.notifyService.success('A transação foi associada com o seu email');
+      .then((data) => {
+        if (data.success)
+          return this.notifyService.success('A transação foi associada com o seu email');
 
-        const msg = data.emailAssociated ? `Pagamento já associado ao email ${data.emailAssociated}` : undefined;
+        const msg = data.emailAssociated
+          ? `Pagamento já associado ao email ${data.emailAssociated}`
+          : undefined;
         return this.notifyService.error('Essa transação não pôde ser associada a sua conta', msg);
       })
       .then(() => window.location.reload())
-      .catch(e => {
+      .catch((e) => {
         console.error(e);
         this.mpOperationNumberLoading = false;
       });

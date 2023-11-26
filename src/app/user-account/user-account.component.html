@@ -48,6 +48,11 @@
                 <td>
                   <span>{{transaction.email}}</span>
                   <span>{{transaction.lockedUserDoc | cpfCnpj}}</span>
+                  <span *ngIf="!transaction.inUse">
+                    <a href="javascript:void(0)" (click)="transactionsLoading=true;apiConnectPayment(transaction.paymentNumber)">
+                      Associar a esta conta
+                    </a>
+                  </span>
                 </td>
               </tr>
             </tbody>
