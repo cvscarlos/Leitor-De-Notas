@@ -5,7 +5,6 @@ import packageJson from '../../../package.json';
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.less'],
 })
 export class StatisticsComponent implements OnInit {
 

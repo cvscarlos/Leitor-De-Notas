@@ -9,7 +9,6 @@ import { UserData } from 'src/types';
   template: '<b>User Component</b>',
 })
 export class UserComponent implements OnInit {
-
   public loading = false;
   public user: UserData = {
     allowManageMembers: false,
@@ -25,7 +24,7 @@ export class UserComponent implements OnInit {
     protected apiService: ApiService,
     public sessionService: SessionService,
     protected router: Router,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loading = true;

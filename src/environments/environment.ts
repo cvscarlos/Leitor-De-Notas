@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiServer: 'http://localhost:5001',
+  // apiServer: 'http://localhost:5001',
+  apiServer: 'https://api-4.leitordenotas.com.br',
 };
 
 /*

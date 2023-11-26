@@ -7,7 +7,6 @@ type NotifyCallback = (result: SweetAlertResult) => void;
   providedIn: 'root',
 })
 export class NotifyService {
-
   private queue: { options: SweetAlertOptions; callback: NotifyCallback }[] = [];
 
   public success(title: string, message?: string) {
@@ -23,7 +22,10 @@ export class NotifyService {
   }
 
   public infoForceOpened(title: string, message?: string) {
-    return this.addToQueue('info', title, message, { backdrop: 'rgba(0,0,123,0.4)', showConfirmButton: false });
+    return this.addToQueue('info', title, message, {
+      backdrop: 'rgba(0,0,123,0.4)',
+      showConfirmButton: false,
+    });
   }
 
   public warning(title: string, message?: string) {
@@ -41,7 +43,12 @@ export class NotifyService {
     });
   }
 
-  private addToQueue(type: SweetAlertIcon, title: string, message?: string, options = {}): Promise<SweetAlertResult> {
+  private addToQueue(
+    type: SweetAlertIcon,
+    title: string,
+    message?: string,
+    options = {},
+  ): Promise<SweetAlertResult> {
     return this.notify({
       icon: type,
       title,
@@ -51,10 +58,12 @@ export class NotifyService {
   }
 
   private notify(options: SweetAlertOptions) {
-    const prom = new Promise<SweetAlertResult>((callback) => this.queue.push({
-      options,
-      callback,
-    }));
+    const prom = new Promise<SweetAlertResult>((callback) =>
+      this.queue.push({
+        options,
+        callback,
+      }),
+    );
 
     this.triggerQueue();
     return prom;
@@ -69,6 +78,6 @@ export class NotifyService {
     const options = queueItem.options;
     options.didClose = () => this.triggerQueue();
 
-    Swal.fire(options).then(r => queueItem.callback(r));
+    Swal.fire(options).then((r) => queueItem.callback(r));
   }
 }

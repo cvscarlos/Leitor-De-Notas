@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
-import { UserData } from 'src/types';
+import { UserData, UserTransactions } from 'src/types';
 
 export type OauthProvider = 'google' | 'facebook' | 'microsoft';
 type Callback = (data: any) => void;
@@ -88,7 +88,7 @@ export class ApiService {
     });
   }
 
-  public userTransactions(callback: Callback): void {
+  public userTransactions(callback: (data: UserTransactions) => void): void {
     this.post('pvt/user/transactions').subscribe((data) => callback(data));
   }
 

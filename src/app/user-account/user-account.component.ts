@@ -7,19 +7,8 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { UntypedFormGroup } from '@angular/forms';
 import { UserComponent } from 'src/app/user/user.component';
 import { UserService } from 'src/app/services/user/user.service';
+import { UserTransactions } from 'src/types';
 
-type UserTransactions = {
-  results: boolean;
-  response: {
-    desc: string;
-    dateApproved: string;
-    email: string;
-    lockedUserDoc: string;
-    paymentNumber: number;
-    reference: string;
-    inUse: boolean;
-  }[];
-};
 type UserUsageHistory = {
   [cpfCnpj: string]: {
     formatedDate: string;
@@ -31,7 +20,6 @@ type UserUsageHistory = {
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
-  styleUrls: ['./user-account.component.less'],
 })
 export class UserAccountComponent extends UserComponent implements OnInit {
   public tpl = { mpOperationNumber: false, connectTransaction: false };
