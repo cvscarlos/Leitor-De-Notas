@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiServer: 'https://api-4.leitordenotas.com.br',
+  apiServer: 'https://api-3.leitordenotas.com.br',
 };
