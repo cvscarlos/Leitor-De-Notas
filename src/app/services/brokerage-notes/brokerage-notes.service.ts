@@ -4,9 +4,11 @@ import { firstValueFrom } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { UploadInterface } from './upload.interface';
 
-
-
-type NotesArray = { notesList: UploadInterface[]; noteDetails: NoteDetails[]; noteErrors: NoteError[] };
+type NotesArray = {
+  notesList: UploadInterface[];
+  noteDetails: NoteDetails[];
+  noteErrors: NoteError[];
+};
 type NoteCallback = (note: NoteDetails) => void;
 
 @Injectable({
@@ -18,16 +20,15 @@ export class BrokerageNotesService {
   private noteErrors: NoteError[] = [];
   private onNewNoteCallback: NoteCallback[] = [];
 
-  constructor(
-    private api: ApiService,
-  ) { }
+  constructor(private api: ApiService) {}
 
   public uploadFiles(files: FileList | null): void {
     if (!files) {
       return;
     }
 
-    for (let i = 0; i < files.length; i++) { // eslint-disable-line @typescript-eslint/prefer-for-of
+    for (let i = 0; i < files.length; i++) {
+      // eslint-disable-line @typescript-eslint/prefer-for-of
       this.upload(files[i]);
     }
   }
@@ -64,12 +65,12 @@ export class BrokerageNotesService {
     const formData = new FormData();
     formData.append('brokerageNote', file, file.name);
 
-    firstValueFrom(this.api.uploadDualRequests(formData))
-      .then(response => {
+    firstValueFrom(this.api.upload(formData))
+      .then((response) => {
         newFile.server = response;
         this.parseDetails(response);
       })
-      .catch(err => {
+      .catch((err) => {
         newFile.serverError = true;
         newFile.error = err;
       })
@@ -87,8 +88,17 @@ export class BrokerageNotesService {
 
       const noteError = noteApiResponse._error || false;
       const noteMessages = noteApiResponse._messages || [];
-      const showNote = !!(noteApiResponse._noteReadCompletely && noteApiResponse.trades && noteApiResponse.trades.length);
-      const note: NoteDetails = { ...noteApiResponse, _error: noteError, _messages: noteMessages, showNote };
+      const showNote = !!(
+        noteApiResponse._noteReadCompletely &&
+        noteApiResponse.trades &&
+        noteApiResponse.trades.length
+      );
+      const note: NoteDetails = {
+        ...noteApiResponse,
+        _error: noteError,
+        _messages: noteMessages,
+        showNote,
+      };
       this.noteDetails.push(note);
 
       if (note._messages.length) {
@@ -100,7 +110,9 @@ export class BrokerageNotesService {
         });
       }
 
-      this.onNewNoteCallback.forEach(callback => { callback(note); });
+      this.onNewNoteCallback.forEach((callback) => {
+        callback(note);
+      });
     }
   }
 }
