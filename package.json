@@ -1,6 +1,7 @@
 {
   "name": "leitor-de-notas",
   "version": "6.9.3",
+  "license": "CC BY-NC-ND",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
