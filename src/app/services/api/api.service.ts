@@ -89,7 +89,7 @@ export class ApiService {
   }
 
   public userTransactions(callback: (data: UserTransactions) => void): void {
-    this.post('pvt/user/transactions').subscribe((data) => callback(data));
+    this.cachedPost('pvt/user/transactions').subscribe((data) => callback(data));
   }
 
   public userUsageHistory(callback: Callback): void {

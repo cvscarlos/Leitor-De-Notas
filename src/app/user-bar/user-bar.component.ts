@@ -33,24 +33,15 @@ export class UserBarComponent extends UserComponent implements OnInit {
     if (sawAvailablePayment) return;
 
     this.apiService.userTransactions(async ({ response }) => {
-      const oneYearAgo = new Date();
-      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-
-      const userMe = await this.apiService.userMe();
-      if (!userMe?.isFreePlan) return;
-
-      const availablePayment = response.find(
-        (transaction) => new Date(transaction.dateApproved) > oneYearAgo && !transaction.inUse,
-      );
+      const availablePayment = response.find((transaction) => !transaction.inUse);
       if (!availablePayment) return;
 
       const { isConfirmed } = await this.notifyService.confirm(
-        'Existe um pagamento disponível',
+        'Você possui um pagamento disponível!',
         'Deseja associar a sua conta?',
       );
-      localStorage.setItem('bgggSawAvailablePayment', '1');
-
       if (isConfirmed) this.router.navigate(['minha-conta']);
+      else localStorage.setItem('bgggSawAvailablePayment', '1');
     });
   }
 
