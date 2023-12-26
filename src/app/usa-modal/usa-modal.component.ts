@@ -8,15 +8,14 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
 
 @Component({
   selector: 'app-modal',
-  templateUrl: './apex-modal.component.html',
-  styleUrls: ['./apex-modal.component.less'],
+  templateUrl: './usa-modal.component.html',
   providers: [CpfCnpjPipe],
 })
-export class ApexModalComponent implements OnInit {
+export class USAModalComponent implements OnInit {
   @ViewChild('modalContent') modalContent: ElementRef | undefined;
 
   public showApexModal = false;
-  public apexAccount?: string;
+  public usaAccount?: string;
   public membersList: AccountMember[] = [];
   public loading = true;
 
@@ -26,7 +25,7 @@ export class ApexModalComponent implements OnInit {
     private notesService: BrokerageNotesService,
     private notifyService: NotifyService,
     private modalService: NgbModal,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.notesService.noteCallback((note) => {
@@ -35,7 +34,7 @@ export class ApexModalComponent implements OnInit {
       this.showApexModal = note._errorCode == 1101;
       if (!this.showApexModal) return;
 
-      this.apexAccount = note.apexAccount;
+      this.usaAccount = note.usaAccount;
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.apiService.userMembersList((data: any) => {
@@ -50,20 +49,23 @@ export class ApexModalComponent implements OnInit {
   }
 
   public async associateAccount(member: AccountMember) {
-    if (!this.apexAccount) return;
+    if (!this.usaAccount) return;
 
     const confirm = await this.notifyService.confirm(
       'Você deseja mesmo associar esta conta?',
-      `CPF: ${this.cpfCnpj.transform(member.cpf)}<br/>Apex: ${this.apexAccount}`,
+      `CPF: ${this.cpfCnpj.transform(member.cpf)}<br/>Conta EUA: ${this.usaAccount}`,
     );
     if (!confirm.isConfirmed) return;
 
     this.loading = true;
-    this.apiService.connectApexAccount(member.cpf, this.apexAccount)
+    this.apiService
+      .connectUSAAccount(member.cpf, this.usaAccount)
       .then(() => {
-        this.notifyService.success('Conta associada com sucesso!', 'Sua página será atualizada.').then(() => {
-          window.location.reload();
-        });
+        this.notifyService
+          .success('Conta associada com sucesso!', 'Sua página será atualizada.')
+          .then(() => {
+            window.location.reload();
+          });
       })
       .finally(() => {
         this.loading = false;

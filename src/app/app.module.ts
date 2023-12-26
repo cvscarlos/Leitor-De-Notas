@@ -1,4 +1,4 @@
-import { ApexModalComponent } from './apex-modal/apex-modal.component';
+import { USAModalComponent } from './usa-modal/usa-modal.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,7 +29,7 @@ import { BinanceModule } from './binance/binance.module';
     PageNotFoundComponent,
     StatisticsComponent,
     UserBarComponent,
-    ApexModalComponent,
+    USAModalComponent,
   ],
   imports: [
     AppRoutingModule,

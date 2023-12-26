@@ -161,8 +161,8 @@ export class ApiService {
     );
   }
 
-  public connectApexAccount(cpfCnpj: string, apexAccount: string) {
-    return lastValueFrom(this.post('pvt/user/connect-apex-account', { cpfCnpj, apexAccount }));
+  public connectUSAAccount(cpfCnpj: string, usaAccount: string) {
+    return lastValueFrom(this.post('pvt/user/connect-usa-account', { cpfCnpj, usaAccount }));
   }
 
   private post(

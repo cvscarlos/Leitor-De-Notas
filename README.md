@@ -33,6 +33,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | ModalMais Corretora                   | ✅              |                |
 | MyCAP                                 | ✅              |                |
 | Necton                                | ✅              |                |
+| Nomad (EUA)                           | ✅              |                |
 | Nova Futura                           | ✅              | ✅             |
 | NuInvest / Easynvest Corretora        | ✅              | ✅             |
 | Órama Corretora                       | ✅              | ✅             |

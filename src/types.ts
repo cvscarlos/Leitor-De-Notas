@@ -1,5 +1,5 @@
 export type AccountMember = {
-  apexAccount?: string;
+  usaAccounts: string[];
   cpf: string;
   expires: string;
 };
@@ -43,7 +43,7 @@ export type Note = {
   _page?: number;
   allFees: number;
   ANATax: number;
-  apexAccount?: string;
+  usaAccount?: string;
   bovespaOthers: number;
   bovespaTotal: number;
   brokerageTax: number;
@@ -69,7 +69,7 @@ export type Note = {
   showNote: boolean;
   trades: NoteTrade[];
   tradesTotal: number;
-  type: 'Bovespa' | 'BMF' | 'Apex';
+  type: 'Bovespa' | 'BMF' | 'USA';
   isFakeNumber?: boolean;
 };
 
