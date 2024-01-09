@@ -28,7 +28,6 @@ export class BrokerageNotesService {
     }
 
     for (let i = 0; i < files.length; i++) {
-      // eslint-disable-line @typescript-eslint/prefer-for-of
       this.upload(files[i]);
     }
   }
@@ -65,7 +64,7 @@ export class BrokerageNotesService {
     const formData = new FormData();
     formData.append('brokerageNote', file, file.name);
 
-    firstValueFrom(this.api.upload(formData))
+    firstValueFrom(this.api.uploadDualRequests(formData))
       .then((response) => {
         newFile.server = response;
         this.parseDetails(response);
