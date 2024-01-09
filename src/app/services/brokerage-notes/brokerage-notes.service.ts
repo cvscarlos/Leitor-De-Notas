@@ -64,7 +64,7 @@ export class BrokerageNotesService {
     const formData = new FormData();
     formData.append('brokerageNote', file, file.name);
 
-    firstValueFrom(this.api.uploadDualRequests(formData))
+    firstValueFrom(this.api.upload(formData))
       .then((response) => {
         newFile.server = response;
         this.parseDetails(response);
