@@ -8,7 +8,7 @@ Você pode encontrar esse número tanto no email de confirmação enviado pelo M
 
 No **comprovante do PIX** (atenção, nem todos os bancos trazem essa informação no comprovante):
 
-![](https://s3-eu-west-1.amazonaws.com/blackhole.customerly.io/attachments/froala/images/8f6891a3a5f11af7af190af857e2546c.png)
+![](../.gitbook/assets/8f6891a3a5f11af7af190af857e2546c.png)
 
 #### No comprovante PIX (exemplo B)
 
@@ -20,12 +20,12 @@ No **comprovante do PIX** (atenção, nem todos os bancos trazem essa informaç�
 
 No **email enviado pelo Mercado Pago:**
 
-![](https://s3-eu-west-1.amazonaws.com/blackhole.customerly.io/attachments/froala/images/9395dee817226f5bad00e6c6833ba488.png)
+![](../.gitbook/assets/9395dee817226f5bad00e6c6833ba488.png)
 
 #### No site do Mercado Pago
 
 Na **sua conta dentro do Mercado Pago:**
 
-![](https://s3-eu-west-1.amazonaws.com/blackhole.customerly.io/attachments/froala/images/250fb2483dfc25f541fafb38c28b69a1.png)
+![](../.gitbook/assets/250fb2483dfc25f541fafb38c28b69a1.png)
 
 ⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

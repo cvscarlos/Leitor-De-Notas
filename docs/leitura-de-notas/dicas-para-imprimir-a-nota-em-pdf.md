@@ -35,7 +35,7 @@ A cada alteração que fizer nas configurações, gere o PDF e tente importar no
 
 Não existe uma configuração única que resolve todos os casos, você deve encontrar a que melhor se encaixa com a sua corretora.
 
-![](https://s3-eu-west-1.amazonaws.com/blackhole.customerly.io/attachments/froala/images/7ab14171ee7ab07e1a8af0d979fc63f8.png)
+![](../.gitbook/assets/7ab14171ee7ab07e1a8af0d979fc63f8.png)
 
 Se mesmo após todos os ajustes, o erro ainda persistir, por favor nos envie uma mensagem através do [formulário de suporte](https://leitordenotas.com.br/suporte.html).&#x20;
 

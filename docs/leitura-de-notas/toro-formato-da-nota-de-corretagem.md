@@ -8,6 +8,6 @@ Caso não consiga obter a nota através da área logada ou do Homer Broker, voc�
 
 Mas caso queira conferir se sua nota esta no formato suportado pelo Leitor, compare com a imagem abaixo:
 
-![](https://s3-eu-west-1.amazonaws.com/blackhole.customerly.io/attachments/froala/images/a1ec64b7d5dfe9055339a239c478b138.png)
+![](../.gitbook/assets/a1ec64b7d5dfe9055339a239c478b138.png)
 
 ⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

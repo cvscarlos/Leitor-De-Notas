@@ -14,7 +14,7 @@ Não exporto através do menu "Minha Conta" > "Movimentações", pois, ele costu
 
 Mas caso queira conferir se sua nota esta no formato suportado pelo Leitor, compare com a imagem abaixo:
 
-![](https://s3-eu-west-1.amazonaws.com/blackhole.customerly.io/attachments/froala/images/d5f2050c233465eba9f145da60f8cdfd.png)
+![](../.gitbook/assets/d5f2050c233465eba9f145da60f8cdfd.png)
 
 🔍 [ampliar imagem](https://pasteboard.co/JXSNQvz.png)
 
