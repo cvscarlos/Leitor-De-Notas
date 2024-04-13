@@ -37,6 +37,6 @@ Não existe uma configuração única que resolve todos os casos, você deve enc
 
 ![](https://s3-eu-west-1.amazonaws.com/blackhole.customerly.io/attachments/froala/images/7ab14171ee7ab07e1a8af0d979fc63f8.png)
 
-Se mesmo após todos os ajustes, o erro ainda persistir, por favor nos envie uma mensagem através do [formulário de suporte](https://leitordenotas.github.io/suporte.html).&#x20;
+Se mesmo após todos os ajustes, o erro ainda persistir, por favor nos envie uma mensagem através do [formulário de suporte](https://leitordenotas.com.br/suporte.html).&#x20;
 
-⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.github.io/).
+⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

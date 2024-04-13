@@ -16,4 +16,4 @@ A nota somente pode ser lida na conta que possui o mesmo CPF que a nota.
 
 \*A nota de corretagem deve estar no padrão SINACOR
 
-⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.github.io/).
+⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

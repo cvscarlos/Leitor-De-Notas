@@ -6,4 +6,4 @@ Exporte suas notas de corretagem seguindo o exemplo abaixo:
 
 Veja também: Dicas de como gerar o PDF.
 
-⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.github.io/).
+⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

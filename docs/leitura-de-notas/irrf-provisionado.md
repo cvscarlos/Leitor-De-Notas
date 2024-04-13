@@ -28,6 +28,6 @@ O IR de ST também pode não ser descontado, dependendo da corretora.
 ### Valor no Leitor, diferente do da Nota
 
 Caso o Leitor apresente um valor de imposto diferente do que esta na nota.\
-Isso é um erro de leitura e você pode reportar este problema através do [formulário de suporte](https://leitordenotas.github.io/suporte.html).
+Isso é um erro de leitura e você pode reportar este problema através do [formulário de suporte](https://leitordenotas.com.br/suporte.html).
 
 Quando ocorrer da corretora descontar um valor diferente do que esta na nota, isso não é um erro de leitura.

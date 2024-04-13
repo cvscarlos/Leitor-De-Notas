@@ -18,4 +18,4 @@ Mas caso queira conferir se sua nota esta no formato suportado pelo Leitor, comp
 
 🔍 [ampliar imagem](https://pasteboard.co/JXSNQvz.png)
 
-⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.github.io/).
+⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

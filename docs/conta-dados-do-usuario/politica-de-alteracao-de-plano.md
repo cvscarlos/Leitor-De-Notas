@@ -11,7 +11,7 @@ Para isso, é necessário primeiro realizar o pagamento do novo plano, para ent�
 **1.** Faça o pagamento do novo plano através de um dos links disponíveis em nosso site (observe que cada página possui opções de planos diferentes).
 
 * [https://www.dlombelloplanilhas.com/planos](https://www.dlombelloplanilhas.com/planos)
-* [https://leitordenotas.github.io/limites-uso](https://leitordenotas.github.io/limites-uso)
+* [https://leitordenotas.com.br/limites-uso](https://leitordenotas.com.br/limites-uso)
 
 **2.** Encaminhe os comprovantes do pagamento anterior e do atual solicitando reembolso da diferença para os seguintes emails:
 

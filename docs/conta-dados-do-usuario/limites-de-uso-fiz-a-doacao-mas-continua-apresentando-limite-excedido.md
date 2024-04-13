@@ -10,4 +10,4 @@ Vale lembra que, após o pagamento associado a sua conta ele não será desassoc
 
 Para situações onde você possua mais que 1 pagamento associado a sua conta, você poderá utilizar a opção de enviar o "código de associação" para que outra pessoa possa conectar o seu pagamento extra a conta dela.
 
-⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.github.io/).
+⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

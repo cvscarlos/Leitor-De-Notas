@@ -28,4 +28,4 @@ Na **sua conta dentro do Mercado Pago:**
 
 ![](https://s3-eu-west-1.amazonaws.com/blackhole.customerly.io/attachments/froala/images/250fb2483dfc25f541fafb38c28b69a1.png)
 
-⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.github.io/).
+⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).
