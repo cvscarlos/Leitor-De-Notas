@@ -104,7 +104,7 @@ export class ExportToolComponent implements OnInit {
     } else if (groupByTicker) {
       this.groupByTicker = Boolean((groupByTicker.target as HTMLInputElement)?.checked);
       if (this.groupByTicker && !this.groupByTickerMsg) {
-        this.notifyService.warning('Atenção', 'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitordenotas.customerly.help/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">clicando aqui</a>.');
+        this.notifyService.warning('Atenção', 'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">clicando aqui</a>.');
         this.groupByTickerMsg = true;
       }
     } else if (removeOptionDT) {
@@ -160,7 +160,7 @@ export class ExportToolComponent implements OnInit {
 
   private provisionedIrrfMsg(enabled: boolean): void {
     if (enabled && !this.provIrrfMsg) {
-      this.notifyService.warning('Atenção', 'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitordenotas.customerly.help/leitura-de-notas/irrf-provisionado" target="_blank">clicando aqui</a>.');
+      this.notifyService.warning('Atenção', 'Utilize esta opção com cuidado.<br/><br/>Entenda melhor como funciona <a href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/irrf-provisionado" target="_blank">clicando aqui</a>.');
       this.provIrrfMsg = true;
     }
   }
