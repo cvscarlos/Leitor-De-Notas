@@ -47,23 +47,38 @@ export class BinanceComponent implements OnInit {
     };
 
     promises.push(
-      this.apiService.binanceFiatPayments(credentials).then((d) => (this.fiatPayments = parser(d))),
+      this.apiService
+        .binanceFiatPayments(credentials)
+        .then((d) => (this.fiatPayments = parser(d)))
+        .catch((e) => console.log(e)),
     );
 
     promises.push(
-      this.apiService.binanceFiatOrders(credentials).then((d) => (this.fiatOrders = parser(d))),
+      this.apiService
+        .binanceFiatOrders(credentials)
+        .then((d) => (this.fiatOrders = parser(d)))
+        .catch((e) => console.log(e)),
     );
 
     promises.push(
-      this.apiService.binanceTradesOCO(credentials).then((d) => (this.tradesOCO = parser(d))),
+      this.apiService
+        .binanceTradesOCO(credentials)
+        .then((d) => (this.tradesOCO = parser(d)))
+        .catch((e) => console.log(e)),
     );
 
     promises.push(
-      this.apiService.binanceTrades(credentials).then((d) => (this.trades = parser(d))),
+      this.apiService
+        .binanceTrades(credentials)
+        .then((d) => (this.trades = parser(d)))
+        .catch((e) => console.log(e)),
     );
 
     promises.push(
-      this.apiService.binanceConversions(credentials).then((d) => (this.conversions = parser(d))),
+      this.apiService
+        .binanceConversions(credentials)
+        .then((d) => (this.conversions = parser(d)))
+        .catch((e) => console.log(e)),
     );
 
     Promise.all(promises)
