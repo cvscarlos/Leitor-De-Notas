@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ApiService } from '../services/api/api.service';
+import { ApiService, BinanceResponse } from '../services/api/api.service';
+import { NotifyService } from '../services/notify/notify.service';
 
 @Component({
   selector: 'app-binance',
@@ -10,12 +11,17 @@ import { ApiService } from '../services/api/api.service';
 export class BinanceComponent implements OnInit {
   public binanceForm!: FormGroup;
   public loading = false;
-  public fiatTransactions: Record<string, string>[] = [];
-  public trades: Record<string, string>[] = [];
+  public requestMade = false;
+  public fiatPayments: Record<string, string | number>[] = [];
+  public fiatOrders: Record<string, string | number>[] = [];
+  public trades: Record<string, string | number>[] = [];
+  public tradesOCO: Record<string, string | number>[] = [];
+  public conversions: Record<string, string | number>[] = [];
   private numericRegex = /^[0-9.]+$/;
 
   constructor(
     private formBuilder: FormBuilder,
+    private notifyService: NotifyService,
     private apiService: ApiService,
   ) {}
 
@@ -27,21 +33,52 @@ export class BinanceComponent implements OnInit {
   }
 
   public async submitBinanceForm() {
+    const errorsList: string[] = [];
+    const promises = [];
     this.loading = true;
-    try {
-      const credentials = this.binanceForm.value;
+    this.requestMade = true;
 
-      const fiat = await this.apiService.binanceFiatTransactions(credentials);
-      fiat.forEach((t) => this.pointToComma(t));
-      this.fiatTransactions = fiat;
+    const credentials = this.binanceForm.value;
 
-      const trades = await this.apiService.binanceTrades(credentials);
-      trades.forEach((t) => this.pointToComma(t));
-      this.trades = trades;
-    } catch (error) {
-      console.error(error);
-    }
-    this.loading = false;
+    const parser = ({ results, errors }: BinanceResponse) => {
+      if (errors) errorsList.push(...errors);
+      results.forEach((t) => this.pointToComma(t));
+      return results;
+    };
+
+    promises.push(
+      this.apiService.binanceFiatPayments(credentials).then((d) => (this.fiatPayments = parser(d))),
+    );
+
+    promises.push(
+      this.apiService.binanceFiatOrders(credentials).then((d) => (this.fiatOrders = parser(d))),
+    );
+
+    promises.push(
+      this.apiService.binanceTradesOCO(credentials).then((d) => (this.tradesOCO = parser(d))),
+    );
+
+    promises.push(
+      this.apiService.binanceTrades(credentials).then((d) => (this.trades = parser(d))),
+    );
+
+    promises.push(
+      this.apiService.binanceConversions(credentials).then((d) => (this.conversions = parser(d))),
+    );
+
+    Promise.all(promises)
+      .then(() => {
+        this.loading = false;
+      })
+      .catch((error) => {
+        this.loading = false;
+        this.logError(error);
+      });
+  }
+
+  private logError(error: unknown) {
+    this.notifyService.error('Houve um erro ao tentar buscar os dados da Binance');
+    console.error(error);
   }
 
   private pointToComma(obj: Record<string, unknown>) {

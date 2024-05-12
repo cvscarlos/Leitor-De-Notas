@@ -13,6 +13,7 @@ export type OauthProvider = 'google' | 'facebook' | 'microsoft';
 type Callback = (data: any) => void;
 type RequestMethod = 'post' | 'delete' | 'patch' | 'get';
 type BinanceCredentials = { binanceApiKey: string; binanceApiSecret: string };
+export type BinanceResponse = { errors: string[]; results: Record<string, string | number>[] };
 
 @Injectable({
   providedIn: 'root',
@@ -136,14 +137,24 @@ export class ApiService {
     return this.post('pvt/user/settings', { settings });
   }
 
-  public binanceFiatTransactions(
-    credentials: BinanceCredentials,
-  ): Promise<Record<string, string>[]> {
-    return lastValueFrom(this.post('pvt/binance/fiat', credentials));
+  public binanceFiatPayments(credentials: BinanceCredentials): Promise<BinanceResponse> {
+    return lastValueFrom(this.post('pvt/binance/fiat-pay', credentials));
   }
 
-  public binanceTrades(credentials: BinanceCredentials): Promise<Record<string, string>[]> {
+  public binanceFiatOrders(credentials: BinanceCredentials): Promise<BinanceResponse> {
+    return lastValueFrom(this.post('pvt/binance/fiat-order', credentials));
+  }
+
+  public binanceTradesOCO(credentials: BinanceCredentials): Promise<BinanceResponse> {
+    return lastValueFrom(this.post('pvt/binance/trades-oco', credentials));
+  }
+
+  public binanceTrades(credentials: BinanceCredentials): Promise<BinanceResponse> {
     return lastValueFrom(this.post('pvt/binance/trades', credentials));
+  }
+
+  public binanceConversions(credentials: BinanceCredentials): Promise<BinanceResponse> {
+    return lastValueFrom(this.post('pvt/binance/conversions', credentials));
   }
 
   public getMercadoPagoLink(

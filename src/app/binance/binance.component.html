@@ -32,56 +32,132 @@
         </div>
       </form>
 
-      <div *ngIf="fiatTransactions.length">
-        <hr/>
-        <h5>Conta FIAT</h5>
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th scope="col">Data</th>
-              <th scope="col">Moeda</th>
-              <th scope="col">Cripto</th>
-              <th scope="col">Preço</th>
-              <th scope="col">Comissão</th>
-            </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let transaction of fiatTransactions">
-                <td>{{ transaction.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-                <td>{{ transaction.sourceAmount }} {{ transaction.fiatCurrency }}</td>
-                <td>{{ transaction.obtainAmount }} {{ transaction.cryptoCurrency }}</td>
-                <td>{{ transaction.price }}</td>
-                <td>{{ transaction.totalFee }}</td>
+      <div *ngIf="requestMade">
+        <div>
+          <hr/>
+          <h5>Conta FIAT Pagamentos ({{ fiatPayments.length }})</h5>
+          <table class="table table-sm table-striped table-hover table-bordered small-font">
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Moeda</th>
+                <th scope="col">Cripto</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Comissão</th>
               </tr>
-        </table>
-      </div>
+              </thead>
+              <tbody>
+                <tr *ngFor="let transaction of fiatPayments">
+                  <td>{{ transaction.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                  <td>{{ transaction.sourceAmount }} {{ transaction.fiatCurrency }}</td>
+                  <td>{{ transaction.obtainAmount }} {{ transaction.cryptoCurrency }}</td>
+                  <td>{{ transaction.price }}</td>
+                  <td>{{ transaction.totalFee }}</td>
+                </tr>
+          </table>
+        </div>
 
-      <div *ngIf="trades.length">
-        <hr/>
-        <h5>Transações</h5>
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th scope="col">C/V</th>
-              <th scope="col">Data</th>
-              <th scope="col">Símbolo</th>
-              <th scope="col">Quantidade</th>
-              <th scope="col">Preço</th>
-              <th scope="col">Total</th>
-              <th scope="col">Taxa</th>
-            </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let trade of trades">
-                <td>{{ trade.isBuyer? 'C' : 'V' }}</td>
-                <td>{{ trade.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-                <td>{{ trade.symbol }}</td>
-                <td>{{ trade.qtyN }}</td>
-                <td>{{ trade.priceN }}</td>
-                <td>{{ trade.quoteQtyN }}</td>
-                <td>{{ trade.commissionN }} {{ trade.commissionAsset }}</td>
+        <div>
+          <hr/>
+          <h5>Conta FIAT Ordens ({{ fiatOrders.length }})</h5>
+          <table class="table table-sm table-striped table-hover table-bordered small-font">
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Moeda</th>
+                <th scope="col">Cripto</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Comissão</th>
               </tr>
-        </table>
+              </thead>
+              <tbody>
+                <tr *ngFor="let transaction of fiatOrders">
+                  <td>{{ transaction.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                  <td>{{ transaction.sourceAmount }} {{ transaction.fiatCurrency }}</td>
+                  <td>{{ transaction.obtainAmount }} {{ transaction.cryptoCurrency }}</td>
+                  <td>{{ transaction.price }}</td>
+                  <td>{{ transaction.totalFee }}</td>
+                </tr>
+          </table>
+        </div>
+
+        <div>
+          <hr/>
+          <h5>Conversões ({{ conversions.length }})</h5>
+          <table class="table table-sm table-striped table-hover table-bordered small-font">
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">C/V</th>
+                <th scope="col">De</th>
+                <th scope="col">Para</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let c of conversions">
+                  <td>{{ c.created }}</td>
+                  <td>{{ c.operType }}</td>
+                  <td>{{ c.fromAmount }} {{ c.fromAsset }}</td>
+                  <td>{{ c.toAmount }} {{ c.toAsset }}</td>
+                </tr>
+          </table>
+        </div>
+
+        <div>
+          <hr/>
+          <h5>Transações OCO ({{ tradesOCO.length }})</h5>
+          <table class="table table-sm table-striped table-hover table-bordered small-font">
+            <thead>
+              <tr>
+                <th scope="col">Símbolo</th>
+                <th scope="col">Data</th>
+                <th scope="col">C/V</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Total</th>
+                <th scope="col">Taxa</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let trade of tradesOCO">
+                  <td>{{ trade.symbol }}</td>
+                  <td>{{ trade.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                  <td>{{ trade.operType }}</td>
+                  <td>{{ trade.qty }}</td>
+                  <td>{{ trade.price }}</td>
+                  <td>{{ trade.totalPrice }}</td>
+                  <td>{{ trade.fee }} {{ trade.feeAsset }}</td>
+                </tr>
+          </table>
+        </div>
+        
+        <div>
+          <hr/>
+          <h5>Transações ({{ trades.length }})</h5>
+          <table class="table table-sm table-striped table-hover table-bordered small-font">
+            <thead>
+              <tr>
+                <th scope="col">Símbolo</th>
+                <th scope="col">Data</th>
+                <th scope="col">C/V</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Total</th>
+                <th scope="col">Taxa</th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let trade of trades">
+                  <td>{{ trade.symbol }}</td>
+                  <td>{{ trade.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                  <td>{{ trade.operType }}</td>
+                  <td>{{ trade.qty }}</td>
+                  <td>{{ trade.price }}</td>
+                  <td>{{ trade.totalPrice }}</td>
+                  <td>{{ trade.fee }} {{ trade.feeAsset }}</td>
+                </tr>
+          </table>
+        </div>
       </div>
     </div>
   </div>
