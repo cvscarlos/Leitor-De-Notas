@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/leitor-de-notas/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -130,6 +130,69 @@
               "devServerTarget": "leitor-de-notas:serve:production"
             }
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/leitor-de-notas/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "buildOptimizer": false,
+            "optimization": false,
+            "sourceMap": true,
+            "extractLicenses": false,
+            "vendorChunk": true
+          },
+          "configurations": {
+            "production": {
+              "buildOptimizer": true,
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "vendorChunk": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "leitor-de-notas:build:development",
+              "serverTarget": "leitor-de-notas:server:development"
+            },
+            "production": {
+              "browserTarget": "leitor-de-notas:build:production",
+              "serverTarget": "leitor-de-notas:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "leitor-de-notas:build:production",
+              "serverTarget": "leitor-de-notas:server:production"
+            },
+            "development": {
+              "browserTarget": "leitor-de-notas:build:development",
+              "serverTarget": "leitor-de-notas:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

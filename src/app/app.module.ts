@@ -2,7 +2,7 @@ import { USAModalComponent } from './usa-modal/usa-modal.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeModule } from './home/home.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -51,7 +51,7 @@ import { BinanceModule } from './binance/binance.module';
     OauthModule,
     BinanceModule,
   ],
-  providers: [provideEnvironmentNgxMask()],
+  providers: [provideEnvironmentNgxMask(), provideClientHydration()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
