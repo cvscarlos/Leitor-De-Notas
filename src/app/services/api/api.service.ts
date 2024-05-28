@@ -138,23 +138,23 @@ export class ApiService {
   }
 
   public binanceFiatPayments(credentials: BinanceCredentials): Promise<BinanceResponse> {
-    return lastValueFrom(this.post('pvt/binance/fiat-pay', credentials));
+    return lastValueFrom(this.post('pvt/binance/fiat-pay', credentials, undefined, false));
   }
 
   public binanceFiatOrders(credentials: BinanceCredentials): Promise<BinanceResponse> {
-    return lastValueFrom(this.post('pvt/binance/fiat-order', credentials));
+    return lastValueFrom(this.post('pvt/binance/fiat-order', credentials, undefined, false));
   }
 
   public binanceTradesOCO(credentials: BinanceCredentials): Promise<BinanceResponse> {
-    return lastValueFrom(this.post('pvt/binance/trades-oco', credentials));
+    return lastValueFrom(this.post('pvt/binance/trades-oco', credentials, undefined, false));
   }
 
   public binanceTrades(credentials: BinanceCredentials): Promise<BinanceResponse> {
-    return lastValueFrom(this.post('pvt/binance/trades', credentials));
+    return lastValueFrom(this.post('pvt/binance/trades', credentials, undefined, false));
   }
 
   public binanceConversions(credentials: BinanceCredentials): Promise<BinanceResponse> {
-    return lastValueFrom(this.post('pvt/binance/conversions', credentials));
+    return lastValueFrom(this.post('pvt/binance/conversions', credentials, undefined, false));
   }
 
   public getMercadoPagoLink(

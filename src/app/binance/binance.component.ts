@@ -70,7 +70,12 @@ export class BinanceComponent implements OnInit {
     promises.push(
       this.apiService
         .binanceTrades(credentials)
-        .then((d) => (this.trades = parser(d)))
+        .then(
+          (d) =>
+            (this.trades = parser(d)
+              .filter((t) => t.status !== 'CANCELED')
+              .sort((a, b) => (a.date > b.date ? 1 : -1))),
+        )
         .catch((e) => console.log(e)),
     );
 
