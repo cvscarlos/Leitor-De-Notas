@@ -67,7 +67,8 @@
           <div class="col pure-text-field click-to-copy">
             <h4 class="text-center my-3">Copiar para Excel</h4>
             <div class="mb-3"><textarea class="text-to-excel form-control" readonly #excelTextarea>{{excelExportString}}</textarea></div>
-            <button class="btn btn-primary" (click)="copyFn(excelTextarea)"><fa-icon [icon]="faCopy"></fa-icon> Copiar</button>
+            <button class="btn btn-primary me-3" (click)="copyFn(excelTextarea)"><fa-icon [icon]="faCopy"></fa-icon> Copiar</button>
+            <button class="btn btn-secondary" (click)="saveCsv()"><fa-icon [icon]="faFileCsv"></fa-icon> Baixar .csv</button>
           </div>
         </div>
       </ng-template>
