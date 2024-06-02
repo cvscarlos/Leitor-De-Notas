@@ -12,39 +12,40 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 
 | Corretora                             | Mercado à Vista | Mercado Futuro |
 |---------------------------------------|-----------------|----------------|
-| Ágora Corretora                       | ✅              |                |
-| Ativa Investimentos                   | ✅              | ✅             |
-| Apex (EUA)                            | ✅              |                |
-| Avenue (EUA)                          | ✅              |                |
-| Banco do Brasil Investimentos         | ✅              |                |
-| Banco Inter Corretora                 | ✅              | ✅             |
-| Banco Itaú                            | ✅              | ✅             |
-| BTG Pactual Corretora                 | ✅              | ✅             |
-| C6 Bank                               | ✅              |                |
-| CEF Caixa Econômica Federal Corretora | ✅              |                |
-| Clear Corretora                       | ✅              | ✅             |
-| CM Capital                            | ✅              | ✅             |
-| Empiricus / Vitreo Corretora          | ✅              | ✅             |
-| Genial Investimentos Corretora        | ✅              | ✅             |
-| Guide Corretora                       | ✅              | ✅             |
-| Kirton Corretora                      | ✅              |                |
-| Mirae Corretora                       | ✅              | ✅             |
-| Modal Corretora                       | ✅              | ✅             |
-| ModalMais Corretora                   | ✅              | ✅             |
-| MyCAP                                 | ✅              |                |
-| Necton                                | ✅              |                |
-| Nomad (EUA)                           | ✅              |                |
-| Nova Futura                           | ✅              | ✅             |
-| NuInvest / Easynvest Corretora        | ✅              | ✅             |
-| Órama Corretora                       | ✅              | ✅             |
-| Rico Corretora                        | ✅              | ✅             |
-| Santander Corretora                   | ✅              |                |
-| Singulare / Socopa Corretora          | ✅              |                |
-| Tastyworks (EUA)                      | ✅              |                |
-| Terra Investimentos Corretora         | ✅              | ✅             |
-| Toro Corretora                        | ✅              | ✅             |
-| Warren Corretora                      | ✅              | ✅             |
-| XP Corretora                          | ✅              | ✅             |
+| Ágora Corretora                       | ✅               |                |
+| Ativa Investimentos                   | ✅               | ✅              |
+| Apex (EUA) Corretora                  | ✅               |                |
+| Avenue (EUA) Corretora                | ✅               |                |
+| Banco do Brasil Investimentos         | ✅               |                |
+| Banco Inter Corretora                 | ✅               | ✅              |
+| Banco Itaú Corretora                  | ✅               | ✅              |
+| BTG Pactual Corretora                 | ✅               | ✅              |
+| C6 Bank Corretora                     | ✅               |                |
+| CEF Caixa Econômica Federal Corretora | ✅               |                |
+| Clear Corretora                       | ✅               | ✅              |
+| CM Capital Corretora                  | ✅               | ✅              |
+| Empiricus / Vitreo Corretora          | ✅               | ✅              |
+| Genial Investimentos                  | ✅               | ✅              |
+| Guide Corretora                       | ✅               | ✅              |
+| Kirton Corretora                      | ✅               |                |
+| Mirae Corretora                       | ✅               | ✅              |
+| Modal Corretora                       | ✅               | ✅              |
+| ModalMais Corretora                   | ✅               | ✅              |
+| Monte Bravo Corretora                 | ✅               | ✅              |
+| MyCAP Corretora                       | ✅               |                |
+| Necton Corretora                      | ✅               |                |
+| Nomad (EUA) Corretora                 | ✅               |                |
+| Nova Futura Corretora                 | ✅               | ✅              |
+| NuInvest / Easynvest Corretora        | ✅               | ✅              |
+| Órama Corretora                       | ✅               | ✅              |
+| Rico Corretora                        | ✅               | ✅              |
+| Santander Corretora                   | ✅               |                |
+| Singulare / Socopa Corretora          | ✅               |                |
+| Tastyworks (EUA) Corretora            | ✅               |                |
+| Terra Investimentos                   | ✅               | ✅              |
+| Toro Corretora                        | ✅               | ✅              |
+| Warren Corretora                      | ✅               | ✅              |
+| XP Corretora                          | ✅               | ✅              |
 
 ## Sobre este repositório
 - Este repositório contém apenas o código fonte da interface.
