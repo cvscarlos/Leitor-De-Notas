@@ -1,8 +1,15 @@
-# Meu CPF esta associado a outra conta
+# Editar, trocar CPF
 
-Caso você esteja visualizando a mensagem de que o CPF esta associado a outro usuário (_Este CPF já esta associado a outro usuário_), muito provavelmente o seu CPF esta associado a outro email seu, que pode ter sido utilizado para fazer login no Leitor em outro momento.
+No Leitor de Notas cada conta necessita de 1 CPF e após um CPF ser associado a um email, ele não poderá ser utilizado em outro email.
 
-Por favor, tente se recordar de outros endereços de email que possa ter utilizado e tente fazer o login com estes endereços.\
-Tente também email de algum familiar próximo, caso exista a chance de você ter feito um teste utilizando um email de terceiros.
+**Como então trocar/editar o CPF de uma conta?**
 
-Caso encontre o email que esta atrelado ao seu CPF, você pode editar este email e substituí-lo por outro de sua preferência.
+Se você deseja apenas trocar o email, basta acessar sua conta e clicar no botão de "editar email".
+
+Porém existem casos em que apenas editar o email não suficiente.\
+Nestas situações a solução é excluir a conta associada ao CPF e com isso o CPF fica livre para um novo cadastro.
+
+Um exemplo comum para esses casos, é quando o seu CPF esta associado a um email secundário, enquanto o CPF de alguém que você auxilia na leitura das notas esta associado ao seu email principal.\
+Nesta situação editar o email não é possível. A solução é acessar cada conta, excluir a conta e então criar uma nova com o CPF desejado.
+
+Não se esqueça de associar os códigos de pagamento na nova conta.
