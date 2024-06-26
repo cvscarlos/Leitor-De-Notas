@@ -8,7 +8,7 @@ description: Principais problemas e soluções para a leitura das Notas de Corre
 
 Dados do usuário e configurações da conta
 
-* [Meu CPF esta associado a outra conta](conta-dados-do-usuario/meu-cpf-esta-associado-a-outra-conta.md)
+* [Editar e/ou trocar CPF](conta-dados-do-usuario/meu-cpf-esta-associado-a-outra-conta.md)
 * [Limites de uso - Fiz a doação mas continua apresentando limite excedido](conta-dados-do-usuario/limites-de-uso-fiz-a-doacao-mas-continua-apresentando-limite-excedido.md)
 * [Como acessar a versão paga](conta-dados-do-usuario/como-acessar-a-versao-paga.md)
 * [CPF não habilitado na conta](conta-dados-do-usuario/cpf-nao-habilitado-na-conta.md)
