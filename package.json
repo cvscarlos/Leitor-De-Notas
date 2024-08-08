@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "6.12.1",
+  "version": "6.12.2",
   "license": "CC BY-NC-ND",
   "scripts": {
     "ng": "ng",
@@ -29,7 +29,7 @@
     "ngx-mask": "^17.0.8",
     "number-precision": "^1.6.0",
     "rxjs": "^7.8.0",
-    "sweetalert2": "^11.11.0",
+    "sweetalert2": "^11.12.4",
     "tslib": "^2.6.2",
     "zone.js": "^0.14.6"
   },

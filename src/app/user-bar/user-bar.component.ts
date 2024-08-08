@@ -29,7 +29,7 @@ export class UserBarComponent extends UserComponent implements OnInit {
   }
 
   private modalAvailablePayments() {
-    const sawAvailablePayment = localStorage.getItem('bgggSawAvailablePayment');
+    const sawAvailablePayment = sessionStorage.getItem('bgggSawAvailablePayment');
     if (sawAvailablePayment) return;
 
     this.apiService.userTransactions(async ({ response }) => {
@@ -41,7 +41,7 @@ export class UserBarComponent extends UserComponent implements OnInit {
         'Deseja associar a sua conta?',
       );
       if (isConfirmed) this.router.navigate(['minha-conta']);
-      else localStorage.setItem('bgggSawAvailablePayment', '1');
+      else sessionStorage.setItem('bgggSawAvailablePayment', '1');
     });
   }
 
