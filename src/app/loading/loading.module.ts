@@ -7,4 +7,4 @@ import { NgModule } from '@angular/core';
   imports: [CommonModule],
   exports: [LoadingComponent],
 })
-export class LoadingModule {}
+export class LoadingModule { }

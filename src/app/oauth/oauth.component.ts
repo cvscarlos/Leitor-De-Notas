@@ -12,7 +12,7 @@ export class OauthComponent implements OnInit {
   constructor(
     private api: ApiService,
     private sessionService: SessionService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.oAuthLogin();
@@ -49,4 +49,5 @@ export class OauthComponent implements OnInit {
       },
     });
   }
+
 }

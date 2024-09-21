@@ -1,23 +1,23 @@
 .limit-box {
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-  align-items: center;
-  transition: ease-in-out 0.1s;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+    align-items: center;
+    transition: ease-in-out 0.1s;
 
-  @extend .rounded;
-  @extend .mb-3;
-  @extend .p-2;
-  @extend .border;
-  @extend .shadow-sm;
+    @extend .rounded;
+    @extend .mb-3;
+    @extend .p-2;
+    @extend .border;
+    @extend .shadow-sm;
 
-  &:hover {
-    transform: scale(1.015);
-  }
+    &:hover {
+        transform: scale(1.015);
+    }
 
-  ul {
-    margin-bottom: 0;
-  }
+    ul {
+        margin-bottom: 0;
+    }
 
-  a {
-    text-decoration: none;
-  }
+    a {
+        text-decoration: none;
+    }
 }

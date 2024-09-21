@@ -14,7 +14,7 @@ export class UploadComponent implements OnInit {
   constructor(
     public sessionService: SessionService,
     private notesService: BrokerageNotesService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.uploads = this.notesService.getNotes().notesList;

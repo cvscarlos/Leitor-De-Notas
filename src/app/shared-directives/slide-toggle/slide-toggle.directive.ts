@@ -1,16 +1,11 @@
-import {
-  AnimationBuilder,
-  AnimationFactory,
-  AnimationPlayer,
-  animate,
-  style,
-} from '@angular/animations';
+import { AnimationBuilder, AnimationFactory, AnimationPlayer, animate, style } from '@angular/animations';
 import { Directive, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
 @Directive({
   selector: '[appSlideToggle]',
 })
 export class SlideToggleDirective {
+
   @Input('appSlideToggle') set setState(state: string | boolean | null | undefined) {
     if (state === true || state === 'show') {
       this.state = 'down';
@@ -33,7 +28,7 @@ export class SlideToggleDirective {
     private animBuilder: AnimationBuilder,
     private elemRef: ElementRef,
     private renderer2: Renderer2,
-  ) {}
+  ) { }
 
   animate(): void {
     let factory: AnimationFactory;

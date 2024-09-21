@@ -1,12 +1,8 @@
-<div
-  class="row m-3 mb-5 p-2 bg-light rounded mx-auto text-center shadow border"
-  id="login"
-  style="display: none"
-  [appSlideToggle]="!sessionService.isAuthenticated"
-  (appSlideState)="loginSlideState = $event"
-  *ngIf="!sessionService.isAuthenticated || loginSlideState !== 'hidden'"
->
-  <div class="col" style="position: relative">
+<div class="row m-3 mb-5 p-2 bg-light rounded mx-auto text-center shadow border" id="login" style="display: none;"
+  [appSlideToggle]="!sessionService.isAuthenticated" (appSlideState)="loginSlideState = $event"
+  *ngIf="!sessionService.isAuthenticated || loginSlideState !== 'hidden'">
+
+  <div class="col" style="position: relative;">
     <app-loading [show]="loading"></app-loading>
 
     <h5 class="h3">Faça login</h5>
@@ -16,16 +12,9 @@
         <div class="mb-3">
           <label class="form-label" for="email">Email</label>
           <!-- eslint-disable-next-line @angular-eslint/template/no-autofocus -->
-          <input
-            type="email"
-            name="email"
-            required
-            autofocus
-            formControlName="email"
+          <input type="email" name="email" required autofocus formControlName="email"
             [class.is-invalid]="!emailForm.get('email')?.valid && emailForm.get('email')?.touched"
-            class="form-control form-control-lg"
-            placeholder="examplo@email.com"
-          />
+            class="form-control form-control-lg" placeholder="examplo@email.com" />
         </div>
         <div class="mb-3 d-grid">
           <button type="submit" class="btn btn-lg btn-primary">Entrar com email</button>
@@ -33,7 +22,7 @@
       </form>
     </div>
 
-    <div style="display: none" [appSlideToggle]="emailFormSent" *ngIf="emailFormSent">
+    <div style="display: none;" [appSlideToggle]="emailFormSent" *ngIf="emailFormSent">
       <form class="form" [formGroup]="tokenForm" (submit)="submitTokenForm()" action="#">
         <p>
           Enviamos um código de acesso para o SEU E-MAIL.<br />
@@ -42,44 +31,26 @@
         <p>Informe no campo abaixo o código enviado em seu email.</p>
         <div class="mb-3">
           <label class="form-label" for="token"><strong>Token:</strong></label>
-          <input
-            type="tel"
-            name="token"
-            formControlName="token"
-            class="form-control form-control-lg"
-            required="true"
-            placeholder="000000"
-            autocomplete="off"
-            appAutofocus
-          />
+          <input type="tel" name="token" formControlName="token" class="form-control form-control-lg" required="true"
+            placeholder="000000" autocomplete="off" appAutofocus>
         </div>
         <div class="mb-3 d-grid">
           <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
         </div>
       </form>
-      <p style="display: none" class="display-1 text-success">
-        <i class="fas fa-check-circle"></i>
-      </p>
+      <p style="display:none;" class="display-1 text-success"><i class="fas fa-check-circle"></i></p>
     </div>
     <hr />
 
     <div>
       <div class="mb-3">
-        <button
-          class="btn btn-light btn-lg border rounded border-primary"
-          (click)="redirectToOAuth('google')"
-        >
-          <img src="/assets/google.png" alt="Google" class="align-text-bottom" width="24" /> |
-          Entrar com Google
+        <button class="btn btn-light btn-lg border rounded border-primary" (click)="redirectToOAuth('google')">
+          <img src="/assets/google.png" alt="Google" class="align-text-bottom" width="24" /> | Entrar com Google
         </button>
       </div>
       <div class="mb-3">
-        <button
-          class="btn btn-light btn-lg border rounded border-primary"
-          (click)="redirectToOAuth('microsoft')"
-        >
-          <img src="/assets/microsoft.png" alt="Microsoft" class="align-text-bottom" width="24" /> |
-          Entrar com Microsoft
+        <button class="btn btn-light btn-lg border rounded border-primary" (click)="redirectToOAuth('microsoft')">
+          <img src="/assets/microsoft.png" alt="Microsoft" class="align-text-bottom" width="24" /> | Entrar com Microsoft
         </button>
       </div>
     </div>

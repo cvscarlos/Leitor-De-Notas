@@ -4,26 +4,26 @@
   </div>
   <div class="modal-body">
     <p>
-      Para realizar a leitura de notas da EUA você precisa primeiro associar sua conta EUA com o seu
-      CPF.
+      Para realizar a leitura de notas da EUA você precisa
+      primeiro associar sua conta EUA com o seu CPF.
     </p>
     <p>
       Caso sua conta possua mais de 1 CPF, escolha qual CPF deve ser associado a cada conta EUA.
     </p>
     <p>
-      ATENÇÃO, você só poderá fazer essa associação uma única vez por CORRETORA, portanto verifique
-      todos os dados antes de prosseguir. Assegure-se de que o número da conta EUA exibido abaixo é
-      o mesmo que consta em sua nota.
+      ATENÇÃO, você só poderá fazer essa associação uma única vez por CORRETORA, portanto verifique todos os dados antes
+      de prosseguir. Assegure-se de que o número da conta EUA exibido abaixo é o mesmo que consta em
+      sua nota.
     </p>
-    <p>Não é possível desfazer ou editar uma associação entre conta EUA e CPF no futuro.</p>
+    <p>
+      Não é possível desfazer ou editar uma associação entre conta EUA e CPF no futuro.
+    </p>
 
-    <div style="position: relative">
+    <div style="position: relative;">
       <app-loading [show]="loading"></app-loading>
 
-      <hr />
-      <span
-        >Conta EUA desta nota: <strong>{{ usaAccount }}</strong></span
-      >
+      <hr/>
+      <span>Conta EUA desta nota: <strong>{{usaAccount}}</strong></span>
       <table class="table table-hover w-auto">
         <thead>
           <tr>
@@ -36,12 +36,12 @@
             <td>
               <a href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
             </td>
-            <td>{{ member.cpf | cpfCnpj }}</td>
+            <td> {{member.cpf | cpfCnpj}} </td>
           </tr>
         </tbody>
       </table>
 
-      <hr />
+      <hr/>
       <div class="text-small">
         <span>Contas já associadas:</span>
         <table class="table table-hover w-auto table-sm">
@@ -54,8 +54,8 @@
           <tbody>
             <ng-container *ngFor="let member of membersList">
               <tr *ngFor="let usaAccount of member.usaAccounts">
-                <td>{{ usaAccount }}</td>
-                <td>{{ member.cpf | cpfCnpj }}</td>
+                <td> {{usaAccount}} </td>
+                <td> {{member.cpf | cpfCnpj}} </td>
               </tr>
             </ng-container>
           </tbody>

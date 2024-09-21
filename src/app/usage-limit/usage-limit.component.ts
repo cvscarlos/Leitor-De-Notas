@@ -14,7 +14,7 @@ export class UsageLimitComponent {
     private api: ApiService,
     private notifyService: NotifyService,
     private sessionService: SessionService,
-  ) {}
+  ) { }
 
   public getOptionLink(limitType: string) {
     if (this.sessionService.isAuthenticated) {
@@ -23,9 +23,8 @@ export class UsageLimitComponent {
         location.href = data.link;
       });
     } else {
-      this.notifyService
-        .info('Por favor, faça login antes de escolher o plano')
-        .then(() => (location.href = '/'));
+      this.notifyService.info('Por favor, faça login antes de escolher o plano')
+        .then(() => location.href = '/');
     }
   }
 }

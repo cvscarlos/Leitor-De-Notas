@@ -28,8 +28,8 @@ Use o **Google Chrome**, para imprimir sua nota em PDF.
 
 Se mesmo após estes ajustes a nota ainda apresentar erros de leitura, tente as seguintes **configurações alternativas**:
 
-- "**Escala**", mude para "_Personalizado_" e vá alterando o valor padrão que é 100, coloque 105 por exemplo, sempre tomando o cuidado da nota continuar cabendo em apenas 1 página.
-- "**Margens**", altere entre qualquer uma das opções disponíveis.
+* "**Escala**", mude para "_Personalizado_" e vá alterando o valor padrão que é 100, coloque 105 por exemplo, sempre tomando o cuidado da nota continuar cabendo em apenas 1 página.
+* "**Margens**", altere entre qualquer uma das opções disponíveis.
 
 A cada alteração que fizer nas configurações, gere o PDF e tente importar no Leitor novamente.
 

@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeModule } from './home/home.module';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { LoadingModule } from './loading/loading.module';
 import { ManageMembersModule } from './manage-members/manage-members.module';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -31,14 +31,15 @@ import { BinanceModule } from './binance/binance.module';
     UserBarComponent,
     USAModalComponent,
   ],
-  bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
     FontAwesomeModule,
+    HttpClientModule,
     NgbCollapseModule,
     SharedPipesModule,
+
     HomeModule,
     LoadingModule,
     ManageMembersModule,
@@ -50,6 +51,7 @@ import { BinanceModule } from './binance/binance.module';
     OauthModule,
     BinanceModule,
   ],
-  providers: [provideEnvironmentNgxMask(), provideHttpClient(withInterceptorsFromDi())],
+  providers: [provideEnvironmentNgxMask()],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
