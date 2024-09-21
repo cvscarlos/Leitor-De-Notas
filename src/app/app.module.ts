@@ -50,6 +50,10 @@ import { BinanceModule } from './binance/binance.module';
     OauthModule,
     BinanceModule,
   ],
-  providers: [provideEnvironmentNgxMask(), provideHttpClient(withInterceptorsFromDi()), provideClientHydration()],
+  providers: [
+    provideEnvironmentNgxMask(),
+    provideHttpClient(withInterceptorsFromDi()),
+    provideClientHydration(),
+  ],
 })
 export class AppModule {}

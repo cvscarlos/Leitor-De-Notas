@@ -10,7 +10,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prettier": "prettier --write .",
-    "serve:ssr:leitor-de-notas": "node dist/server/server.mjs"
+    "serve:ssr:leitor-de-notas": "node dist/server/server.mjs",
+    "build:ssr": "ng build && ng run leitor-de-notas:server",
+    "serve:ssr": "node dist/leitor-de-notas/server/main.js",
+    "prerender": "ng run leitor-de-notas:prerender"
   },
   "private": true,
   "dependencies": {
