@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/services/api/api.service';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session/session.service';
 import { UserComponent } from 'src/app/user/user.component';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { NotifyService } from '../services/notify/notify.service';
 
 @Component({
@@ -11,7 +11,8 @@ import { NotifyService } from '../services/notify/notify.service';
   templateUrl: './user-bar.component.html',
 })
 export class UserBarComponent extends UserComponent implements OnInit {
-  public faPencilAlt = faPencilAlt;
+  public faUser = faUser;
+  public loggedUsers = [];
 
   constructor(
     public override sessionService: SessionService,
