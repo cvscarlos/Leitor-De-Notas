@@ -7,14 +7,14 @@
     // Side bar
     "activityBar.background": "#0D74CE",
     "activityBar.activeBackground": "#113264",
-    
+
     // Side bar icons
     "activityBar.foreground": "#ACD8FC",
-    "activityBar.inactiveForeground": "#113264",
+    "activityBar.inactiveForeground": "#113264"
   },
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
-  "eslint.validate": [ "javascript", "html" ],
-  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "eslint.validate": ["javascript", "html"],
+  "terminal.integrated.defaultProfile.windows": "Git Bash"
 }

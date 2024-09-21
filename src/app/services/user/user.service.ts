@@ -7,25 +7,26 @@ import { SessionService } from 'src/app/services/session/session.service';
   providedIn: 'root',
 })
 export class UserService {
-
   constructor(
     private apiService: ApiService,
     private notifyService: NotifyService,
     private sessionService: SessionService,
-  ) { }
+  ) {}
 
   public accountDelete(confirmedCallback: () => void): void {
-    this.notifyService.confirm('Você deseja mesmo EXCLUIR esta conta?', '', 'Excluir').then((result) => {
-      if (result.isConfirmed) {
-        confirmedCallback();
+    this.notifyService
+      .confirm('Você deseja mesmo EXCLUIR esta conta?', '', 'Excluir')
+      .then((result) => {
+        if (result.isConfirmed) {
+          confirmedCallback();
 
-        this.apiService.userDeleteAccount(() => {
-          this.notifyService.success('Sua conta foi excluída!').then(() => {
-            this.sessionService.logout();
-            window.location.href = '/';
+          this.apiService.userDeleteAccount(() => {
+            this.notifyService.success('Sua conta foi excluída!').then(() => {
+              this.sessionService.logout();
+              window.location.href = '/';
+            });
           });
-        });
-      }
-    });
+        }
+      });
   }
 }

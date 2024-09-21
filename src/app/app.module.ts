@@ -23,27 +23,33 @@ import { UserBarComponent } from './user-bar/user-bar.component';
 import { UserEmailModule } from './user-email/user-email.module';
 import { BinanceModule } from './binance/binance.module';
 
-@NgModule({ declarations: [
-        AppComponent,
-        PageNotFoundComponent,
-        StatisticsComponent,
-        UserBarComponent,
-        USAModalComponent,
-    ],
-    bootstrap: [AppComponent], imports: [AppRoutingModule,
-        BrowserAnimationsModule,
-        BrowserModule,
-        FontAwesomeModule,
-        NgbCollapseModule,
-        SharedPipesModule,
-        HomeModule,
-        LoadingModule,
-        ManageMembersModule,
-        PrivacyModule,
-        ServerUnavailabilityMessageModule,
-        UserAccountModule,
-        UserEmailModule,
-        UsageLimitModule,
-        OauthModule,
-        BinanceModule], providers: [provideEnvironmentNgxMask(), provideHttpClient(withInterceptorsFromDi())] })
+@NgModule({
+  declarations: [
+    AppComponent,
+    PageNotFoundComponent,
+    StatisticsComponent,
+    UserBarComponent,
+    USAModalComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FontAwesomeModule,
+    NgbCollapseModule,
+    SharedPipesModule,
+    HomeModule,
+    LoadingModule,
+    ManageMembersModule,
+    PrivacyModule,
+    ServerUnavailabilityMessageModule,
+    UserAccountModule,
+    UserEmailModule,
+    UsageLimitModule,
+    OauthModule,
+    BinanceModule,
+  ],
+  providers: [provideEnvironmentNgxMask(), provideHttpClient(withInterceptorsFromDi())],
+})
 export class AppModule {}

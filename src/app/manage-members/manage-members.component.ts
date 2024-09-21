@@ -10,7 +10,6 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
   styleUrls: ['./manage-members.component.less'],
 })
 export class ManageMembersComponent implements OnInit {
-
   public loading = false;
   public membersList: AccountMember[] = [];
   public membersCpfList: Set<string> = new Set();
@@ -20,7 +19,7 @@ export class ManageMembersComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private notifyService: NotifyService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getMembers();
@@ -40,14 +39,19 @@ export class ManageMembersComponent implements OnInit {
         this.loading = false;
         form.reset();
       })
-      .finally(() => this.loading = false);
+      .finally(() => (this.loading = false));
   }
 
   public getOptionLink() {
     this.loading = true;
-    this.apiService.getMercadoPagoLink('LN_001_EMA_A', this.membersCpfList.size, this.membersCpfList, (data) => {
-      location.href = data.link;
-    });
+    this.apiService.getMercadoPagoLink(
+      'LN_001_EMA_A',
+      this.membersCpfList.size,
+      this.membersCpfList,
+      (data) => {
+        location.href = data.link;
+      },
+    );
   }
 
   public membersListToggle(event: Event, cpf: string) {
@@ -68,7 +72,7 @@ export class ManageMembersComponent implements OnInit {
       this.membersLimit = data.membersLimit;
       this.loading = false;
 
-      this.membersList.forEach(item => {
+      this.membersList.forEach((item) => {
         if (!item.expires?.length) {
           this.membersCpfList.add(item.cpf);
         }

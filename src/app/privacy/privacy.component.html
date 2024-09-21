@@ -1,61 +1,113 @@
-<div class="container-fluid"> <div class="custom-panel">
-  <div class="row">
-    <div class="col">
-      <h3 class="text-center">Termos de Uso e Política de Privacidade</h3>
+<div class="container-fluid">
+  <div class="custom-panel">
+    <div class="row">
+      <div class="col">
+        <h3 class="text-center">Termos de Uso e Política de Privacidade</h3>
 
-      <div *ngIf="showAcceptTermsButton">
-        <p class="text-center alert alert-waring"><strong>POR FAVOR LEIA E ACEITE OS TERMOS PARA CONTINUAR UTILIZANDO O SISTEMA</strong><br><i>Botão de aceite, encontra-se ao final do texto</i></p><hr>
-      </div>
+        <div *ngIf="showAcceptTermsButton">
+          <p class="text-center alert alert-waring">
+            <strong>POR FAVOR LEIA E ACEITE OS TERMOS PARA CONTINUAR UTILIZANDO O SISTEMA</strong
+            ><br /><i>Botão de aceite, encontra-se ao final do texto</i>
+          </p>
+          <hr />
+        </div>
 
-      <div>
-        <p>AO ACESSAR E UTILIZAR ESTE SERVIÇO VOCÊ ACEITA E CONCORDA COM TUDO O QUE CONSTA NESTE DOCUMENTO.</p>
+        <div>
+          <p>
+            AO ACESSAR E UTILIZAR ESTE SERVIÇO VOCÊ ACEITA E CONCORDA COM TUDO O QUE CONSTA NESTE
+            DOCUMENTO.
+          </p>
 
-        <p>O propósito deste serviço é possibilitar que você possa fazer a leitura dos dados existentes em suas Notas de Corretagem e então copiar para qualquer outro sistema, serviço ou planilha que suporte o formato exportado.</p>
+          <p>
+            O propósito deste serviço é possibilitar que você possa fazer a leitura dos dados
+            existentes em suas Notas de Corretagem e então copiar para qualquer outro sistema,
+            serviço ou planilha que suporte o formato exportado.
+          </p>
 
-        <h6>Sobre a disponibilidade operacional</h6>
-        <p>Este é um sistema em fase beta, ou seja, está em desenvolvimento e não foi totalmente concluído, com isso não se pode assegurar seu perfeito funcionamento em todos os momentos. Instabilidades e indisponibilidades podem ocorrer, porém, faremos sempre o máximo possível para que tudo esteja funcionando e disponível para uso.</p>
+          <h6>Sobre a disponibilidade operacional</h6>
+          <p>
+            Este é um sistema em fase beta, ou seja, está em desenvolvimento e não foi totalmente
+            concluído, com isso não se pode assegurar seu perfeito funcionamento em todos os
+            momentos. Instabilidades e indisponibilidades podem ocorrer, porém, faremos sempre o
+            máximo possível para que tudo esteja funcionando e disponível para uso.
+          </p>
 
-        <h6>Sobre a leitura das Notas de Corretagem e precisão das informações</h6>
-        <p>Este é um serviço com propósito informativo, não podemos assegurar que todas as informações da Nota de Corretagem serão lidas por completo ou com fidelidade, cabe ao usuário (ou seja, você) verificar se todas as informações foram lidas correta e fielmente. Caso encontre informações incorretas ou incompletas, ajuste-as antes de utilizá-las.</p>
+          <h6>Sobre a leitura das Notas de Corretagem e precisão das informações</h6>
+          <p>
+            Este é um serviço com propósito informativo, não podemos assegurar que todas as
+            informações da Nota de Corretagem serão lidas por completo ou com fidelidade, cabe ao
+            usuário (ou seja, você) verificar se todas as informações foram lidas correta e
+            fielmente. Caso encontre informações incorretas ou incompletas, ajuste-as antes de
+            utilizá-las.
+          </p>
 
-        <h6>Sobre o cálculo de taxas e impostos</h6>
-        <p>
-          Para cálculo das taxas da B3 é feito o rateio entre os negócios listados na nota.<br/>
-          As taxas de corretagem também são calculadas através do rateio, já que cada corretora tem suas regras específicas de cobrança e isenção da taxa de corretagem.<br/>
-          Para ISS e IRRF os dados são extraídos de 2 formas.<br/>
-          A primeira forma é para as corretoras que já deduzem o imposto do valor final da Nota de Corretagem.<br/>
-          A segunda forma é para corretoras que apenas informam o imposto que será descontado no futuro, nesse caso o usuário necessita ativar esta opção no Leitor de Notas, esta opção é mais complexa para o Leitor de Notas realizar a autovalidação dos dados, portanto, sempre verifique se o valor de imposto informado na Nota de Corretagem corresponde ao que o Leitor de Notas extraiu e também se corresponde ao que a corretora descontou de sua conta.
-        </p>
+          <h6>Sobre o cálculo de taxas e impostos</h6>
+          <p>
+            Para cálculo das taxas da B3 é feito o rateio entre os negócios listados na nota.<br />
+            As taxas de corretagem também são calculadas através do rateio, já que cada corretora
+            tem suas regras específicas de cobrança e isenção da taxa de corretagem.<br />
+            Para ISS e IRRF os dados são extraídos de 2 formas.<br />
+            A primeira forma é para as corretoras que já deduzem o imposto do valor final da Nota de
+            Corretagem.<br />
+            A segunda forma é para corretoras que apenas informam o imposto que será descontado no
+            futuro, nesse caso o usuário necessita ativar esta opção no Leitor de Notas, esta opção
+            é mais complexa para o Leitor de Notas realizar a autovalidação dos dados, portanto,
+            sempre verifique se o valor de imposto informado na Nota de Corretagem corresponde ao
+            que o Leitor de Notas extraiu e também se corresponde ao que a corretora descontou de
+            sua conta.
+          </p>
 
-        <h6>Sobre a coleta, armazenamento e uso dos dados</h6>
-        <p>
-          Para monitorar o uso do site, utilizamos a ferramenta Google Analytics, que coleta e armazena dados anônimos (ou seja, não é possível te identificar / saber quem você é) sobre a navegação dentro do site, dispositivo utilizado e outras informações relacionadas.<br/>
-          Quando você envia uma Nota de Corretagem, fazemos a leitura dos dados em nosso servidor e logo após isso a Nota de Corretagem é eliminada do Leitor de Notas, ou seja, não salvamos o arquivo PDF e não mantemos nenhuma cópia de sua Nota de Corretagem em nosso poder.<br/>
-          As informações que armazenamos sobre você são:<br/>
-          - Dados necessários para o cadastro do usuário: e-mail (utilizado para acessar o Leitor de Notas), CPF/CNPJ, dados do pagamento fornecidos por você e/ou Mercado Pago.<br/>
-          - Dados necessários para a leitura das Notas de Corretagem: data, corretora, valor total e o número da Nota de Corretagem. As demais informações da Nota de Corretagem são exibidas a você no momento do uso e descartadas logo em seguida.
-        </p>
+          <h6>Sobre a coleta, armazenamento e uso dos dados</h6>
+          <p>
+            Para monitorar o uso do site, utilizamos a ferramenta Google Analytics, que coleta e
+            armazena dados anônimos (ou seja, não é possível te identificar / saber quem você é)
+            sobre a navegação dentro do site, dispositivo utilizado e outras informações
+            relacionadas.<br />
+            Quando você envia uma Nota de Corretagem, fazemos a leitura dos dados em nosso servidor
+            e logo após isso a Nota de Corretagem é eliminada do Leitor de Notas, ou seja, não
+            salvamos o arquivo PDF e não mantemos nenhuma cópia de sua Nota de Corretagem em nosso
+            poder.<br />
+            As informações que armazenamos sobre você são:<br />
+            - Dados necessários para o cadastro do usuário: e-mail (utilizado para acessar o Leitor
+            de Notas), CPF/CNPJ, dados do pagamento fornecidos por você e/ou Mercado Pago.<br />
+            - Dados necessários para a leitura das Notas de Corretagem: data, corretora, valor total
+            e o número da Nota de Corretagem. As demais informações da Nota de Corretagem são
+            exibidas a você no momento do uso e descartadas logo em seguida.
+          </p>
 
-        <h6>Sobre o seu direito de acessar e controlar seus dados</h6>
-        <p>
-          Você pode a qualquer momento consultar / alterar / excluir seus dados através do menu “Minha conta”.<br/>
-          A exclusão dos seus dados é feita assim que clicado na opção de “excluir conta”. Entretanto, para evitar abusos e usos indevidos do sistema, em alguns casos o seu CPF e os dados de controle das notas de corretagem já lidas (corretora, data, número e volume movimentado) podem ficar armazenados mesmo após a solicitação de exclusão dos dados.
-        </p>
+          <h6>Sobre o seu direito de acessar e controlar seus dados</h6>
+          <p>
+            Você pode a qualquer momento consultar / alterar / excluir seus dados através do menu
+            “Minha conta”.<br />
+            A exclusão dos seus dados é feita assim que clicado na opção de “excluir conta”.
+            Entretanto, para evitar abusos e usos indevidos do sistema, em alguns casos o seu CPF e
+            os dados de controle das notas de corretagem já lidas (corretora, data, número e volume
+            movimentado) podem ficar armazenados mesmo após a solicitação de exclusão dos dados.
+          </p>
 
-        <h6>Sobre o uso e compartilhamento dos seus dados</h6>
-        <p>
-          Não compartilhamos nenhum dado seu com terceiros e nunca o faremos, a menos que solicitado por você mesmo ou devido a uma decisão judicial que obrigue tal ato.<br/>
-          O propósito do Leitor de Notas é unicamente ler e extrair dados das Notas de Corretagem, utilizamos seus dados, única e exclusivamente para este fim.
-        </p>
+          <h6>Sobre o uso e compartilhamento dos seus dados</h6>
+          <p>
+            Não compartilhamos nenhum dado seu com terceiros e nunca o faremos, a menos que
+            solicitado por você mesmo ou devido a uma decisão judicial que obrigue tal ato.<br />
+            O propósito do Leitor de Notas é unicamente ler e extrair dados das Notas de Corretagem,
+            utilizamos seus dados, única e exclusivamente para este fim.
+          </p>
 
-        <h6>Sobre a atualização destes termos</h6>
-        <p>Estes termos podem ser atualizados a qualquer momento sem aviso, cabe ao usuário sempre que acessar este site conferir se houve alguma mudança antes de utilizar o Leitor de Notas.</p>
-      </div>
+          <h6>Sobre a atualização destes termos</h6>
+          <p>
+            Estes termos podem ser atualizados a qualquer momento sem aviso, cabe ao usuário sempre
+            que acessar este site conferir se houve alguma mudança antes de utilizar o Leitor de
+            Notas.
+          </p>
+        </div>
 
-      <div *ngIf="showAcceptTermsButton" class="text-center" style="position: relative;">
-        <app-loading [show]="loading"></app-loading>
-        <button type="button" class="btn btn-primary" (click)="acceptingTerms()">Confirmo que li e aceito os termos de uso</button>
+        <div *ngIf="showAcceptTermsButton" class="text-center" style="position: relative">
+          <app-loading [show]="loading"></app-loading>
+          <button type="button" class="btn btn-primary" (click)="acceptingTerms()">
+            Confirmo que li e aceito os termos de uso
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div> </div>
+</div>

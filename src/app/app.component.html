@@ -1,38 +1,72 @@
 <nav *ngIf="!isIframe.isIframe()" class="navbar navbar-expand-lg navbar-dark bg-dark mb-2 shadow">
- <div class="container-fluid">
-  <h1 class="navbar-brand h3 my-0 mr-md-auto font-weight-normal">
-    <a routerLink="/" class="text-white" style="text-decoration: none;">
-      <svg class="bi bi-book-half" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 0 0 7.5 2.5v11a.5.5 0 0 0 .854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 0 0-.799-.34 12.96 12.96 0 0 0-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0 1 15 2.82z"/> <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 0 1 8.5 2.5v11a.5.5 0 0 1-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 0 1 0 13.5v-11a.5.5 0 0 1 .276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 0 1 .22-.103 12.958 12.958 0 0 1 2.7-.869z"/> </svg>
-      Leitor de Notas de Corretagem
-    </a>
-  </h1>
+  <div class="container-fluid">
+    <h1 class="navbar-brand h3 my-0 mr-md-auto font-weight-normal">
+      <a routerLink="/" class="text-white" style="text-decoration: none">
+        <svg
+          class="bi bi-book-half"
+          width="1em"
+          height="1em"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 0 0 7.5 2.5v11a.5.5 0 0 0 .854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 0 0-.799-.34 12.96 12.96 0 0 0-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0 1 15 2.82z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 0 1 8.5 2.5v11a.5.5 0 0 1-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 0 1 0 13.5v-11a.5.5 0 0 1 .276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 0 1 .22-.103 12.958 12.958 0 0 1 2.7-.869z"
+          />
+        </svg>
+        Leitor de Notas de Corretagem
+      </a>
+    </h1>
 
-  <button class="navbar-toggler mr-3" type="button"
-    (click)="headerMenuCollapsed = !headerMenuCollapsed"
-    [attr.aria-expanded]="!headerMenuCollapsed"
-    aria-controls="collapseMenu">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <button
+      class="navbar-toggler mr-3"
+      type="button"
+      (click)="headerMenuCollapsed = !headerMenuCollapsed"
+      [attr.aria-expanded]="!headerMenuCollapsed"
+      aria-controls="collapseMenu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse justify-content-end" #collapse="ngbCollapse" [(ngbCollapse)]="headerMenuCollapsed" id="collapseMenu">
-    <ul class="navbar-nav ml-auto mr-2">
-      <li class="nav-item">
-        <a (click)="headerMenuCollapsed = true" class="nav-link px-3" href="https://leitor-de-notas.gitbook.io/" target="_blank">
-          <fa-icon [icon]="faQuestionCircle"></fa-icon> Ajuda
-        </a>
-      </li>
-      <li class="nav-item">
-        <a (click)="headerMenuCollapsed = true" class="nav-link px-3" routerLink="/limites-uso">
-          <fa-icon [icon]="faInfoCircle"></fa-icon> Planos
-        </a>
-      </li>
-      <li class="nav-item">
-        <a (click)="headerMenuCollapsed = true" class="nav-link px-3" href="https://bit.ly/leitor-de-notas-suporte" target="_blank">
-          <fa-icon [icon]="faBug"></fa-icon> Reportar um problema
-        </a>
-      </li>
-    </ul>
-  </div>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      #collapse="ngbCollapse"
+      [(ngbCollapse)]="headerMenuCollapsed"
+      id="collapseMenu"
+    >
+      <ul class="navbar-nav ml-auto mr-2">
+        <li class="nav-item">
+          <a
+            (click)="headerMenuCollapsed = true"
+            class="nav-link px-3"
+            href="https://leitor-de-notas.gitbook.io/"
+            target="_blank"
+          >
+            <fa-icon [icon]="faQuestionCircle"></fa-icon> Ajuda
+          </a>
+        </li>
+        <li class="nav-item">
+          <a (click)="headerMenuCollapsed = true" class="nav-link px-3" routerLink="/limites-uso">
+            <fa-icon [icon]="faInfoCircle"></fa-icon> Planos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            (click)="headerMenuCollapsed = true"
+            class="nav-link px-3"
+            href="https://bit.ly/leitor-de-notas-suporte"
+            target="_blank"
+          >
+            <fa-icon [icon]="faBug"></fa-icon> Reportar um problema
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>
 
@@ -44,60 +78,215 @@
 
 <router-outlet (activate)="onActivate()"></router-outlet>
 
-<div *ngIf="!isIframe.isIframe()" class="my-5" style="background-image: radial-gradient(circle, #fcfcfc, #f9f9f9, #f5f5f6, #f2f2f2, #eeefef);">
+<div
+  *ngIf="!isIframe.isIframe()"
+  class="my-5"
+  style="background-image: radial-gradient(circle, #fcfcfc, #f9f9f9, #f5f5f6, #f2f2f2, #eeefef)"
+>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col col-md-10 col-lg-8 my-5">
         <div>
           <h4 class="text-center">Conheça mais sobre o sistema</h4>
 
-          <p>Este é um Leitor de Notas de Corretagem Online e gratuito. Basta informar seu email e CPF e começar a utilizar! 🙂</p>
-          <p>Ao enviar sua nota em PDF o nosso sistema irá converte-la para texto e com isso você conseguirá facilmente copiar e colar em sua planilha de Excel favorita.</p>
-          <p>Além da funcionalidade básica de exportar para Excel, o sistema também é 100% compatível com a <a href="https://www.dlombelloplanilhas.com" target="_blank">Planilha de Controle de Ações Dlombello</a>.</p>
-          <h5>Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de corretagem:</h5>
+          <p>
+            Este é um Leitor de Notas de Corretagem Online e gratuito. Basta informar seu email e
+            CPF e começar a utilizar! 🙂
+          </p>
+          <p>
+            Ao enviar sua nota em PDF o nosso sistema irá converte-la para texto e com isso você
+            conseguirá facilmente copiar e colar em sua planilha de Excel favorita.
+          </p>
+          <p>
+            Além da funcionalidade básica de exportar para Excel, o sistema também é 100% compatível
+            com a
+            <a href="https://www.dlombelloplanilhas.com" target="_blank"
+              >Planilha de Controle de Ações Dlombello</a
+            >.
+          </p>
+          <h5>
+            Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
+            corretagem:
+          </h5>
           <table class="table table-striped table-bordered table-brokerages">
             <thead>
               <tr>
                 <th scope="col">Corretora</th>
-                <th scope="col">Mercado<br>à Vista</th>
-                <th scope="col">Mercado<br>Futuro</th>
+                <th scope="col">Mercado<br />à Vista</th>
+                <th scope="col">Mercado<br />Futuro</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>Ágora Corretora</td>												<td>✓</td><td></td></tr>
-              <tr><td>Ativa Investimentos</td>										<td>✓</td><td>✓</td></tr>
-              <tr><td>Apex (EUA)</td>															<td>✓</td><td></td></tr>
-              <tr><td>Avenue (EUA)</td>														<td>✓</td><td></td></tr>
-              <tr><td>Banco do Brasil Investimentos</td>					<td>✓</td><td></td></tr>
-              <tr><td>Banco Inter Corretora</td>									<td>✓</td><td>✓</td></tr>
-              <tr><td>Banco Itaú</td>															<td>✓</td><td>✓</td></tr>
-              <tr><td>BTG Pactual Corretora</td>									<td>✓</td><td>✓</td></tr>
-              <tr><td>C6 Bank</td>																<td>✓</td><td></td></tr>
-              <tr><td>CEF Caixa Econômica Federal Corretora</td>	<td>✓</td><td></td></tr>
-              <tr><td>Clear Corretora</td>												<td>✓</td><td>✓</td></tr>
-              <tr><td>CM Capital</td>															<td>✓</td><td>✓</td></tr>
-              <tr><td>Empiricus / Vitreo Corretora</td>						<td>✓</td><td>✓</td></tr>
-              <tr><td>Genial Investimentos Corretora</td>					<td>✓</td><td>✓</td></tr>
-              <tr><td>Guide Corretora</td>												<td>✓</td><td>✓</td></tr>
-              <tr><td>Kirton Corretora</td>												<td>✓</td><td></td></tr>
-              <tr><td>Mirae Corretora</td>												<td>✓</td><td>✓</td></tr>
-              <tr><td>Modal Corretora</td>												<td>✓</td><td>✓</td></tr>
-              <tr><td>ModalMais Corretora</td>										<td>✓</td><td>✓</td></tr>
-              <tr><td>Monte Bravo Corretora</td>									<td>✓</td><td>✓</td></tr>
-              <tr><td>MyCAP</td>																	<td>✓</td><td></td></tr>
-              <tr><td>Necton</td>																	<td>✓</td><td></td></tr>
-              <tr><td>Nomad</td>																	<td>✓</td><td></td></tr>
-              <tr><td>Nova Futura</td>														<td>✓</td><td>✓</td></tr>
-              <tr><td>NuInvest / Easynvest Corretora</td>					<td>✓</td><td>✓</td></tr>
-              <tr><td>Órama Corretora</td>												<td>✓</td><td>✓</td></tr>
-              <tr><td>Rico Corretora</td>													<td>✓</td><td>✓</td></tr>
-              <tr><td>Santander Corretora</td>										<td>✓</td><td></td></tr>
-              <tr><td>Singulare / Socopa Corretora</td>						<td>✓</td><td></td></tr>
-              <tr><td>Tastyworks (EUA)</td>												<td>✓</td><td>✓</td></tr>
-              <tr><td>Terra Investimentos Corretora</td>					<td>✓</td><td>✓</td></tr>
-              <tr><td>Toro Corretora</td>													<td>✓</td><td>✓</td></tr>
-              <tr><td>Warren Corretora</td>												<td>✓</td><td>✓</td></tr>
-              <tr><td>XP Corretora</td>														<td>✓</td><td>✓</td></tr>
+              <tr>
+                <td>Ágora Corretora</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Ativa Investimentos</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Apex (EUA)</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Avenue (EUA)</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Banco do Brasil Investimentos</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Banco Inter Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Banco Itaú</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>BTG Pactual Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>C6 Bank</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>CEF Caixa Econômica Federal Corretora</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Clear Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>CM Capital</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Empiricus / Vitreo Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Genial Investimentos Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Guide Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Kirton Corretora</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Mirae Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Modal Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>ModalMais Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Monte Bravo Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>MyCAP</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Necton</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Nomad</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Nova Futura</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>NuInvest / Easynvest Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Órama Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Rico Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Santander Corretora</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Singulare / Socopa Corretora</td>
+                <td>✓</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Tastyworks (EUA)</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Terra Investimentos Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Toro Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>Warren Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
+              <tr>
+                <td>XP Corretora</td>
+                <td>✓</td>
+                <td>✓</td>
+              </tr>
             </tbody>
           </table>
         </div>

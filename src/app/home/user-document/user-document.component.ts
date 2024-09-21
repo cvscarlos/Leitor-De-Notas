@@ -23,7 +23,7 @@ export class UserDocumentComponent implements OnInit {
     private userService: UserService,
     public sessionService: SessionService,
     private modalService: NgbModal,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -50,12 +50,18 @@ export class UserDocumentComponent implements OnInit {
     this.loading = true;
     this.apiService
       .userDocumentSave(form.value.userDoc)
-      .then(data => {
+      .then((data) => {
         if (data.error)
-          this.notifyService.success(data._messages.join('\n')).then(() => window.location.reload());
+          this.notifyService
+            .success(data._messages.join('\n'))
+            .then(() => window.location.reload());
         else
-          this.notifyService.success('Dados atualizados com sucesso!').then(() => window.location.reload());
+          this.notifyService
+            .success('Dados atualizados com sucesso!')
+            .then(() => window.location.reload());
       })
-      .finally(() => { this.loading = false; });
+      .finally(() => {
+        this.loading = false;
+      });
   }
 }

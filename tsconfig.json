@@ -19,11 +19,8 @@
     "target": "ES2022",
     "module": "ES2020",
     "resolveJsonModule": true,
-    "lib": [
-      "ES2020",
-      "DOM"
-    ],
-    "useDefineForClassFields": false,
+    "lib": ["ES2020", "DOM"],
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
@@ -32,4 +29,3 @@
     "strictTemplates": true
   }
 }
-

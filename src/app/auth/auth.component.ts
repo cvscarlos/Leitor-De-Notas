@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private notifyService: NotifyService,
     private isIframeService: IsIframeService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.emailForm = this.formBuilder.group({
@@ -55,9 +55,10 @@ export class AuthComponent implements OnInit {
         this.loading = false;
         this.sessionId = data.session;
       },
-      error: () => this.notifyService
-        .error('Houve um problema ao tentar enviar sua mensagem', 'Por favor tente novamente.')
-        .then(() => window.location.reload()),
+      error: () =>
+        this.notifyService
+          .error('Houve um problema ao tentar enviar sua mensagem', 'Por favor tente novamente.')
+          .then(() => window.location.reload()),
     });
   }
 
@@ -78,9 +79,10 @@ export class AuthComponent implements OnInit {
         this.sessionService.id = this.sessionId;
         window.location.reload();
       },
-      error: () => this.notifyService
-        .error('Não foi possível validar o seu TOKEN', 'Por favor tente novamente.')
-        .then(() => window.location.reload()),
+      error: () =>
+        this.notifyService
+          .error('Não foi possível validar o seu TOKEN', 'Por favor tente novamente.')
+          .then(() => window.location.reload()),
     });
   }
 
@@ -98,8 +100,12 @@ export class AuthComponent implements OnInit {
     this.api.oAuthUrl(provider, isIframe, (data) => {
       const loginWindow = window.open(data.url);
 
-      const htmlSpin = '<div><div class="spinner-border" role="status"><span class="sr-only">Carregando...</span></div></div>';
-      this.notifyService.infoForceOpened('Aguardando a autorização', `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`);
+      const htmlSpin =
+        '<div><div class="spinner-border" role="status"><span class="sr-only">Carregando...</span></div></div>';
+      this.notifyService.infoForceOpened(
+        'Aguardando a autorização',
+        `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`,
+      );
 
       const intervalId = setInterval(() => {
         const bgggSessionId = loginWindow?.localStorage?.getItem('bgggSessionId');

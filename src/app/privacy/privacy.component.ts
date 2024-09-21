@@ -8,7 +8,6 @@ import { SessionService } from '../services/session/session.service';
   templateUrl: './privacy.component.html',
 })
 export class PrivacyComponent implements OnInit {
-
   public loading = false;
   public showAcceptTermsButton = false;
 
@@ -16,7 +15,7 @@ export class PrivacyComponent implements OnInit {
     private apiService: ApiService,
     private notifyService: NotifyService,
     public sessionService: SessionService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -29,8 +28,9 @@ export class PrivacyComponent implements OnInit {
     this.loading = true;
 
     this.apiService.userAcceptTerms(() => {
-      this.notifyService.success('Obrigado por aceitar os termos', 'Sua página será recarregada')
-        .then(() => window.location.href = '/');
+      this.notifyService
+        .success('Obrigado por aceitar os termos', 'Sua página será recarregada')
+        .then(() => (window.location.href = '/'));
     });
   }
 }
