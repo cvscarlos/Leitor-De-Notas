@@ -28,6 +28,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Genial Investimentos                  | ✅               | ✅              |
 | Guide Corretora                       | ✅               | ✅              |
 | Kirton Corretora                      | ✅               |                |
+| Master Corretora                      |                  | ✅              |
 | Mirae Corretora                       | ✅               | ✅              |
 | Modal Corretora                       | ✅               | ✅              |
 | ModalMais Corretora                   | ✅               | ✅              |
