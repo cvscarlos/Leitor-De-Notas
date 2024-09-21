@@ -5,16 +5,9 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { UserDocumentComponent } from './user-document.component';
 
-
-
 @NgModule({
   declarations: [UserDocumentComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    LoadingModule,
-    NgbModalModule,
-  ],
+  imports: [CommonModule, FormsModule, LoadingModule, NgbModalModule],
   exports: [UserDocumentComponent],
 })
-export class UserDocumentModule { }
+export class UserDocumentModule {}

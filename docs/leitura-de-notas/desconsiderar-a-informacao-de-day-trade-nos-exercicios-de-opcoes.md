@@ -2,7 +2,7 @@
 
 Algumas corretoras trazem as operações de Exercício de Opções onde a Compra / Venda ocorre no mesmo dia. Como uma operação de Day Trade.
 
-A Receita Federel, na [Instrução Normativa 1585, Art. 65, § 13](http://normas.receita.fazenda.gov.br/sijut2consulta/link.action?visao=anotado\&idAto=67494#1563902), diz:
+A Receita Federel, na [Instrução Normativa 1585, Art. 65, § 13](http://normas.receita.fazenda.gov.br/sijut2consulta/link.action?visao=anotado&idAto=67494#1563902), diz:
 
 > _§ 13. Não se caracteriza como day-trade:_
 >
@@ -18,7 +18,7 @@ Em resumo, o que essa configuração faz, é sempre tratar as operações de Exe
 
 Por padrão essa opção vem desmarcada, ou seja, mantém-se a informação original da nota de corretagem.
 
-***
+---
 
 **Exemplo de nota de corretagem** com exercício de opção e compra / venda no mesmo dia:
 

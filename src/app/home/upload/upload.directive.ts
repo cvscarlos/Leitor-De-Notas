@@ -6,12 +6,11 @@ import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-
   selector: '[appUpload]',
 })
 export class UploadDirective {
-
   constructor(
     private notesService: BrokerageNotesService,
     private renderer: Renderer2,
     private hostElement: ElementRef,
-  ) { }
+  ) {}
 
   @HostListener('dragover', ['$event']) public onDragOver(evt: DragEvent): void {
     evt.preventDefault();

@@ -1,47 +1,73 @@
-<div class="container-fluid"> <div class="custom-panel-md my-5">
-  <div class="row">
-    <div class="col">
-      <h3 class="text-center">Atualizar email</h3>
+<div class="container-fluid">
+  <div class="custom-panel-md my-5">
+    <div class="row">
+      <div class="col">
+        <h3 class="text-center">Atualizar email</h3>
 
-      <div>
-        <p>Por aqui você pode alterar seu email de cadastro, basta inserir o email no campo abaixo e confirma com o token que iremos te enviar.</p>
-        <p>Ao final do processo, você precisará entrar novamente no Leitor, desta vez usando seu email novo.</p>
-        <p>Caso seu email já esteja associado a outra conta, primeiro troque o email nesta outra conta, para entao usa-lo aqui.</p>
+        <div>
+          <p>
+            Por aqui você pode alterar seu email de cadastro, basta inserir o email no campo abaixo
+            e confirma com o token que iremos te enviar.
+          </p>
+          <p>
+            Ao final do processo, você precisará entrar novamente no Leitor, desta vez usando seu
+            email novo.
+          </p>
+          <p>
+            Caso seu email já esteja associado a outra conta, primeiro troque o email nesta outra
+            conta, para entao usa-lo aqui.
+          </p>
 
-        <hr/>
+          <hr />
 
-        <div style="position: relative;">
-          <app-loading [show]="loading"></app-loading>
+          <div style="position: relative">
+            <app-loading [show]="loading"></app-loading>
 
-          <form class="form" #f="ngForm" (ngSubmit)="submitUserEmailForm(f.form);" ngNativeValidate>
-            <div class="mb-3 new-email-FG" [appSlideToggle]="!tokenRequested">
-              <label class="h5 form-label" for="newEmail">Novo email:</label>
-              <input type="email" class="form-control"
-                [disabled]="tokenRequested"
-                required="true"
-                placeholder="novo-email@example.com"
-                id="newEmail"
-                name="newEmail"
-                ngModel />
-            </div>
+            <form
+              class="form"
+              #f="ngForm"
+              (ngSubmit)="submitUserEmailForm(f.form)"
+              ngNativeValidate
+            >
+              <div class="mb-3 new-email-FG" [appSlideToggle]="!tokenRequested">
+                <label class="h5 form-label" for="newEmail">Novo email:</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  [disabled]="tokenRequested"
+                  required="true"
+                  placeholder="novo-email@example.com"
+                  id="newEmail"
+                  name="newEmail"
+                  ngModel
+                />
+              </div>
 
-            <div class="mb-3 new-email-token-FG" style="display:none;" [appSlideToggle]="tokenRequested">
-              <label class="h5 form-label" for="newEmailToken">Token:</label>
-              <input type="tel" class="form-control form-control-lg text-center"
-                [disabled]="!tokenRequested"
-                required="true"
-                placeholder="000000"
-                autocomplete="off"
-                id="newEmailToken"
-                name="newEmailToken"
-                ngModel />
-            </div>
-            <div class="mb-3">
-              <button type="submit" class="btn btn-primary">Enviar</button>
-            </div>
-          </form>
+              <div
+                class="mb-3 new-email-token-FG"
+                style="display: none"
+                [appSlideToggle]="tokenRequested"
+              >
+                <label class="h5 form-label" for="newEmailToken">Token:</label>
+                <input
+                  type="tel"
+                  class="form-control form-control-lg text-center"
+                  [disabled]="!tokenRequested"
+                  required="true"
+                  placeholder="000000"
+                  autocomplete="off"
+                  id="newEmailToken"
+                  name="newEmailToken"
+                  ngModel
+                />
+              </div>
+              <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div> </div>
+</div>

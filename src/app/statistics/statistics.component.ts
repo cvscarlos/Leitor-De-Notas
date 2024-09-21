@@ -7,22 +7,18 @@ import packageJson from '../../../package.json';
   templateUrl: './statistics.component.html',
 })
 export class StatisticsComponent implements OnInit {
-
   public appVersion?: string;
   public interfaceVersion?: string;
   public uniqueSessions?: string;
 
-  constructor(
-    private apiService: ApiService,
-  ) { }
+  constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.interfaceVersion = packageJson.version;
 
-    this.apiService.getServerStatus(data => {
+    this.apiService.getServerStatus((data) => {
       this.appVersion = data.version;
       this.uniqueSessions = data.uniqueSessions;
     });
   }
-
 }
