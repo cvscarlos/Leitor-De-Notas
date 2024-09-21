@@ -9,23 +9,17 @@ module.exports = {
     {
       files: ['*.{js, cjs}'],
       "plugins": ["prettier"],
-      extends: [
-        'eslint:recommended',
-        'airbnb-base'
-      ],
-      rules: {
-        "prettier/prettier": "error",
-      }
+      extends: [ 'eslint:recommended', "plugin:prettier/recommended"],
     },
     {
       files: ['*.ts'],
       "plugins": ["prettier"],
       extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@angular-eslint/recommended',
-        // This is required if you use inline templates in Components
-        'plugin:@angular-eslint/template/process-inline-templates'
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended"
       ],
       rules: {
         '@angular-eslint/directive-selector': [
