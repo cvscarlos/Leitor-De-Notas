@@ -5,9 +5,16 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directives.module';
 
+
+
 @NgModule({
   declarations: [ExportToolComponent],
-  imports: [CommonModule, SharedDirectivesModule, NgbNavModule, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    SharedDirectivesModule,
+    NgbNavModule,
+    FontAwesomeModule,
+  ],
   exports: [ExportToolComponent],
 })
-export class ExportToolModule {}
+export class ExportToolModule { }

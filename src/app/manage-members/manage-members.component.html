@@ -1,92 +1,71 @@
-<div class="container-fluid">
-  <div class="custom-panel-md my-5">
-    <div class="row">
-      <div class="col">
-        <h3 class="text-center">Gerenciar membros</h3>
+<div class="container-fluid"> <div class="custom-panel-md my-5">
+  <div class="row">
+    <div class="col">
+      <h3 class="text-center">Gerenciar membros</h3>
 
-        <div *ngIf="membersLimit > membersList.length" style="position: relative">
+      <div *ngIf="membersLimit > membersList.length" style="position: relative;">
+        <app-loading [show]="loading"></app-loading>
+        <p>Adicione ou consulte os membros de sua conta.</p>
+
+        <form class="form" #f="ngForm" (ngSubmit)="submitMemberForm(f.form);" ngNativeValidate>
+          <div class="form-row align-items-center">
+            <div class="col-auto"> <label for="memberDoc" class="mb-2">Novo membro: </label> </div>
+            <div class="col-auto">
+              <input type="tel" class="form-control mb-2"
+                aria-describedby="memberDocHelp"
+                id="memberDoc"
+                mask="000.000.000-00||00.000.000/0000-00"
+                name="memberDoc"
+                placeholder="CPF / CNPJ"
+                required
+                ngModel />
+              </div>
+            <div class="col-md-auto col-sm">
+              <button type="submit" class="btn btn-primary mb-2">Adicionar</button>
+            </div>
+            <small id="memberDocHelp" class="form-text text-muted">
+              ATENÇÃO, certifique-se de adicionar o CPF corretamente, não será possível editar depois.
+            </small>
+          </div>
+        </form>
+      </div>
+
+      <hr />
+      <div class="members-list">
+        <h6>Lista de membros</h6>
+        <div class="members-list" style="position: relative;">
           <app-loading [show]="loading"></app-loading>
-          <p>Adicione ou consulte os membros de sua conta.</p>
+          <table class="table table-striped table-hover table-sm">
+            <thead>
+              <tr>
+                <th class="align-middle" scope="col">#</th>
+                <th class="align-middle" scope="col">CPF / CNPJ</th>
+                <th class="align-middle" scope="col">Validade</th>
+                <th class="align-middle text-center" scope="col" *ngIf="pendingMembers">+ limite</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let member of membersList; let ndx = index;">
+                <th scope="row">{{ndx+1}}</th>
+                <td>{{member.cpf | cpfCnpj}}</td>
+                <td>{{member.expires | date: 'dd/MM/yyyy'}}</td>
+                <td *ngIf="pendingMembers" class="text-center">
+                  <input *ngIf="!member.expires?.length" checked type="checkbox" (change)="membersListToggle($event, member.cpf)" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-          <form class="form" #f="ngForm" (ngSubmit)="submitMemberForm(f.form)" ngNativeValidate>
-            <div class="form-row align-items-center">
-              <div class="col-auto"><label for="memberDoc" class="mb-2">Novo membro: </label></div>
-              <div class="col-auto">
-                <input
-                  type="tel"
-                  class="form-control mb-2"
-                  aria-describedby="memberDocHelp"
-                  id="memberDoc"
-                  mask="000.000.000-00||00.000.000/0000-00"
-                  name="memberDoc"
-                  placeholder="CPF / CNPJ"
-                  required
-                  ngModel
-                />
-              </div>
-              <div class="col-md-auto col-sm">
-                <button type="submit" class="btn btn-primary mb-2">Adicionar</button>
-              </div>
-              <small id="memberDocHelp" class="form-text text-muted">
-                ATENÇÃO, certifique-se de adicionar o CPF corretamente, não será possível editar
-                depois.
-              </small>
-            </div>
-          </form>
-        </div>
-
-        <hr />
-        <div class="members-list">
-          <h6>Lista de membros</h6>
-          <div class="members-list" style="position: relative">
+          <div *ngIf="pendingMembers" style="position: relative;">
             <app-loading [show]="loading"></app-loading>
-            <table class="table table-striped table-hover table-sm">
-              <thead>
-                <tr>
-                  <th class="align-middle" scope="col">#</th>
-                  <th class="align-middle" scope="col">CPF / CNPJ</th>
-                  <th class="align-middle" scope="col">Validade</th>
-                  <th class="align-middle text-center" scope="col" *ngIf="pendingMembers">
-                    + limite
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let member of membersList; let ndx = index">
-                  <th scope="row">{{ ndx + 1 }}</th>
-                  <td>{{ member.cpf | cpfCnpj }}</td>
-                  <td>{{ member.expires | date: 'dd/MM/yyyy' }}</td>
-                  <td *ngIf="pendingMembers" class="text-center">
-                    <input
-                      *ngIf="!member.expires?.length"
-                      checked
-                      type="checkbox"
-                      (change)="membersListToggle($event, member.cpf)"
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div *ngIf="pendingMembers" style="position: relative">
-              <app-loading [show]="loading"></app-loading>
-              <hr />
-              <button
-                class="btn btn-success"
-                (click)="getOptionLink()"
-                [disabled]="!membersCpfList.size"
-              >
-                <img
-                  src="https://www.mercadopago.com.br/favicon.ico"
-                  alt="Mercado Pago"
-                  style="max-height: 24px"
-                />
-                - Adicionar Limite p/ <strong>{{ membersCpfList.size }}</strong> membros avulsos
-              </button>
-            </div>
+            <hr />
+            <button class="btn btn-success" (click)="getOptionLink()" [disabled]="!membersCpfList.size">
+              <img src="https://www.mercadopago.com.br/favicon.ico" alt="Mercado Pago" style="max-height: 24px;"> -
+              Adicionar Limite p/ <strong>{{membersCpfList.size}}</strong> membros avulsos
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> </div>

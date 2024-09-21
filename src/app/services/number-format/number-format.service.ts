@@ -6,6 +6,7 @@ type NumberValue = number | null | undefined;
   providedIn: 'root',
 })
 export class NumberFormatService {
+
   public br(numberValue: NumberValue, decimal = 2, minDecimal?: number): string {
     if (numberValue == null || numberValue === undefined) {
       return '';

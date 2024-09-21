@@ -3,10 +3,9 @@ import { ApiService } from '../services/api/api.service';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  interface Window {
-    dataLayer: any;
-  }
+  interface Window { dataLayer: any }
 }
+
 
 @Component({
   selector: 'app-server-unavailability-message',
@@ -14,9 +13,12 @@ declare global {
   styleUrls: ['./server-unavailability-message.component.less'],
 })
 export class ServerUnavailabilityMessageComponent implements OnInit {
+
   public serverStatus = 0;
 
-  constructor(public apiService: ApiService) {}
+  constructor(
+    public apiService: ApiService,
+  ) { }
 
   ngOnInit(): void {
     this.checkServerStatus();

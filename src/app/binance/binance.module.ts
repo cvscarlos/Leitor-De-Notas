@@ -4,9 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BinanceComponent } from './binance.component';
 import { LoadingModule } from '../loading/loading.module';
 
+
+
 @NgModule({
   declarations: [BinanceComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, LoadingModule],
-  exports: [BinanceComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    LoadingModule,
+  ],
+  exports: [BinanceComponent]
 })
-export class BinanceModule {}
+export class BinanceModule { }

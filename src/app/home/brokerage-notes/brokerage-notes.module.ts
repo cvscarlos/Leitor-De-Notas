@@ -3,8 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 @NgModule({
-  declarations: [BrokerageNotesComponent],
-  imports: [CommonModule],
-  exports: [BrokerageNotesComponent],
+  declarations: [
+    BrokerageNotesComponent,
+  ],
+  imports: [
+    CommonModule,
+  ],
+  exports: [
+    BrokerageNotesComponent,
+  ],
 })
-export class BrokerageNotesModule {}
+export class BrokerageNotesModule { }

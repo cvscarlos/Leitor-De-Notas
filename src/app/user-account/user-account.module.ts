@@ -7,6 +7,8 @@ import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directi
 import { SharedPipesModule } from 'src/app/shared-pipes/shared-pipes.module';
 import { UserAccountComponent } from './user-account.component';
 
+
+
 @NgModule({
   declarations: [UserAccountComponent],
   imports: [
@@ -19,4 +21,4 @@ import { UserAccountComponent } from './user-account.component';
   ],
   exports: [UserAccountComponent],
 })
-export class UserAccountModule {}
+export class UserAccountModule { }

@@ -3,9 +3,14 @@ import { LoadingModule } from '../loading/loading.module';
 import { NgModule } from '@angular/core';
 import { PrivacyComponent } from './privacy.component';
 
+
+
 @NgModule({
   declarations: [PrivacyComponent],
-  imports: [CommonModule, LoadingModule],
+  imports: [
+    CommonModule,
+    LoadingModule,
+  ],
   exports: [PrivacyComponent],
 })
-export class PrivacyModule {}
+export class PrivacyModule { }

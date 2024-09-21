@@ -4,7 +4,7 @@ Após realizar a doação através do Mercado Pago, você deve aguardar de 5 a 6
 
 Ao fazer login no Leitor, **utilize o mesmo e-mail que usou para realizar a transação no Mercado Pago**, assim o sistema poderá fazer a associação da sua conta com o pagamento automaticamente.
 
-Caso você já tenha criado uma conta no Leitor e associado o seu CPF a um email diferente do utilizado no Mercado Pago, após login no sistema do leitor, basta editar seu email pelo campo de edição de email e inserir o seu email usado no Mercado Pago.
+Caso você já tenha criado uma conta no Leitor e associado o seu CPF a um email diferente do utilizado no Mercado Pago, após login no sistema do leitor, basta editar seu email pelo campo de edição de email e inserir o  seu email usado no Mercado Pago.
 
 Vale lembra que, após o pagamento associado a sua conta ele não será desassociado mais, ou seja, você pode trocar seu endereço de email que o pagamento continuará em sua conta.
 

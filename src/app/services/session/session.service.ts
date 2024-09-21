@@ -29,11 +29,10 @@ export class SessionService {
   private getSessionId(): string {
     if (Boolean(this.sessionId)) return this.sessionId;
 
-    const sessionId =
-      parseInt(localStorage.bgggSessionExpires) > Date.now()
-        ? String(localStorage.bgggSessionId).trim()
-        : '';
-
+    const sessionId = parseInt(localStorage.bgggSessionExpires) > Date.now()
+      ? String(localStorage.bgggSessionId).trim()
+      : '';
+    
     return Boolean(sessionId) ? sessionId : '';
   }
 }
