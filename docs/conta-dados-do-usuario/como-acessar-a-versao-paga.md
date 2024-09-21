@@ -9,9 +9,9 @@ Caso, após esse tempo seu pagamento ainda não tenha sido reconhecido.\
 
 **Se mesmo assim o problema persistir**, você pode realizar os procedimentos descritos em um dos seguintes artigos:
 
-* [Limites de uso - Fiz a doação mas continua apresentando limite excedido](limites-de-uso-fiz-a-doacao-mas-continua-apresentando-limite-excedido.md)
-* [Paguei em um email diferente, como associar com a minha conta](paguei-em-um-email-diferente-como-associar-com-a-minha-conta.md)
-* [Como associar o pagamento a contas diferentes](paguei-em-um-email-diferente-como-associar-com-a-minha-conta.md)
-* [Como adicionar outros CPFs a conta Família](como-adicionar-outros-cpfs-a-conta-familia.md)
+- [Limites de uso - Fiz a doação mas continua apresentando limite excedido](limites-de-uso-fiz-a-doacao-mas-continua-apresentando-limite-excedido.md)
+- [Paguei em um email diferente, como associar com a minha conta](paguei-em-um-email-diferente-como-associar-com-a-minha-conta.md)
+- [Como associar o pagamento a contas diferentes](paguei-em-um-email-diferente-como-associar-com-a-minha-conta.md)
+- [Como adicionar outros CPFs a conta Família](como-adicionar-outros-cpfs-a-conta-familia.md)
 
 ⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

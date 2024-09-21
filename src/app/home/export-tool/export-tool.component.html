@@ -1,4 +1,4 @@
-<div class="container" style="display: none;" [appSlideToggle]="enableExport">
+<div class="container" style="display: none" [appSlideToggle]="enableExport">
   <div class="row small-font">
     <div class="col text-center mb-3">
       <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cleanNotes()">
@@ -23,38 +23,80 @@
             <h6>Configurações</h6>
             <div class="mb-3 form-check">
               <label class="d-block">
-                <input type="checkbox" [checked]="provisionedIrrfDT" (change)="settingsChange({dayTrade: $event})" />
-                Incluir o IRRF DayTrade provisionado (<a href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/irrf-provisionado" target="_blank">saiba mais</a>).
+                <input
+                  type="checkbox"
+                  [checked]="provisionedIrrfDT"
+                  (change)="settingsChange({ dayTrade: $event })"
+                />
+                Incluir o IRRF DayTrade provisionado (<a
+                  href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/irrf-provisionado"
+                  target="_blank"
+                  >saiba mais</a
+                >).
               </label>
 
               <label class="d-block">
-                <input type="checkbox" [checked]="provisionedIrrfST" (change)="settingsChange({swingTrade: $event})" />
-                Incluir o IRRF SwingTrade provisionado (<a href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/irrf-provisionado" target="_blank">saiba mais</a>).
+                <input
+                  type="checkbox"
+                  [checked]="provisionedIrrfST"
+                  (change)="settingsChange({ swingTrade: $event })"
+                />
+                Incluir o IRRF SwingTrade provisionado (<a
+                  href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/irrf-provisionado"
+                  target="_blank"
+                  >saiba mais</a
+                >).
               </label>
 
               <label class="d-block">
-                <input type="checkbox" [checked]="groupByTicker" (change)="settingsChange({groupByTicker: $event})" />
-                Agrupar pelo nome do ativo (<a href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos" target="_blank">saiba mais</a>).
+                <input
+                  type="checkbox"
+                  [checked]="groupByTicker"
+                  (change)="settingsChange({ groupByTicker: $event })"
+                />
+                Agrupar pelo nome do ativo (<a
+                  href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos"
+                  target="_blank"
+                  >saiba mais</a
+                >).
               </label>
 
               <label class="d-block">
-                <input type="checkbox" [checked]="removeOptionDT" (change)="settingsChange({removeOptionDT: $event})" />
-                Não considerar Day Trade em Opções (<a href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/desconsiderar-a-informacao-de-day-trade-nos-exercicios-de-opcoes" target="_blank">saiba mais</a>).
+                <input
+                  type="checkbox"
+                  [checked]="removeOptionDT"
+                  (change)="settingsChange({ removeOptionDT: $event })"
+                />
+                Não considerar Day Trade em Opções (<a
+                  href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/desconsiderar-a-informacao-de-day-trade-nos-exercicios-de-opcoes"
+                  target="_blank"
+                  >saiba mais</a
+                >).
               </label>
             </div>
           </div>
 
           <div class="col-md pure-text-field click-to-copy">
             <div class="mb-3">
-              <textarea class="text-to-dlombello form-control" readonly #dlombelloTextarea>{{dlombelloExportString}}</textarea>
+              <textarea class="text-to-dlombello form-control" readonly #dlombelloTextarea>{{
+                dlombelloExportString
+              }}</textarea>
             </div>
-            <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(dlombelloTextarea)"><fa-icon [icon]="faCopy"></fa-icon> Copiar</button>
+            <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(dlombelloTextarea)">
+              <fa-icon [icon]="faCopy"></fa-icon> Copiar
+            </button>
           </div>
         </div>
 
         <div class="row" *ngIf="isIframe">
           <div class="col text-center">
-            <button class="btn btn-success btn-lg mt-4" style="font-size: 1.25rem;" (click)="sendJsonMessage()"><fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações</button>
+            <button
+              class="btn btn-success btn-lg mt-4"
+              style="font-size: 1.25rem"
+              (click)="sendJsonMessage()"
+            >
+              <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
+            </button>
           </div>
         </div>
       </ng-template>
@@ -66,9 +108,17 @@
         <div class="row">
           <div class="col pure-text-field click-to-copy">
             <h4 class="text-center my-3">Copiar para Excel</h4>
-            <div class="mb-3"><textarea class="text-to-excel form-control" readonly #excelTextarea>{{excelExportString}}</textarea></div>
-            <button class="btn btn-primary me-3" (click)="copyFn(excelTextarea)"><fa-icon [icon]="faCopy"></fa-icon> Copiar</button>
-            <button class="btn btn-secondary" (click)="saveCsv()"><fa-icon [icon]="faFileCsv"></fa-icon> Baixar .csv</button>
+            <div class="mb-3">
+              <textarea class="text-to-excel form-control" readonly #excelTextarea>{{
+                excelExportString
+              }}</textarea>
+            </div>
+            <button class="btn btn-primary me-3" (click)="copyFn(excelTextarea)">
+              <fa-icon [icon]="faCopy"></fa-icon> Copiar
+            </button>
+            <button class="btn btn-secondary" (click)="saveCsv()">
+              <fa-icon [icon]="faFileCsv"></fa-icon> Baixar .csv
+            </button>
           </div>
         </div>
       </ng-template>

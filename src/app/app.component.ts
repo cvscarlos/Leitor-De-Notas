@@ -13,12 +13,12 @@ export class AppComponent {
   public faBug = faBug;
   public headerMenuCollapsed = true;
 
-  constructor(
-    public isIframe: IsIframeService,
-  ) { }
+  constructor(public isIframe: IsIframeService) {}
 
   onActivate() {
-    const routerTags = document.getElementsByTagName('router-outlet') as HTMLCollectionOf<HTMLElement>;
+    const routerTags = document.getElementsByTagName(
+      'router-outlet',
+    ) as HTMLCollectionOf<HTMLElement>;
     if (routerTags.length) {
       window.scroll(0, Math.max(routerTags[0].offsetTop - 110, 0));
     } else {
