@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HomeModule } from './home/home.module';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LoadingModule } from './loading/loading.module';
 import { ManageMembersModule } from './manage-members/manage-members.module';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,35 +23,27 @@ import { UserBarComponent } from './user-bar/user-bar.component';
 import { UserEmailModule } from './user-email/user-email.module';
 import { BinanceModule } from './binance/binance.module';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    StatisticsComponent,
-    UserBarComponent,
-    USAModalComponent,
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    FontAwesomeModule,
-    HttpClientModule,
-    NgbCollapseModule,
-    SharedPipesModule,
-
-    HomeModule,
-    LoadingModule,
-    ManageMembersModule,
-    PrivacyModule,
-    ServerUnavailabilityMessageModule,
-    UserAccountModule,
-    UserEmailModule,
-    UsageLimitModule,
-    OauthModule,
-    BinanceModule,
-  ],
-  providers: [provideEnvironmentNgxMask()],
-  bootstrap: [AppComponent],
-})
+@NgModule({ declarations: [
+        AppComponent,
+        PageNotFoundComponent,
+        StatisticsComponent,
+        UserBarComponent,
+        USAModalComponent,
+    ],
+    bootstrap: [AppComponent], imports: [AppRoutingModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        FontAwesomeModule,
+        NgbCollapseModule,
+        SharedPipesModule,
+        HomeModule,
+        LoadingModule,
+        ManageMembersModule,
+        PrivacyModule,
+        ServerUnavailabilityMessageModule,
+        UserAccountModule,
+        UserEmailModule,
+        UsageLimitModule,
+        OauthModule,
+        BinanceModule], providers: [provideEnvironmentNgxMask(), provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}
