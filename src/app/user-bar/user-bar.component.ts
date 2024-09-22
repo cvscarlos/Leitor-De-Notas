@@ -12,8 +12,9 @@ import { NotifyService } from '../services/notify/notify.service';
 })
 export class UserBarComponent extends UserComponent implements OnInit {
   public faUser = faUser;
-  public loggedUsers: string[] = [];
   public addUserKey = '_addUser_';
+  public loggedUsers: string[] = [];
+  public sessionList: API.SessionItem[] = [];
 
   constructor(
     public override sessionService: SessionService,
@@ -35,16 +36,22 @@ export class UserBarComponent extends UserComponent implements OnInit {
 
   public changeUser(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-    const selectedValue = selectElement.value;
-    if (!selectedValue) return;
+    const selectedEmail = selectElement.value;
+    if (!selectedEmail) return;
 
-    if (selectedValue === this.addUserKey) {
+    if (selectedEmail === this.addUserKey) {
       this.sessionService.logout(false);
-      this.router.navigate(['/']);
+      window.location.href = '/';
       return;
     }
 
-    console.log('Selected user:', selectedValue, selectElement);
+    const selectedSession = this.sessionList.find((session) => session.email === selectedEmail);
+    if (!selectedSession) {
+      this.notifyService.error('Sessão não encontrada');
+      return;
+    }
+    this.sessionService.setSession(selectedSession.sessionId, selectedSession.expiresAt);
+    window.location.href = '/';
   }
 
   public logout(): void {
@@ -57,6 +64,7 @@ export class UserBarComponent extends UserComponent implements OnInit {
     sessions.forEach((session) => {
       this.loggedUsers.push(session.email);
     });
+    this.sessionList = sessions;
   }
 
   private modalAvailablePayments() {

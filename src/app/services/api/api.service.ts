@@ -9,11 +9,9 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { UserData, UserTransactions } from 'src/types';
 
-export type OauthProvider = 'google' | 'facebook' | 'microsoft';
 type Callback = (data: any) => void;
 type RequestMethod = 'post' | 'delete' | 'patch' | 'get';
 type BinanceCredentials = { binanceApiKey: string; binanceApiSecret: string };
-export type BinanceResponse = { errors: string[]; results: Record<string, string | number>[] };
 
 @Injectable({
   providedIn: 'root',
@@ -54,13 +52,13 @@ export class ApiService {
     return this.cachedRequest('/status', true, 'get').subscribe((data) => callback(data));
   }
 
-  public oAuthUrl(provider: OauthProvider, isIframe: boolean, callback: Callback) {
+  public oAuthUrl(provider: API.OauthProvider, isIframe: boolean, callback: Callback) {
     return this.request(
       `/oauth/${provider}?domain=${location.host}&isIframe=${Number(Boolean(isIframe))}`,
     ).subscribe((data) => callback(data));
   }
 
-  public oAuthToken(provider: OauthProvider, oauthProviderQuerystring: string) {
+  public oAuthToken(provider: API.OauthProvider, oauthProviderQuerystring: string) {
     return this.request(
       `/oauth/${provider}/callback${oauthProviderQuerystring}&domain=${location.host}`,
     );
@@ -133,23 +131,23 @@ export class ApiService {
     return this.request('/pvt/user/settings', { settings });
   }
 
-  public binanceFiatPayments(credentials: BinanceCredentials): Promise<BinanceResponse> {
+  public binanceFiatPayments(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
     return lastValueFrom(this.request('/pvt/binance/fiat-pay', credentials, 'post', false));
   }
 
-  public binanceFiatOrders(credentials: BinanceCredentials): Promise<BinanceResponse> {
+  public binanceFiatOrders(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
     return lastValueFrom(this.request('/pvt/binance/fiat-order', credentials, 'post', false));
   }
 
-  public binanceTradesOCO(credentials: BinanceCredentials): Promise<BinanceResponse> {
+  public binanceTradesOCO(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
     return lastValueFrom(this.request('/pvt/binance/trades-oco', credentials, 'post', false));
   }
 
-  public binanceTrades(credentials: BinanceCredentials): Promise<BinanceResponse> {
+  public binanceTrades(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
     return lastValueFrom(this.request('/pvt/binance/trades', credentials, 'post', false));
   }
 
-  public binanceConversions(credentials: BinanceCredentials): Promise<BinanceResponse> {
+  public binanceConversions(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
     return lastValueFrom(this.request('/pvt/binance/conversions', credentials, 'post', false));
   }
 
@@ -172,9 +170,7 @@ export class ApiService {
     return lastValueFrom(this.request('/pvt/user/connect-usa-account', { cpfCnpj, usaAccount }));
   }
 
-  public async getSessionsInfo(): Promise<
-    { email: string; sessionId: string; expiresAt: number }[]
-  > {
+  public async getSessionsInfo(): Promise<API.SessionItem[]> {
     const sessions = this.sessionService.getSessionList();
     if (!sessions) return [];
     return await lastValueFrom(this.request(`/pvt/session/list`, { sessions }));

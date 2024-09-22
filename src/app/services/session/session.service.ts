@@ -13,17 +13,21 @@ export class SessionService {
   }
 
   set id(sessionId: string) {
-    this.sessionId = sessionId;
-    localStorage.setItem('bgggSessionId', sessionId);
-    localStorage.setItem('bgggSessionExpires', `${Date.now() + fourteenDays}`);
-    this.sessionListAdd(sessionId);
+    this.setSession(sessionId);
   }
 
   get id(): string {
     return this.getSessionId();
   }
 
-  logout(removeSessionFromList = true): void {
+  public setSession(sessionId: string, expiresAt = Date.now() + fourteenDays) {
+    this.sessionId = sessionId;
+    localStorage.setItem('bgggSessionId', sessionId);
+    localStorage.setItem('bgggSessionExpires', `${expiresAt}`);
+    this.sessionListAdd(sessionId);
+  }
+
+  public logout(removeSessionFromList = true): void {
     if (removeSessionFromList) {
       this.sessionListRemove();
     }

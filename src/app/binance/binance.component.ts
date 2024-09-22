@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ApiService, BinanceResponse } from '../services/api/api.service';
+import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
 
 @Component({
@@ -40,7 +40,7 @@ export class BinanceComponent implements OnInit {
 
     const credentials = this.binanceForm.value;
 
-    const parser = ({ results, errors }: BinanceResponse) => {
+    const parser = ({ results, errors }: API.BinanceResponse) => {
       if (errors) errorsList.push(...errors);
       results.forEach((t) => this.pointToComma(t));
       return results;
@@ -50,21 +50,21 @@ export class BinanceComponent implements OnInit {
       this.apiService
         .binanceFiatPayments(credentials)
         .then((d) => (this.fiatPayments = parser(d)))
-        .catch((e) => console.log(e)),
+        .catch((e) => console.warn(e)),
     );
 
     promises.push(
       this.apiService
         .binanceFiatOrders(credentials)
         .then((d) => (this.fiatOrders = parser(d)))
-        .catch((e) => console.log(e)),
+        .catch((e) => console.warn(e)),
     );
 
     promises.push(
       this.apiService
         .binanceTradesOCO(credentials)
         .then((d) => (this.tradesOCO = parser(d)))
-        .catch((e) => console.log(e)),
+        .catch((e) => console.warn(e)),
     );
 
     promises.push(
@@ -76,14 +76,14 @@ export class BinanceComponent implements OnInit {
               .filter((t) => t.status !== 'CANCELED')
               .sort((a, b) => (a.date > b.date ? 1 : -1))),
         )
-        .catch((e) => console.log(e)),
+        .catch((e) => console.warn(e)),
     );
 
     promises.push(
       this.apiService
         .binanceConversions(credentials)
         .then((d) => (this.conversions = parser(d)))
-        .catch((e) => console.log(e)),
+        .catch((e) => console.warn(e)),
     );
 
     Promise.all(promises)

@@ -1,4 +1,4 @@
-import { ApiService, OauthProvider } from 'src/app/services/api/api.service';
+import { ApiService } from 'src/app/services/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../services/session/session.service';
 
@@ -27,7 +27,7 @@ export class OauthComponent implements OnInit {
       return;
     }
 
-    const provider: OauthProvider = querystring.includes('state=microsoft')
+    const provider: API.OauthProvider = querystring.includes('state=microsoft')
       ? 'microsoft'
       : 'google';
 

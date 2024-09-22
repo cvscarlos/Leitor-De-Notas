@@ -1,4 +1,4 @@
-import { ApiService, OauthProvider } from 'src/app/services/api/api.service';
+import { ApiService } from 'src/app/services/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
@@ -86,7 +86,7 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  public redirectToOAuth(provider: OauthProvider) {
+  public redirectToOAuth(provider: API.OauthProvider) {
     this.loading = true;
     const isIframe = this.isIframeService.isIframe();
 
