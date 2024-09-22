@@ -12,7 +12,8 @@ import { NotifyService } from '../services/notify/notify.service';
 })
 export class UserBarComponent extends UserComponent implements OnInit {
   public faUser = faUser;
-  public loggedUsers = [];
+  public loggedUsers: string[] = [];
+  public addUserKey = '_addUser_';
 
   constructor(
     public override sessionService: SessionService,
@@ -26,7 +27,36 @@ export class UserBarComponent extends UserComponent implements OnInit {
   override ngOnInit() {
     super.ngOnInit();
 
-    if (this.sessionService.isAuthenticated) this.modalAvailablePayments();
+    if (this.sessionService.isAuthenticated) {
+      this.listAvailableUsers();
+      this.modalAvailablePayments();
+    }
+  }
+
+  public changeUser(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+    if (!selectedValue) return;
+
+    if (selectedValue === this.addUserKey) {
+      this.sessionService.logout(false);
+      this.router.navigate(['/']);
+      return;
+    }
+
+    console.log('Selected user:', selectedValue, selectElement);
+  }
+
+  public logout(): void {
+    this.sessionService.logout();
+    window.location.href = '/';
+  }
+
+  private async listAvailableUsers() {
+    const sessions = await this.apiService.getSessionsInfo();
+    sessions.forEach((session) => {
+      this.loggedUsers.push(session.email);
+    });
   }
 
   private modalAvailablePayments() {
@@ -44,10 +74,5 @@ export class UserBarComponent extends UserComponent implements OnInit {
       if (isConfirmed) this.router.navigate(['minha-conta']);
       else sessionStorage.setItem('bgggSawAvailablePayment', '1');
     });
-  }
-
-  public logout(): void {
-    this.sessionService.logout();
-    window.location.href = '/';
   }
 }

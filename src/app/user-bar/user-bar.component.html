@@ -15,11 +15,12 @@
 
     <div class="ms-0 ms-md-5">
       <p>
-        <select class="form-select">
+        <select class="form-select" (change)="changeUser($event)">
           <option>Trocar usuário</option>
+          <option disabled>──────────</option>
           <option *ngFor="let email of loggedUsers" [value]="email">{{ email }}</option>
           <option disabled>──────────</option>
-          <option>+ adicionar usuário</option>
+          <option value="{{addUserKey}}" >+ adicionar usuário</option>
         </select>
       </p>
     </div>
