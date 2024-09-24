@@ -1,3 +1,14 @@
+<!-- eslint-disable @angular-eslint/template/no-autofocus -->
+
+<div *ngIf="queryToken; then tplAutoLogin else tplLoginForm"> </div>
+
+<ng-template #tplAutoLogin>
+  <div>
+    <app-loading [show]="loading"></app-loading>
+  </div>
+</ng-template>
+
+<ng-template #tplLoginForm>
 <div
   class="row m-3 mb-5 p-2 bg-light rounded mx-auto text-center shadow border"
   id="login"
@@ -15,7 +26,6 @@
       <form class="form" [formGroup]="emailForm" (submit)="submitEmailForm()">
         <div class="mb-3">
           <label class="form-label" for="email">Email</label>
-          <!-- eslint-disable-next-line @angular-eslint/template/no-autofocus -->
           <input
             type="email"
             name="email"
@@ -85,3 +95,4 @@
     </div>
   </div>
 </div>
+</ng-template>

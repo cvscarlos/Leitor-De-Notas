@@ -16,6 +16,7 @@ export class AuthComponent implements OnInit {
   public loading = false;
   public loginSlideState = '';
   public tokenForm!: UntypedFormGroup;
+  public queryToken = '';
   private sessionId = '';
 
   constructor(
@@ -24,7 +25,9 @@ export class AuthComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private notifyService: NotifyService,
     private isIframeService: IsIframeService,
-  ) {}
+  ) {
+    this.queryToken = new URLSearchParams(window.location.search).get('token') || '';
+  }
 
   ngOnInit(): void {
     this.emailForm = this.formBuilder.group({
@@ -34,6 +37,10 @@ export class AuthComponent implements OnInit {
     this.tokenForm = this.formBuilder.group({
       token: [null, [Validators.required, Validators.pattern('^[0-9]{6}$')]],
     });
+
+    if (this.queryToken) {
+      this.autoAuthenticateUser();
+    }
   }
 
   public submitEmailForm(): void {
@@ -117,5 +124,11 @@ export class AuthComponent implements OnInit {
         }
       }, 500);
     });
+  }
+
+  private autoAuthenticateUser(): void {
+    this.loading = true;
+    
+    
   }
 }
