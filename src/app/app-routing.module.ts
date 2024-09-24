@@ -60,7 +60,7 @@ const routes: Routes = [
     data: { hideAboutUs: true },
   },
   { path: 'oauth', component: OauthComponent, data: { hideAboutUs: true } },
-  { path: 'oauth-i.html', component: OauthComponent, data: { hideAboutUs: true } },
+  { path: 'oauth.html', component: OauthComponent, data: { hideAboutUs: true } },
   { path: 'oauth-i.html', component: OauthComponent, data: { hideAboutUs: true } },
   { path: 'binance', component: BinanceComponent, canActivate: [AuthService] },
   { path: 'loading', component: FullPageLoadingComponent, data: { hideAboutUs: true } },
