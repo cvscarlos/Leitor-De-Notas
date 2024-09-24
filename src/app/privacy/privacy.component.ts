@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
 import { SessionService } from '../services/session/session.service';
+import { CommonModule } from '@angular/common';
+import { LoadingModule } from '../loading/loading.module';
 
 @Component({
+  imports: [CommonModule, LoadingModule],
+  standalone: true,
   selector: 'app-privacy',
   templateUrl: './privacy.component.html',
 })
@@ -18,9 +22,10 @@ export class PrivacyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.apiService.userMe().then((data: any) => {
-      this.showAcceptTermsButton = !data.termsAccepted;
+    this.apiService.userMe().then((data?: Record<string, unknown>) => {
+      if (data) {
+        this.showAcceptTermsButton = !data.termsAccepted;
+      }
     });
   }
 

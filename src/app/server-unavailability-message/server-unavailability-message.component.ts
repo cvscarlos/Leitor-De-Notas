@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
+import { CommonModule } from '@angular/common';
+import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   interface Window {
-    dataLayer: any;
+    dataLayer: Record<string, unknown>[];
   }
 }
 
 @Component({
   selector: 'app-server-unavailability-message',
+  imports: [CommonModule, SharedDirectivesModule],
+  standalone: true,
   templateUrl: './server-unavailability-message.component.html',
   styleUrls: ['./server-unavailability-message.component.less'],
 })
@@ -57,9 +60,9 @@ export class ServerUnavailabilityMessageComponent implements OnInit {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: 'GACustomEvent',
-      ga_category: params[0], // eslint-disable-line @typescript-eslint/naming-convention
-      ga_action: params[1], // eslint-disable-line @typescript-eslint/naming-convention
-      ga_label: params[2], // eslint-disable-line @typescript-eslint/naming-convention
+      ga_category: params[0],
+      ga_action: params[1],
+      ga_label: params[2],
     });
   }
 }
