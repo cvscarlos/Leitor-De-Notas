@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService, BinanceResponse } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
+import { CommonModule } from '@angular/common';
+import { LoadingModule } from '../loading/loading.module';
 
 @Component({
   selector: 'app-binance',
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, LoadingModule],
+  standalone: true,
   templateUrl: './binance.component.html',
   styleUrls: ['./binance.component.less'],
 })

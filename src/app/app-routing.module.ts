@@ -11,6 +11,8 @@ import { PrivacyComponent } from './privacy/privacy.component';
 import { UsageLimitComponent } from './usage-limit/usage-limit.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserEmailComponent } from './user-email/user-email.component';
+import { FullPageLoadingComponent } from './full-page-loading/full-page-loading.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const queryMatcher = (queryToMatch: string): boolean => {
   const url = new URL(window.location.href);
@@ -29,6 +31,7 @@ const routes: Routes = [
 
   { path: '', component: HomeComponent },
   { path: 'index.html', component: HomeComponent },
+  { path: 'sobre', component: AboutUsComponent, data: { hideAboutUs: true } },
   {
     path: 'minha-conta',
     component: UserAccountComponent,
@@ -44,11 +47,23 @@ const routes: Routes = [
     component: ManageMembersComponent,
     canActivate: [AuthService, IsIframeService],
   },
-  { path: 'privacidade-termos', component: PrivacyComponent, canActivate: [IsIframeService] },
-  { path: 'limites-uso', component: UsageLimitComponent, canActivate: [IsIframeService] },
-  { path: 'oauth.html', component: OauthComponent },
-  { path: 'oauth-i.html', component: OauthComponent },
+  {
+    path: 'privacidade-termos',
+    component: PrivacyComponent,
+    canActivate: [IsIframeService],
+    data: { hideAboutUs: true },
+  },
+  {
+    path: 'limites-uso',
+    component: UsageLimitComponent,
+    canActivate: [IsIframeService],
+    data: { hideAboutUs: true },
+  },
+  { path: 'oauth', component: OauthComponent, data: { hideAboutUs: true } },
+  { path: 'oauth-i.html', component: OauthComponent, data: { hideAboutUs: true } },
+  { path: 'oauth-i.html', component: OauthComponent, data: { hideAboutUs: true } },
   { path: 'binance', component: BinanceComponent, canActivate: [AuthService] },
+  { path: 'loading', component: FullPageLoadingComponent, data: { hideAboutUs: true } },
   { path: '**', component: PageNotFoundComponent },
 ];
 

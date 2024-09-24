@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountMember } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
-import { UntypedFormGroup } from '@angular/forms';
+import { FormsModule, UntypedFormGroup } from '@angular/forms';
 import { NotifyService } from 'src/app/services/notify/notify.service';
+import { CommonModule } from '@angular/common';
+import { LoadingModule } from '../loading/loading.module';
+import { SharedPipesModule } from '../shared-pipes/shared-pipes.module';
 
 @Component({
   selector: 'app-manage-members',
+  imports: [CommonModule, FormsModule, LoadingModule, SharedPipesModule],
+  standalone: true,
   templateUrl: './manage-members.component.html',
   styleUrls: ['./manage-members.component.less'],
 })
