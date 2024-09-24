@@ -171,9 +171,13 @@ export class ApiService {
   }
 
   public async getSessionsInfo(): Promise<API.SessionItem[]> {
-    const sessions = this.sessionService.getSessionList();
+    const sessions = this.sessionService.getSessionList()?.split(',');
     if (!sessions) return [];
     return await lastValueFrom(this.request(`/pvt/session/list`, { sessions }));
+  }
+
+  public async createSession(token: string): Promise<any> {
+    return await lastValueFrom(this.request(`/dlombello/create-session`, { token }));
   }
 
   private request(

@@ -108,7 +108,7 @@ export class AuthComponent implements OnInit {
       const loginWindow = window.open(data.url);
 
       const htmlSpin =
-        '<div><div class="spinner-border" role="status"><span class="sr-only">Carregando...</span></div></div>';
+        '<div><div class="spinner-border" role="status"><span class="visually-hidden">Carregando...</span></div></div>';
       this.notifyService.infoForceOpened(
         'Aguardando a autorização',
         `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`,
@@ -126,9 +126,15 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  private autoAuthenticateUser(): void {
-    this.loading = true;
-    
-    
+  private async autoAuthenticateUser() {
+    try {
+      this.loading = true;
+      this.api.createSession(this.queryToken);
+    } catch (error) {
+      console.error(error);
+      this.notifyService.error(
+        'Erro ao conectar o usuário automaticamente, por favor se autentique manualmente',
+      );
+    }
   }
 }
