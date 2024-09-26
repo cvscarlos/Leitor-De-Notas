@@ -129,7 +129,9 @@ export class AuthComponent implements OnInit {
   private async autoAuthenticateUser() {
     try {
       this.loading = true;
-      this.api.createSession(this.queryToken);
+      const data = await this.api.createSession(this.queryToken);
+      this.sessionService.id = data.session;
+      window.location.href = '/';
     } catch (error) {
       console.error(error);
       this.notifyService.error(

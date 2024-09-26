@@ -44,8 +44,10 @@ export class UserAccountComponent extends UserComponent implements OnInit {
   override ngOnInit() {
     super.ngOnInit();
 
+    this.transactionsLoading = true;
     this.apiService.userTransactions((data) => {
       this.userTransactions = data;
+      this.transactionsLoading = false;
     });
 
     this.userUsageHistoryLoading = true;

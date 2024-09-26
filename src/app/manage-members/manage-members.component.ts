@@ -54,7 +54,7 @@ export class ManageMembersComponent implements OnInit {
       this.membersCpfList.size,
       this.membersCpfList,
       (data) => {
-        location.href = data.link;
+        window.location.href = data.link;
       },
     );
   }

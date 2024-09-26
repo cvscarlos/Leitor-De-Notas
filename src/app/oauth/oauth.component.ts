@@ -43,12 +43,8 @@ export class OauthComponent implements OnInit {
           this.message = '✅ Sucesso! Você já pode fechar esta aba.';
           window.close();
         } else {
-          location.href = '/';
+          window.location.href = '/';
         }
-      },
-      error: (err) => {
-        console.error({ err });
-        this.message = '❌ Erro inesperado!';
       },
     });
   }

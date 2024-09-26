@@ -24,7 +24,7 @@ export class UsageLimitComponent {
     if (this.sessionService.isAuthenticated) {
       this.loading = true;
       this.api.getMercadoPagoLink(limitType, 1, null, (data) => {
-        location.href = data.link;
+        window.location.href = data.link;
       });
     } else {
       this.notifyService
