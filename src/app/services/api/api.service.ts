@@ -178,7 +178,7 @@ export class ApiService {
   }
 
   public async createSession(token: string): Promise<any> {
-    return await lastValueFrom(this.request(`/dlombello/create-session`, { token }));
+    return await lastValueFrom(this.request(`/dlombello/create-session`, { token }, 'post', false));
   }
 
   private request(

@@ -131,12 +131,9 @@ export class AuthComponent implements OnInit {
       this.loading = true;
       const data = await this.api.createSession(this.queryToken);
       this.sessionService.id = data.session;
-      window.location.href = '/';
     } catch (error) {
       console.error(error);
-      this.notifyService.error(
-        'Erro ao conectar o usuário automaticamente, por favor se autentique manualmente',
-      );
     }
+    window.location.href = '/';
   }
 }
