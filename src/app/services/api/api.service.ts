@@ -18,6 +18,7 @@ type BinanceCredentials = { binanceApiKey: string; binanceApiSecret: string };
 })
 export class ApiService {
   private requestCache: { [endpoint: string]: ReplaySubject<any> } = {};
+  private pendingCache: { [key: string]: boolean } = {};
 
   constructor(
     private http: HttpClient,
@@ -207,10 +208,18 @@ export class ApiService {
   ): ReplaySubject<any> {
     this.requestCache[endpoint] = this.requestCache[endpoint] || new ReplaySubject(1);
 
-    if (!this.requestCache[endpoint].observed) {
+    // Only make the request if it has not been made before and is not pending
+    if (!this.requestCache[endpoint].observed && !this.pendingCache[endpoint]) {
+      this.pendingCache[endpoint] = true;
       this.request(endpoint, null, method, handleError).subscribe({
-        next: (n) => this.requestCache[endpoint].next(n),
-        error: (e) => this.requestCache[endpoint].error(e),
+        next: (n) => {
+          this.requestCache[endpoint].next(n);
+          this.pendingCache[endpoint] = false;
+        },
+        error: (e) => {
+          this.requestCache[endpoint].error(e);
+          this.pendingCache[endpoint] = false;
+        },
       });
     }
 
