@@ -1,4 +1,4 @@
-import { ApiService, OauthProvider } from 'src/app/services/api/api.service';
+import { ApiService } from 'src/app/services/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
@@ -16,6 +16,7 @@ export class AuthComponent implements OnInit {
   public loading = false;
   public loginSlideState = '';
   public tokenForm!: UntypedFormGroup;
+  public queryToken = '';
   private sessionId = '';
 
   constructor(
@@ -24,7 +25,9 @@ export class AuthComponent implements OnInit {
     private formBuilder: UntypedFormBuilder,
     private notifyService: NotifyService,
     private isIframeService: IsIframeService,
-  ) {}
+  ) {
+    this.queryToken = new URLSearchParams(window.location.search).get('token') || '';
+  }
 
   ngOnInit(): void {
     this.emailForm = this.formBuilder.group({
@@ -34,6 +37,10 @@ export class AuthComponent implements OnInit {
     this.tokenForm = this.formBuilder.group({
       token: [null, [Validators.required, Validators.pattern('^[0-9]{6}$')]],
     });
+
+    if (this.queryToken) {
+      this.autoAuthenticateUser();
+    }
   }
 
   public submitEmailForm(): void {
@@ -86,7 +93,7 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  public redirectToOAuth(provider: OauthProvider) {
+  public redirectToOAuth(provider: API.OauthProvider) {
     this.loading = true;
     const isIframe = this.isIframeService.isIframe();
 
@@ -101,7 +108,7 @@ export class AuthComponent implements OnInit {
       const loginWindow = window.open(data.url);
 
       const htmlSpin =
-        '<div><div class="spinner-border" role="status"><span class="sr-only">Carregando...</span></div></div>';
+        '<div><div class="spinner-border" role="status"><span class="visually-hidden">Carregando...</span></div></div>';
       this.notifyService.infoForceOpened(
         'Aguardando a autorização',
         `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`,
@@ -117,5 +124,19 @@ export class AuthComponent implements OnInit {
         }
       }, 500);
     });
+  }
+
+  private async autoAuthenticateUser() {
+    try {
+      this.loading = true;
+      const data = await this.api.createSession(this.queryToken);
+      this.sessionService.id = data.session;
+      window.location.href = '/';
+    } catch (error) {
+      console.error(error);
+      this.notifyService.error(
+        'Erro ao conectar o usuário automaticamente, por favor se autentique manualmente',
+      );
+    }
   }
 }

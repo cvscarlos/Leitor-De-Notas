@@ -1,4 +1,4 @@
-import { ApiService, OauthProvider } from 'src/app/services/api/api.service';
+import { ApiService } from 'src/app/services/api/api.service';
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../services/session/session.service';
 import { CommonModule } from '@angular/common';
@@ -30,7 +30,7 @@ export class OauthComponent implements OnInit {
       return;
     }
 
-    const provider: OauthProvider = querystring.includes('state=microsoft')
+    const provider: API.OauthProvider = querystring.includes('state=microsoft')
       ? 'microsoft'
       : 'google';
 
@@ -43,12 +43,8 @@ export class OauthComponent implements OnInit {
           this.message = '✅ Sucesso! Você já pode fechar esta aba.';
           window.close();
         } else {
-          location.href = '/';
+          window.location.href = '/';
         }
-      },
-      error: (err) => {
-        console.error({ err });
-        this.message = '❌ Erro inesperado!';
       },
     });
   }

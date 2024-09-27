@@ -6,7 +6,7 @@ import { LoadingModule } from '../loading/loading.module';
   standalone: true,
   imports: [LoadingModule],
   template: `
-    <div class="position-fixed w-100 h-100 bg-white top-0 z-1">
+    <div class="bg-white fixed-top h-100 w-100 z-1">
       <app-loading [show]="true"></app-loading>
     </div>
   `,

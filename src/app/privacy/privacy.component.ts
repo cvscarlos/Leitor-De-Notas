@@ -22,7 +22,7 @@ export class PrivacyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.apiService.userMe().then((data?: Record<string, unknown>) => {
+    this.apiService.userMe().then((data) => {
       if (data) {
         this.showAcceptTermsButton = !data.termsAccepted;
       }

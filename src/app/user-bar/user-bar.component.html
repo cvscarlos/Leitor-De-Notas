@@ -1,33 +1,28 @@
 <div *ngIf="this.sessionService.isAuthenticated" style="position: relative">
   <app-loading [show]="loading"></app-loading>
 
-  <div class="text-center">
-    <p>
-      <svg
-        class="bi bi-person-circle text-secondary"
-        width="1.2em"
-        height="1.2em"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"
-        />
-        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-        <path
-          fill-rule="evenodd"
-          d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"
-        />
-      </svg>
-      {{ user.email }}
-      <a routerLink="/editar-email">
-        <fa-icon [icon]="faPencilAlt"></fa-icon>
-      </a>
-      |
-      <a routerLink="/minha-conta">Minha conta</a>
-      |
-      <a href="javascript:void(0);" (click)="logout()">Sair</a>
-    </p>
+  <div class="d-flex justify-content-center align-items-center flex-column flex-md-row">
+    <div class="text-center">
+      <p>
+        <fa-icon [icon]="faUser" class="text-secondary"></fa-icon>
+        {{ user.email }}
+        |
+        <a routerLink="/minha-conta">Minha conta</a>
+        |
+        <a href="javascript:void(0);" (click)="logout()">Sair</a>
+      </p>
+    </div>
+
+    <div class="ms-0 ms-md-5">
+      <p>
+        <select class="form-select" (change)="changeUser($event)">
+          <option>Trocar usuário</option>
+          <option disabled>──────────</option>
+          <option *ngFor="let email of loggedUsers" [value]="email">{{ email }}</option>
+          <option disabled>──────────</option>
+          <option value="{{ addUserKey }}">+ adicionar usuário</option>
+        </select>
+      </p>
+    </div>
   </div>
 </div>

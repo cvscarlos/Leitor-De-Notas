@@ -4,17 +4,17 @@
       <div class="bg-warning p-3" *ngIf="serverStatus < 4">
         <span id="msg-30s" [appSlideToggle]="serverStatus === 1" style="display: none">
           <span class="spinner-grow spinner-grow-sm" role="status"
-            ><span class="sr-only"></span
+            ><span class="visually-hidden"></span
           ></span>
           <p>.. nosso servidor esta demorado um pouco para responder. Por favor, aguarde!</p>
         </span>
 
         <span id="msg-60s" [appSlideToggle]="serverStatus === 2" style="display: none">
           <span class="spinner-grow spinner-grow-sm" role="status"
-            ><span class="sr-only"></span
+            ><span class="visually-hidden"></span
           ></span>
           <span class="spinner-grow spinner-grow-sm" role="status"
-            ><span class="sr-only"></span
+            ><span class="visually-hidden"></span
           ></span>
           <p>
             ... já se passaram mais de 1 minuto.<br />Desculpe a demora, mas ainda estamos tentando
@@ -24,13 +24,13 @@
 
         <span id="msg-90s" [appSlideToggle]="serverStatus === 3" style="display: none">
           <span class="spinner-grow spinner-grow-sm" role="status"
-            ><span class="sr-only"></span
+            ><span class="visually-hidden"></span
           ></span>
           <span class="spinner-grow spinner-grow-sm" role="status"
-            ><span class="sr-only"></span
+            ><span class="visually-hidden"></span
           ></span>
           <span class="spinner-grow spinner-grow-sm" role="status"
-            ><span class="sr-only"></span
+            ><span class="visually-hidden"></span
           ></span>
           <p>
             ... mais de 1 min. e 30 seg. sem resposta do servidor, pode ser que estejamos passando

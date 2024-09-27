@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/services/api/api.service';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session/session.service';
 import { UserComponent } from 'src/app/user/user.component';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { NotifyService } from '../services/notify/notify.service';
 
 @Component({
@@ -11,7 +11,10 @@ import { NotifyService } from '../services/notify/notify.service';
   templateUrl: './user-bar.component.html',
 })
 export class UserBarComponent extends UserComponent implements OnInit {
-  public faPencilAlt = faPencilAlt;
+  public faUser = faUser;
+  public addUserKey = '_addUser_';
+  public loggedUsers: string[] = [];
+  public sessionList: API.SessionItem[] = [];
 
   constructor(
     public override sessionService: SessionService,
@@ -25,7 +28,43 @@ export class UserBarComponent extends UserComponent implements OnInit {
   override ngOnInit() {
     super.ngOnInit();
 
-    if (this.sessionService.isAuthenticated) this.modalAvailablePayments();
+    if (this.sessionService.isAuthenticated) {
+      this.listAvailableUsers();
+      this.modalAvailablePayments();
+    }
+  }
+
+  public changeUser(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedEmail = selectElement.value;
+    if (!selectedEmail) return;
+
+    if (selectedEmail === this.addUserKey) {
+      this.sessionService.logout(false);
+      window.location.href = '/';
+      return;
+    }
+
+    const selectedSession = this.sessionList.find((session) => session.email === selectedEmail);
+    if (!selectedSession) {
+      this.notifyService.error('Sessão não encontrada');
+      return;
+    }
+    this.sessionService.setSession(selectedSession.sessionId, selectedSession.expiresAt);
+    window.location.href = '/';
+  }
+
+  public logout(): void {
+    this.sessionService.logout();
+    window.location.href = '/';
+  }
+
+  private async listAvailableUsers() {
+    const sessions = await this.apiService.getSessionsInfo();
+    sessions.forEach((session) => {
+      this.loggedUsers.push(session.email);
+    });
+    this.sessionList = sessions;
   }
 
   private modalAvailablePayments() {
@@ -43,10 +82,5 @@ export class UserBarComponent extends UserComponent implements OnInit {
       if (isConfirmed) this.router.navigate(['minha-conta']);
       else sessionStorage.setItem('bgggSawAvailablePayment', '1');
     });
-  }
-
-  public logout(): void {
-    this.sessionService.logout();
-    window.location.href = '/';
   }
 }
