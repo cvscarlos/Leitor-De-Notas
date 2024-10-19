@@ -39,6 +39,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Nova Futura Corretora                 | ✅              | ✅             |
 | NuInvest / Easynvest Corretora        | ✅              | ✅             |
 | Órama Corretora                       | ✅              | ✅             |
+| Renascença Corretora                  |                 | ✅             |
 | Rico Corretora                        | ✅              | ✅             |
 | Santander Corretora                   | ✅              |                |
 | Singulare / Socopa Corretora          | ✅              |                |
