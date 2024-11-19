@@ -1,11 +1,11 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import * as Sentry from '@sentry/angular';
+import { provideMicroSentry } from '@micro-sentry/angular';
 
 import { USAModalComponent } from './usa-modal/usa-modal.component';
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { UserBarComponent } from './user-bar/user-bar.component';
 import { UserEmailModule } from './user-email/user-email.module';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ServerUnavailabilityMessageComponent } from './server-unavailability-message/server-unavailability-message.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -47,12 +48,10 @@ import { ServerUnavailabilityMessageComponent } from './server-unavailability-me
   providers: [
     provideEnvironmentNgxMask(),
     provideHttpClient(withInterceptorsFromDi()),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: () => () => {},
-      deps: [Sentry.TraceService],
-      multi: true,
-    },
+    provideMicroSentry({
+      dsn: 'https://5b8bf0c4ebaef72d93c588958ee478ae@o4505375512395776.ingest.us.sentry.io/4508327216807936',
+      environment: environment.production ? 'production' : 'development',
+    }),
   ],
 })
 export class AppModule {}
