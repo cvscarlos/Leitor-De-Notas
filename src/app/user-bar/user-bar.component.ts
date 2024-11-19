@@ -47,9 +47,12 @@ export class UserBarComponent extends UserComponent implements OnInit {
 
     const selectedSession = this.sessionList.find((session) => session.email === selectedEmail);
     if (!selectedSession) {
-      this.notifyService.error('Sessão não encontrada');
+      const error = new Error('Sessão não encontrada');
+      console.error(error);
+      this.notifyService.error(error.message);
       return;
     }
+
     this.sessionService.setSession(selectedSession.sessionId, selectedSession.expiresAt);
     window.location.href = '/';
   }

@@ -3,8 +3,9 @@
 import { concatMap, share } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { lastValueFrom, Observable, of, ReplaySubject } from 'rxjs';
-import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
+
+import { environment } from 'src/environments/environment';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { UserData, UserTransactions } from 'src/types';
@@ -196,7 +197,12 @@ export class ApiService {
       .request(method, environment.apiServer + endpoint, options)
       .pipe(share());
 
-    if (handleError) httpReq.subscribe({ error: (e) => this.requestErrorHandler(e) });
+    httpReq.subscribe({
+      error: (e) => {
+        console.error(e);
+        if (handleError) this.requestErrorHandler(e);
+      },
+    });
 
     return httpReq;
   }

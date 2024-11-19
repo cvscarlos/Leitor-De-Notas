@@ -143,11 +143,11 @@ export class ExportToolComponent implements OnInit {
     try {
       window.parent.postMessage(JSON.stringify(this.dlombelloExportObjects), '*');
     } catch (error) {
+      console.error(error);
       this.notifyService.error(
         'Algo saiu errado ao tentar enviar os dados!',
         'A operação não foi completada.',
       );
-      console.error(error);
     }
   }
 

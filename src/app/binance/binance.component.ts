@@ -101,8 +101,8 @@ export class BinanceComponent implements OnInit {
   }
 
   private logError(error: unknown) {
-    this.notifyService.error('Houve um erro ao tentar buscar os dados da Binance');
     console.error(error);
+    this.notifyService.error('Houve um erro ao tentar buscar os dados da Binance');
   }
 
   private pointToComma(obj: Record<string, unknown>) {

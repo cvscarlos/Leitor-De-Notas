@@ -49,7 +49,9 @@ export class AuthComponent implements OnInit {
     }
 
     if (!this.emailForm.valid) {
-      this.notifyService.error('Email inválido');
+      const error = new Error('Email inválido');
+      console.error(error);
+      this.notifyService.error(error.message);
       return;
     }
 
@@ -75,7 +77,9 @@ export class AuthComponent implements OnInit {
     }
 
     if (!this.tokenForm.valid) {
-      this.notifyService.error('Token inválido');
+      const err = new Error('Token inválido');
+      console.error(err);
+      this.notifyService.error(err.message);
       return;
     }
 

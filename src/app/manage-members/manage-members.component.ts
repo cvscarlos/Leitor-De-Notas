@@ -32,7 +32,9 @@ export class ManageMembersComponent implements OnInit {
 
   public submitMemberForm(form: UntypedFormGroup) {
     if (form.status !== 'VALID') {
-      this.notifyService.error('CPF/CNPJ inválido');
+      const error = new Error('CPF/CNPJ inválido');
+      console.error(error);
+      this.notifyService.error(error.message);
       return;
     }
 
