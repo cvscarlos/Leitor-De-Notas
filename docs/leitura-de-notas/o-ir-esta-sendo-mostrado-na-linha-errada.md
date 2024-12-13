@@ -1,12 +1,11 @@
-# O IR esta sendo mostrado na linha errada
+# O IR Está Sendo Mostrado na Linha Errada
 
-Ao ler a sua nota de corretagem, o Leitor coloca o IRRF (caso tenha sido descontado da nota) junto ao primeiro ativo existente na nota.
+Ao ler sua nota de corretagem, o Leitor pode exibir o IRRF (caso tenha sido descontado) junto ao primeiro ativo listado.
 
-Isso é ocorre por questões de técnicas envolvendo a performance do sistema.\
-Porém isso não afeta o cálculo do imposto devido.\
-O IR é mensal, então no final das contas o que importa é quanto de IR foi retido durante aquele mês.\
-Se o IR é mostrado em uma operação de venda ou de compra, não fará diferença na Planilha Dlombello.
+Isso acontece porque a corretora não informa o IRRF por ativo. O cálculo do imposto devido é feito com base no valor total da nota, e não por ativo individualmente.
+No entanto, essa exibição não impacta o cálculo do imposto devido.
+O IR é calculado mensalmente, ou seja, o que realmente importa é o total de IR retido durante o mês.
 
-Caso, mesmo assim queira mover o IR para outra operação da nota, você deve fazer isso manualmente na planilha.
+Se o IR aparecer em uma operação de compra ou venda, isso não afetará o cálculo mensal do imposto.
 
-\
+Caso deseje mover o IR para outra operação na nota, essa alteração deve ser feita manualmente na planilha.
