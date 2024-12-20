@@ -13,8 +13,8 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Corretora                             | Mercado à Vista | Mercado Futuro |
 | ------------------------------------- | --------------- | -------------- |
 | Ágora Corretora                       | ✅              |                |
-| Ativa Investimentos                   | ✅              | ✅             |
 | Apex (EUA) Corretora                  | ✅              |                |
+| Ativa Investimentos                   | ✅              | ✅             |
 | Avenue (EUA) Corretora                | ✅              |                |
 | Banco do Brasil Investimentos         | ✅              |                |
 | Banco Inter Corretora                 | ✅              | ✅             |
@@ -39,13 +39,16 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Nova Futura Corretora                 | ✅              | ✅             |
 | NuInvest / Easynvest Corretora        | ✅              | ✅             |
 | Órama Corretora                       | ✅              | ✅             |
+| Passfolio (EUA) Corretora             | ✅              |                |
 | Renascença Corretora                  |                 | ✅             |
 | Rico Corretora                        | ✅              | ✅             |
 | Santander Corretora                   | ✅              |                |
 | Singulare / Socopa Corretora          | ✅              |                |
+| Sproutfi (EUA) Corretora              | ✅              |                |
 | Tastyworks (EUA) Corretora            | ✅              |                |
 | Terra Investimentos                   | ✅              | ✅             |
 | Toro Corretora                        | ✅              | ✅             |
+| Vest (EUA) Corretora                  | ✅              |                |
 | Warren Corretora                      | ✅              | ✅             |
 | XP Corretora                          | ✅              | ✅             |
 

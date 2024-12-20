@@ -12,6 +12,7 @@
     "activityBar.foreground": "#ACD8FC",
     "activityBar.inactiveForeground": "#113264"
   },
+  "cSpell.language": "en,pt_BR",
   "editor.detectIndentation": false,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
