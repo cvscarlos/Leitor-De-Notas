@@ -12,7 +12,6 @@ declare global {
 @Component({
   selector: 'app-server-unavailability-message',
   imports: [CommonModule, SharedDirectivesModule],
-  standalone: true,
   templateUrl: './server-unavailability-message.component.html',
   styleUrls: ['./server-unavailability-message.component.less'],
 })

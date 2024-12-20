@@ -3,7 +3,6 @@ import { LoadingModule } from '../loading/loading.module';
 
 @Component({
   selector: 'app-full-page-loading',
-  standalone: true,
   imports: [LoadingModule],
   template: `
     <div class="bg-white fixed-top h-100 w-100 z-1">

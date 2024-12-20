@@ -9,6 +9,7 @@ import { SessionService } from 'src/app/services/session/session.service';
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.less'],
+  standalone: false,
 })
 export class AuthComponent implements OnInit {
   public emailForm!: UntypedFormGroup;

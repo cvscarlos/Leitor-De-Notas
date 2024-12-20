@@ -8,7 +8,6 @@ import { LoadingModule } from '../loading/loading.module';
 @Component({
   selector: 'app-binance',
   imports: [CommonModule, FormsModule, ReactiveFormsModule, LoadingModule],
-  standalone: true,
   templateUrl: './binance.component.html',
   styleUrls: ['./binance.component.less'],
 })

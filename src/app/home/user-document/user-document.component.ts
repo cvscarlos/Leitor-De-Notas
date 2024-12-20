@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user/user.service';
   selector: 'app-user-document',
   templateUrl: './user-document.component.html',
   styleUrls: ['./user-document.component.less'],
+  standalone: false,
 })
 export class UserDocumentComponent implements OnInit {
   @ViewChild('modalContent') modalContent: ElementRef | undefined;

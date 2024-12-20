@@ -20,6 +20,7 @@ type UserUsageHistory = {
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
+  standalone: false,
 })
 export class UserAccountComponent extends UserComponent implements OnInit {
   public tpl = { mpOperationNumber: false, connectTransaction: false };

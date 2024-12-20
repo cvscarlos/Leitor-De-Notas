@@ -8,6 +8,7 @@ import { SessionService } from 'src/app/services/session/session.service';
   selector: 'app-user-email',
   templateUrl: './user-email.component.html',
   styleUrls: ['./user-email.component.less'],
+  standalone: false,
 })
 export class UserEmailComponent {
   public loading = false;

@@ -1,13 +1,21 @@
-import Swal, { SweetAlertIcon, SweetAlertOptions, SweetAlertResult } from 'sweetalert2';
+// Importing SweetAlert2 should be simple,
+// but Angular says that it is not a ESM module.
+// So, I had to force import the ESM version and cast it to the correct type.
+import type * as SwalType from 'sweetalert2';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import sweetalert2 from 'sweetalert2/dist/sweetalert2.esm.all.js';
+const Swal = sweetalert2 as typeof SwalType.default;
+
 import { Injectable } from '@angular/core';
 
-type NotifyCallback = (result: SweetAlertResult) => void;
+type NotifyCallback = (result: SwalType.SweetAlertResult) => void;
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotifyService {
-  private queue: { options: SweetAlertOptions; callback: NotifyCallback }[] = [];
+  private queue: { options: SwalType.SweetAlertOptions; callback: NotifyCallback }[] = [];
 
   public success(title: string, message?: string) {
     return this.addToQueue('success', title, message);
@@ -44,11 +52,11 @@ export class NotifyService {
   }
 
   private addToQueue(
-    type: SweetAlertIcon,
+    type: SwalType.SweetAlertIcon,
     title: string,
     message?: string,
     options = {},
-  ): Promise<SweetAlertResult> {
+  ): Promise<SwalType.SweetAlertResult> {
     return this.notify({
       icon: type,
       title,
@@ -57,8 +65,8 @@ export class NotifyService {
     });
   }
 
-  private notify(options: SweetAlertOptions) {
-    const prom = new Promise<SweetAlertResult>((callback) =>
+  private notify(options: SwalType.SweetAlertOptions): Promise<SwalType.SweetAlertResult> {
+    const prom = new Promise<SwalType.SweetAlertResult>((callback) =>
       this.queue.push({
         options,
         callback,

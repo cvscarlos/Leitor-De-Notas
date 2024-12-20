@@ -4,6 +4,7 @@ import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-
 
 @Directive({
   selector: '[appUpload]',
+  standalone: false,
 })
 export class UploadDirective {
   constructor(

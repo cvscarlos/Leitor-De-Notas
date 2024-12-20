@@ -9,6 +9,7 @@ import { NotifyService } from '../services/notify/notify.service';
 @Component({
   selector: 'app-user-bar',
   templateUrl: './user-bar.component.html',
+  standalone: false,
 })
 export class UserBarComponent extends UserComponent implements OnInit {
   public faUser = faUser;

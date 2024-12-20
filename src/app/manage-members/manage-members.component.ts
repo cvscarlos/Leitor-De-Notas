@@ -10,7 +10,6 @@ import { SharedPipesModule } from '../shared-pipes/shared-pipes.module';
 @Component({
   selector: 'app-manage-members',
   imports: [CommonModule, FormsModule, LoadingModule, SharedPipesModule],
-  standalone: true,
   templateUrl: './manage-members.component.html',
   styleUrls: ['./manage-members.component.less'],
 })

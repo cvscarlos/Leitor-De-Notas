@@ -43,6 +43,7 @@ type DlombelloExportObject = {
   selector: 'app-export-tool',
   templateUrl: './export-tool.component.html',
   styleUrls: ['./export-tool.component.less'],
+  standalone: false,
 })
 export class ExportToolComponent implements OnInit {
   public faCopy = faCopy;

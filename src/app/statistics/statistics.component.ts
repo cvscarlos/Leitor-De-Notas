@@ -5,6 +5,7 @@ import packageJson from '../../../package.json';
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
+  standalone: false,
 })
 export class StatisticsComponent implements OnInit {
   public appVersion?: string;

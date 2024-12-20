@@ -7,6 +7,7 @@ import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interfa
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.less'],
+  standalone: false,
 })
 export class UploadComponent implements OnInit {
   public uploads?: UploadInterface[];

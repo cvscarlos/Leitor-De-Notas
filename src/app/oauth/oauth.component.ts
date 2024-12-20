@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-oauth',
   imports: [CommonModule],
-  standalone: true,
   templateUrl: './oauth.component.html',
 })
 export class OauthComponent implements OnInit {

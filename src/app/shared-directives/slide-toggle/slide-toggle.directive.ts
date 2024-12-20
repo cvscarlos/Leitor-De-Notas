@@ -9,6 +9,7 @@ import { Directive, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@
 
 @Directive({
   selector: '[appSlideToggle]',
+  standalone: false,
 })
 export class SlideToggleDirective {
   @Input('appSlideToggle') set setState(state: string | boolean | null | undefined) {

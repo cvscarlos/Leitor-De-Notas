@@ -2,6 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'cpfCnpj',
+  standalone: false,
 })
 export class CpfCnpjPipe implements PipeTransform {
   private cpfRegex = /([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})/;

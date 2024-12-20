@@ -7,7 +7,6 @@ import { LoadingModule } from '../loading/loading.module';
 
 @Component({
   imports: [CommonModule, LoadingModule],
-  standalone: true,
   selector: 'app-privacy',
   templateUrl: './privacy.component.html',
 })

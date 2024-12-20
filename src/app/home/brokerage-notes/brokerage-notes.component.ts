@@ -7,6 +7,7 @@ import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interfa
 @Component({
   selector: 'app-brokerage-notes',
   templateUrl: './brokerage-notes.component.html',
+  standalone: false,
 })
 export class BrokerageNotesComponent implements OnInit, DoCheck {
   public noteDetails?: NoteDetails[];

@@ -10,6 +10,7 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
   selector: 'app-modal',
   templateUrl: './usa-modal.component.html',
   providers: [CpfCnpjPipe],
+  standalone: false,
 })
 export class USAModalComponent implements OnInit {
   @ViewChild('modalContent') modalContent: ElementRef | undefined;
