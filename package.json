@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "6.15.0",
+  "version": "6.15.1",
   "license": "CC BY-NC-ND",
   "scripts": {
     "ng": "ng",
@@ -24,9 +24,9 @@
     "@fortawesome/angular-fontawesome": "^1.0.0",
     "@fortawesome/free-regular-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
-    "@micro-sentry/angular": "^7.1.1",
     "@ng-bootstrap/ng-bootstrap": "^18.0.0",
     "@popperjs/core": "^2.11.8",
+    "@sentry/angular": "^8.47.0",
     "bootstrap": "^5.3.3",
     "ngx-mask": "^19.0.6",
     "number-precision": "^1.6.0",

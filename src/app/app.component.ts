@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { IsIframeService } from './services/is-iframe/is-iframe.service';
+import * as Sentry from '@sentry/angular';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
     public isIframe: IsIframeService,
     private router: Router,
     private route: ActivatedRoute,
+    trace: Sentry.TraceService, // eslint-disable-line @typescript-eslint/no-unused-vars
   ) {}
 
   ngOnInit(): void {
