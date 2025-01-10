@@ -66,27 +66,25 @@ export class ApiService {
     );
   }
 
-  public userMe(): Promise<UserData | null> {
-    return new Promise((resolve, reject) => {
-      if (!this.sessionService.isAuthenticated) return resolve(null);
+  public async userMe(): Promise<UserData | null> {
+    if (!this.sessionService.isAuthenticated) return null;
 
-      this.cachedRequest('/pvt/user/me', false).subscribe({
-        next: (data) => resolve(data),
-        error: (error) => {
-          this.notifyService
-            .error('Não foi possível obter os dados do usuário.', 'Por atualize sua página')
-            .then(() => {
-              this.sessionService.logout();
-              window.location.href = '/';
-            });
-          reject(error);
-        },
-      });
-    });
+    try {
+      return await lastValueFrom(this.cachedRequest('/pvt/user/me', false));
+    } catch (error) {
+      this.notifyService
+        .error('Não foi possível obter os dados do usuário.', 'Por atualize sua página')
+        .then(() => {
+          this.sessionService.logout();
+          window.location.href = '/';
+        });
+
+      throw error;
+    }
   }
 
-  public userTransactions(callback: (data: UserTransactions) => void): void {
-    this.cachedRequest('/pvt/user/transactions').subscribe((data) => callback(data));
+  public userTransactions(): Promise<UserTransactions> {
+    return lastValueFrom(this.cachedRequest('/pvt/user/transactions'));
   }
 
   public userUsageHistory(callback: Callback): void {
@@ -130,7 +128,7 @@ export class ApiService {
   }
 
   public userSettings(settings: UserData['settings']) {
-    return this.request('/pvt/user/settings', { settings });
+    return lastValueFrom(this.request('/pvt/user/settings', { settings }));
   }
 
   public binanceFiatPayments(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
@@ -220,10 +218,12 @@ export class ApiService {
       this.request(endpoint, null, method, handleError).subscribe({
         next: (n) => {
           this.requestCache[endpoint].next(n);
+          this.requestCache[endpoint].complete();
           this.pendingCache[endpoint] = false;
         },
         error: (e) => {
           this.requestCache[endpoint].error(e);
+          this.requestCache[endpoint].complete();
           this.pendingCache[endpoint] = false;
         },
       });

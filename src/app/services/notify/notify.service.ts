@@ -40,7 +40,12 @@ export class NotifyService {
     return this.addToQueue('warning', title, message);
   }
 
-  public confirm(title: string, message?: string, confirmButtonText?: string) {
+  public confirm(
+    title: string,
+    message?: string,
+    confirmButtonText?: string,
+    extendsOptions?: SwalType.SweetAlertOptions,
+  ) {
     return this.notify({
       title,
       html: message || '',
@@ -48,6 +53,7 @@ export class NotifyService {
       showCancelButton: true,
       confirmButtonText: confirmButtonText || 'Sim',
       cancelButtonText: confirmButtonText ? 'Cancelar' : 'Não',
+      ...extendsOptions,
     });
   }
 

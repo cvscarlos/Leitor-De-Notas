@@ -43,6 +43,7 @@ type DlombelloExportObject = {
   selector: 'app-export-tool',
   templateUrl: './export-tool.component.html',
   styleUrls: ['./export-tool.component.less'],
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
 })
 export class ExportToolComponent implements OnInit {
@@ -98,14 +99,14 @@ export class ExportToolComponent implements OnInit {
     this.localCleanNotes();
   }
 
-  public settingsChange({
+  public async settingsChange({
     dayTrade,
     swingTrade,
     groupByTicker,
     removeOptionDT,
   }: {
     [x: string]: Event;
-  }): void {
+  }): Promise<void> {
     if (dayTrade) {
       this.provisionedIrrfDT = Boolean((dayTrade.target as HTMLInputElement)?.checked);
       this.provisionedIrrfMsg(this.provisionedIrrfDT);
@@ -130,7 +131,7 @@ export class ExportToolComponent implements OnInit {
         });
     }
 
-    this.apiService.userSettings({
+    await this.apiService.userSettings({
       provisionedIrrfST: this.provisionedIrrfST,
       provisionedIrrfDT: this.provisionedIrrfDT,
       groupByTicker: this.groupByTicker,

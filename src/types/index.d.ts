@@ -9,10 +9,12 @@ export type UserData = {
   email: string;
   limit: string;
   settings?: {
-    provisionedIrrfDT: boolean;
-    provisionedIrrfST: boolean;
-    groupByTicker: boolean;
-    removeOptionDT: boolean;
+    provisionedIrrfDT?: boolean;
+    provisionedIrrfST?: boolean;
+    groupByTicker?: boolean;
+    removeOptionDT?: boolean;
+    hidePaymentNotification?: boolean;
+    readonly hidePaymentNotificationUntil?: string;
   };
   termsAccepted: boolean;
   userDoc: string;

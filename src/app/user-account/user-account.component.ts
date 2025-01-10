@@ -20,6 +20,7 @@ type UserUsageHistory = {
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
 })
 export class UserAccountComponent extends UserComponent implements OnInit {
@@ -42,14 +43,18 @@ export class UserAccountComponent extends UserComponent implements OnInit {
     super(apiService, sessionService, router);
   }
 
-  override ngOnInit() {
+  override async ngOnInit() {
     super.ngOnInit();
 
     this.transactionsLoading = true;
-    this.apiService.userTransactions((data) => {
-      this.userTransactions = data;
-      this.transactionsLoading = false;
-    });
+    this.apiService
+      .userTransactions()
+      .then((data) => {
+        this.userTransactions = data;
+      })
+      .finally(() => {
+        this.transactionsLoading = false;
+      });
 
     this.userUsageHistoryLoading = true;
     this.apiService.userUsageHistory((data) => {

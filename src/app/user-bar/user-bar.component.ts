@@ -9,6 +9,7 @@ import { NotifyService } from '../services/notify/notify.service';
 @Component({
   selector: 'app-user-bar',
   templateUrl: './user-bar.component.html',
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false,
 })
 export class UserBarComponent extends UserComponent implements OnInit {
@@ -71,20 +72,45 @@ export class UserBarComponent extends UserComponent implements OnInit {
     this.sessionList = sessions;
   }
 
-  private modalAvailablePayments() {
+  private async modalAvailablePayments() {
     const sawAvailablePayment = sessionStorage.getItem('bgggSawAvailablePayment');
     if (sawAvailablePayment) return;
+    sessionStorage.setItem('bgggSawAvailablePayment', '1');
 
-    this.apiService.userTransactions(async ({ response }) => {
-      const availablePayment = response.find((transaction) => !transaction.inUse);
-      if (!availablePayment) return;
+    const [trx, user] = await Promise.all([
+      this.apiService.userTransactions(),
+      this.apiService.userMe(),
+    ]);
 
-      const { isConfirmed } = await this.notifyService.confirm(
-        'Você possui um pagamento disponível!',
-        'Deseja associar a sua conta?',
-      );
-      if (isConfirmed) this.router.navigate(['minha-conta']);
-      else sessionStorage.setItem('bgggSawAvailablePayment', '1');
-    });
+    const isUnlimited = user?.limit === 'Ilimitado';
+    if (isUnlimited) return;
+
+    const availablePayment = trx.response.find((transaction) => !transaction.inUse);
+    if (!availablePayment) return;
+
+    const hidePaymentNotification = new Date(
+      user?.settings?.hidePaymentNotificationUntil || Date.now() - 1000,
+    );
+    if (hidePaymentNotification > new Date()) return;
+
+    const { isConfirmed, value } = await this.notifyService.confirm(
+      'Você possui um pagamento disponível!',
+      'Deseja associar a sua conta?',
+      undefined,
+      {
+        input: 'checkbox',
+        inputAutoFocus: false,
+        inputPlaceholder: 'não mostrar novamente por 4 meses',
+        returnInputValueOnDeny: true,
+        showCancelButton: false,
+        showDenyButton: true,
+        denyButtonText: 'Agora não',
+        denyButtonColor: '#6e7881',
+      },
+    );
+
+    if (value) await this.apiService.userSettings({ hidePaymentNotification: true });
+
+    if (isConfirmed) this.router.navigate(['minha-conta']);
   }
 }
