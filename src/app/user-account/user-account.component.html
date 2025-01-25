@@ -75,12 +75,13 @@
           <div style="position: relative">
             <app-loading [show]="mpOperationNumberLoading"></app-loading>
 
-            <span
-              >Possui um número de pagamento do Mercado Pago?
-              <a href="javascript:void(0)" (click)="tpl.mpOperationNumber = true"
-                >Informar MP</a
-              ></span
-            >
+            <span>
+              Possui um número de pagamento do Mercado Pago? 
+              <button
+                class="btn btn-secondary btn-sm"
+                (click)="tpl.mpOperationNumber = true;"
+                *ngIf="!tpl.mpOperationNumber">Informar MP</button>
+            </span>
 
             <form
               class="alert alert-info"
@@ -99,8 +100,6 @@
                   placeholder="12312312312"
                   autocomplete="false"
                   required
-                  minlength="11"
-                  maxlength="11"
                   id="mpOperationNumber"
                   name="mpOperationNumber"
                   ngModel
