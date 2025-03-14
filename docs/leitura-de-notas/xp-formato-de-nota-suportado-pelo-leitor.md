@@ -10,5 +10,3 @@ Para exportar o arquivo vá até o portal do cliente da XP e procure pelo local 
 Abaixo você conferir se sua nota esta no formato suportado pelo Leitor, compare com a imagem abaixo:
 
 ![](../.gitbook/assets/5c3d2825e38e67f9eeb0631a85fb2dae.png)
-
-⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

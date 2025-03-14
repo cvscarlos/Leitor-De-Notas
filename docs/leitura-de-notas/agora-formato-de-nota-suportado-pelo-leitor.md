@@ -1,11 +1,5 @@
 # Ágora - Formato de nota suportado pelo Leitor
 
-### Ágora - Formato de nota suportado pelo Leitor
-
-Ágora - Formato de nota suportado pelo Leitor
-
-Written by Leitor de NotasLast update 2 months ago
-
 Algumas notas com senha da corretora Ágora não são suportadas pelo Leitor de Notas.
 
 Para evitar erros de leitura, faça o download do PDF da nota através do Portal do Cliente.
@@ -17,5 +11,3 @@ Para evitar erros de leitura, faça o download do PDF da nota através do Portal
 **Versão NÃO suportada ❌**
 
 ![](https://blackhole.customerly.io/attachments/ded6585e/accounts/29323/34259b6ed987b200a1d5c666f1a3ce87/image.png)
-
-Did this answer your question?

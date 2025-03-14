@@ -10,4 +10,3 @@ Mas caso queira conferir se sua nota esta no formato suportado pelo Leitor, comp
 
 ![](../.gitbook/assets/a1ec64b7d5dfe9055339a239c478b138.png)
 
-⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

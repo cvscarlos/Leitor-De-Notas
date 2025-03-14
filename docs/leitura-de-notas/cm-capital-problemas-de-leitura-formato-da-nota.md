@@ -5,4 +5,3 @@ Abaixo você pode ver 2 imagens, uma com o formato de nota suportado e outra com
 
 ![](../.gitbook/assets/19b3acb4212f2c9c81375d2802c1c7da.png)
 
-⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).
