@@ -41,4 +41,4 @@ Principais problemas e soluções para a leitura das Notas de Corretagem
 * [Agrupar operações pelo código dos ativos](leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos.md)
 * [Desconsiderar a informação de Day Trade nos Exercícios de Opções](leitura-de-notas/desconsiderar-a-informacao-de-day-trade-nos-exercicios-de-opcoes.md)
 * [Ágora - Formato de nota suportado pelo Leitor](leitura-de-notas/agora-formato-de-nota-suportado-pelo-leitor.md)
-* [Caixa Econômica Federal (CEF) - Formato de nota suportado pelo Leitor](leitura-de-notas/agora-formato-de-nota-suportado-pelo-leitor-1.md)
+* [Caixa Econômica Federal (CEF) - Formato de nota suportado pelo Leitor](leitura-de-notas/cef-formato-de-nota-suportado-pelo-leitor.md)
