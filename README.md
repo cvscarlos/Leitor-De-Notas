@@ -22,6 +22,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | BTG Pactual Corretora                 | ✅              | ✅             | ✅                  |
 | C6 Bank Corretora                     | ✅              |                |                     |
 | CEF Caixa Econômica Federal Corretora | ✅              |                |                     |
+| Charles Schwab (EUA)                  |                 |                | ✅                  |
 | Clear Corretora                       | ✅              | ✅             |                     |
 | CM Capital Corretora                  | ✅              | ✅             |                     |
 | Empiricus / Vitreo Corretora          | ✅              | ✅             |                     |

@@ -76,11 +76,14 @@
             <app-loading [show]="mpOperationNumberLoading"></app-loading>
 
             <span>
-              Possui um número de pagamento do Mercado Pago? 
+              Possui um número de pagamento do Mercado Pago?
               <button
                 class="btn btn-secondary btn-sm"
-                (click)="tpl.mpOperationNumber = true;"
-                *ngIf="!tpl.mpOperationNumber">Informar MP</button>
+                (click)="tpl.mpOperationNumber = true"
+                *ngIf="!tpl.mpOperationNumber"
+              >
+                Informar MP
+              </button>
             </span>
 
             <form
