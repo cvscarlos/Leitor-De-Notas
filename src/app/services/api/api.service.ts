@@ -20,6 +20,7 @@ type BinanceCredentials = { binanceApiKey: string; binanceApiSecret: string };
 export class ApiService {
   private requestCache: { [endpoint: string]: ReplaySubject<any> } = {};
   private pendingCache: { [key: string]: boolean } = {};
+  private isXlServer = window.location.search.includes('xl=true');
 
   constructor(
     private http: HttpClient,
@@ -191,9 +192,8 @@ export class ApiService {
       body: payload,
       headers: { 'x-bggg-session': sessionId || this.sessionService.id },
     };
-    const httpReq = this.http
-      .request(method, environment.apiServer + endpoint, options)
-      .pipe(share());
+    const apiUrl = this.isXlServer ? environment.apiUpload : environment.apiServer;
+    const httpReq = this.http.request(method, `${apiUrl}${endpoint}`, options).pipe(share());
 
     httpReq.subscribe({
       error: (e) => {
