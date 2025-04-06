@@ -20,7 +20,6 @@ type BinanceCredentials = { binanceApiKey: string; binanceApiSecret: string };
 export class ApiService {
   private requestCache: { [endpoint: string]: ReplaySubject<any> } = {};
   private pendingCache: { [key: string]: boolean } = {};
-  private isXlServer = window.location.search.includes('xl=true');
 
   constructor(
     private http: HttpClient,
@@ -29,7 +28,7 @@ export class ApiService {
   ) {}
 
   public upload(requestBody: any): Observable<any> {
-    return this.request('/pvt/upload', requestBody, 'post', false);
+    return this.request({ url: `${environment.apiUpload}/pvt/upload` }, requestBody, 'post', false);
   }
 
   public uploadDualRequests(requestBody: any): Observable<any> {
@@ -182,7 +181,7 @@ export class ApiService {
   }
 
   private request(
-    endpoint: string,
+    endpoint: string | { url: string },
     payload: Record<string, unknown> | string | null = null,
     method: RequestMethod = 'post',
     handleError: boolean = true,
@@ -192,8 +191,9 @@ export class ApiService {
       body: payload,
       headers: { 'x-bggg-session': sessionId || this.sessionService.id },
     };
-    const apiUrl = this.isXlServer ? environment.apiUpload : environment.apiServer;
-    const httpReq = this.http.request(method, `${apiUrl}${endpoint}`, options).pipe(share());
+    const apiUrl =
+      typeof endpoint === 'string' ? `${environment.apiServer}${endpoint}` : endpoint.url;
+    const httpReq = this.http.request(method, apiUrl, options).pipe(share());
 
     httpReq.subscribe({
       error: (e) => {
