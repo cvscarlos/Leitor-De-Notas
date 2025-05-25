@@ -10,7 +10,7 @@ Além da funcionalidade básica de exportar para Excel, o sistema também é 100
 
 Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de corretagem:
 
-| Corretora                             | Mercado à Vista | Mercado Futuro | EUA / Internacional |
+| Corretora                             | Mercado à Vista | Mercado Futuro | USA / Internacional |
 | ------------------------------------- | --------------- | -------------- | ------------------- |
 | Ágora Corretora                       | ✅              |                |                     |
 | Apex (EUA) Corretora                  |                 |                | ✅                  |
@@ -28,6 +28,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Empiricus / Vitreo Corretora          | ✅              | ✅             |                     |
 | Genial Investimentos                  | ✅              | ✅             |                     |
 | Guide Corretora                       | ✅              | ✅             |                     |
+| Interactive Brokers (EUA)             | ✅              |                |                     |
 | Kirton Corretora                      | ✅              |                |                     |
 | Master Corretora                      |                 | ✅             |                     |
 | Mirae Corretora                       | ✅              | ✅             |                     |
