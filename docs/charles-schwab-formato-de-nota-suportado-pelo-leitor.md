@@ -1,0 +1,10 @@
+# Charles Schwab - Formato de nota suportado pelo Leitor
+
+Você deve utilizar um PDF que descreva suas negociações diárias.\
+De preferência, envie um PDF separado para cada dia.
+
+Abaixo, você pode ver um exemplo de um arquivo em formato suportado e um exemplo de arquivo não suportado.
+
+| Suportado ✅                                                                                                                                    | Não suportado  ❌                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <div><figure><img src=".gitbook/assets/SCR-20250529-pgeo (1).png" alt=""><figcaption><p>Arquivo de negociações</p></figcaption></figure></div> | <div><figure><img src=".gitbook/assets/SCR-20250529-pgzy (1).png" alt=""><figcaption><p>Arquivo de extrado da conta</p></figcaption></figure></div> |
