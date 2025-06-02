@@ -8,3 +8,7 @@ Abaixo, você pode ver um exemplo de um arquivo em formato suportado e um exempl
 | Suportado ✅                                                                                                                                    | Não suportado  ❌                                                                                                                                    |
 | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <div><figure><img src=".gitbook/assets/SCR-20250529-pgeo (1).png" alt=""><figcaption><p>Arquivo de negociações</p></figcaption></figure></div> | <div><figure><img src=".gitbook/assets/SCR-20250529-pgzy (1).png" alt=""><figcaption><p>Arquivo de extrado da conta</p></figcaption></figure></div> |
+
+### Renda Fixa e App Dlombello
+
+Operações de Renda Fixa não são extraídas das notas de corretagem pelo Leitor de Notas, você deverá cadastrar manualmente este tipo de operação.
