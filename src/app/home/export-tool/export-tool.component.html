@@ -27,11 +27,11 @@
                   type="checkbox"
                   [checked]="provisionedIrrfDT"
                   (change)="settingsChange({ dayTrade: $event })"
-                />
+                  />
                 Incluir o IRRF DayTrade provisionado (<a
-                  href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/irrf-provisionado"
-                  target="_blank"
-                  >saiba mais</a
+                href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/irrf-provisionado"
+                target="_blank"
+                >saiba mais</a
                 >).
               </label>
 
@@ -40,11 +40,11 @@
                   type="checkbox"
                   [checked]="provisionedIrrfST"
                   (change)="settingsChange({ swingTrade: $event })"
-                />
+                  />
                 Incluir o IRRF SwingTrade provisionado (<a
-                  href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/irrf-provisionado"
-                  target="_blank"
-                  >saiba mais</a
+                href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/irrf-provisionado"
+                target="_blank"
+                >saiba mais</a
                 >).
               </label>
 
@@ -53,11 +53,11 @@
                   type="checkbox"
                   [checked]="groupByTicker"
                   (change)="settingsChange({ groupByTicker: $event })"
-                />
+                  />
                 Agrupar pelo nome do ativo (<a
-                  href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos"
-                  target="_blank"
-                  >saiba mais</a
+                href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/agrupar-operacoes-pelo-codigo-dos-ativos"
+                target="_blank"
+                >saiba mais</a
                 >).
               </label>
 
@@ -66,11 +66,11 @@
                   type="checkbox"
                   [checked]="removeOptionDT"
                   (change)="settingsChange({ removeOptionDT: $event })"
-                />
+                  />
                 Não considerar Day Trade em Opções (<a
-                  href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/desconsiderar-a-informacao-de-day-trade-nos-exercicios-de-opcoes"
-                  target="_blank"
-                  >saiba mais</a
+                href="https://leitor-de-notas.gitbook.io/untitled/leitura-de-notas/desconsiderar-a-informacao-de-day-trade-nos-exercicios-de-opcoes"
+                target="_blank"
+                >saiba mais</a
                 >).
               </label>
             </div>
@@ -82,23 +82,27 @@
                 dlombelloExportString
               }}</textarea>
             </div>
-            <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(dlombelloTextarea)">
-              <fa-icon [icon]="faCopy"></fa-icon> Copiar
-            </button>
+            @if (!isIframe) {
+              <button class="btn btn-primary" (click)="copyFn(dlombelloTextarea)">
+                <fa-icon [icon]="faCopy"></fa-icon> Copiar
+              </button>
+            }
           </div>
         </div>
 
-        <div class="row" *ngIf="isIframe">
-          <div class="col text-center">
-            <button
-              class="btn btn-success btn-lg mt-4"
-              style="font-size: 1.25rem"
-              (click)="sendJsonMessage()"
-            >
-              <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
-            </button>
+        @if (isIframe) {
+          <div class="row">
+            <div class="col text-center">
+              <button
+                class="btn btn-success btn-lg mt-4"
+                style="font-size: 1.25rem"
+                (click)="sendJsonMessage()"
+                >
+                <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
+              </button>
+            </div>
           </div>
-        </div>
+        }
       </ng-template>
     </li>
 

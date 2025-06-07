@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
 import { SessionService } from '../services/session/session.service';
-import { CommonModule } from '@angular/common';
+
 import { LoadingModule } from '../loading/loading.module';
 
 @Component({
-  imports: [CommonModule, LoadingModule],
+  imports: [LoadingModule],
   selector: 'app-privacy',
   templateUrl: './privacy.component.html',
 })

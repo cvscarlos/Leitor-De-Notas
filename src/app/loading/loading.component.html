@@ -1,5 +1,7 @@
-<div class="wrapper" *ngIf="show">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Carregando...</span>
+@if (show) {
+  <div class="wrapper">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
   </div>
-</div>
+}

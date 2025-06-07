@@ -1,28 +1,30 @@
-<div *ngIf="this.sessionService.isAuthenticated" style="position: relative">
-  <app-loading [show]="loading"></app-loading>
-
-  <div class="d-flex justify-content-center align-items-center flex-column flex-md-row">
-    <div class="text-center">
-      <p>
-        <fa-icon [icon]="faUser" class="text-secondary"></fa-icon>
-        {{ user.email }}
-        |
-        <a routerLink="/minha-conta">Minha conta</a>
-        |
-        <a href="javascript:void(0);" (click)="logout()">Sair</a>
-      </p>
-    </div>
-
-    <div class="ms-0 ms-md-5">
-      <p>
-        <select class="form-select" (change)="changeUser($event)">
-          <option>Trocar usuário</option>
-          <option disabled>──────────</option>
-          <option *ngFor="let email of loggedUsers" [value]="email">{{ email }}</option>
-          <option disabled>──────────</option>
-          <option value="{{ addUserKey }}">+ adicionar usuário</option>
-        </select>
-      </p>
+@if (this.sessionService.isAuthenticated) {
+  <div style="position: relative">
+    <app-loading [show]="loading"></app-loading>
+    <div class="d-flex justify-content-center align-items-center flex-column flex-md-row">
+      <div class="text-center">
+        <p>
+          <fa-icon [icon]="faUser" class="text-secondary"></fa-icon>
+          {{ user.email }}
+          |
+          <a routerLink="/minha-conta">Minha conta</a>
+          |
+          <a href="javascript:void(0);" (click)="logout()">Sair</a>
+        </p>
+      </div>
+      <div class="ms-0 ms-md-5">
+        <p>
+          <select class="form-select" (change)="changeUser($event)">
+            <option>Trocar usuário</option>
+            <option disabled>──────────</option>
+            @for (email of loggedUsers; track email) {
+              <option [value]="email">{{ email }}</option>
+            }
+            <option disabled>──────────</option>
+            <option value="{{ addUserKey }}">+ adicionar usuário</option>
+          </select>
+        </p>
+      </div>
     </div>
   </div>
-</div>
+}

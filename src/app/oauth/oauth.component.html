@@ -1,12 +1,16 @@
 <div class="bg-white fixed-top h-100 w-100">
   <div class="position-absolute top-50 start-50 translate-middle h2">
-    <div *ngIf="message?.length">
-      {{ message }}
-    </div>
+    @if (message?.length) {
+      <div>
+        {{ message }}
+      </div>
+    }
 
-    <div *ngIf="!message?.length">
-      <div class="spinner-border" role="status"></div>
-      <p>Carregando ...</p>
-    </div>
+    @if (!message?.length) {
+      <div>
+        <div class="spinner-border" role="status"></div>
+        <p>Carregando ...</p>
+      </div>
+    }
   </div>
 </div>
