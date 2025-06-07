@@ -2,7 +2,7 @@
 
 import { concatMap, share } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { lastValueFrom, Observable, of, ReplaySubject } from 'rxjs';
+import { firstValueFrom, Observable, of, ReplaySubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
@@ -27,8 +27,10 @@ export class ApiService {
     private sessionService: SessionService,
   ) {}
 
-  public upload(requestBody: any): Observable<any> {
-    return this.request({ url: `${environment.apiUpload}/pvt/upload` }, requestBody, 'post', false);
+  public upload(requestBody: any): Promise<any> {
+    return firstValueFrom(
+      this.request({ url: `${environment.apiUpload}/pvt/upload` }, requestBody, 'post', false),
+    );
   }
 
   public uploadDualRequests(requestBody: any): Observable<any> {
@@ -70,7 +72,7 @@ export class ApiService {
     if (!this.sessionService.isAuthenticated) return null;
 
     try {
-      return await lastValueFrom(this.cachedRequest('/pvt/user/me', false));
+      return await firstValueFrom(this.cachedRequest('/pvt/user/me', false));
     } catch (error) {
       this.notifyService
         .error('Não foi possível obter os dados do usuário.', 'Por atualize sua página')
@@ -84,7 +86,7 @@ export class ApiService {
   }
 
   public userTransactions(): Promise<UserTransactions> {
-    return lastValueFrom(this.cachedRequest('/pvt/user/transactions'));
+    return firstValueFrom(this.cachedRequest('/pvt/user/transactions'));
   }
 
   public userUsageHistory(callback: Callback): void {
@@ -96,15 +98,15 @@ export class ApiService {
   }
 
   public userDocumentSave(userDoc: string) {
-    return lastValueFrom(this.request('/pvt/user/me', { userDoc }, 'patch'));
+    return firstValueFrom(this.request('/pvt/user/me', { userDoc }, 'patch'));
   }
 
   public userTransactionConnect(code: string) {
-    return lastValueFrom(this.request('/pvt/user/connect-transaction', { code }));
+    return firstValueFrom(this.request('/pvt/user/connect-transaction', { code }));
   }
 
   public userMercadoPagoConnect(reference: string) {
-    return lastValueFrom(this.request('/pvt/user/connect-mp-transaction', { reference }));
+    return firstValueFrom(this.request('/pvt/user/connect-mp-transaction', { reference }));
   }
 
   public userAcceptTerms(callback: Callback) {
@@ -116,7 +118,7 @@ export class ApiService {
   }
 
   public userMemberSave(memberDoc: string) {
-    return lastValueFrom(this.request('/pvt/user/add-member-document', { memberDoc }));
+    return firstValueFrom(this.request('/pvt/user/add-member-document', { memberDoc }));
   }
 
   public userNewEmailSave(newEmail: string) {
@@ -128,27 +130,27 @@ export class ApiService {
   }
 
   public userSettings(settings: UserData['settings']) {
-    return lastValueFrom(this.request('/pvt/user/settings', { settings }));
+    return firstValueFrom(this.request('/pvt/user/settings', { settings }));
   }
 
   public binanceFiatPayments(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return lastValueFrom(this.request('/pvt/binance/fiat-pay', credentials, 'post', false));
+    return firstValueFrom(this.request('/pvt/binance/fiat-pay', credentials, 'post', false));
   }
 
   public binanceFiatOrders(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return lastValueFrom(this.request('/pvt/binance/fiat-order', credentials, 'post', false));
+    return firstValueFrom(this.request('/pvt/binance/fiat-order', credentials, 'post', false));
   }
 
   public binanceTradesOCO(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return lastValueFrom(this.request('/pvt/binance/trades-oco', credentials, 'post', false));
+    return firstValueFrom(this.request('/pvt/binance/trades-oco', credentials, 'post', false));
   }
 
   public binanceTrades(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return lastValueFrom(this.request('/pvt/binance/trades', credentials, 'post', false));
+    return firstValueFrom(this.request('/pvt/binance/trades', credentials, 'post', false));
   }
 
   public binanceConversions(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return lastValueFrom(this.request('/pvt/binance/conversions', credentials, 'post', false));
+    return firstValueFrom(this.request('/pvt/binance/conversions', credentials, 'post', false));
   }
 
   public getMercadoPagoLink(
@@ -167,17 +169,19 @@ export class ApiService {
   }
 
   public connectUSAAccount(cpfCnpj: string, usaAccount: string) {
-    return lastValueFrom(this.request('/pvt/user/connect-usa-account', { cpfCnpj, usaAccount }));
+    return firstValueFrom(this.request('/pvt/user/connect-usa-account', { cpfCnpj, usaAccount }));
   }
 
   public async getSessionsInfo(): Promise<API.SessionItem[]> {
     const sessions = this.sessionService.getSessionList()?.split(',');
     if (!sessions) return [];
-    return await lastValueFrom(this.request(`/pvt/session/list`, { sessions }));
+    return await firstValueFrom(this.request(`/pvt/session/list`, { sessions }));
   }
 
   public async createSession(token: string): Promise<any> {
-    return await lastValueFrom(this.request(`/dlombello/create-session`, { token }, 'post', false));
+    return await firstValueFrom(
+      this.request(`/dlombello/create-session`, { token }, 'post', false),
+    );
   }
 
   private request(

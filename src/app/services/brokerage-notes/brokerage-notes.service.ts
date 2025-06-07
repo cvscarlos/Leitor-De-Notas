@@ -1,6 +1,5 @@
 import { Note, NoteDetails, NoteError } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
-import { firstValueFrom } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { UploadInterface } from './upload.interface';
 
@@ -64,10 +63,12 @@ export class BrokerageNotesService {
     const formData = new FormData();
     formData.append('brokerageNote', file, file.name);
 
-    firstValueFrom(this.api.upload(formData))
-      .then((response) => {
-        newFile.server = response;
-        this.parseDetails(response);
+    this.api
+      .upload(formData)
+      .then((res) => {
+        const content = res.data || res;
+        newFile.server = content;
+        this.parseDetails(content);
       })
       .catch((err) => {
         newFile.serverError = true;
