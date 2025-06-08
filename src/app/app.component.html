@@ -28,15 +28,24 @@
           <a
             (click)="headerMenuCollapsed = true"
             class="nav-link px-3"
+            href="https://web.dlombelloplanilhas.com/#h.yrfqsff9p5fl"
+            target="_blank"
+          >
+            <fa-icon [icon]="faCalculator"></fa-icon> Calculadora IR
+          </a>
+        </li><li class="nav-item">
+          <a
+            (click)="headerMenuCollapsed = true"
+            class="nav-link px-3"
             href="https://leitor-de-notas.gitbook.io/"
             target="_blank"
           >
-            <fa-icon [icon]="faQuestionCircle"></fa-icon> Ajuda
+            <fa-icon [icon]="faQuestionCircle"></fa-icon> FAQ / Ajuda
           </a>
         </li>
         <li class="nav-item">
           <a (click)="headerMenuCollapsed = true" class="nav-link px-3" routerLink="/limites-uso">
-            <fa-icon [icon]="faInfoCircle"></fa-icon> Planos
+            <fa-icon [icon]="faDollarSign"></fa-icon> Preços
           </a>
         </li>
         <li class="nav-item">
@@ -46,7 +55,7 @@
             href="https://bit.ly/leitor-de-notas-suporte"
             target="_blank"
           >
-            <fa-icon [icon]="faBug"></fa-icon> Reportar um problema
+            <fa-icon [icon]="faEnvelope"></fa-icon> Informar erro
           </a>
         </li>
       </ul>

@@ -1,4 +1,9 @@
-import { faBug, faInfoCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEnvelope,
+  faCalculator,
+  faQuestionCircle,
+  faCircleDollarToSlot,
+} from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
@@ -14,8 +19,10 @@ import * as Sentry from '@sentry/angular';
 })
 export class AppComponent implements OnInit {
   public faQuestionCircle = faQuestionCircle;
-  public faInfoCircle = faInfoCircle;
-  public faBug = faBug;
+  public faEnvelope = faEnvelope;
+  public faCalculator = faCalculator;
+  public faDollarSign = faCircleDollarToSlot;
+
   public headerMenuCollapsed = true;
   public showAboutUs = true;
 
