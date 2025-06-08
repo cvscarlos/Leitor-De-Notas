@@ -1,6 +1,14 @@
 # CM Capital - Problemas de Leitura? Formato da nota
 
-A corretora CM Capital fornece 2 tipos de notas de corretagem, porém o Leitor suporta apenas 1 delas.\
-Abaixo você pode ver 2 imagens, uma com o formato de nota suportado e outra com a nota que não é aceita.
+A corretora CM Capital fornece 2 tipos de notas de corretagem.
 
-![](../.gitbook/assets/19b3acb4212f2c9c81375d2802c1c7da.png)
+Um dos formatos da nota de corretagem é a do arquivo PDF enviado por email.\
+O outro formato é a do PDF exportado através do Home Broker / site da corretora.
+
+Na maioria dos casos, ambos os formatos podem ser utilizados normalmente. Mas existem casos (dependendo da operação realizada em bolsa) onde o arquivo enviado por email possui inconsistências que não existem no arquivo exportado no Home Broker.
+
+Então se encontrar erros na leitura de seu arquivo, tente novamente com a versão do Home Broker.
+
+| Nota enviada por email ✅                                                                                 | Nota do Home Broker ✅                                                                                    |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| <div><figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure></div> | <div><figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure></div> |

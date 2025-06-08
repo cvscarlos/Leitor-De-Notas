@@ -10,4 +10,4 @@ Evite utilizar a opção de **impressão do navegador**, pois o arquivo resultan
 
 ### **Versão de Nota suportada ✅**
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
