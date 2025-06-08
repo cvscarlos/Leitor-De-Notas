@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from '../services/session/session.service';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private sessionService: SessionService,
-    private router: Router,
-  ) {}
+  private sessionService = inject(SessionService);
+  private router = inject(Router);
+
+  constructor() {}
 
   canActivate(): boolean {
     if (!this.sessionService.isAuthenticated) {

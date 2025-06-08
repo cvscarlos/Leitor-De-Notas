@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import packageJson from '../../../package.json';
 
@@ -8,11 +8,13 @@ import packageJson from '../../../package.json';
   standalone: false,
 })
 export class StatisticsComponent implements OnInit {
+  private apiService = inject(ApiService);
+
   public appVersion?: string;
   public interfaceVersion?: string;
   public uniqueSessions?: string;
 
-  constructor(private apiService: ApiService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.interfaceVersion = packageJson.version;

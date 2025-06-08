@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { faCopy, faSquarePlus, faTrashAlt, faFileExcel } from '@fortawesome/free-regular-svg-icons';
 import { Note, NoteTrade } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
@@ -47,6 +47,12 @@ type DlombelloExportObject = {
   standalone: false,
 })
 export class ExportToolComponent implements OnInit {
+  private apiService = inject(ApiService);
+  private isIframeService = inject(IsIframeService);
+  private notesService = inject(BrokerageNotesService);
+  private notifyService = inject(NotifyService);
+  private numberFmt = inject(NumberFormatService);
+
   public faCopy = faCopy;
   public faFileCsv = faFileExcel;
   public faSquarePlus = faSquarePlus;
@@ -67,13 +73,7 @@ export class ExportToolComponent implements OnInit {
   private notNumberRegex = /[^0-9]+/g;
   private provIrrfMsg = false;
 
-  constructor(
-    private apiService: ApiService,
-    private isIframeService: IsIframeService,
-    private notesService: BrokerageNotesService,
-    private notifyService: NotifyService,
-    private numberFmt: NumberFormatService,
-  ) {
+  constructor() {
     this.isIframe = this.isIframeService.isIframe();
     NP.enableBoundaryChecking(false);
   }

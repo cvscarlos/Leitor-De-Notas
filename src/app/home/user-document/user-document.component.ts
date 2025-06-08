@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifyService } from 'src/app/services/notify/notify.service';
@@ -13,18 +13,18 @@ import { UserService } from 'src/app/services/user/user.service';
   standalone: false,
 })
 export class UserDocumentComponent implements OnInit {
+  private apiService = inject(ApiService);
+  private notifyService = inject(NotifyService);
+  private userService = inject(UserService);
+  sessionService = inject(SessionService);
+  private modalService = inject(NgbModal);
+
   @ViewChild('modalContent') modalContent: ElementRef | undefined;
 
   public loading = false;
   public valid = true;
 
-  constructor(
-    private apiService: ApiService,
-    private notifyService: NotifyService,
-    private userService: UserService,
-    public sessionService: SessionService,
-    private modalService: NgbModal,
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

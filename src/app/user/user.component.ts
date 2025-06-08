@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session/session.service';
@@ -10,6 +10,10 @@ import { UserData } from 'src/types';
   standalone: false,
 })
 export class UserComponent implements OnInit {
+  protected apiService = inject(ApiService);
+  sessionService = inject(SessionService);
+  protected router = inject(Router);
+
   public loading = false;
   public user: UserData = {
     allowManageMembers: false,
@@ -21,11 +25,7 @@ export class UserComponent implements OnInit {
     isFreePlan: true,
   };
 
-  constructor(
-    protected apiService: ApiService,
-    public sessionService: SessionService,
-    protected router: Router,
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.loading = true;

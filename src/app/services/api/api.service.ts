@@ -3,7 +3,7 @@
 import { concatMap, share } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { firstValueFrom, Observable, of, ReplaySubject } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { NotifyService } from 'src/app/services/notify/notify.service';
@@ -18,14 +18,14 @@ type BinanceCredentials = { binanceApiKey: string; binanceApiSecret: string };
   providedIn: 'root',
 })
 export class ApiService {
+  private http = inject(HttpClient);
+  private notifyService = inject(NotifyService);
+  private sessionService = inject(SessionService);
+
   private requestCache: { [endpoint: string]: ReplaySubject<any> } = {};
   private pendingCache: { [key: string]: boolean } = {};
 
-  constructor(
-    private http: HttpClient,
-    private notifyService: NotifyService,
-    private sessionService: SessionService,
-  ) {}
+  constructor() {}
 
   public upload(requestBody: any): Promise<any> {
     return firstValueFrom(

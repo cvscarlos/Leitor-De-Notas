@@ -1,5 +1,5 @@
 import { ApiService } from 'src/app/services/api/api.service';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
@@ -11,15 +11,15 @@ import { SessionService } from 'src/app/services/session/session.service';
   standalone: false,
 })
 export class UserEmailComponent {
+  private apiService = inject(ApiService);
+  private notifyService = inject(NotifyService);
+  private sessionService = inject(SessionService);
+
   public loading = false;
 
   public tokenRequested = false;
 
-  constructor(
-    private apiService: ApiService,
-    private notifyService: NotifyService,
-    private sessionService: SessionService,
-  ) {}
+  constructor() {}
 
   public submitUserEmailForm(form: UntypedFormGroup) {
     this.loading = true;

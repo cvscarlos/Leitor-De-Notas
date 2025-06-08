@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api/api.service';
-import { Router } from '@angular/router';
-import { SessionService } from 'src/app/services/session/session.service';
+import { Component, OnInit, inject } from '@angular/core';
 import { UserComponent } from 'src/app/user/user.component';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { NotifyService } from '../services/notify/notify.service';
@@ -13,18 +10,15 @@ import { NotifyService } from '../services/notify/notify.service';
   standalone: false,
 })
 export class UserBarComponent extends UserComponent implements OnInit {
+  private notifyService = inject(NotifyService);
+
   public faUser = faUser;
   public addUserKey = '_addUser_';
   public loggedUsers: string[] = [];
   public sessionList: API.SessionItem[] = [];
 
-  constructor(
-    public override sessionService: SessionService,
-    protected override apiService: ApiService,
-    protected override router: Router,
-    private notifyService: NotifyService,
-  ) {
-    super(apiService, sessionService, router);
+  constructor() {
+    super();
   }
 
   override ngOnInit() {

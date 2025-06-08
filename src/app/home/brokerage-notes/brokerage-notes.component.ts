@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit, inject } from '@angular/core';
 import { NoteDetails, NoteError } from 'src/types';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
@@ -10,15 +10,15 @@ import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interfa
   standalone: false,
 })
 export class BrokerageNotesComponent implements OnInit, DoCheck {
+  private notesService = inject(BrokerageNotesService);
+  numberFormatService = inject(NumberFormatService);
+
   public noteDetails?: NoteDetails[];
   public noteErrors?: NoteError[];
   public notes?: UploadInterface[];
   public hasAnyNote = false;
 
-  constructor(
-    private notesService: BrokerageNotesService,
-    public numberFormatService: NumberFormatService,
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     const notesService = this.notesService.getNotes();

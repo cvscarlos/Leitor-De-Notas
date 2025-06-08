@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
 import { SessionService } from '../services/session/session.service';
@@ -11,14 +11,14 @@ import { LoadingModule } from '../loading/loading.module';
   templateUrl: './privacy.component.html',
 })
 export class PrivacyComponent implements OnInit {
+  private apiService = inject(ApiService);
+  private notifyService = inject(NotifyService);
+  sessionService = inject(SessionService);
+
   public loading = false;
   public showAcceptTermsButton = false;
 
-  constructor(
-    private apiService: ApiService,
-    private notifyService: NotifyService,
-    public sessionService: SessionService,
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.apiService.userMe().then((data) => {

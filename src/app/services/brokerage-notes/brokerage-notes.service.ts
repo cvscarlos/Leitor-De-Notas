@@ -1,6 +1,6 @@
 import { Note, NoteDetails, NoteError } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { UploadInterface } from './upload.interface';
 
 type NotesArray = {
@@ -14,12 +14,14 @@ type NoteCallback = (note: NoteDetails) => void;
   providedIn: 'root',
 })
 export class BrokerageNotesService {
+  private api = inject(ApiService);
+
   private notesList: UploadInterface[] = [];
   private noteDetails: NoteDetails[] = [];
   private noteErrors: NoteError[] = [];
   private onNewNoteCallback: NoteCallback[] = [];
 
-  constructor(private api: ApiService) {}
+  constructor() {}
 
   public uploadFiles(files: FileList | null): void {
     if (!files) {

@@ -4,7 +4,7 @@ import {
   faQuestionCircle,
   faCircleDollarToSlot,
 } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -18,6 +18,10 @@ import * as Sentry from '@sentry/angular';
   standalone: false,
 })
 export class AppComponent implements OnInit {
+  isIframe = inject(IsIframeService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+
   public faQuestionCircle = faQuestionCircle;
   public faEnvelope = faEnvelope;
   public faCalculator = faCalculator;
@@ -26,12 +30,7 @@ export class AppComponent implements OnInit {
   public headerMenuCollapsed = true;
   public showAboutUs = true;
 
-  constructor(
-    public isIframe: IsIframeService,
-    private router: Router,
-    private route: ActivatedRoute,
-    trace: Sentry.TraceService, // eslint-disable-line @typescript-eslint/no-unused-vars
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {

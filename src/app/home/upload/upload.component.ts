@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interface';
@@ -10,12 +10,12 @@ import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interfa
   standalone: false,
 })
 export class UploadComponent implements OnInit {
+  sessionService = inject(SessionService);
+  private notesService = inject(BrokerageNotesService);
+
   public uploads?: UploadInterface[];
 
-  constructor(
-    public sessionService: SessionService,
-    private notesService: BrokerageNotesService,
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.uploads = this.notesService.getNotes().notesList;

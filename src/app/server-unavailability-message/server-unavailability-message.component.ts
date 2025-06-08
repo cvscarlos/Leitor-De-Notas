@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { CommonModule } from '@angular/common';
 import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
@@ -16,9 +16,11 @@ declare global {
   styleUrls: ['./server-unavailability-message.component.less'],
 })
 export class ServerUnavailabilityMessageComponent implements OnInit {
+  apiService = inject(ApiService);
+
   public serverStatus = 0;
 
-  constructor(public apiService: ApiService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.checkServerStatus();

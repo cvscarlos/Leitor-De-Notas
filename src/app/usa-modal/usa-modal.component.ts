@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { AccountMember } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
@@ -13,6 +13,12 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
   standalone: false,
 })
 export class USAModalComponent implements OnInit {
+  private apiService = inject(ApiService);
+  private cpfCnpj = inject(CpfCnpjPipe);
+  private notesService = inject(BrokerageNotesService);
+  private notifyService = inject(NotifyService);
+  private modalService = inject(NgbModal);
+
   @ViewChild('modalContent') modalContent: ElementRef | undefined;
 
   public showApexModal = false;
@@ -20,13 +26,7 @@ export class USAModalComponent implements OnInit {
   public membersList: AccountMember[] = [];
   public loading = true;
 
-  constructor(
-    private apiService: ApiService,
-    private cpfCnpj: CpfCnpjPipe,
-    private notesService: BrokerageNotesService,
-    private notifyService: NotifyService,
-    private modalService: NgbModal,
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.notesService.noteCallback((note) => {

@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { NotifyService } from '../notify/notify.service';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class IsIframeService {
-  constructor(
-    private notifyService: NotifyService,
-    private router: Router,
-  ) {}
+  private notifyService = inject(NotifyService);
+  private router = inject(Router);
+
+  constructor() {}
 
   isIframe(): boolean {
     try {

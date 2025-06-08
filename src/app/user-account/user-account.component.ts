@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api/api.service';
+import { Component, OnInit, inject } from '@angular/core';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
-import { Router } from '@angular/router';
-import { SessionService } from 'src/app/services/session/session.service';
 import { UntypedFormGroup } from '@angular/forms';
 import { UserComponent } from 'src/app/user/user.component';
 import { UserService } from 'src/app/services/user/user.service';
@@ -24,6 +21,10 @@ type UserUsageHistory = {
   standalone: false,
 })
 export class UserAccountComponent extends UserComponent implements OnInit {
+  private notifyService = inject(NotifyService);
+  private userService = inject(UserService);
+  numberFormat = inject(NumberFormatService);
+
   public tpl = { mpOperationNumber: false, connectTransaction: false };
   public transactionsLoading = false;
   public userUsageHistoryLoading = false;
@@ -32,15 +33,8 @@ export class UserAccountComponent extends UserComponent implements OnInit {
   public userUsageHistory?: UserUsageHistory;
   public accountDeleteLoading = false;
 
-  constructor(
-    private notifyService: NotifyService,
-    private userService: UserService,
-    protected override apiService: ApiService,
-    protected override router: Router,
-    public numberFormat: NumberFormatService,
-    public override sessionService: SessionService,
-  ) {
-    super(apiService, sessionService, router);
+  constructor() {
+    super();
   }
 
   override async ngOnInit() {

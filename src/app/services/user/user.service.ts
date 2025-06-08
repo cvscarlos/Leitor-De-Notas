@@ -1,5 +1,5 @@
 import { ApiService } from 'src/app/services/api/api.service';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
 
@@ -7,11 +7,11 @@ import { SessionService } from 'src/app/services/session/session.service';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(
-    private apiService: ApiService,
-    private notifyService: NotifyService,
-    private sessionService: SessionService,
-  ) {}
+  private apiService = inject(ApiService);
+  private notifyService = inject(NotifyService);
+  private sessionService = inject(SessionService);
+
+  constructor() {}
 
   public accountDelete(confirmedCallback: () => void): void {
     this.notifyService

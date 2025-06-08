@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostListener, Renderer2, inject } from '@angular/core';
 
 import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
 
@@ -7,11 +7,11 @@ import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-
   standalone: false,
 })
 export class UploadDirective {
-  constructor(
-    private notesService: BrokerageNotesService,
-    private renderer: Renderer2,
-    private hostElement: ElementRef,
-  ) {}
+  private notesService = inject(BrokerageNotesService);
+  private renderer = inject(Renderer2);
+  private hostElement = inject(ElementRef);
+
+  constructor() {}
 
   @HostListener('dragover', ['$event']) public onDragOver(evt: DragEvent): void {
     evt.preventDefault();

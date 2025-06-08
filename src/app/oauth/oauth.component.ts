@@ -1,5 +1,5 @@
 import { ApiService } from 'src/app/services/api/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { SessionService } from '../services/session/session.service';
 import { CommonModule } from '@angular/common';
 
@@ -9,12 +9,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './oauth.component.html',
 })
 export class OauthComponent implements OnInit {
+  private api = inject(ApiService);
+  private sessionService = inject(SessionService);
+
   public message = '';
 
-  constructor(
-    private api: ApiService,
-    private sessionService: SessionService,
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.oAuthLogin();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
@@ -12,6 +12,10 @@ import { LoadingModule } from '../loading/loading.module';
   styleUrls: ['./binance.component.less'],
 })
 export class BinanceComponent implements OnInit {
+  private formBuilder = inject(FormBuilder);
+  private notifyService = inject(NotifyService);
+  private apiService = inject(ApiService);
+
   public binanceForm!: FormGroup;
   public loading = false;
   public requestMade = false;
@@ -22,11 +26,7 @@ export class BinanceComponent implements OnInit {
   public conversions: Record<string, string | number>[] = [];
   private numericRegex = /^[0-9.]+$/;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private notifyService: NotifyService,
-    private apiService: ApiService,
-  ) {}
+  constructor() {}
 
   public ngOnInit(): void {
     this.binanceForm = this.formBuilder.group({

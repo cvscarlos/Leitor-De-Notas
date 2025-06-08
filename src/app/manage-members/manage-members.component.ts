@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AccountMember } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
 import { FormsModule, UntypedFormGroup } from '@angular/forms';
@@ -14,16 +14,16 @@ import { SharedPipesModule } from '../shared-pipes/shared-pipes.module';
   styleUrls: ['./manage-members.component.less'],
 })
 export class ManageMembersComponent implements OnInit {
+  private apiService = inject(ApiService);
+  private notifyService = inject(NotifyService);
+
   public loading = false;
   public membersList: AccountMember[] = [];
   public membersCpfList: Set<string> = new Set();
   public membersLimit = 1;
   public pendingMembers = 0;
 
-  constructor(
-    private apiService: ApiService,
-    private notifyService: NotifyService,
-  ) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.getMembers();

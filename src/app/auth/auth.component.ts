@@ -1,5 +1,5 @@
 import { ApiService } from 'src/app/services/api/api.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
@@ -12,6 +12,12 @@ import { SessionService } from 'src/app/services/session/session.service';
   standalone: false,
 })
 export class AuthComponent implements OnInit {
+  sessionService = inject(SessionService);
+  private api = inject(ApiService);
+  private formBuilder = inject(UntypedFormBuilder);
+  private notifyService = inject(NotifyService);
+  private isIframeService = inject(IsIframeService);
+
   public emailForm!: UntypedFormGroup;
   public emailFormSent = false;
   public loading = false;
@@ -20,13 +26,7 @@ export class AuthComponent implements OnInit {
   public queryToken = '';
   private sessionId = '';
 
-  constructor(
-    public sessionService: SessionService,
-    private api: ApiService,
-    private formBuilder: UntypedFormBuilder,
-    private notifyService: NotifyService,
-    private isIframeService: IsIframeService,
-  ) {
+  constructor() {
     this.queryToken = new URLSearchParams(window.location.search).get('token') || '';
   }
 
