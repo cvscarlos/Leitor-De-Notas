@@ -45,6 +45,7 @@ Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de
 | Renascença Corretora                  |                 | ✅             |                     |
 | Rico Corretora                        | ✅              | ✅             |                     |
 | Santander Corretora                   | ✅              |                |                     |
+| Sicredi Corretora                     | ✅              |                |                     |
 | Singulare / Socopa Corretora          | ✅              |                |                     |
 | Sproutfi (EUA) Corretora              |                 |                | ✅                  |
 | Tastyworks (EUA) Corretora            |                 |                | ✅                  |
