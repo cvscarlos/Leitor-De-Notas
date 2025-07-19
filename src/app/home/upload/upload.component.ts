@@ -33,4 +33,8 @@ export class UploadComponent implements OnInit {
 
     input.value = '';
   }
+
+  public hasServerErrors(): boolean {
+    return Boolean(this.uploads && this.uploads.some((upload) => upload.serverError));
+  }
 }
