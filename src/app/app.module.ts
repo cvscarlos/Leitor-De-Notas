@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { ErrorHandler, NgModule, provideAppInitializer, inject } from '@angular/core';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +20,7 @@ import { UserBarComponent } from './user-bar/user-bar.component';
 import { UserEmailModule } from './user-email/user-email.module';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ServerUnavailabilityMessageComponent } from './server-unavailability-message/server-unavailability-message.component';
+import { SentryErrorHandler } from './services/sentry-error-handler.service';
 
 @NgModule({
   declarations: [
@@ -48,11 +49,12 @@ import { ServerUnavailabilityMessageComponent } from './server-unavailability-me
     provideEnvironmentNgxMask(),
     provideHttpClient(withInterceptorsFromDi()),
     {
-      provide: APP_INITIALIZER,
-      useFactory: () => () => {},
-      deps: [Sentry.TraceService],
-      multi: true,
+      provide: ErrorHandler,
+      useClass: SentryErrorHandler,
     },
+    provideAppInitializer(() => {
+      inject(Sentry.TraceService);
+    }),
   ],
 })
 export class AppModule {}

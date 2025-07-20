@@ -4,6 +4,7 @@ import { concatMap, share } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { firstValueFrom, Observable, of, ReplaySubject } from 'rxjs';
 import { Injectable, inject } from '@angular/core';
+import * as Sentry from '@sentry/angular';
 
 import { environment } from 'src/environments/environment';
 import { NotifyService } from 'src/app/services/notify/notify.service';
@@ -201,7 +202,8 @@ export class ApiService {
 
     httpReq.subscribe({
       error: (e) => {
-        console.error(e);
+        console.error('__LN Error:', e);
+        Sentry.captureException(e);
         if (handleError) this.requestErrorHandler(e);
       },
     });
