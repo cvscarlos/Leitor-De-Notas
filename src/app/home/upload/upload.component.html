@@ -72,7 +72,7 @@
       <h4 class="text-white">Erros</h4>
       <ul class="list-group list-group-numbered list-group-flush bg-danger-subtle rounded">
         <li class="list-group-item list-group-item-danger" *ngFor="let upload of uploads">
-          {{ upload.error.error._message }}
+          {{ upload.error.error?._message }}
         </li>
       </ul>
     </div>
