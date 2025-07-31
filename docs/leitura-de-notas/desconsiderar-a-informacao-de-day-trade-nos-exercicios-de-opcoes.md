@@ -28,6 +28,6 @@ Por padrão essa opção vem desmarcada, ou seja, mantém-se a informação orig
 
 ![](https://blackhole.customerly.io/attachments/ded6585e/accounts/29323/5637c2e56ad5ae5fbb3b6574ed3c5d97/image.png)
 
-**Exemplo do resultado do Leitor de Notas, com a opção de disconsiderar Day Trade ativada:**
+**Exemplo do resultado do Leitor de Notas, com a opção de desconsiderar Day Trade ativada:**
 
 ![](https://blackhole.customerly.io/attachments/ded6585e/accounts/29323/7df3debb08008ecb8b991a9fafeafe36/image.png)

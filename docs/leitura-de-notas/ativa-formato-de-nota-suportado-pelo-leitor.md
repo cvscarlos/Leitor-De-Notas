@@ -12,6 +12,6 @@ Faça isso através do Home Broker.
 
 Não exporto através do menu "Minha Conta" > "Movimentações", pois, ele costuma gerar a nota no formato não suportado.
 
-Mas caso queira conferir se sua nota esta no formato suportado pelo Leitor, compare com a imagem abaixo:
+Mas caso queira conferir se sua nota está no formato suportado pelo Leitor de Notas, compare com a imagem abaixo:
 
 ![](../.gitbook/assets/d5f2050c233465eba9f145da60f8cdfd.png)

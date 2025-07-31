@@ -6,6 +6,6 @@ Sua nota de corretagem deve estar no padrão SINACOR.
 
 Não se preocupe, esse é o formato padrão que as corretoras geram as Notas de Negociação.
 
-Mas caso queira conferir se sua nota esta no formato suportado pelo Leitor, compare com a imagem abaixo:
+Mas caso queira conferir se sua nota está no formato suportado pelo Leitor de Notas, compare com a imagem abaixo:
 
 ![](../.gitbook/assets/52ed0ba93830f118edf83fad4c5dc87d.png)

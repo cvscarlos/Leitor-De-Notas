@@ -1,21 +1,19 @@
-# Política de alteração de plano
+# Política de Troca de Plano (Upgrade)
 
-O usuário poderá fazer o upgrade do plano, ou seja solicitar a troca do plano atual por outro de valor superior, em até 30 dias após o pagamento.
+Você pode fazer o upgrade do seu plano para um de maior valor em até 10 dias após a compra original.
 
-Para isso, é necessário primeiro realizar o pagamento do novo plano, para então solicitar o reembolso/cancelamento do plano anterior.
+Para isso, você precisa primeiro comprar o novo plano e, em seguida, solicitar o reembolso do plano anterior.
 
-**Regra**: para que a troca seja autorizada, o pagamento do plano anterior não pode ter mais que 30 dias.
+**Importante:** Para que a troca seja autorizada, o pagamento do novo plano deve ser feito em até 10 dias após o pagamento do plano original.
 
-#### **Para realizar a alteração, siga o procedimento abaixo:**
+#### **Para realizar a troca, siga os passos abaixo:**
 
-**1.** Faça o pagamento do novo plano através de um dos links disponíveis em nosso site (observe que cada página possui opções de planos diferentes).
+**1.** Realize o pagamento do novo plano desejado através de um dos links em nosso site.
 
-- [https://www.dlombelloplanilhas.com/planos](https://www.dlombelloplanilhas.com/planos)
-- [https://leitordenotas.com.br/limites-uso](https://leitordenotas.com.br/limites-uso)
+- [Planos DLP Invest](https://www.dlpinvest.com.br/)
+- [Planos Leitor de Notas](https://leitordenotas.com.br/limites-uso)
 
-**2.** Encaminhe os comprovantes do pagamento anterior e do atual solicitando reembolso da diferença para os seguintes emails:
+**2.** Encaminhe os comprovantes de pagamento do plano anterior e do novo plano para os seguintes e-mails, solicitando o reembolso do plano anterior:
 
-Dlombello Planilhas Alpha<[dlombelloplanilhas@gmail.com](mailto:dlombelloplanilhas@gmail.com)>\
-Leitor de Notas<[suporte.leitordenotas@gmail.com](mailto:suporte.leitordenotas@gmail.com)>
-
-\
+- `dlombelloplanilhas.suporte@gmail.com`
+- `suporte.leitordenotas@gmail.com`

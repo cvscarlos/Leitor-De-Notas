@@ -7,7 +7,7 @@ Com o propósito de oferecer um produto ainda mais completo, temos a funcionalid
 Para cálculo das taxas da B3 é feito o rateio entre os negócios listados na nota.\
 As taxas de corretagem também são calculadas através do rateio já que cada corretora tem suas regras específicas de cobrança e isenção da taxa de corretagem.
 
-**Insenções de taxa de corretagem**, não temos como diferenciar as operações que são isentas de taxa de corretagem e aquelas que não são (como por exemplo Ações x FIIs).\
+**Isenções de taxa de corretagem**, não temos como diferenciar as operações que são isentas de taxa de corretagem e aquelas que não são (como por exemplo Ações x FIIs).\
 Também não conseguimos colocar o valor de corretagem por operação.\
 Nós não temos como fazer isso, porque as corretoras não informam isso nas notas de corretagem.&#x20;
 

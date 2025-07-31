@@ -6,14 +6,14 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import packageJson from '../package.json';
 
-if (environment.production) {
+if (environment.isProduction) {
   enableProdMode();
 }
 
 Sentry.init({
   dsn: 'https://5b8bf0c4ebaef72d93c588958ee478ae@o4505375512395776.ingest.us.sentry.io/4508327216807936',
   integrations: [Sentry.browserTracingIntegration(), Sentry.replayIntegration()],
-  environment: environment.production ? 'production' : 'development',
+  environment: environment.isProduction ? 'production' : 'development',
   release: `${packageJson.name}@${packageJson.version}`,
   // Tracing
   tracesSampleRate: 1.0, //  Capture 100% of the transactions
@@ -28,7 +28,9 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
   _experiments: {
     enableLogs: true,
+    beforeSendLog: (log) => (environment.isProduction ? null : log),
   },
+  beforeSend: (event) => (environment.isProduction ? event : null),
 });
 
 platformBrowserDynamic()

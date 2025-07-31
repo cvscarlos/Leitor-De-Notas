@@ -21,6 +21,7 @@ import { UserEmailModule } from './user-email/user-email.module';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ServerUnavailabilityMessageComponent } from './server-unavailability-message/server-unavailability-message.component';
 import { SentryErrorHandler } from './services/sentry-error-handler.service';
+import { RedirectComponent } from './redirect/redirect.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { SentryErrorHandler } from './services/sentry-error-handler.service';
     UserEmailModule,
     AboutUsComponent,
     ServerUnavailabilityMessageComponent,
+    RedirectComponent,
   ],
   providers: [
     provideEnvironmentNgxMask(),

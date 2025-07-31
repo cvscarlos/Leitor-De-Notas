@@ -1,6 +1,6 @@
-# O IR esta sendo mostrado na linha errada
+# O IR está sendo mostrado na linha errada
 
-Ao ler sua nota de corretagem, o Leitor pode exibir o IRRF (caso tenha sido descontado) junto ao primeiro ativo listado.
+Ao ler sua nota de corretagem, o Leitor de Notas pode exibir o IRRF (caso tenha sido descontado) junto ao primeiro ativo listado.
 
 Isso acontece porque a corretora não informa o IRRF por ativo. O cálculo do imposto devido é feito com base no valor total da nota, e não por ativo individualmente. No entanto, essa exibição não impacta o cálculo do imposto devido. O IR é calculado mensalmente, ou seja, o que realmente importa é o total de IR retido durante o mês.
 

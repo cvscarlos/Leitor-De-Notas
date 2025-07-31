@@ -13,6 +13,7 @@ import { UserAccountComponent } from './user-account/user-account.component';
 import { UserEmailComponent } from './user-email/user-email.component';
 import { FullPageLoadingComponent } from './full-page-loading/full-page-loading.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 const queryMatcher = (queryToMatch: string): boolean => {
   const url = new URL(window.location.href);
@@ -64,6 +65,16 @@ const routes: Routes = [
   { path: 'oauth-i.html', component: OauthComponent, data: { hideAboutUs: true } },
   { path: 'binance', component: BinanceComponent, canActivate: [AuthService] },
   { path: 'loading', component: FullPageLoadingComponent, data: { hideAboutUs: true } },
+  {
+    path: 'faq',
+    component: RedirectComponent,
+    data: { externalUrl: 'https://leitor-de-notas.gitbook.io/faq/' },
+  },
+  {
+    path: 'suporte',
+    component: RedirectComponent,
+    data: { externalUrl: 'https://bit.ly/leitor-de-notas-suporte' },
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
 

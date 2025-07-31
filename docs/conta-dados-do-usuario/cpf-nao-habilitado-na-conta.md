@@ -1,6 +1,6 @@
 # CPF não habilitado na conta
 
-**Erro:** O CPF/CNPJ desta nota não esta habilitado nesta conta
+**Erro:** O CPF/CNPJ desta nota não está habilitado nesta conta
 
 #### **Possíveis soluções:**
 

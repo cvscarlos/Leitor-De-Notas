@@ -1,6 +1,6 @@
-# Como importar no App Dlombello
+# Como importar no DLP Invest
 
-Ao acessar o App Dlombello, clique em "Operações" e depois clique no botão do "Leitor de Notas".
+Ao acessar o DLP Invest, clique em "Operações" e depois clique no botão do "Leitor de Notas".
 
 <figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 

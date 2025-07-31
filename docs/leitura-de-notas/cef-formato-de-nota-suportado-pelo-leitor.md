@@ -1,6 +1,6 @@
-# Caixa Econômica Federal (CEF) - Formato de nota suportado pelo Leitor
+# Caixa Econômica Federal (CEF) - Formato de nota suportado pelo Leitor de Notas
 
-Abaixo está um exemplo do formato de nota compatível com o Leitor.
+Abaixo está um exemplo do formato de nota compatível com o Leitor de Notas.
 
 Esse é o formato padrão de nota, conhecido como **padrão SINACOR**.
 

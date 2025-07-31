@@ -10,7 +10,7 @@ Essas são dicas gerais, que independem da corretora a qual a nota pertence.
 
 Use o **Google Chrome**, para imprimir sua nota em PDF.
 
-**Obs.:** cada item da lista a seguir esta marcado na imagem abaixo.
+**Obs.:** cada item da lista a seguir está marcado na imagem abaixo.
 
 ### Dicas:
 
@@ -18,11 +18,11 @@ Use o **Google Chrome**, para imprimir sua nota em PDF.
 2. "**Páginas**", deixe como "_Tudo_" para imprimir todas as páginas ou filtre apenas as páginas desejadas;
 3. "**Layout**", use sempre o modo "Retrato";
 4. Clique em "**Mais definições**";
-5. "**Tamanho do papel**", use sempre **A4;**
+5. "**Tamanho do papel**", use sempre **A4**;
 6. "**Páginas por folha**", 1 (uma) sempre;
-7. "**Margens**", esolha "_Nenhuma_" para que o conteúdo da nota possa ocupar o maior espaço possível;
+7. "**Margens**", escolha "_Nenhuma_" para que o conteúdo da nota possa ocupar o maior espaço possível;
 8. "**Escala**", escolha "_Padrão_".
-9. **Cabeçalho e Rodapé**, caso sua janela de impressão tenha esta opção disponível, deixe-a sempre desmarcada ou escolha a opção de não imprimir cabeçalhos e rodapé.
+9. **Cabeçalho e Rodapé**, caso sua janela de impressão tenha esta opção disponível, deixe-a sempre desmarcada ou escolha a opção de não imprimir cabeçalhos e rodapés.
 
 ### Dicas II:
 
@@ -31,7 +31,7 @@ Se mesmo após estes ajustes a nota ainda apresentar erros de leitura, tente as 
 - "**Escala**", mude para "_Personalizado_" e vá alterando o valor padrão que é 100, coloque 105 por exemplo, sempre tomando o cuidado da nota continuar cabendo em apenas 1 página.
 - "**Margens**", altere entre qualquer uma das opções disponíveis.
 
-A cada alteração que fizer nas configurações, gere o PDF e tente importar no Leitor novamente.
+A cada alteração que fizer nas configurações, gere o PDF e tente importar no Leitor de Notas novamente.
 
 Não existe uma configuração única que resolve todos os casos, você deve encontrar a que melhor se encaixa com a sua corretora.
 
