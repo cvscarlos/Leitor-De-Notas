@@ -5,13 +5,16 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-redirect',
   standalone: true,
   imports: [],
-  template: '',
+  template: `<p class="text-center my-5 mx-2">
+    <a href="{{ externalUrl }}">redirecionando...</a>
+  </p>`,
 })
 export class RedirectComponent implements OnInit {
+  externalUrl!: string;
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    const externalUrl = this.route.snapshot.data['externalUrl'];
-    window.location.href = externalUrl;
+    this.externalUrl = this.route.snapshot.data['externalUrl'];
+    window.location.href = this.externalUrl;
   }
 }

@@ -68,12 +68,17 @@ const routes: Routes = [
   {
     path: 'faq',
     component: RedirectComponent,
-    data: { externalUrl: 'https://leitor-de-notas.gitbook.io/faq/' },
+    data: { externalUrl: 'https://leitor-de-notas.gitbook.io/faq/', hideAboutUs: true },
   },
   {
     path: 'suporte',
     component: RedirectComponent,
-    data: { externalUrl: 'https://bit.ly/leitor-de-notas-suporte' },
+    data: { externalUrl: 'https://forms.gle/yWiDFTAPaXPCbyQk7', hideAboutUs: true },
+  },
+  {
+    path: 'suporte.html',
+    component: RedirectComponent,
+    data: { externalUrl: 'https://forms.gle/yWiDFTAPaXPCbyQk7', hideAboutUs: true },
   },
   { path: '**', component: PageNotFoundComponent },
 ];
