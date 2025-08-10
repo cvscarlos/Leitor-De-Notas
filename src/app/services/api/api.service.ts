@@ -185,6 +185,18 @@ export class ApiService {
     );
   }
 
+  public adminUserSwitch(emailOrCpf: string): Promise<any> {
+    return firstValueFrom(
+      this.request(`/admin/user-switch/${emailOrCpf}`, null, 'post'),
+    );
+  }
+
+  public adminUnlinkPayment(paymentId: string): Promise<any> {
+    return firstValueFrom(
+      this.request(`/admin/unlink-payment/${paymentId}`, null, 'post'),
+    );
+  }
+
   private request(
     endpoint: string | { url: string },
     payload: Record<string, unknown> | string | null = null,

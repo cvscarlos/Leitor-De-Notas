@@ -22,6 +22,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ServerUnavailabilityMessageComponent } from './server-unavailability-message/server-unavailability-message.component';
 import { SentryErrorHandler } from './services/sentry-error-handler.service';
 import { RedirectComponent } from './redirect/redirect.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { RedirectComponent } from './redirect/redirect.component';
     AboutUsComponent,
     ServerUnavailabilityMessageComponent,
     RedirectComponent,
+    AdminComponent,
   ],
   providers: [
     provideEnvironmentNgxMask(),

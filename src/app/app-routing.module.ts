@@ -14,6 +14,7 @@ import { UserEmailComponent } from './user-email/user-email.component';
 import { FullPageLoadingComponent } from './full-page-loading/full-page-loading.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { RedirectComponent } from './redirect/redirect.component';
+import { AdminComponent } from './admin/admin.component';
 
 const queryMatcher = (queryToMatch: string): boolean => {
   const url = new URL(window.location.href);
@@ -32,6 +33,12 @@ const routes: Routes = [
 
   { path: '', component: HomeComponent },
   { path: 'index.html', component: HomeComponent },
+  { 
+    path: 'lnadmin', 
+    component: AdminComponent, 
+    canActivate: [AuthService, IsIframeService],
+    data: { hideAboutUs: true }
+  },
   { path: 'sobre', component: AboutUsComponent, data: { hideAboutUs: true } },
   {
     path: 'minha-conta',
