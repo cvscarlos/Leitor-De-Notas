@@ -80,12 +80,12 @@ const routes: Routes = [
   {
     path: 'suporte',
     component: RedirectComponent,
-    data: { externalUrl: 'https://forms.gle/yWiDFTAPaXPCbyQk7', hideAboutUs: true },
+    data: { externalUrl: 'https://dlpinvest.com.br/contato', hideAboutUs: true },
   },
   {
     path: 'suporte.html',
     component: RedirectComponent,
-    data: { externalUrl: 'https://forms.gle/yWiDFTAPaXPCbyQk7', hideAboutUs: true },
+    data: { externalUrl: 'https://dlpinvest.com.br/contato', hideAboutUs: true },
   },
   { path: '**', component: PageNotFoundComponent },
 ];
