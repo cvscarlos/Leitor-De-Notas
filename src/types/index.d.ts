@@ -73,6 +73,7 @@ export type Note = {
   tradesTotal: number;
   type: 'Bovespa' | 'BMF' | 'USA';
   isFakeNumber?: boolean;
+  b3Fees?: { TTA: number };
 };
 
 export type NoteDetails = Note & { showNote: boolean };

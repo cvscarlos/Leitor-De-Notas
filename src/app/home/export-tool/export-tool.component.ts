@@ -251,6 +251,7 @@ export class ExportToolComponent implements OnInit {
           this.numberFmt.br(excelTrade.irrfDtProvisioned),
           this.numberFmt.br(excelTrade.irrfStProvisioned),
           note.currency,
+          note.b3Fees?.TTA || '',
         ].join('\t'),
       );
     });
@@ -287,6 +288,7 @@ export class ExportToolComponent implements OnInit {
         'IRRF provisionado DT',
         'IRRF provisionado ST',
         'Moeda',
+        'Taxa B3 TTA',
       ].join('\t');
     }
 
