@@ -33,11 +33,11 @@ const routes: Routes = [
 
   { path: '', component: HomeComponent },
   { path: 'index.html', component: HomeComponent },
-  { 
-    path: 'lnadmin', 
-    component: AdminComponent, 
+  {
+    path: 'lnadmin',
+    component: AdminComponent,
     canActivate: [AuthService, IsIframeService],
-    data: { hideAboutUs: true }
+    data: { hideAboutUs: true },
   },
   { path: 'sobre', component: AboutUsComponent, data: { hideAboutUs: true } },
   {

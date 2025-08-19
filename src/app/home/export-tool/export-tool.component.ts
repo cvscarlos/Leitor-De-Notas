@@ -323,7 +323,7 @@ export class ExportToolComponent implements OnInit {
         trade.BS +
         trade.symbol +
         (this.groupByTicker ? '_' : trade.price) +
-        this.observationNormalizer(trade.obs);
+        trade.dlombelloOperationType;
       const { brokerageTax, tran, others } = trade.fees || {};
 
       groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {

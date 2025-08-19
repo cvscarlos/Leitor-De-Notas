@@ -3,16 +3,18 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './admin.component.html'
+  templateUrl: './admin.component.html',
 })
 export class AdminComponent {
   private fb = inject(FormBuilder);
   private apiService = inject(ApiService);
   private notifyService = inject(NotifyService);
+  private router = inject(Router);
 
   userSwitchForm: FormGroup;
   unlinkPaymentForm: FormGroup;
@@ -22,11 +24,11 @@ export class AdminComponent {
 
   constructor() {
     this.userSwitchForm = this.fb.group({
-      emailOrCpf: ['', [Validators.required, Validators.minLength(3)]]
+      emailOrCpf: ['', [Validators.required, Validators.minLength(3)]],
     });
 
     this.unlinkPaymentForm = this.fb.group({
-      paymentId: ['', [Validators.required, Validators.minLength(1)]]
+      paymentId: ['', [Validators.required, Validators.minLength(1)]],
     });
   }
 
@@ -39,7 +41,7 @@ export class AdminComponent {
     try {
       const emailOrCpf = this.userSwitchForm.value.emailOrCpf;
       await this.apiService.adminUserSwitch(emailOrCpf);
-      window.location.reload();
+      this.router.navigate(['minha-conta']);
     } finally {
       this.isUserSwitchLoading = false;
     }

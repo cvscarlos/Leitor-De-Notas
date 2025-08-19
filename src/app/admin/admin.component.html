@@ -1,8 +1,8 @@
-<div class="container-fluid px-3 px-md-4 py-4" style="max-width: 800px;">
+<div class="container-fluid px-3 px-md-4 py-4" style="max-width: 800px">
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
       <h2 class="text-center mb-4 fw-semibold text-dark">Painel Administrativo</h2>
-      
+
       <div class="card shadow-sm mb-4">
         <div class="card-header bg-light border-bottom">
           <h5 class="mb-0 fw-semibold text-secondary">Entrar como usuário</h5>
@@ -10,16 +10,27 @@
         <div class="card-body p-4">
           <form [formGroup]="userSwitchForm" (ngSubmit)="onUserSwitch()">
             <div class="mb-3">
-              <label for="emailOrCpf" class="form-label fw-medium text-secondary">Email ou CPF/CNPJ:</label>
-              <input 
-                type="text" 
+              <label for="emailOrCpf" class="form-label fw-medium text-secondary"
+                >Email ou CPF/CNPJ:</label
+              >
+              <input
+                type="text"
                 id="emailOrCpf"
                 class="form-control form-control-lg"
                 formControlName="emailOrCpf"
                 placeholder="Digite o email ou CPF do usuário"
-                [class.is-invalid]="userSwitchForm.get('emailOrCpf')?.invalid && userSwitchForm.get('emailOrCpf')?.touched"
+                [class.is-invalid]="
+                  userSwitchForm.get('emailOrCpf')?.invalid &&
+                  userSwitchForm.get('emailOrCpf')?.touched
+                "
               />
-              <div class="invalid-feedback d-block" *ngIf="userSwitchForm.get('emailOrCpf')?.invalid && userSwitchForm.get('emailOrCpf')?.touched">
+              <div
+                class="invalid-feedback d-block"
+                *ngIf="
+                  userSwitchForm.get('emailOrCpf')?.invalid &&
+                  userSwitchForm.get('emailOrCpf')?.touched
+                "
+              >
                 <small *ngIf="userSwitchForm.get('emailOrCpf')?.errors?.['required']">
                   Email ou CPF é obrigatório
                 </small>
@@ -28,13 +39,18 @@
                 </small>
               </div>
             </div>
-            
-            <button 
-              type="submit" 
+
+            <button
+              type="submit"
               class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center"
               [disabled]="userSwitchForm.invalid || isUserSwitchLoading"
             >
-              <span *ngIf="isUserSwitchLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              <span
+                *ngIf="isUserSwitchLoading"
+                class="spinner-border spinner-border-sm me-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
               {{ isUserSwitchLoading ? 'Processando...' : 'Entrar como usuário' }}
             </button>
           </form>
@@ -49,28 +65,44 @@
           <form [formGroup]="unlinkPaymentForm" (ngSubmit)="onUnlinkPayment()">
             <div class="mb-3">
               <p>Libere um pagamento para que possa ser vinculado novamente a qualquer usuário.</p>
-              <label for="paymentId" class="form-label fw-medium text-secondary">ID do Pagamento:</label>
-              <input 
-                type="text" 
+              <label for="paymentId" class="form-label fw-medium text-secondary"
+                >ID do Pagamento:</label
+              >
+              <input
+                type="text"
                 id="paymentId"
                 class="form-control form-control-lg"
                 formControlName="paymentId"
                 placeholder="Digite o ID do pagamento"
-                [class.is-invalid]="unlinkPaymentForm.get('paymentId')?.invalid && unlinkPaymentForm.get('paymentId')?.touched"
+                [class.is-invalid]="
+                  unlinkPaymentForm.get('paymentId')?.invalid &&
+                  unlinkPaymentForm.get('paymentId')?.touched
+                "
               />
-              <div class="invalid-feedback d-block" *ngIf="unlinkPaymentForm.get('paymentId')?.invalid && unlinkPaymentForm.get('paymentId')?.touched">
+              <div
+                class="invalid-feedback d-block"
+                *ngIf="
+                  unlinkPaymentForm.get('paymentId')?.invalid &&
+                  unlinkPaymentForm.get('paymentId')?.touched
+                "
+              >
                 <small *ngIf="unlinkPaymentForm.get('paymentId')?.errors?.['required']">
                   ID do pagamento é obrigatório
                 </small>
               </div>
             </div>
-            
-            <button 
-              type="submit" 
+
+            <button
+              type="submit"
               class="btn btn-danger btn-lg w-100 d-flex align-items-center justify-content-center"
               [disabled]="unlinkPaymentForm.invalid || isUnlinkPaymentLoading"
             >
-              <span *ngIf="isUnlinkPaymentLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+              <span
+                *ngIf="isUnlinkPaymentLoading"
+                class="spinner-border spinner-border-sm me-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
               {{ isUnlinkPaymentLoading ? 'Processando...' : 'Desvincular pagamento' }}
             </button>
           </form>
