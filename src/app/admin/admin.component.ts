@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -14,7 +13,6 @@ export class AdminComponent {
   private fb = inject(FormBuilder);
   private apiService = inject(ApiService);
   private notifyService = inject(NotifyService);
-  private router = inject(Router);
 
   userSwitchForm: FormGroup;
   unlinkPaymentForm: FormGroup;
@@ -41,7 +39,7 @@ export class AdminComponent {
     try {
       const emailOrCpf = this.userSwitchForm.value.emailOrCpf;
       await this.apiService.adminUserSwitch(emailOrCpf);
-      this.router.navigate(['minha-conta']);
+      window.location.href = '/minha-conta';
     } finally {
       this.isUserSwitchLoading = false;
     }

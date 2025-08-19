@@ -30,7 +30,25 @@ Sentry.init({
     enableLogs: true,
     beforeSendLog: (log) => (environment.isProduction ? null : log),
   },
-  beforeSend: (event) => (environment.isProduction ? event : null),
+  beforeSend(event, hint) {
+    try {
+      if (!environment.isProduction) {
+        return null;
+      }
+
+      const urlStr = event.request?.url || window.location?.href || 'x://unknown-host';
+      const host = new URL(urlStr).host;
+      const errStr = hint.originalException?.toString?.() || event.exception?.values?.[0]?.value || 'unknown-error';
+
+      // Fingerprint only by host + error.toString(); keep it minimal
+      event.fingerprint = [host, errStr];
+
+      return event;
+    } catch (error) {
+      console.error('Sentry beforeSend Error:', error);
+      return event;
+    }
+  },
 });
 
 platformBrowserDynamic()
