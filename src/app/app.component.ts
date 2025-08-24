@@ -4,12 +4,12 @@ import {
   faQuestionCircle,
   faCircleDollarToSlot,
 } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 import { IsIframeService } from './services/is-iframe/is-iframe.service';
-import * as Sentry from '@sentry/angular';
+import { IframeHeightService } from './services/iframe-height/iframe-height.service';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +17,11 @@ import * as Sentry from '@sentry/angular';
   styleUrls: ['./app.component.less'],
   standalone: false,
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   isIframe = inject(IsIframeService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
+  private iframeHeightService = inject(IframeHeightService);
 
   public faQuestionCircle = faQuestionCircle;
   public faEnvelope = faEnvelope;
@@ -33,6 +34,8 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    this.iframeHeightService.initialize();
+
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
       let currentRoute = this.route;
       while (currentRoute.firstChild) {
@@ -42,6 +45,10 @@ export class AppComponent implements OnInit {
         this.showAboutUs = this.isIframe.isIframe() || data.hideAboutUs ? false : true;
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    this.iframeHeightService.destroy();
   }
 
   onActivate() {

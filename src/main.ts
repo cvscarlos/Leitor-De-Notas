@@ -38,7 +38,10 @@ Sentry.init({
 
       const urlStr = event.request?.url || window.location?.href || 'x://unknown-host';
       const host = new URL(urlStr).host;
-      const errStr = hint.originalException?.toString?.() || event.exception?.values?.[0]?.value || 'unknown-error';
+      const errStr =
+        hint.originalException?.toString?.() ||
+        event.exception?.values?.[0]?.value ||
+        'unknown-error';
 
       // Fingerprint only by host + error.toString(); keep it minimal
       event.fingerprint = [host, errStr];

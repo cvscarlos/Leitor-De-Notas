@@ -11,7 +11,7 @@ import { UserData } from 'src/types';
 })
 export class UserComponent implements OnInit {
   protected apiService = inject(ApiService);
-  sessionService = inject(SessionService);
+  public sessionService = inject(SessionService);
   protected router = inject(Router);
 
   public loading = false;

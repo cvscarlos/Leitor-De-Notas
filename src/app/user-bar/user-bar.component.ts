@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { UserComponent } from 'src/app/user/user.component';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faFileInvoice, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NotifyService } from '../services/notify/notify.service';
+import { IsIframeService } from '../services/is-iframe/is-iframe.service';
 
 const _15DAYS = 15 * 24 * 60 * 60 * 1000;
 
@@ -13,8 +14,10 @@ const _15DAYS = 15 * 24 * 60 * 60 * 1000;
 })
 export class UserBarComponent extends UserComponent implements OnInit {
   private notifyService = inject(NotifyService);
+  public isIframeService = inject(IsIframeService);
 
   public faUser = faUser;
+  public faFileInvoice = faFileInvoice;
   public addUserKey = '_addUser_';
   public loggedUsers: string[] = [];
   public sessionList: API.SessionItem[] = [];

@@ -8,8 +8,12 @@
         {{ user.email }}
         |
         <a routerLink="/minha-conta">Minha conta</a>
-        |
-        <a href="javascript:void(0);" (click)="logout()">Sair</a>
+        <ng-container *ngIf="this.isIframeService.isIframe()">
+          | <a routerLink="/"><fa-icon [icon]="faFileInvoice"></fa-icon> LEITOR</a>
+        </ng-container>
+        <ng-container *ngIf="!this.isIframeService.isIframe()">
+          | <a href="javascript:void(0);" (click)="logout()">Sair</a>
+        </ng-container>
       </p>
     </div>
 
