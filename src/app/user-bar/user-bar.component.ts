@@ -3,6 +3,8 @@ import { UserComponent } from 'src/app/user/user.component';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { NotifyService } from '../services/notify/notify.service';
 
+const _15DAYS = 15 * 24 * 60 * 60 * 1000;
+
 @Component({
   selector: 'app-user-bar',
   templateUrl: './user-bar.component.html',
@@ -68,8 +70,8 @@ export class UserBarComponent extends UserComponent implements OnInit {
 
   private async modalAvailablePayments() {
     const sawAvailablePayment = sessionStorage.getItem('bgggSawAvailablePayment');
-    if (sawAvailablePayment) return;
-    sessionStorage.setItem('bgggSawAvailablePayment', '1');
+    if (sawAvailablePayment && Date.now() < Number(sawAvailablePayment)) return;
+    sessionStorage.setItem('bgggSawAvailablePayment', String(Date.now() + _15DAYS));
 
     const [trx, user] = await Promise.all([
       this.apiService.userTransactions(),
