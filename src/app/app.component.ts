@@ -18,7 +18,7 @@ import { IframeHeightService } from './services/iframe-height/iframe-height.serv
   standalone: false,
 })
 export class AppComponent implements OnInit, OnDestroy {
-  isIframe = inject(IsIframeService);
+  public isIframe = inject(IsIframeService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private iframeHeightService = inject(IframeHeightService);
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
         currentRoute = currentRoute.firstChild;
       }
       currentRoute.data.subscribe((data) => {
-        this.showAboutUs = this.isIframe.isIframe() || data.hideAboutUs ? false : true;
+        this.showAboutUs = data.hideAboutUs ? false : true;
       });
     });
   }
