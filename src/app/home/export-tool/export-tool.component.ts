@@ -308,8 +308,9 @@ export class ExportToolComponent implements OnInit {
     return marketType;
   }
 
+  private obsList = new Set(['#', '#2', '@', '@#', '-', '#2']);
   private observationNormalizer(obs: string): string {
-    if (obs === '#' || obs === '#2') return '';
+    if (this.obsList.has(obs)) return '';
     return obs;
   }
 
@@ -323,7 +324,7 @@ export class ExportToolComponent implements OnInit {
         trade.BS +
         trade.symbol +
         (this.groupByTicker ? '_' : trade.price) +
-        trade.dlombelloOperationType;
+        this.observationNormalizer(trade.obs);
       const { brokerageTax, tran, others } = trade.fees || {};
 
       groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {
