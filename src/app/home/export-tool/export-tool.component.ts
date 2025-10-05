@@ -7,6 +7,10 @@ import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import NP from 'number-precision';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
+import { SlideToggleDirective } from '../../shared-directives/slide-toggle/slide-toggle.directive';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgbNav, NgbNavItem, NgbNavItemRole, NgbNavLink, NgbNavLinkBase, NgbNavContent, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf } from '@angular/common';
 
 type DlombelloTrade = {
   brokerage: Note['brokerName'];
@@ -40,11 +44,21 @@ type DlombelloExportObject = {
 };
 
 @Component({
-  selector: 'app-export-tool',
-  templateUrl: './export-tool.component.html',
-  styleUrls: ['./export-tool.component.less'],
-  // eslint-disable-next-line @angular-eslint/prefer-standalone
-  standalone: false,
+    selector: 'app-export-tool',
+    templateUrl: './export-tool.component.html',
+    styleUrls: ['./export-tool.component.less'],
+    imports: [
+        SlideToggleDirective,
+        FaIconComponent,
+        NgbNav,
+        NgbNavItem,
+        NgbNavItemRole,
+        NgbNavLink,
+        NgbNavLinkBase,
+        NgbNavContent,
+        NgIf,
+        NgbNavOutlet,
+    ],
 })
 export class ExportToolComponent implements OnInit {
   private apiService = inject(ApiService);

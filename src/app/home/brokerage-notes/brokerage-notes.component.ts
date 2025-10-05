@@ -3,11 +3,12 @@ import { NoteDetails, NoteError } from 'src/types';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interface';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-brokerage-notes',
-  templateUrl: './brokerage-notes.component.html',
-  standalone: false,
+    selector: 'app-brokerage-notes',
+    templateUrl: './brokerage-notes.component.html',
+    imports: [NgIf, NgFor],
 })
 export class BrokerageNotesComponent implements OnInit, DoCheck {
   private notesService = inject(BrokerageNotesService);

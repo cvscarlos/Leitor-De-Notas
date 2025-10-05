@@ -6,8 +6,7 @@ import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directi
 import { UserEmailComponent } from './user-email.component';
 
 @NgModule({
-  declarations: [UserEmailComponent],
-  imports: [SharedDirectivesModule, CommonModule, FormsModule, LoadingModule],
-  exports: [UserEmailComponent],
+    imports: [SharedDirectivesModule, CommonModule, FormsModule, LoadingModule, UserEmailComponent],
+    exports: [UserEmailComponent],
 })
 export class UserEmailModule {}

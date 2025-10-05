@@ -4,8 +4,7 @@ import { UploadComponent } from './upload.component';
 import { UploadDirective } from './upload.directive';
 
 @NgModule({
-  declarations: [UploadComponent, UploadDirective],
-  imports: [CommonModule],
-  exports: [UploadComponent],
+    imports: [CommonModule, UploadComponent, UploadDirective],
+    exports: [UploadComponent],
 })
 export class UploadModule {}

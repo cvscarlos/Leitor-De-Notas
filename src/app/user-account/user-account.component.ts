@@ -1,10 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
-import { UntypedFormGroup } from '@angular/forms';
+import { UntypedFormGroup, FormsModule } from '@angular/forms';
 import { UserComponent } from 'src/app/user/user.component';
 import { UserService } from 'src/app/services/user/user.service';
 import { UserTransactions } from 'src/types';
+import { LoadingComponent } from '../loading/loading.component';
+import { RouterLink } from '@angular/router';
+import { NgIf, NgFor, DatePipe, KeyValuePipe } from '@angular/common';
+import { SlideToggleDirective } from '../shared-directives/slide-toggle/slide-toggle.directive';
+import { CpfCnpjPipe } from '../shared-pipes/cpf-cnpj/cpf-cnpj.pipe';
 
 type UserUsageHistory = {
   [cpfCnpj: string]: {
@@ -15,10 +20,19 @@ type UserUsageHistory = {
 };
 
 @Component({
-  selector: 'app-user-account',
-  templateUrl: './user-account.component.html',
-  // eslint-disable-next-line @angular-eslint/prefer-standalone
-  standalone: false,
+    selector: 'app-user-account',
+    templateUrl: './user-account.component.html',
+    imports: [
+        LoadingComponent,
+        RouterLink,
+        NgIf,
+        NgFor,
+        FormsModule,
+        SlideToggleDirective,
+        DatePipe,
+        KeyValuePipe,
+        CpfCnpjPipe,
+    ],
 })
 export class UserAccountComponent extends UserComponent implements OnInit {
   private notifyService = inject(NotifyService);

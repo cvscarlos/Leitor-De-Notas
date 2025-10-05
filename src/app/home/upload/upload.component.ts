@@ -2,12 +2,18 @@ import { Component, OnInit, inject } from '@angular/core';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
 import { SessionService } from 'src/app/services/session/session.service';
 import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interface';
+import { NgIf, NgFor } from '@angular/common';
+import { UploadDirective } from './upload.directive';
 
 @Component({
-  selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.less'],
-  standalone: false,
+    selector: 'app-upload',
+    templateUrl: './upload.component.html',
+    styleUrls: ['./upload.component.less'],
+    imports: [
+        NgIf,
+        UploadDirective,
+        NgFor,
+    ],
 })
 export class UploadComponent implements OnInit {
   sessionService = inject(SessionService);

@@ -10,16 +10,16 @@ import { UserDocumentModule } from './user-document/user-document.module';
 import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [
-    AppRoutingModule,
-    AuthModule,
-    BrokerageNotesModule,
-    CommonModule,
-    ExportToolModule,
-    UploadModule,
-    UserDocumentModule,
-  ],
-  exports: [HomeComponent],
+    imports: [
+        AppRoutingModule,
+        AuthModule,
+        BrokerageNotesModule,
+        CommonModule,
+        ExportToolModule,
+        UploadModule,
+        UserDocumentModule,
+        HomeComponent,
+    ],
+    exports: [HomeComponent],
 })
 export class HomeModule {}

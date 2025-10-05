@@ -5,12 +5,18 @@ import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerag
 import { CpfCnpjPipe } from 'src/app/shared-pipes/cpf-cnpj/cpf-cnpj.pipe';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifyService } from 'src/app/services/notify/notify.service';
+import { LoadingComponent } from '../loading/loading.component';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './usa-modal.component.html',
-  providers: [CpfCnpjPipe],
-  standalone: false,
+    selector: 'app-modal',
+    templateUrl: './usa-modal.component.html',
+    providers: [CpfCnpjPipe],
+    imports: [
+        LoadingComponent,
+        NgFor,
+        CpfCnpjPipe,
+    ],
 })
 export class USAModalComponent implements OnInit {
   private apiService = inject(ApiService);

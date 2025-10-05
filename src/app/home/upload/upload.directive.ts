@@ -2,10 +2,7 @@ import { Directive, ElementRef, HostListener, Renderer2, inject } from '@angular
 
 import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
 
-@Directive({
-  selector: '[appUpload]',
-  standalone: false,
-})
+@Directive({ selector: '[appUpload]', standalone: true })
 export class UploadDirective {
   private notesService = inject(BrokerageNotesService);
   private renderer = inject(Renderer2);

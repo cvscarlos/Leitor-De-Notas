@@ -25,40 +25,38 @@ import { RedirectComponent } from './redirect/redirect.component';
 import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    StatisticsComponent,
-    UserBarComponent,
-    USAModalComponent,
-  ],
-  bootstrap: [AppComponent],
-  imports: [
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    FontAwesomeModule,
-    NgbCollapseModule,
-    SharedPipesModule,
-    HomeModule,
-    LoadingModule,
-    UserAccountModule,
-    UserEmailModule,
-    AboutUsComponent,
-    ServerUnavailabilityMessageComponent,
-    RedirectComponent,
-    AdminComponent,
-  ],
-  providers: [
-    provideEnvironmentNgxMask(),
-    provideHttpClient(withInterceptorsFromDi()),
-    {
-      provide: ErrorHandler,
-      useClass: SentryErrorHandler,
-    },
-    provideAppInitializer(() => {
-      inject(Sentry.TraceService);
-    }),
-  ],
+    declarations: [AppComponent],
+    bootstrap: [AppComponent],
+    imports: [
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        FontAwesomeModule,
+        NgbCollapseModule,
+        SharedPipesModule,
+        HomeModule,
+        LoadingModule,
+        UserAccountModule,
+        UserEmailModule,
+        AboutUsComponent,
+        ServerUnavailabilityMessageComponent,
+        RedirectComponent,
+        AdminComponent,
+        PageNotFoundComponent,
+        StatisticsComponent,
+        UserBarComponent,
+        USAModalComponent,
+    ],
+    providers: [
+        provideEnvironmentNgxMask(),
+        provideHttpClient(withInterceptorsFromDi()),
+        {
+            provide: ErrorHandler,
+            useClass: SentryErrorHandler,
+        },
+        provideAppInitializer(() => {
+            inject(Sentry.TraceService);
+        }),
+    ],
 })
 export class AppModule {}

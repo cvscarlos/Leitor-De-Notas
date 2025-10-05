@@ -8,15 +8,15 @@ import { SharedPipesModule } from 'src/app/shared-pipes/shared-pipes.module';
 import { UserAccountComponent } from './user-account.component';
 
 @NgModule({
-  declarations: [UserAccountComponent],
-  imports: [
-    AppRoutingModule,
-    CommonModule,
-    SharedDirectivesModule,
-    FormsModule,
-    LoadingModule,
-    SharedPipesModule,
-  ],
-  exports: [UserAccountComponent],
+    imports: [
+        AppRoutingModule,
+        CommonModule,
+        SharedDirectivesModule,
+        FormsModule,
+        LoadingModule,
+        SharedPipesModule,
+        UserAccountComponent,
+    ],
+    exports: [UserAccountComponent],
 })
 export class UserAccountModule {}
