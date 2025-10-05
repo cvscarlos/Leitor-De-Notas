@@ -3,8 +3,8 @@ import { ApiService } from 'src/app/services/api/api.service';
 import packageJson from '../../../package.json';
 
 @Component({
-    selector: 'app-statistics',
-    templateUrl: './statistics.component.html',
+  selector: 'app-statistics',
+  templateUrl: './statistics.component.html',
 })
 export class StatisticsComponent implements OnInit {
   private apiService = inject(ApiService);

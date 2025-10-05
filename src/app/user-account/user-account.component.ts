@@ -20,19 +20,19 @@ type UserUsageHistory = {
 };
 
 @Component({
-    selector: 'app-user-account',
-    templateUrl: './user-account.component.html',
-    imports: [
-        LoadingComponent,
-        RouterLink,
-        NgIf,
-        NgFor,
-        FormsModule,
-        SlideToggleDirective,
-        DatePipe,
-        KeyValuePipe,
-        CpfCnpjPipe,
-    ],
+  selector: 'app-user-account',
+  templateUrl: './user-account.component.html',
+  imports: [
+    LoadingComponent,
+    RouterLink,
+    NgIf,
+    NgFor,
+    FormsModule,
+    SlideToggleDirective,
+    DatePipe,
+    KeyValuePipe,
+    CpfCnpjPipe,
+  ],
 })
 export class UserAccountComponent extends UserComponent implements OnInit {
   private notifyService = inject(NotifyService);

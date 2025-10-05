@@ -8,15 +8,10 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-    selector: 'app-upload',
-    templateUrl: './upload.component.html',
-    styleUrls: ['./upload.component.less'],
-    imports: [
-        NgIf,
-        UploadDirective,
-        NgFor,
-        FaIconComponent,
-    ],
+  selector: 'app-upload',
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.less'],
+  imports: [NgIf, UploadDirective, NgFor, FaIconComponent],
 })
 export class UploadComponent implements OnInit {
   sessionService = inject(SessionService);

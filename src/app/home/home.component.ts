@@ -13,21 +13,21 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFilePdf, faFileCsv } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    imports: [
-        AuthComponent,
-        UserDocumentComponent,
-        UploadComponent,
-        StatementUploadComponent,
-        ExportToolComponent,
-        StatementExportComponent,
-        BrokerageNotesComponent,
-        RouterLink,
-        RouterLinkActive,
-        NgIf,
-        FaIconComponent,
-    ],
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  imports: [
+    AuthComponent,
+    UserDocumentComponent,
+    UploadComponent,
+    StatementUploadComponent,
+    ExportToolComponent,
+    StatementExportComponent,
+    BrokerageNotesComponent,
+    RouterLink,
+    RouterLinkActive,
+    NgIf,
+    FaIconComponent,
+  ],
 })
 export class HomeComponent implements OnInit {
   private router = inject(Router);
@@ -39,11 +39,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.updateCurrentTab();
 
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.updateCurrentTab();
-      });
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      this.updateCurrentTab();
+    });
   }
 
   private updateCurrentTab(): void {

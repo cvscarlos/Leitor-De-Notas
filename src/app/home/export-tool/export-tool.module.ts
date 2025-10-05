@@ -6,7 +6,13 @@ import { NgModule } from '@angular/core';
 import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directives.module';
 
 @NgModule({
-    imports: [CommonModule, SharedDirectivesModule, NgbNavModule, FontAwesomeModule, ExportToolComponent],
-    exports: [ExportToolComponent],
+  imports: [
+    CommonModule,
+    SharedDirectivesModule,
+    NgbNavModule,
+    FontAwesomeModule,
+    ExportToolComponent,
+  ],
+  exports: [ExportToolComponent],
 })
 export class ExportToolModule {}

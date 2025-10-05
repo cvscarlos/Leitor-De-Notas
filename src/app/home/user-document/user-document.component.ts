@@ -8,10 +8,10 @@ import { UserService } from 'src/app/services/user/user.service';
 import { LoadingComponent } from '../../loading/loading.component';
 
 @Component({
-    selector: 'app-user-document',
-    templateUrl: './user-document.component.html',
-    styleUrls: ['./user-document.component.less'],
-    imports: [LoadingComponent, FormsModule],
+  selector: 'app-user-document',
+  templateUrl: './user-document.component.html',
+  styleUrls: ['./user-document.component.less'],
+  imports: [LoadingComponent, FormsModule],
 })
 export class UserDocumentComponent implements OnInit {
   private apiService = inject(ApiService);

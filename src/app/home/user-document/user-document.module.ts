@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 import { UserDocumentComponent } from './user-document.component';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, LoadingModule, NgbModalModule, UserDocumentComponent],
-    exports: [UserDocumentComponent],
+  imports: [CommonModule, FormsModule, LoadingModule, NgbModalModule, UserDocumentComponent],
+  exports: [UserDocumentComponent],
 })
 export class UserDocumentModule {}

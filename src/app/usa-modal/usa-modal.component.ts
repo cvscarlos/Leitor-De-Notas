@@ -9,14 +9,10 @@ import { LoadingComponent } from '../loading/loading.component';
 import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-modal',
-    templateUrl: './usa-modal.component.html',
-    providers: [CpfCnpjPipe],
-    imports: [
-        LoadingComponent,
-        NgFor,
-        CpfCnpjPipe,
-    ],
+  selector: 'app-modal',
+  templateUrl: './usa-modal.component.html',
+  providers: [CpfCnpjPipe],
+  imports: [LoadingComponent, NgFor, CpfCnpjPipe],
 })
 export class USAModalComponent implements OnInit {
   private apiService = inject(ApiService);

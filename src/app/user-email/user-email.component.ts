@@ -7,14 +7,10 @@ import { LoadingComponent } from '../loading/loading.component';
 import { SlideToggleDirective } from '../shared-directives/slide-toggle/slide-toggle.directive';
 
 @Component({
-    selector: 'app-user-email',
-    templateUrl: './user-email.component.html',
-    styleUrls: ['./user-email.component.less'],
-    imports: [
-        LoadingComponent,
-        FormsModule,
-        SlideToggleDirective,
-    ],
+  selector: 'app-user-email',
+  templateUrl: './user-email.component.html',
+  styleUrls: ['./user-email.component.less'],
+  imports: [LoadingComponent, FormsModule, SlideToggleDirective],
 })
 export class UserEmailComponent {
   private apiService = inject(ApiService);

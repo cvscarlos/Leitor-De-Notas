@@ -6,9 +6,9 @@ import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interfa
 import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-brokerage-notes',
-    templateUrl: './brokerage-notes.component.html',
-    imports: [NgIf, NgFor],
+  selector: 'app-brokerage-notes',
+  templateUrl: './brokerage-notes.component.html',
+  imports: [NgIf, NgFor],
 })
 export class BrokerageNotesComponent implements OnInit, DoCheck {
   private notesService = inject(BrokerageNotesService);

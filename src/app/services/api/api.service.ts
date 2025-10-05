@@ -36,7 +36,12 @@ export class ApiService {
 
   public uploadStatement(requestBody: any): Promise<any> {
     return firstValueFrom(
-      this.request({ url: `${environment.apiUpload}/pvt/upload-statement` }, requestBody, 'post', false),
+      this.request(
+        { url: `${environment.apiUpload}/pvt/upload-statement` },
+        requestBody,
+        'post',
+        false,
+      ),
     );
   }
 

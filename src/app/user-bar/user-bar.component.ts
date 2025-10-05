@@ -11,15 +11,9 @@ import { RouterLink } from '@angular/router';
 const _15DAYS = 15 * 24 * 60 * 60 * 1000;
 
 @Component({
-    selector: 'app-user-bar',
-    templateUrl: './user-bar.component.html',
-    imports: [
-        NgIf,
-        LoadingComponent,
-        FaIconComponent,
-        RouterLink,
-        NgFor,
-    ],
+  selector: 'app-user-bar',
+  templateUrl: './user-bar.component.html',
+  imports: [NgIf, LoadingComponent, FaIconComponent, RouterLink, NgFor],
 })
 export class UserBarComponent extends UserComponent implements OnInit {
   private notifyService = inject(NotifyService);
