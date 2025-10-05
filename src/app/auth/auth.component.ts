@@ -1,15 +1,34 @@
 import { ApiService } from 'src/app/services/api/api.service';
 import { Component, OnInit, inject } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
+import { NgIf } from '@angular/common';
+import { FullPageLoadingComponent } from '../full-page-loading/full-page-loading.component';
+import { SlideToggleDirective } from '../shared-directives/slide-toggle/slide-toggle.directive';
+import { LoadingComponent } from '../loading/loading.component';
+import { AutofocusDirective } from '../shared-directives/autofocus/autofocus.directive';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.less'],
-  standalone: false,
+  imports: [
+    NgIf,
+    FullPageLoadingComponent,
+    SlideToggleDirective,
+    LoadingComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    AutofocusDirective,
+  ],
 })
 export class AuthComponent implements OnInit {
   sessionService = inject(SessionService);

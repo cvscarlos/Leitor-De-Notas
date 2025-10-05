@@ -3,14 +3,15 @@ import { ApiService } from 'src/app/services/api/api.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
-import { UntypedFormGroup } from '@angular/forms';
+import { UntypedFormGroup, FormsModule } from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
+import { LoadingComponent } from '../../loading/loading.component';
 
 @Component({
   selector: 'app-user-document',
   templateUrl: './user-document.component.html',
   styleUrls: ['./user-document.component.less'],
-  standalone: false,
+  imports: [LoadingComponent, FormsModule],
 })
 export class UserDocumentComponent implements OnInit {
   private apiService = inject(ApiService);

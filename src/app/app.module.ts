@@ -25,13 +25,7 @@ import { RedirectComponent } from './redirect/redirect.component';
 import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    PageNotFoundComponent,
-    StatisticsComponent,
-    UserBarComponent,
-    USAModalComponent,
-  ],
+  declarations: [AppComponent],
   bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
@@ -48,6 +42,10 @@ import { AdminComponent } from './admin/admin.component';
     ServerUnavailabilityMessageComponent,
     RedirectComponent,
     AdminComponent,
+    PageNotFoundComponent,
+    StatisticsComponent,
+    UserBarComponent,
+    USAModalComponent,
   ],
   providers: [
     provideEnvironmentNgxMask(),

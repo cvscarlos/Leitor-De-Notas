@@ -15,10 +15,7 @@ import {
   inject,
 } from '@angular/core';
 
-@Directive({
-  selector: '[appSlideToggle]',
-  standalone: false,
-})
+@Directive({ selector: '[appSlideToggle]', standalone: true })
 export class SlideToggleDirective {
   private animBuilder = inject(AnimationBuilder);
   private elemRef = inject(ElementRef);

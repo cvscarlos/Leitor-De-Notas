@@ -8,7 +8,6 @@ import { SharedPipesModule } from 'src/app/shared-pipes/shared-pipes.module';
 import { UserAccountComponent } from './user-account.component';
 
 @NgModule({
-  declarations: [UserAccountComponent],
   imports: [
     AppRoutingModule,
     CommonModule,
@@ -16,6 +15,7 @@ import { UserAccountComponent } from './user-account.component';
     FormsModule,
     LoadingModule,
     SharedPipesModule,
+    UserAccountComponent,
   ],
   exports: [UserAccountComponent],
 })

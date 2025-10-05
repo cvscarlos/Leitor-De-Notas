@@ -1,9 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({
-  name: 'cpfCnpj',
-  standalone: false,
-})
+@Pipe({ name: 'cpfCnpj', standalone: true })
 export class CpfCnpjPipe implements PipeTransform {
   private cpfRegex = /([0-9]{3})([0-9]{3})([0-9]{3})([0-9]{2})/;
   private cnpjRegex = /([0-9]{2})([0-9]{3})([0-9]{3})([0-9]{4})([0-9]{2})/;

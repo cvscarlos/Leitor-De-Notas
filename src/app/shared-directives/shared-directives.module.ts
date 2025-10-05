@@ -5,8 +5,7 @@ import { NgModule } from '@angular/core';
 import { SlideToggleDirective } from './slide-toggle/slide-toggle.directive';
 
 @NgModule({
-  declarations: [AutofocusDirective, SlideToggleDirective],
-  imports: [BrowserAnimationsModule, CommonModule],
+  imports: [BrowserAnimationsModule, CommonModule, AutofocusDirective, SlideToggleDirective],
   exports: [AutofocusDirective, SlideToggleDirective],
 })
 export class SharedDirectivesModule {}

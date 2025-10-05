@@ -10,7 +10,6 @@ import { UserDocumentModule } from './user-document/user-document.module';
 import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
-  declarations: [HomeComponent],
   imports: [
     AppRoutingModule,
     AuthModule,
@@ -19,6 +18,7 @@ import { AppRoutingModule } from '../app-routing.module';
     ExportToolModule,
     UploadModule,
     UserDocumentModule,
+    HomeComponent,
   ],
   exports: [HomeComponent],
 })

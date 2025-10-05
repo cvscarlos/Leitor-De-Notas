@@ -7,7 +7,6 @@ import { SharedDirectivesModule } from 'src/app/shared-directives/shared-directi
 import { FullPageLoadingComponent } from '../full-page-loading/full-page-loading.component';
 
 @NgModule({
-  declarations: [AuthComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -15,6 +14,7 @@ import { FullPageLoadingComponent } from '../full-page-loading/full-page-loading
     LoadingModule,
     SharedDirectivesModule,
     FullPageLoadingComponent,
+    AuthComponent,
   ],
   exports: [AuthComponent],
 })

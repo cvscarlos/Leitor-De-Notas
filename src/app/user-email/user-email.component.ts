@@ -1,14 +1,16 @@
 import { ApiService } from 'src/app/services/api/api.service';
 import { Component, inject } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { UntypedFormGroup, FormsModule } from '@angular/forms';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
+import { LoadingComponent } from '../loading/loading.component';
+import { SlideToggleDirective } from '../shared-directives/slide-toggle/slide-toggle.directive';
 
 @Component({
   selector: 'app-user-email',
   templateUrl: './user-email.component.html',
   styleUrls: ['./user-email.component.less'],
-  standalone: false,
+  imports: [LoadingComponent, FormsModule, SlideToggleDirective],
 })
 export class UserEmailComponent {
   private apiService = inject(ApiService);
