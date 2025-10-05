@@ -1,0 +1,54 @@
+<div class="container" style="display: none" [appSlideToggle]="enableExport">
+  <div class="row small-font">
+    <div class="col text-center mb-3">
+      <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cleanStatements()">
+        <fa-icon [icon]="faTrashAlt"></fa-icon> limpar extratos da tela
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h4 class="text-center mt-3 mb-4">Resultados</h4>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="statements.length > 0">
+    <div class="col">
+      <div class="table-responsive mb-3">
+        <table class="table table-sm table-striped">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Ativo</th>
+              <th>Tipo</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let statement of statements">
+              <td>{{ statement.date }}</td>
+              <td>{{ statement.stock }}</td>
+              <td>{{ statement.dlpType }}</td>
+              <td>{{ statement.value }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col pure-text-field click-to-copy">
+      <h5 class="mb-3">Copiar para Excel / DLP Invest</h5>
+      <div class="mb-3">
+        <textarea class="text-to-export form-control" readonly #exportTextarea>{{
+          exportString
+        }}</textarea>
+      </div>
+      <button class="btn btn-primary" (click)="copyFn(exportTextarea)">
+        <fa-icon [icon]="faCopy"></fa-icon> Copiar
+      </button>
+    </div>
+  </div>
+</div>

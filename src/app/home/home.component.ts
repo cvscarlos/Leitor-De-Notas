@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AuthComponent } from '../auth/auth.component';
 import { UserDocumentComponent } from './user-document/user-document.component';
 import { UploadComponent } from './upload/upload.component';
+import { StatementUploadComponent } from './statement-upload/statement-upload.component';
 import { ExportToolComponent } from './export-tool/export-tool.component';
+import { StatementExportComponent } from './statement-export/statement-export.component';
 import { BrokerageNotesComponent } from './brokerage-notes/brokerage-notes.component';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { filter } from 'rxjs/operators';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faFilePdf, faFileCsv } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-home',
@@ -13,9 +19,35 @@ import { RouterLink } from '@angular/router';
         AuthComponent,
         UserDocumentComponent,
         UploadComponent,
+        StatementUploadComponent,
         ExportToolComponent,
+        StatementExportComponent,
         BrokerageNotesComponent,
         RouterLink,
+        RouterLinkActive,
+        NgIf,
+        FaIconComponent,
     ],
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  private router = inject(Router);
+
+  currentTab: 'notas' | 'extratos' = 'notas';
+  faFilePdf = faFilePdf;
+  faFileCsv = faFileCsv;
+
+  ngOnInit(): void {
+    this.updateCurrentTab();
+
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.updateCurrentTab();
+      });
+  }
+
+  private updateCurrentTab(): void {
+    const url = this.router.url;
+    this.currentTab = url.includes('/extratos') ? 'extratos' : 'notas';
+  }
+}

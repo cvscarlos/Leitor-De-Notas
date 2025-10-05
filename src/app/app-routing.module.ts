@@ -32,6 +32,7 @@ const routes: Routes = [
   },
 
   { path: '', component: HomeComponent },
+  { path: 'extratos', component: HomeComponent },
   { path: 'index.html', component: HomeComponent },
   {
     path: 'lnadmin',

@@ -4,6 +4,8 @@ import { SessionService } from 'src/app/services/session/session.service';
 import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interface';
 import { NgIf, NgFor } from '@angular/common';
 import { UploadDirective } from './upload.directive';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { faFilePdf } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'app-upload',
@@ -13,6 +15,7 @@ import { UploadDirective } from './upload.directive';
         NgIf,
         UploadDirective,
         NgFor,
+        FaIconComponent,
     ],
 })
 export class UploadComponent implements OnInit {
@@ -20,6 +23,7 @@ export class UploadComponent implements OnInit {
   private notesService = inject(BrokerageNotesService);
 
   public uploads?: UploadInterface[];
+  public faFilePdf = faFilePdf;
 
   constructor() {}
 
@@ -42,5 +46,10 @@ export class UploadComponent implements OnInit {
 
   public hasServerErrors(): boolean {
     return Boolean(this.uploads && this.uploads.some((upload) => upload.serverError));
+  }
+
+  public getErrorMessage(upload: UploadInterface): string {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (upload.error as any).error?._message || 'Erro desconhecido';
   }
 }

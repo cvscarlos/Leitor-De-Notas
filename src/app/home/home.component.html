@@ -3,10 +3,29 @@
 
   <app-user-document></app-user-document>
 
-  <app-upload></app-upload>
+  <div class="row">
+    <div class="col">
+      <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="currentTab === 'notas'" routerLink="/" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+            <fa-icon [icon]="faFilePdf"></fa-icon> Notas de Corretagem
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [class.active]="currentTab === 'extratos'" routerLink="/extratos" routerLinkActive="active">
+            <fa-icon [icon]="faFileCsv"></fa-icon> Dividendos
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <app-upload *ngIf="currentTab === 'notas'"></app-upload>
+  <app-statement-upload *ngIf="currentTab === 'extratos'"></app-statement-upload>
 </div>
 
-<app-export-tool></app-export-tool>
+<app-export-tool *ngIf="currentTab === 'notas'"></app-export-tool>
+<app-statement-export *ngIf="currentTab === 'extratos'"></app-statement-export>
 
 <div class="container-fluid">
   <app-brokerage-notes></app-brokerage-notes>
