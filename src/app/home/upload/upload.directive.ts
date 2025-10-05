@@ -1,12 +1,17 @@
-import { Directive, ElementRef, HostListener, Renderer2, inject } from '@angular/core';
+import { Directive, ElementRef, HostListener, Renderer2, inject, input } from '@angular/core';
 
 import { BrokerageNotesService } from '../../services/brokerage-notes/brokerage-notes.service';
+import { StatementService } from '../../services/statement/statement.service';
 
 @Directive({ selector: '[appUpload]', standalone: true })
 export class UploadDirective {
   private notesService = inject(BrokerageNotesService);
+  private statementService = inject(StatementService);
   private renderer = inject(Renderer2);
   private hostElement = inject(ElementRef);
+
+  uploadType = input<'notes' | 'statements'>('notes');
+  broker = input<string>('');
 
   constructor() {}
 
@@ -27,7 +32,11 @@ export class UploadDirective {
     evt.stopPropagation();
 
     if (evt.dataTransfer != null) {
-      this.notesService.uploadFiles(evt.dataTransfer.files);
+      if (this.uploadType() === 'statements') {
+        this.statementService.uploadFiles(evt.dataTransfer.files, this.broker());
+      } else {
+        this.notesService.uploadFiles(evt.dataTransfer.files);
+      }
     }
 
     this.leaveClass();

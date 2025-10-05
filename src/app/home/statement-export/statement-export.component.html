@@ -19,8 +19,20 @@
                 exportString
               }}</textarea>
             </div>
-            <button class="btn btn-primary" (click)="copyFn(exportTextarea)">
+            <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(exportTextarea)">
               <fa-icon [icon]="faCopy"></fa-icon> Copiar
+            </button>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="isIframe">
+          <div class="col text-center">
+            <button
+              class="btn btn-success btn-lg mt-4"
+              style="font-size: 1.25rem"
+              (click)="sendJsonMessage()"
+            >
+              <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
             </button>
           </div>
         </div>
@@ -30,29 +42,37 @@
 
   <div [ngbNavOutlet]="nav" class="small-font border border-top-0 p-3 pt-0"></div>
 
-  <h4 class="text-center mt-5 mb-4">Resumo dos dividendos</h4>
+  <div *ngIf="statements.length > 0">
+    <div class="row mt-5">
+      <div class="col small-font">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0">Resumo dos dividendos</h4>
+          </div>
 
-  <div class="row" *ngIf="statements.length > 0">
-    <div class="col">
-      <div class="table-responsive mb-3">
-        <table class="table table-sm table-striped">
-          <thead>
-            <tr>
-              <th>Data</th>
-              <th>Ativo</th>
-              <th>Tipo</th>
-              <th>Valor</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let statement of statements">
-              <td>{{ statement.date }}</td>
-              <td>{{ statement.stock }}</td>
-              <td>{{ statement.dlpType }}</td>
-              <td>{{ statement.value }}</td>
-            </tr>
-          </tbody>
-        </table>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-striped mb-3">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Ativo</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let statement of statements">
+                    <td>{{ statement.date }}</td>
+                    <td>{{ statement.stock }}</td>
+                    <td>{{ statement.dlpType }}</td>
+                    <td>{{ statement.value }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

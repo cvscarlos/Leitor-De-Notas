@@ -3,23 +3,18 @@
     <div class="upload-wrapper">
       <div *ngIf="!sessionService.isAuthenticated" class="upload-overlay"></div>
 
-      <div class="mb-3 row align-items-center justify-content-center">
-        <label for="broker-select" class="col-auto col-form-label">Corretora:</label>
-        <div class="col-auto">
-          <select id="broker-select" class="form-select" [(ngModel)]="selectedBroker">
-            <option value="Avenue">Avenue</option>
-          </select>
-        </div>
-      </div>
-
-      <div
-        class="drop-files small-font"
-        style="background-color: #a146f4"
-        appUpload
-        (click)="uploadInput.click()"
-      >
+      <div class="drop-files" style="background-color: #a146f4" appUpload [uploadType]="'statements'" [broker]="selectedBroker">
         <div class="text-white">
-          <div class="row align-items-center justify-content-center g-3">
+          <div class="mb-3 row align-items-center justify-content-center">
+            <label for="broker-select" class="col-auto col-form-label">Corretora:</label>
+            <div class="col-auto">
+              <select id="broker-select" class="form-select" [(ngModel)]="selectedBroker">
+                <option value="Avenue">Avenue</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row align-items-center justify-content-center g-3 small-font" style="cursor: pointer" (click)="uploadInput.click()">
             <div class="col-auto">
               <fa-icon [icon]="faFileCsv" size="4x"></fa-icon>
             </div>
@@ -41,7 +36,7 @@
 
         <div
           id="status-wrapper"
-          class="bg-light p-1 border border-secondary rounded mt-3"
+          class="bg-light p-1 border border-secondary rounded mt-3 small-font"
           [class.d-none]="!hasStatements()"
         >
           <span
