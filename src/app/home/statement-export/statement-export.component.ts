@@ -5,12 +5,25 @@ import { StatementDetail } from 'src/app/services/statement/statement-upload.int
 import { SlideToggleDirective } from '../../shared-directives/slide-toggle/slide-toggle.directive';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { NgIf, NgFor } from '@angular/common';
+import { NgbNav, NgbNavItem, NgbNavItemRole, NgbNavLink, NgbNavLinkBase, NgbNavContent, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-statement-export',
   templateUrl: './statement-export.component.html',
   styleUrls: ['./statement-export.component.less'],
-  imports: [SlideToggleDirective, FaIconComponent, NgIf, NgFor],
+  imports: [
+    SlideToggleDirective,
+    FaIconComponent,
+    NgIf,
+    NgFor,
+    NgbNav,
+    NgbNavItem,
+    NgbNavItemRole,
+    NgbNavLink,
+    NgbNavLinkBase,
+    NgbNavContent,
+    NgbNavOutlet,
+  ],
 })
 export class StatementExportComponent implements OnInit {
   private statementService = inject(StatementService);
@@ -23,10 +36,23 @@ export class StatementExportComponent implements OnInit {
   public statements: StatementDetail[] = [];
   private broker = '';
 
-  constructor() {}
+  constructor() {
+    // Check for existing data before component initializes to avoid animation
+    const existingStatements = this.statementService.getStatements().statementDetails;
+    if (existingStatements.length > 0) {
+      this.enableExport = true;
+    }
+  }
 
   ngOnInit(): void {
     this.statementService.statementCallback((details) => this.statementParser(details));
+
+    // Load existing data from service
+    const existingStatements = this.statementService.getStatements().statementDetails;
+    if (existingStatements.length > 0) {
+      this.statements = [...existingStatements];
+      this.generateExportString();
+    }
   }
 
   public async copyFn(textarea: HTMLTextAreaElement): Promise<void> {

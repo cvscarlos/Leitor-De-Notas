@@ -7,11 +7,30 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col">
-      <h4 class="text-center mt-3 mb-4">Resultados</h4>
-    </div>
-  </div>
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>DLP Invest</a>
+      <ng-template ngbNavContent>
+        <div class="row">
+          <div class="col pure-text-field click-to-copy">
+            <h4 class="text-center my-3">Copiar para DLP Invest</h4>
+            <div class="mb-3">
+              <textarea class="text-to-export form-control" readonly #exportTextarea>{{
+                exportString
+              }}</textarea>
+            </div>
+            <button class="btn btn-primary" (click)="copyFn(exportTextarea)">
+              <fa-icon [icon]="faCopy"></fa-icon> Copiar
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="small-font border border-top-0 p-3 pt-0"></div>
+
+  <h4 class="text-center mt-5 mb-4">Resumo dos dividendos</h4>
 
   <div class="row" *ngIf="statements.length > 0">
     <div class="col">
@@ -35,20 +54,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col pure-text-field click-to-copy">
-      <h5 class="mb-3">Copiar para Excel / DLP Invest</h5>
-      <div class="mb-3">
-        <textarea class="text-to-export form-control" readonly #exportTextarea>{{
-          exportString
-        }}</textarea>
-      </div>
-      <button class="btn btn-primary" (click)="copyFn(exportTextarea)">
-        <fa-icon [icon]="faCopy"></fa-icon> Copiar
-      </button>
     </div>
   </div>
 </div>

@@ -12,6 +12,13 @@ import { filter } from 'rxjs/operators';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFilePdf, faFileCsv } from '@fortawesome/free-solid-svg-icons';
 
+const TAB_NOTAS = 'notas' as const;
+const TAB_EXTRATOS = 'extratos' as const;
+const ROUTE_EXTRATOS = '/extratos';
+const ROUTE_HOME = '/';
+
+type TabType = typeof TAB_NOTAS | typeof TAB_EXTRATOS;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -32,7 +39,12 @@ import { faFilePdf, faFileCsv } from '@fortawesome/free-solid-svg-icons';
 export class HomeComponent implements OnInit {
   private router = inject(Router);
 
-  currentTab: 'notas' | 'extratos' = 'notas';
+  readonly TAB_NOTAS = TAB_NOTAS;
+  readonly TAB_EXTRATOS = TAB_EXTRATOS;
+  readonly ROUTE_EXTRATOS = ROUTE_EXTRATOS;
+  readonly ROUTE_HOME = ROUTE_HOME;
+
+  currentTab: TabType = TAB_NOTAS;
   faFilePdf = faFilePdf;
   faFileCsv = faFileCsv;
 
@@ -46,6 +58,6 @@ export class HomeComponent implements OnInit {
 
   private updateCurrentTab(): void {
     const url = this.router.url;
-    this.currentTab = url.includes('/extratos') ? 'extratos' : 'notas';
+    this.currentTab = url.includes(ROUTE_EXTRATOS) ? TAB_EXTRATOS : TAB_NOTAS;
   }
 }
