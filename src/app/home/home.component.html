@@ -7,12 +7,23 @@
     <div class="col">
       <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-          <a class="nav-link" [class.active]="currentTab === TAB_NOTES" [routerLink]="ROUTE_HOME" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+          <a
+            class="nav-link"
+            [class.active]="currentTab === TAB_NOTES"
+            [routerLink]="ROUTE_HOME"
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="active"
+          >
             <fa-icon [icon]="faFilePdf"></fa-icon> Notas de Corretagem
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [class.active]="currentTab === TAB_STATEMENTS" [routerLink]="ROUTE_STATEMENTS" routerLinkActive="active">
+          <a
+            class="nav-link"
+            [class.active]="currentTab === TAB_STATEMENTS"
+            [routerLink]="ROUTE_STATEMENTS"
+            routerLinkActive="active"
+          >
             <fa-icon [icon]="faFileCsv"></fa-icon> Dividendos
           </a>
         </li>

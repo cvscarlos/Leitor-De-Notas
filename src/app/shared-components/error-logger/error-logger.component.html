@@ -4,9 +4,15 @@
       <h3>Log</h3>
       <ul class="list-group">
         <li class="list-group-item list-group-item-warning" *ngFor="let error of errors">
-          <span *ngIf="error._page">Página: <strong>{{ error._page }}</strong> | </span>
-          <span>Arquivo: <strong>{{ error.fileName }}</strong></span>
-          <span *ngIf="error.number"> | Nota: <strong>{{ error.number }}</strong></span>
+          <span *ngIf="error._page"
+            >Página: <strong>{{ error._page }}</strong> |
+          </span>
+          <span
+            >Arquivo: <strong>{{ error.fileName }}</strong></span
+          >
+          <span *ngIf="error.number">
+            | Nota: <strong>{{ error.number }}</strong></span
+          >
           <ul>
             <li *ngFor="let msg of error._messages">{{ msg }}</li>
           </ul>
