@@ -14,7 +14,15 @@
             </div>
           </div>
 
-          <div class="row align-items-center justify-content-center g-3 small-font" style="cursor: pointer" (click)="uploadInput.click()">
+          <div
+            class="row align-items-center justify-content-center g-3 small-font"
+            style="cursor: pointer"
+            role="button"
+            tabindex="0"
+            aria-label="Selecionar arquivos de extrato"
+            (click)="uploadInput.click()"
+            (keyup.enter)="uploadInput.click()"
+          >
             <div class="col-auto">
               <fa-icon [icon]="faFileCsv" size="4x"></fa-icon>
             </div>
@@ -36,7 +44,7 @@
 
         <div
           id="status-wrapper"
-          class="bg-light p-1 border border-secondary rounded mt-3 small-font"
+          class="bg-light px-1 py-0 border border-secondary rounded mt-3 small-font"
           [class.d-none]="!hasStatements()"
         >
           <span

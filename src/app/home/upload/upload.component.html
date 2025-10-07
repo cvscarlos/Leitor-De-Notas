@@ -3,7 +3,15 @@
     <div class="upload-wrapper">
       <div *ngIf="!sessionService.isAuthenticated" class="upload-overlay"></div>
 
-      <div class="drop-files bg-primary small-font" appUpload (click)="uploadInput.click()">
+      <div
+        class="drop-files bg-primary small-font"
+        appUpload
+        role="button"
+        tabindex="0"
+        (click)="uploadInput.click()"
+        (keyup.enter)="uploadInput.click()"
+        (keyup.space)="uploadInput.click()"
+      >
         <div class="text-white">
           <div class="row align-items-center justify-content-center g-3">
             <div class="col-auto">
@@ -27,7 +35,7 @@
 
         <div
           id="status-wrapper"
-          class="bg-light p-1 border border-secondary rounded mt-3"
+          class="bg-light px-1 py-0 border border-secondary rounded mt-3"
           [class.d-none]="!hasNotes()"
         >
           <span

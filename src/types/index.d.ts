@@ -80,6 +80,13 @@ export type NoteDetails = Note & { showNote: boolean };
 
 export type NoteError = Pick<Note, '_messages' | '_page' | 'fileName' | 'number'>;
 
+export type UploadGenericError = {
+  fileName: string;
+  _messages: string[];
+  _error: boolean;
+  _errorCode: string | null;
+};
+
 export type UserTransactions = {
   results: boolean;
   response: {

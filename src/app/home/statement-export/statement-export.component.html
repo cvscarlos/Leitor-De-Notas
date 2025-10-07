@@ -1,4 +1,7 @@
 <div class="container" style="display: none" [appSlideToggle]="enableExport">
+  <!-- Error messages -->
+  <app-error-logger [errors]="statementErrors"></app-error-logger>
+
   <div class="row small-font">
     <div class="col text-center mb-3">
       <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cleanStatements()">
@@ -48,6 +51,8 @@
         <div class="card">
           <div class="card-header">
             <h4 class="mb-0">Resumo dos dividendos</h4>
+            <span *ngIf="broker">Corretora: {{ broker }}</span>
+            <span *ngIf="fileName"> | Arquivo: {{ fileName }}</span>
           </div>
 
           <div class="card-body">
@@ -55,18 +60,22 @@
               <table class="table table-sm table-striped mb-3">
                 <thead>
                   <tr>
-                    <th>Data</th>
                     <th>Ativo</th>
-                    <th>Tipo</th>
+                    <th>Data</th>
+                    <th>Evento</th>
                     <th>Valor</th>
+                    <th>IRRF</th>
+                    <th>Corretora</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let statement of statements">
-                    <td>{{ statement.date }}</td>
                     <td>{{ statement.stock }}</td>
+                    <td>{{ statement.date }}</td>
                     <td>{{ statement.dlpType }}</td>
                     <td>{{ statement.value }}</td>
+                    <td>{{ statement.tax }}</td>
+                    <td>{{ broker }}</td>
                   </tr>
                 </tbody>
               </table>

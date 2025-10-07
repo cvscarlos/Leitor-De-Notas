@@ -7,7 +7,6 @@ import { UserData } from 'src/types';
 @Component({
   selector: 'app-user',
   template: '<b>User Component</b>',
-  standalone: false,
 })
 export class UserComponent implements OnInit {
   protected apiService = inject(ApiService);

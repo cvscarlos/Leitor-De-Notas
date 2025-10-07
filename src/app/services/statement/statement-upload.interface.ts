@@ -12,6 +12,18 @@ export interface StatementDetail {
   stock: string;
   value: number;
   dlpType: string;
+  tax: number;
+}
+
+export interface StatementResponse {
+  result: StatementDetail[];
+  broker: string;
+  fileName: string;
+}
+
+export interface StatementApiResponse {
+  data?: StatementResponse;
+  uploadGenericError?: import('src/types').UploadGenericError;
 }
 
 export interface StatementError {

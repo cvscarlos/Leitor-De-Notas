@@ -1,13 +1,25 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { faCopy, faTrashAlt, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { StatementService } from 'src/app/services/statement/statement.service';
-import { StatementDetail } from 'src/app/services/statement/statement-upload.interface';
+import {
+  StatementDetail,
+  StatementError,
+} from 'src/app/services/statement/statement-upload.interface';
 import { SlideToggleDirective } from '../../shared-directives/slide-toggle/slide-toggle.directive';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { NgIf, NgFor } from '@angular/common';
-import { NgbNav, NgbNavItem, NgbNavItemRole, NgbNavLink, NgbNavLinkBase, NgbNavContent, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbNav,
+  NgbNavItem,
+  NgbNavItemRole,
+  NgbNavLink,
+  NgbNavLinkBase,
+  NgbNavContent,
+  NgbNavOutlet,
+} from '@ng-bootstrap/ng-bootstrap';
 import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
+import { ErrorLoggerComponent } from 'src/app/shared-components/error-logger/error-logger.component';
 
 @Component({
   selector: 'app-statement-export',
@@ -25,6 +37,7 @@ import { NotifyService } from 'src/app/services/notify/notify.service';
     NgbNavLinkBase,
     NgbNavContent,
     NgbNavOutlet,
+    ErrorLoggerComponent,
   ],
 })
 export class StatementExportComponent implements OnInit {
@@ -39,15 +52,17 @@ export class StatementExportComponent implements OnInit {
   public exportString = '';
   public enableExport = false;
   public statements: StatementDetail[] = [];
+  public statementErrors: StatementError[] = [];
   public isIframe = false;
-  private broker = '';
+  public broker = '';
+  public fileName = '';
 
   constructor() {
     this.isIframe = this.isIframeService.isIframe();
 
     // Check for existing data before component initializes to avoid animation
-    const existingStatements = this.statementService.getStatements().statementDetails;
-    if (existingStatements.length > 0) {
+    const existingData = this.statementService.getStatements();
+    if (existingData.statementDetails.length > 0 || existingData.statementErrors.length > 0) {
       this.enableExport = true;
     }
   }
@@ -56,9 +71,12 @@ export class StatementExportComponent implements OnInit {
     this.statementService.statementCallback((details) => this.statementParser(details));
 
     // Load existing data from service
-    const existingStatements = this.statementService.getStatements().statementDetails;
-    if (existingStatements.length > 0) {
-      this.statements = [...existingStatements];
+    const existingData = this.statementService.getStatements();
+    if (existingData.statementDetails.length > 0) {
+      this.statements = [...existingData.statementDetails];
+      this.statementErrors = [...existingData.statementErrors];
+      this.broker = this.statementService.getBroker();
+      this.fileName = this.statementService.getFileName();
       this.generateExportString();
     }
   }
@@ -71,6 +89,7 @@ export class StatementExportComponent implements OnInit {
   public cleanStatements(): void {
     this.statementService.clean();
     this.statements = [];
+    this.statementErrors = [];
     this.exportString = '';
     this.enableExport = false;
   }
@@ -103,24 +122,24 @@ export class StatementExportComponent implements OnInit {
   private statementParser(details: StatementDetail[]): void {
     try {
       this.statements = [...this.statements, ...details];
+      this.statementErrors = this.statementService.getStatements().statementErrors;
+      this.broker = this.statementService.getBroker();
+      this.fileName = this.statementService.getFileName();
       this.generateExportString();
-      this.enableExport = this.exportString.length > 0;
+      this.enableExport = this.exportString.length > 0 || this.statementErrors.length > 0;
     } catch (error) {
       console.error(error);
     }
   }
 
   private generateExportString(): void {
-    const uploads = this.statementService.getStatements().statementsList;
-    this.broker = uploads.length > 0 ? 'Avenue' : '';
-
     const lines = this.statements.map((detail) => {
       return [
         detail.stock,
-        '45832',
+        detail.date,
         detail.dlpType,
-        detail.value.toString().replace('.', ','),
-        '',
+        detail.value?.toString().replace('.', ','),
+        detail.tax?.toString().replace('.', ','),
         '',
         this.broker,
       ].join('\t');
