@@ -9,8 +9,8 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            [class.active]="currentTab === TAB_NOTES"
-            [routerLink]="ROUTE_HOME"
+            [class.active]="currentTab === NOTES_TAB"
+            [routerLink]="'/'"
             [routerLinkActiveOptions]="{ exact: true }"
             routerLinkActive="active"
           >
@@ -20,8 +20,8 @@
         <li class="nav-item">
           <a
             class="nav-link"
-            [class.active]="currentTab === TAB_STATEMENTS"
-            [routerLink]="ROUTE_STATEMENTS"
+            [class.active]="currentTab === STATEMENTS_TAB"
+            [routerLink]="'/extratos'"
             routerLinkActive="active"
           >
             <fa-icon [icon]="faFileCsv"></fa-icon> Dividendos
@@ -31,17 +31,17 @@
     </div>
   </div>
 
-  <app-upload *ngIf="currentTab === TAB_NOTES"></app-upload>
-  <app-statement-upload *ngIf="currentTab === TAB_STATEMENTS"></app-statement-upload>
+  <app-upload *ngIf="currentTab === NOTES_TAB"></app-upload>
+  <app-statement-upload *ngIf="currentTab === STATEMENTS_TAB"></app-statement-upload>
 </div>
 
-<app-export-tool *ngIf="currentTab === TAB_NOTES"></app-export-tool>
+<app-export-tool *ngIf="currentTab === NOTES_TAB"></app-export-tool>
 
-<div class="container-fluid" *ngIf="currentTab === TAB_NOTES">
+<div class="container-fluid" *ngIf="currentTab === NOTES_TAB">
   <app-brokerage-notes></app-brokerage-notes>
 </div>
 
-<div class="container-fluid" *ngIf="currentTab === TAB_STATEMENTS">
+<div class="container-fluid" *ngIf="currentTab === STATEMENTS_TAB">
   <app-statement-export></app-statement-export>
 </div>
 

@@ -1,4 +1,16 @@
-export abstract class UploadBaseService<TUpload, TDetail, TError, TCallbackParam = TDetail> {
+interface UploadObject {
+  responseComplete: boolean;
+  serverError: boolean;
+  server?: unknown;
+  error?: unknown;
+}
+
+export abstract class UploadBaseService<
+  TUpload extends UploadObject,
+  TDetail,
+  TError,
+  TCallbackParam = TDetail,
+> {
   protected uploadsList: TUpload[] = [];
   protected detailsList: TDetail[] = [];
   protected errorsList: TError[] = [];
@@ -26,36 +38,27 @@ export abstract class UploadBaseService<TUpload, TDetail, TError, TCallbackParam
     this.callbacks.forEach((callback) => callback(detail));
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected abstract parseResponse(serverResponse: any, fileName: string): void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected abstract createFormData(file: File, ...args: any[]): FormData;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected abstract uploadToApi(formData: FormData): Promise<any>;
+  protected abstract parseResponse(serverResponse: unknown, fileName: string): void;
+  protected abstract createFormData(file: File, ...args: unknown[]): FormData;
+  protected abstract uploadToApi(formData: FormData): Promise<{ data?: unknown } | unknown>;
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected uploadFile(file: File, uploadObject: TUpload, ...additionalArgs: any[]): void {
+  protected uploadFile(file: File, uploadObject: TUpload, ...additionalArgs: unknown[]): void {
     this.uploadsList.push(uploadObject);
 
     const formData = this.createFormData(file, ...additionalArgs);
 
     this.uploadToApi(formData)
       .then((res) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const content = res.data || res;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (uploadObject as any).server = content;
+        const content = (res as { data?: unknown }).data || res;
+        uploadObject.server = content;
         this.parseResponse(content, file.name);
       })
       .catch((err) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (uploadObject as any).serverError = true;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (uploadObject as any).error = err;
+        uploadObject.serverError = true;
+        uploadObject.error = err;
       })
       .finally(() => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (uploadObject as any).responseComplete = true;
+        uploadObject.responseComplete = true;
       });
   }
 }

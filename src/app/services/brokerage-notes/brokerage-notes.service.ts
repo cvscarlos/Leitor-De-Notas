@@ -66,16 +66,15 @@ export class BrokerageNotesService extends UploadBaseService<
     return formData;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected uploadToApi(formData: FormData): Promise<any> {
+  protected uploadToApi(formData: FormData): Promise<unknown> {
     return this.api.upload(formData);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected parseResponse(serverResponse: any): void {
+  protected parseResponse(serverResponse: unknown): void {
+    const response = serverResponse as any;
     // Check for generic upload error
-    if (serverResponse.uploadGenericError) {
-      const uploadError = serverResponse.uploadGenericError as UploadGenericError;
+    if (response.uploadGenericError) {
+      const uploadError = response.uploadGenericError as UploadGenericError;
       this.errorsList.push({
         _messages: uploadError._messages,
         fileName: uploadError.fileName,
@@ -85,10 +84,10 @@ export class BrokerageNotesService extends UploadBaseService<
       return;
     }
 
-    for (const n in serverResponse) {
-      if (!Object.prototype.hasOwnProperty.call(serverResponse, n)) continue;
+    for (const n in response) {
+      if (!Object.prototype.hasOwnProperty.call(response, n)) continue;
 
-      const noteApiResponse = serverResponse[n] as Note;
+      const noteApiResponse = response[n] as Note;
 
       const noteError = noteApiResponse._error || false;
       const noteMessages = noteApiResponse._messages || [];

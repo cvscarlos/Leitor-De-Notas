@@ -1,28 +1,19 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { SessionService } from 'src/app/services/session/session.service';
 import { StatementService } from 'src/app/services/statement/statement.service';
 import { StatementUploadInterface } from 'src/app/services/statement/statement-upload.interface';
-import { NgIf, NgFor } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { UploadDirective } from '../upload/upload.directive';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
+import { UploadAreaComponent } from '../../shared-components/upload-area/upload-area.component';
 
 @Component({
   selector: 'app-statement-upload',
   templateUrl: './statement-upload.component.html',
   styleUrls: ['./statement-upload.component.less'],
-  imports: [NgIf, NgFor, FormsModule, UploadDirective, FaIconComponent],
+  imports: [UploadAreaComponent],
 })
 export class StatementUploadComponent implements OnInit {
-  sessionService = inject(SessionService);
   private statementService = inject(StatementService);
 
   public uploads?: StatementUploadInterface[];
   public selectedBroker: string = 'Avenue';
-  public faFileCsv = faFileCsv;
-
-  constructor() {}
 
   ngOnInit(): void {
     this.uploads = this.statementService.getStatements().statementsList;
@@ -47,5 +38,12 @@ export class StatementUploadComponent implements OnInit {
   public getErrorMessage(upload: StatementUploadInterface): string {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (upload.error as any).error?._message || 'Erro desconhecido';
+  }
+
+  public getErrorMessages(): string[] {
+    if (!this.uploads) return [];
+    return this.uploads
+      .filter((upload) => upload.serverError)
+      .map((upload) => this.getErrorMessage(upload));
   }
 }

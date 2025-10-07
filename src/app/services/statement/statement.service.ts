@@ -82,13 +82,11 @@ export class StatementService extends UploadBaseService<
     return formData;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected uploadToApi(formData: FormData): Promise<any> {
+  protected uploadToApi(formData: FormData): Promise<unknown> {
     return this.api.uploadStatement(formData);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected parseResponse(serverResponse: any, fileName: string): void {
+  protected parseResponse(serverResponse: unknown, fileName: string): void {
     const apiResponse = serverResponse as StatementApiResponse;
 
     // Check for generic upload error
