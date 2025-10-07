@@ -57,11 +57,11 @@
 
         <div
           id="status-wrapper"
-          class="bg-light px-1 py-0 border border-secondary rounded mt-3 small-font"
+          class="bg-light p-0 border border-secondary rounded mt-3 small-font"
           [class.d-none]="!hasFiles"
         >
           <span
-            class="badge ml-1 mb-1"
+            class="badge ms-1 mb-1"
             *ngFor="let upload of uploads"
             [class.bg-secondary]="!upload.responseComplete"
             [class.bg-danger]="upload.serverError"
