@@ -7,12 +7,12 @@
     <div class="col">
       <ul class="nav nav-tabs mb-3">
         <li class="nav-item">
-          <a class="nav-link" [class.active]="currentTab === TAB_NOTAS" [routerLink]="ROUTE_HOME" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+          <a class="nav-link" [class.active]="currentTab === TAB_NOTES" [routerLink]="ROUTE_HOME" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
             <fa-icon [icon]="faFilePdf"></fa-icon> Notas de Corretagem
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" [class.active]="currentTab === TAB_EXTRATOS" [routerLink]="ROUTE_EXTRATOS" routerLinkActive="active">
+          <a class="nav-link" [class.active]="currentTab === TAB_STATEMENTS" [routerLink]="ROUTE_STATEMENTS" routerLinkActive="active">
             <fa-icon [icon]="faFileCsv"></fa-icon> Dividendos
           </a>
         </li>
@@ -20,15 +20,18 @@
     </div>
   </div>
 
-  <app-upload *ngIf="currentTab === TAB_NOTAS"></app-upload>
-  <app-statement-upload *ngIf="currentTab === TAB_EXTRATOS"></app-statement-upload>
+  <app-upload *ngIf="currentTab === TAB_NOTES"></app-upload>
+  <app-statement-upload *ngIf="currentTab === TAB_STATEMENTS"></app-statement-upload>
 </div>
 
-<app-export-tool *ngIf="currentTab === TAB_NOTAS"></app-export-tool>
-<app-statement-export *ngIf="currentTab === TAB_EXTRATOS"></app-statement-export>
+<app-export-tool *ngIf="currentTab === TAB_NOTES"></app-export-tool>
 
-<div class="container-fluid" *ngIf="currentTab === TAB_NOTAS">
+<div class="container-fluid" *ngIf="currentTab === TAB_NOTES">
   <app-brokerage-notes></app-brokerage-notes>
+</div>
+
+<div class="container-fluid" *ngIf="currentTab === TAB_STATEMENTS">
+  <app-statement-export></app-statement-export>
 </div>
 
 <div class="container-fluid">

@@ -12,12 +12,12 @@ import { filter } from 'rxjs/operators';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFilePdf, faFileCsv } from '@fortawesome/free-solid-svg-icons';
 
-const TAB_NOTAS = 'notas' as const;
-const TAB_EXTRATOS = 'extratos' as const;
-const ROUTE_EXTRATOS = '/extratos';
+const TAB_NOTES = 'notas' as const;
+const TAB_STATEMENTS = 'extratos' as const;
+const ROUTE_STATEMENTS = '/extratos';
 const ROUTE_HOME = '/';
 
-type TabType = typeof TAB_NOTAS | typeof TAB_EXTRATOS;
+type TabType = typeof TAB_NOTES | typeof TAB_STATEMENTS;
 
 @Component({
   selector: 'app-home',
@@ -39,12 +39,12 @@ type TabType = typeof TAB_NOTAS | typeof TAB_EXTRATOS;
 export class HomeComponent implements OnInit {
   private router = inject(Router);
 
-  readonly TAB_NOTAS = TAB_NOTAS;
-  readonly TAB_EXTRATOS = TAB_EXTRATOS;
-  readonly ROUTE_EXTRATOS = ROUTE_EXTRATOS;
+  readonly TAB_NOTES = TAB_NOTES;
+  readonly TAB_STATEMENTS = TAB_STATEMENTS;
+  readonly ROUTE_STATEMENTS = ROUTE_STATEMENTS;
   readonly ROUTE_HOME = ROUTE_HOME;
 
-  currentTab: TabType = TAB_NOTAS;
+  currentTab: TabType = TAB_NOTES;
   faFilePdf = faFilePdf;
   faFileCsv = faFileCsv;
 
@@ -58,6 +58,6 @@ export class HomeComponent implements OnInit {
 
   private updateCurrentTab(): void {
     const url = this.router.url;
-    this.currentTab = url.includes(ROUTE_EXTRATOS) ? TAB_EXTRATOS : TAB_NOTAS;
+    this.currentTab = url.includes(ROUTE_STATEMENTS) ? TAB_STATEMENTS : TAB_NOTES;
   }
 }

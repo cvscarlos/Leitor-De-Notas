@@ -1,7 +1,7 @@
-<div class="container" style="display: none" [appSlideToggle]="enableExport">
-  <!-- Error messages -->
-  <app-error-logger [errors]="statementErrors"></app-error-logger>
+<!-- Error messages -->
+<app-error-logger [errors]="statementErrors"></app-error-logger>
 
+<div style="display: none" [appSlideToggle]="enableExport">
   <div class="row small-font">
     <div class="col text-center mb-3">
       <button type="button" class="btn btn-outline-secondary btn-sm" (click)="cleanStatements()">
@@ -10,40 +10,42 @@
     </div>
   </div>
 
-  <ul ngbNav #nav="ngbNav" class="nav-tabs">
-    <li [ngbNavItem]="1">
-      <a ngbNavLink>DLP Invest</a>
-      <ng-template ngbNavContent>
-        <div class="row">
-          <div class="col pure-text-field click-to-copy">
-            <h4 class="text-center my-3">Copiar para DLP Invest</h4>
-            <div class="mb-3">
-              <textarea class="text-to-export form-control" readonly #exportTextarea>{{
-                exportString
-              }}</textarea>
+  <div *ngIf="statements.length > 0">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink>DLP Invest</a>
+        <ng-template ngbNavContent>
+          <div class="row">
+            <div class="col pure-text-field click-to-copy">
+              <h4 class="text-center my-3">Copiar para DLP Invest</h4>
+              <div class="mb-3">
+                <textarea class="text-to-export form-control" readonly #exportTextarea>{{
+                  exportString
+                }}</textarea>
+              </div>
+              <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(exportTextarea)">
+                <fa-icon [icon]="faCopy"></fa-icon> Copiar
+              </button>
             </div>
-            <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(exportTextarea)">
-              <fa-icon [icon]="faCopy"></fa-icon> Copiar
-            </button>
           </div>
-        </div>
 
-        <div class="row" *ngIf="isIframe">
-          <div class="col text-center">
-            <button
-              class="btn btn-success btn-lg mt-4"
-              style="font-size: 1.25rem"
-              (click)="sendJsonMessage()"
-            >
-              <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
-            </button>
+          <div class="row" *ngIf="isIframe">
+            <div class="col text-center">
+              <button
+                class="btn btn-success btn-lg mt-4"
+                style="font-size: 1.25rem"
+                (click)="sendJsonMessage()"
+              >
+                <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
+              </button>
+            </div>
           </div>
-        </div>
-      </ng-template>
-    </li>
-  </ul>
+        </ng-template>
+      </li>
+    </ul>
 
-  <div [ngbNavOutlet]="nav" class="small-font border border-top-0 p-3 pt-0"></div>
+    <div [ngbNavOutlet]="nav" class="small-font border border-top-0 p-3 pt-0"></div>
+  </div>
 
   <div *ngIf="statements.length > 0">
     <div class="row mt-5">

@@ -62,7 +62,7 @@ export class StatementExportComponent implements OnInit {
 
     // Check for existing data before component initializes to avoid animation
     const existingData = this.statementService.getStatements();
-    if (existingData.statementDetails.length > 0 || existingData.statementErrors.length > 0) {
+    if (existingData.statementDetails.length > 0) {
       this.enableExport = true;
     }
   }
@@ -126,7 +126,7 @@ export class StatementExportComponent implements OnInit {
       this.broker = this.statementService.getBroker();
       this.fileName = this.statementService.getFileName();
       this.generateExportString();
-      this.enableExport = this.exportString.length > 0 || this.statementErrors.length > 0;
+      this.enableExport = this.exportString.length > 0;
     } catch (error) {
       console.error(error);
     }
