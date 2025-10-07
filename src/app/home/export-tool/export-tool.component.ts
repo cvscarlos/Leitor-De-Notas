@@ -98,6 +98,12 @@ export class ExportToolComponent implements OnInit {
   constructor() {
     this.isIframe = this.isIframeService.isIframe();
     NP.enableBoundaryChecking(false);
+
+    // Check for existing data before component initializes to avoid animation
+    const existingNotes = this.notesService.getNotes().noteDetails;
+    if (existingNotes.length > 0) {
+      this.enableExport = true;
+    }
   }
 
   ngOnInit(): void {
@@ -108,6 +114,10 @@ export class ExportToolComponent implements OnInit {
       this.provisionedIrrfST = Boolean(data?.settings?.provisionedIrrfST);
       this.groupByTicker = Boolean(data?.settings?.groupByTicker);
       this.removeOptionDT = Boolean(data?.settings?.removeOptionDT);
+
+      // Load existing data from service after settings are loaded
+      const existingNotes = this.notesService.getNotes().noteDetails;
+      existingNotes.forEach((note) => this.noteParser(note));
     });
   }
 

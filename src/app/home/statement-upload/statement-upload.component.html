@@ -1,8 +1,10 @@
 <app-upload-area
-  [uploadType]="'notes'"
+  [uploadType]="'statements'"
+  [selectedBroker]="selectedBroker"
   [uploads]="uploads || []"
-  [hasFiles]="hasNotes()"
+  [hasFiles]="hasStatements()"
   [hasErrors]="hasServerErrors()"
   [errorMessages]="getErrorMessages()"
+  (onBrokerChange)="selectedBroker = $event"
   (onFileInput)="handleFileInput($event)"
 ></app-upload-area>

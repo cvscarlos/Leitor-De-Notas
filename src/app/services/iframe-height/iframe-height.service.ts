@@ -21,7 +21,7 @@ export class IframeHeightService {
   initialize(): void {
     try {
       this.isIframe = window.self !== window.top;
-    } catch (e) {
+    } catch {
       this.isIframe = true;
     }
 

@@ -1,27 +1,29 @@
-import { Note, NoteDetails, NoteError } from 'src/types';
+import { Note, NoteDetails, NoteError, UploadGenericError } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Injectable, inject } from '@angular/core';
 import { UploadInterface } from './upload.interface';
+import { UploadBaseService } from '../upload-base/upload-base.service';
 
 type NotesArray = {
   notesList: UploadInterface[];
   noteDetails: NoteDetails[];
   noteErrors: NoteError[];
 };
-type NoteCallback = (note: NoteDetails) => void;
 
 @Injectable({
   providedIn: 'root',
 })
-export class BrokerageNotesService {
+export class BrokerageNotesService extends UploadBaseService<
+  UploadInterface,
+  NoteDetails,
+  NoteError,
+  NoteDetails
+> {
   private api = inject(ApiService);
 
-  private notesList: UploadInterface[] = [];
-  private noteDetails: NoteDetails[] = [];
-  private noteErrors: NoteError[] = [];
-  private onNewNoteCallback: NoteCallback[] = [];
-
-  constructor() {}
+  constructor() {
+    super();
+  }
 
   public uploadFiles(files: FileList | null): void {
     if (!files) {
@@ -35,20 +37,14 @@ export class BrokerageNotesService {
 
   public getNotes(): NotesArray {
     return {
-      notesList: this.notesList,
-      noteDetails: this.noteDetails,
-      noteErrors: this.noteErrors,
+      notesList: this.uploadsList,
+      noteDetails: this.detailsList,
+      noteErrors: this.errorsList,
     };
   }
 
-  public noteCallback(onNewNoteCallback: NoteCallback): void {
-    this.onNewNoteCallback.push(onNewNoteCallback);
-  }
-
-  public clean(): void {
-    this.notesList.splice(0, this.notesList.length);
-    this.noteDetails.splice(0, this.noteDetails.length);
-    this.noteErrors.splice(0, this.noteErrors.length);
+  public noteCallback(callback: (note: NoteDetails) => void): void {
+    this.registerCallback(callback);
   }
 
   private upload(file: File): void {
@@ -60,33 +56,38 @@ export class BrokerageNotesService {
       error: {},
       server: {},
     };
-    this.notesList.push(newFile);
 
-    const formData = new FormData();
-    formData.append('brokerageNote', file, file.name);
-
-    this.api
-      .upload(formData)
-      .then((res) => {
-        const content = res.data || res;
-        newFile.server = content;
-        this.parseDetails(content);
-      })
-      .catch((err) => {
-        newFile.serverError = true;
-        newFile.error = err;
-      })
-      .finally(() => {
-        newFile.responseComplete = true;
-      });
+    this.uploadFile(file, newFile);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private parseDetails(serverResponse: any): void {
-    for (const n in serverResponse) {
-      if (!Object.prototype.hasOwnProperty.call(serverResponse, n)) continue;
+  protected createFormData(file: File): FormData {
+    const formData = new FormData();
+    formData.append('brokerageNote', file, file.name);
+    return formData;
+  }
 
-      const noteApiResponse = serverResponse[n] as Note;
+  protected uploadToApi(formData: FormData): Promise<unknown> {
+    return this.api.upload(formData);
+  }
+
+  protected parseResponse(serverResponse: unknown): void {
+    const response = serverResponse as any;
+    // Check for generic upload error
+    if (response.uploadGenericError) {
+      const uploadError = response.uploadGenericError as UploadGenericError;
+      this.errorsList.push({
+        _messages: uploadError._messages,
+        fileName: uploadError.fileName,
+        _page: undefined,
+        number: '',
+      });
+      return;
+    }
+
+    for (const n in response) {
+      if (!Object.prototype.hasOwnProperty.call(response, n)) continue;
+
+      const noteApiResponse = response[n] as Note;
 
       const noteError = noteApiResponse._error || false;
       const noteMessages = noteApiResponse._messages || [];
@@ -101,10 +102,10 @@ export class BrokerageNotesService {
         _messages: noteMessages,
         showNote,
       };
-      this.noteDetails.push(note);
+      this.detailsList.push(note);
 
       if (note._messages.length) {
-        this.noteErrors.push({
+        this.errorsList.push({
           _messages: note._messages,
           _page: note._page,
           fileName: note.fileName,
@@ -112,9 +113,7 @@ export class BrokerageNotesService {
         });
       }
 
-      this.onNewNoteCallback.forEach((callback) => {
-        callback(note);
-      });
+      this.notifyCallbacks(note);
     }
   }
 }

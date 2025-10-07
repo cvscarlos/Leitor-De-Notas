@@ -1,6 +1,6 @@
 <nav *ngIf="!isIframe.isIframe()" class="navbar navbar-expand-lg navbar-dark bg-dark mb-2 shadow py-1" style="background-color:#18204D!important;">
   <div class="container-fluid">
-    <h1 class="navbar-brand h3 p-0 my-0 mr-md-auto font-weight-normal ">
+    <h1 class="navbar-brand h3 p-0 my-0 me-md-auto font-weight-normal ">
       <a routerLink="/" class="text-white" style="text-decoration: none">
         <img src="assets/dlp-logo.png" alt="DLP - Logo" class="rounded" style="max-width: 34px;" />
         DLP - Leitor de Notas
@@ -8,7 +8,7 @@
     </h1>
 
     <button
-      class="navbar-toggler mr-3"
+      class="navbar-toggler me-3"
       type="button"
       (click)="headerMenuCollapsed = !headerMenuCollapsed"
       [attr.aria-expanded]="!headerMenuCollapsed"
@@ -23,7 +23,7 @@
       [(ngbCollapse)]="headerMenuCollapsed"
       id="collapseMenu"
     >
-      <ul class="navbar-nav ml-auto mr-2">
+      <ul class="navbar-nav ms-auto me-2">
         <li class="nav-item">
           <a
             (click)="headerMenuCollapsed = true"

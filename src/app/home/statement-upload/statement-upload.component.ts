@@ -1,32 +1,32 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
-import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interface';
+import { StatementService } from 'src/app/services/statement/statement.service';
+import { StatementUploadInterface } from 'src/app/services/statement/statement-upload.interface';
 import { UploadAreaComponent } from '../../shared-components/upload-area/upload-area.component';
 
 @Component({
-  selector: 'app-upload',
-  templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.less'],
+  selector: 'app-statement-upload',
+  templateUrl: './statement-upload.component.html',
+  styleUrls: ['./statement-upload.component.less'],
   imports: [UploadAreaComponent],
 })
-export class UploadComponent implements OnInit {
-  private notesService = inject(BrokerageNotesService);
+export class StatementUploadComponent implements OnInit {
+  private statementService = inject(StatementService);
 
-  public uploads?: UploadInterface[];
+  public uploads?: StatementUploadInterface[];
+  public selectedBroker: string = 'Avenue';
 
   ngOnInit(): void {
-    this.uploads = this.notesService.getNotes().notesList;
+    this.uploads = this.statementService.getStatements().statementsList;
   }
 
-  public hasNotes(): boolean {
-    return !!this.notesService.getNotes().notesList.length;
+  public hasStatements(): boolean {
+    return !!this.statementService.getStatements().statementsList.length;
   }
 
   public handleFileInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-
     const files = input.files as FileList;
-    this.notesService.uploadFiles(files);
+    this.statementService.uploadFiles(files, this.selectedBroker);
 
     input.value = '';
   }
@@ -35,7 +35,7 @@ export class UploadComponent implements OnInit {
     return Boolean(this.uploads && this.uploads.some((upload) => upload.serverError));
   }
 
-  public getErrorMessage(upload: UploadInterface): string {
+  public getErrorMessage(upload: StatementUploadInterface): string {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return (upload.error as any).error?._message || 'Erro desconhecido';
   }
