@@ -15,6 +15,12 @@ export interface StatementDetail {
   tax: number;
 }
 
+export interface StatementBatch {
+  details: StatementDetail[];
+  broker: string;
+  fileName: string;
+}
+
 export interface StatementResponse {
   result: StatementDetail[];
   broker: string;

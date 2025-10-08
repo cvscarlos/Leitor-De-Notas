@@ -175,7 +175,10 @@ export class ExportToolComponent implements OnInit {
 
   public sendJsonMessage(): void {
     try {
-      window.parent.postMessage(JSON.stringify(this.dlombelloExportObjects), '*');
+      window.parent.postMessage(
+        JSON.stringify({ dlpBrokerageNotes: this.dlombelloExportObjects }),
+        '*',
+      );
     } catch (error) {
       console.error(error);
       this.notifyService.error(

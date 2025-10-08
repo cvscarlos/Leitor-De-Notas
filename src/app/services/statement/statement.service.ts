@@ -6,6 +6,7 @@ import {
   StatementError,
   StatementResponse,
   StatementApiResponse,
+  StatementBatch,
 } from './statement-upload.interface';
 import { UploadBaseService } from '../upload-base/upload-base.service';
 
@@ -22,11 +23,9 @@ export class StatementService extends UploadBaseService<
   StatementUploadInterface,
   StatementDetail,
   StatementError,
-  StatementDetail[]
+  StatementBatch
 > {
   private api = inject(ApiService);
-  private broker: string = '';
-  private fileName: string = '';
 
   constructor() {
     super();
@@ -50,16 +49,8 @@ export class StatementService extends UploadBaseService<
     };
   }
 
-  public statementCallback(callback: (statement: StatementDetail[]) => void): void {
+  public statementCallback(callback: (batch: StatementBatch) => void): void {
     this.registerCallback(callback);
-  }
-
-  public getBroker(): string {
-    return this.broker;
-  }
-
-  public getFileName(): string {
-    return this.fileName;
   }
 
   private upload(file: File, broker: string): void {
@@ -96,15 +87,16 @@ export class StatementService extends UploadBaseService<
         _messages: apiResponse.uploadGenericError._messages,
       };
       this.errorsList.push(error);
-      this.notifyCallbacks([]);
+      this.notifyCallbacks({
+        details: [],
+        broker: '',
+        fileName: apiResponse.uploadGenericError.fileName,
+      });
       return;
     }
 
     // Handle successful response with data
     const response = apiResponse.data || (serverResponse as StatementResponse);
-    this.broker = response.broker || '';
-    this.fileName = response.fileName || fileName;
-
     const result = response.result || [];
     const details: StatementDetail[] = [];
 
@@ -120,6 +112,12 @@ export class StatementService extends UploadBaseService<
       this.detailsList.push(detail);
     }
 
-    this.notifyCallbacks(details);
+    const batch: StatementBatch = {
+      details,
+      broker: response.broker,
+      fileName: response.fileName || fileName,
+    };
+
+    this.notifyCallbacks(batch);
   }
 }

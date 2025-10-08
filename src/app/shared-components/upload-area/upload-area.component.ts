@@ -34,7 +34,9 @@ export class UploadAreaComponent {
   }
 
   get ariaLabel() {
-    return this.uploadType === 'statements' ? 'Selecionar arquivos de extrato' : 'Selecionar arquivos de nota';
+    return this.uploadType === 'statements'
+      ? 'Selecionar arquivos de extrato'
+      : 'Selecionar arquivos de nota';
   }
 
   get inputId() {

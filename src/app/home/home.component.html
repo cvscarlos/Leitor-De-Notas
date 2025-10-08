@@ -5,11 +5,18 @@
 
   <div class="row">
     <div class="col">
-      <ul class="nav nav-tabs mb-3">
+      <ul
+        class="nav nav-tabs nav-underline mb-3 border-bottom"
+        [class.border-primary]="currentTab === NOTES_TAB"
+        [class.border-purple]="currentTab === STATEMENTS_TAB"
+      >
         <li class="nav-item">
           <a
-            class="nav-link"
+            class="nav-link px-3 py-2"
             [class.active]="currentTab === NOTES_TAB"
+            [class.text-primary]="currentTab === NOTES_TAB"
+            [class.text-body-emphasis]="currentTab !== NOTES_TAB"
+            [class.border-primary]="currentTab === NOTES_TAB"
             [routerLink]="'/'"
             [routerLinkActiveOptions]="{ exact: true }"
             routerLinkActive="active"
@@ -19,8 +26,11 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link"
+            class="nav-link px-3 py-2"
             [class.active]="currentTab === STATEMENTS_TAB"
+            [class.text-purple]="currentTab === STATEMENTS_TAB"
+            [class.text-body-emphasis]="currentTab !== STATEMENTS_TAB"
+            [class.border-purple]="currentTab === STATEMENTS_TAB"
             [routerLink]="'/extratos'"
             routerLinkActive="active"
           >

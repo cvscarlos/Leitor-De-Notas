@@ -53,8 +53,6 @@
         <div class="card">
           <div class="card-header">
             <h4 class="mb-0">Resumo dos dividendos</h4>
-            <span *ngIf="broker">Corretora: {{ broker }}</span>
-            <span *ngIf="fileName"> | Arquivo: {{ fileName }}</span>
           </div>
 
           <div class="card-body">
@@ -77,7 +75,7 @@
                     <td>{{ statement.dlpType }}</td>
                     <td>{{ statement.value }}</td>
                     <td>{{ statement.tax }}</td>
-                    <td>{{ broker }}</td>
+                    <td>{{ statement.broker }}</td>
                   </tr>
                 </tbody>
               </table>

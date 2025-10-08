@@ -19,6 +19,7 @@ const STATEMENTS_TAB = 'extratos' as const;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrl: './home.component.less',
   imports: [
     AuthComponent,
     UserDocumentComponent,

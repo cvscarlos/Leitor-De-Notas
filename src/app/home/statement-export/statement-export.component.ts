@@ -4,6 +4,7 @@ import { StatementService } from 'src/app/services/statement/statement.service';
 import {
   StatementDetail,
   StatementError,
+  StatementBatch,
 } from 'src/app/services/statement/statement-upload.interface';
 import { SlideToggleDirective } from '../../shared-directives/slide-toggle/slide-toggle.directive';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -20,6 +21,21 @@ import {
 import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { ErrorLoggerComponent } from 'src/app/shared-components/error-logger/error-logger.component';
+
+type StatementExportObject = {
+  stock: string;
+  code: string;
+  dlpType: string;
+  value: number;
+  tax: number;
+  broker: string;
+  fileName: string;
+};
+
+type StatementWithContext = StatementDetail & {
+  broker: string;
+  fileName: string;
+};
 
 @Component({
   selector: 'app-statement-export',
@@ -51,11 +67,10 @@ export class StatementExportComponent implements OnInit {
 
   public exportString = '';
   public enableExport = false;
-  public statements: StatementDetail[] = [];
+  public statements: StatementWithContext[] = [];
   public statementErrors: StatementError[] = [];
   public isIframe = false;
-  public broker = '';
-  public fileName = '';
+  private statementExportObjects: StatementExportObject[] = [];
 
   constructor() {
     this.isIframe = this.isIframeService.isIframe();
@@ -68,16 +83,14 @@ export class StatementExportComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.statementService.statementCallback((details) => this.statementParser(details));
+    this.statementService.statementCallback((batch) => this.statementParser(batch));
 
     // Load existing data from service
     const existingData = this.statementService.getStatements();
     if (existingData.statementDetails.length > 0) {
-      this.statements = [...existingData.statementDetails];
+      // Note: On page reload, we lose broker/fileName context since it's not stored
+      // This is acceptable - users will need to re-upload if they refresh
       this.statementErrors = [...existingData.statementErrors];
-      this.broker = this.statementService.getBroker();
-      this.fileName = this.statementService.getFileName();
-      this.generateExportString();
     }
   }
 
@@ -91,25 +104,16 @@ export class StatementExportComponent implements OnInit {
     this.statements = [];
     this.statementErrors = [];
     this.exportString = '';
+    this.statementExportObjects = [];
     this.enableExport = false;
   }
 
   public sendJsonMessage(): void {
     try {
-      // Convert textarea content to JSON array format for DLP Invest
-      const lines = this.exportString.split('\n').filter((line) => line.trim());
-      const data = lines.map((line) => {
-        const [stock, code, dlpType, value, , , broker] = line.split('\t');
-        return {
-          stock,
-          code,
-          dlpType,
-          value: parseFloat(value.replace(',', '.')),
-          broker,
-        };
-      });
-
-      window.parent.postMessage(JSON.stringify(data), '*');
+      window.parent.postMessage(
+        JSON.stringify({ dlpStatements: this.statementExportObjects }),
+        '*',
+      );
     } catch (error) {
       console.error(error);
       this.notifyService.error(
@@ -119,12 +123,17 @@ export class StatementExportComponent implements OnInit {
     }
   }
 
-  private statementParser(details: StatementDetail[]): void {
+  private statementParser(batch: StatementBatch): void {
     try {
-      this.statements = [...this.statements, ...details];
+      // Add broker and fileName to each detail
+      const detailsWithContext: StatementWithContext[] = batch.details.map((detail) => ({
+        ...detail,
+        broker: batch.broker,
+        fileName: batch.fileName,
+      }));
+
+      this.statements = [...this.statements, ...detailsWithContext];
       this.statementErrors = this.statementService.getStatements().statementErrors;
-      this.broker = this.statementService.getBroker();
-      this.fileName = this.statementService.getFileName();
       this.generateExportString();
       this.enableExport = this.exportString.length > 0;
     } catch (error) {
@@ -133,18 +142,32 @@ export class StatementExportComponent implements OnInit {
   }
 
   private generateExportString(): void {
+    const newStatementExportObjects: StatementExportObject[] = [];
+
     const lines = this.statements.map((detail) => {
+      const exportObject: StatementExportObject = {
+        stock: detail.stock,
+        code: detail.date,
+        dlpType: detail.dlpType,
+        value: detail.value || 0,
+        tax: detail.tax || 0,
+        broker: detail.broker,
+        fileName: detail.fileName,
+      };
+      newStatementExportObjects.push(exportObject);
+
       return [
-        detail.stock,
-        detail.date,
-        detail.dlpType,
-        detail.value?.toString().replace('.', ','),
-        detail.tax?.toString().replace('.', ','),
+        exportObject.stock,
+        exportObject.code,
+        exportObject.dlpType,
+        exportObject.value.toString().replace('.', ','),
+        exportObject.tax.toString().replace('.', ','),
         '',
-        this.broker,
+        exportObject.broker,
       ].join('\t');
     });
 
+    this.statementExportObjects = newStatementExportObjects;
     this.exportString = lines.join('\n');
   }
 }

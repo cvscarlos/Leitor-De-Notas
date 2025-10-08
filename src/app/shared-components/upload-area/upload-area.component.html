@@ -61,7 +61,7 @@
           [class.d-none]="!hasFiles"
         >
           <span
-            class="badge ms-1 mb-1"
+            class="badge me-0 m-1"
             *ngFor="let upload of uploads"
             [class.bg-secondary]="!upload.responseComplete"
             [class.bg-danger]="upload.serverError"
