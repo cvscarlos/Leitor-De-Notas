@@ -29,7 +29,6 @@ type StatementExportObject = {
   value: number;
   tax: number;
   broker: string;
-  fileName: string;
 };
 
 type StatementWithContext = StatementDetail & {
@@ -152,7 +151,6 @@ export class StatementExportComponent implements OnInit {
         value: detail.value || 0,
         tax: detail.tax || 0,
         broker: detail.broker,
-        fileName: detail.fileName,
       };
       newStatementExportObjects.push(exportObject);
 
