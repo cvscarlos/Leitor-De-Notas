@@ -13,6 +13,7 @@ export interface StatementDetail {
   value: number;
   dlpType: string;
   tax: number;
+  currency: string;
 }
 
 export interface StatementBatch {

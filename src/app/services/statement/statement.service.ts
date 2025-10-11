@@ -107,6 +107,7 @@ export class StatementService extends UploadBaseService<
         value: item.value,
         dlpType: item.dlpType,
         tax: item.tax,
+        currency: item.currency,
       };
       details.push(detail);
       this.detailsList.push(detail);

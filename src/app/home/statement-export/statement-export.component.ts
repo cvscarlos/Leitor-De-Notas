@@ -29,6 +29,7 @@ type StatementExportObject = {
   value: number;
   tax: number;
   broker: string;
+  currency: string;
 };
 
 type StatementWithContext = StatementDetail & {
@@ -151,6 +152,7 @@ export class StatementExportComponent implements OnInit {
         value: detail.value || 0,
         tax: detail.tax || 0,
         broker: detail.broker,
+        currency: detail.currency,
       };
       newStatementExportObjects.push(exportObject);
 
@@ -160,7 +162,7 @@ export class StatementExportComponent implements OnInit {
         exportObject.dlpType,
         exportObject.value.toString().replace('.', ','),
         exportObject.tax.toString().replace('.', ','),
-        '',
+        exportObject.currency,
         exportObject.broker,
       ].join('\t');
     });
