@@ -113,6 +113,15 @@ export class StatementService extends UploadBaseService<
       this.detailsList.push(detail);
     }
 
+    // Handle errors array from response
+    if (response.errors && response.errors.length > 0) {
+      const error: StatementError = {
+        fileName: response.fileName || fileName,
+        _messages: response.errors,
+      };
+      this.errorsList.push(error);
+    }
+
     const batch: StatementBatch = {
       details,
       broker: response.broker,

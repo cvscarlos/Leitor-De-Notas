@@ -158,6 +158,6 @@ export class AuthComponent implements OnInit {
     } catch (error) {
       console.error(error);
     }
-    window.location.href =  window.location.pathname;
+    window.location.href = window.location.pathname;
   }
 }

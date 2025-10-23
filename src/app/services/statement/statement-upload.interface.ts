@@ -24,6 +24,7 @@ export interface StatementBatch {
 
 export interface StatementResponse {
   result: StatementDetail[];
+  errors?: string[];
   broker: string;
   fileName: string;
 }
