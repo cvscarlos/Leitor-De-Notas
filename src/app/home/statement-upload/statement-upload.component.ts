@@ -13,7 +13,10 @@ export class StatementUploadComponent implements OnInit {
   private statementService = inject(StatementService);
 
   public uploads?: StatementUploadInterface[];
-  public selectedBroker: string = 'Avenue';
+  public selectedBroker = '';
+  public brokerSelectIsInvalid = false;
+  private pendingFiles: FileList | null = null;
+  private fileInput: HTMLInputElement | null = null;
 
   ngOnInit(): void {
     this.uploads = this.statementService.getStatements().statementsList;
@@ -25,10 +28,31 @@ export class StatementUploadComponent implements OnInit {
 
   public handleFileInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const files = input.files as FileList;
-    this.statementService.uploadFiles(files, this.selectedBroker);
+    this.fileInput = input;
+    this.pendingFiles = input.files && input.files.length > 0 ? input.files : null;
+    this.attemptUpload();
+  }
 
-    input.value = '';
+  public onBrokerChange(broker: string): void {
+    this.selectedBroker = broker;
+    this.attemptUpload();
+  }
+
+  private attemptUpload(): void {
+    const brokerIsSelected = !!this.selectedBroker;
+    const filesAreSelected = !!this.pendingFiles;
+
+    this.brokerSelectIsInvalid = filesAreSelected && !brokerIsSelected;
+
+    if (brokerIsSelected && filesAreSelected) {
+      this.statementService.uploadFiles(this.pendingFiles!, this.selectedBroker);
+
+      this.pendingFiles = null;
+      if (this.fileInput) {
+        this.fileInput.value = '';
+        this.fileInput = null;
+      }
+    }
   }
 
   public hasServerErrors(): boolean {

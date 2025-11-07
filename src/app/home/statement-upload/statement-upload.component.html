@@ -5,6 +5,7 @@
   [hasFiles]="hasStatements()"
   [hasErrors]="hasServerErrors()"
   [errorMessages]="getErrorMessages()"
-  (onBrokerChange)="selectedBroker = $event"
+  [isInvalid]="brokerSelectIsInvalid"
+  (onBrokerChange)="onBrokerChange($event)"
   (onFileInput)="handleFileInput($event)"
 ></app-upload-area>

@@ -21,6 +21,7 @@ export class UploadAreaComponent {
   @Input() hasFiles = false;
   @Input() hasErrors = false;
   @Input() errorMessages: string[] = [];
+  @Input() isInvalid = false;
 
   @Output() onBrokerChange = new EventEmitter<string>();
   @Output() onFileInput = new EventEmitter<Event>();

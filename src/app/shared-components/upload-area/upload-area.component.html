@@ -19,10 +19,13 @@
               <select
                 id="broker-select"
                 class="form-select"
+                [class.is-invalid]="isInvalid"
                 [(ngModel)]="selectedBroker"
                 (ngModelChange)="onBrokerChange.emit($event)"
               >
+                <option value="">Selecione</option>
                 <option value="Avenue">Avenue</option>
+                <option value="XP">XP</option>
               </select>
             </div>
           </div>
