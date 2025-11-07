@@ -32,12 +32,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let member of membersList">
-            <td>
-              <a href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
-            </td>
-            <td>{{ member.cpf | cpfCnpj }}</td>
-          </tr>
+          @for (member of membersList; track member) {
+            <tr>
+              <td>
+                <a href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
+              </td>
+              <td>{{ member.cpf | cpfCnpj }}</td>
+            </tr>
+          }
         </tbody>
       </table>
 
@@ -52,12 +54,14 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let member of membersList">
-              <tr *ngFor="let usaAccount of member.usaAccounts">
-                <td>{{ usaAccount }}</td>
-                <td>{{ member.cpf | cpfCnpj }}</td>
-              </tr>
-            </ng-container>
+            @for (member of membersList; track member) {
+              @for (usaAccount of member.usaAccounts; track usaAccount) {
+                <tr>
+                  <td>{{ usaAccount }}</td>
+                  <td>{{ member.cpf | cpfCnpj }}</td>
+                </tr>
+              }
+            }
           </tbody>
         </table>
       </div>

@@ -51,157 +51,177 @@
         </div>
       </form>
 
-      <div *ngIf="requestMade">
+      @if (requestMade) {
         <div>
-          <hr />
-          <h5>Conta FIAT Pagamentos ({{ fiatPayments.length }})</h5>
-          <table class="table table-sm table-striped table-hover table-bordered small-font">
-            <thead>
-              <tr>
-                <th scope="col">Data</th>
-                <th scope="col">Moeda</th>
-                <th scope="col">Cripto</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Comissão</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let transaction of fiatPayments">
-                <td>{{ transaction.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-                <td>{{ transaction.sourceAmount }} {{ transaction.fiatCurrency }}</td>
-                <td>{{ transaction.obtainAmount }} {{ transaction.cryptoCurrency }}</td>
-                <td>{{ transaction.price }}</td>
-                <td>{{ transaction.totalFee }}</td>
-              </tr>
-              <tr *ngIf="fiatPayments.length === 0">
-                <td colspan="5">Sem dados</td>
-              </tr>
-            </tbody>
-          </table>
+          <div>
+            <hr />
+            <h5>Conta FIAT Pagamentos ({{ fiatPayments.length }})</h5>
+            <table class="table table-sm table-striped table-hover table-bordered small-font">
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Moeda</th>
+                  <th scope="col">Cripto</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col">Comissão</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (transaction of fiatPayments; track transaction) {
+                  <tr>
+                    <td>{{ transaction.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{ transaction.sourceAmount }} {{ transaction.fiatCurrency }}</td>
+                    <td>{{ transaction.obtainAmount }} {{ transaction.cryptoCurrency }}</td>
+                    <td>{{ transaction.price }}</td>
+                    <td>{{ transaction.totalFee }}</td>
+                  </tr>
+                }
+                @if (fiatPayments.length === 0) {
+                  <tr>
+                    <td colspan="5">Sem dados</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <hr />
+            <h5>Conta FIAT Ordens ({{ fiatOrders.length }})</h5>
+            <table class="table table-sm table-striped table-hover table-bordered small-font">
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Moeda</th>
+                  <th scope="col">Comissão</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (transaction of fiatOrders; track transaction) {
+                  <tr>
+                    <td>{{ transaction.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{ transaction.amount }} {{ transaction.fiatCurrency }}</td>
+                    <td>{{ transaction.totalFee }}</td>
+                  </tr>
+                }
+                @if (fiatOrders.length === 0) {
+                  <tr>
+                    <td colspan="3">Sem dados</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <hr />
+            <h5>Conversões ({{ conversions.length }})</h5>
+            <table class="table table-sm table-striped table-hover table-bordered small-font">
+              <thead>
+                <tr>
+                  <th scope="col">Ativo</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Evento</th>
+                  <th scope="col">Qtd.</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Observação</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (c of conversions; track c) {
+                  <tr>
+                    <td>{{ c.asset }}</td>
+                    <td>{{ c.created | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{ c.operType }}</td>
+                    <td>{{ c.amount }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      {{ c.fromAmount }} {{ c.fromAsset }} -> {{ c.toAmount }} {{ c.toAsset }}
+                    </td>
+                  </tr>
+                }
+                @if (conversions.length === 0) {
+                  <tr>
+                    <td colspan="10">Sem dados</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <hr />
+            <h5>Transações OCO ({{ tradesOCO.length }})</h5>
+            <table class="table table-sm table-striped table-hover table-bordered small-font">
+              <thead>
+                <tr>
+                  <th scope="col">Ativo</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Evento</th>
+                  <th scope="col">Qtd</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col">Taxas</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (trade of tradesOCO; track trade) {
+                  <tr>
+                    <td>{{ trade.symbol }}</td>
+                    <td>{{ trade.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{ trade.operType }}</td>
+                    <td>{{ trade.qty }}</td>
+                    <td>{{ trade.price }}</td>
+                    <td>{{ trade.fee }} {{ trade.feeAsset }}</td>
+                  </tr>
+                }
+                @if (tradesOCO.length === 0) {
+                  <tr>
+                    <td colspan="6">Sem dados</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <hr />
+            <h5>Transações Spot ({{ trades.length }})</h5>
+            <table class="table table-sm table-striped table-hover table-bordered small-font">
+              <thead>
+                <tr>
+                  <th scope="col">Ativo</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Evento</th>
+                  <th scope="col">Qtd</th>
+                  <th scope="col">Preço</th>
+                  <th scope="col">Taxas</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (trade of trades; track trade) {
+                  <tr>
+                    <td>{{ trade.symbol }}</td>
+                    <td>{{ trade.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+                    <td>{{ trade.operType }}</td>
+                    <td>{{ trade.qty }}</td>
+                    <td>{{ trade.price }}</td>
+                    <td>{{ trade.fee }} {{ trade.feeAsset }}</td>
+                  </tr>
+                }
+                @if (trades.length === 0) {
+                  <tr>
+                    <td colspan="6">Sem dados</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
         </div>
-
-        <div>
-          <hr />
-          <h5>Conta FIAT Ordens ({{ fiatOrders.length }})</h5>
-          <table class="table table-sm table-striped table-hover table-bordered small-font">
-            <thead>
-              <tr>
-                <th scope="col">Data</th>
-                <th scope="col">Moeda</th>
-                <th scope="col">Comissão</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let transaction of fiatOrders">
-                <td>{{ transaction.updateDate | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-                <td>{{ transaction.amount }} {{ transaction.fiatCurrency }}</td>
-                <td>{{ transaction.totalFee }}</td>
-              </tr>
-              <tr *ngIf="fiatOrders.length === 0">
-                <td colspan="3">Sem dados</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div>
-          <hr />
-          <h5>Conversões ({{ conversions.length }})</h5>
-          <table class="table table-sm table-striped table-hover table-bordered small-font">
-            <thead>
-              <tr>
-                <th scope="col">Ativo</th>
-                <th scope="col">Data</th>
-                <th scope="col">Evento</th>
-                <th scope="col">Qtd.</th>
-                <th scope="col">Preço</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">Observação</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let c of conversions">
-                <td>{{ c.asset }}</td>
-                <td>{{ c.created | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-                <td>{{ c.operType }}</td>
-                <td>{{ c.amount }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{ c.fromAmount }} {{ c.fromAsset }} -> {{ c.toAmount }} {{ c.toAsset }}</td>
-              </tr>
-              <tr *ngIf="conversions.length === 0">
-                <td colspan="10">Sem dados</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div>
-          <hr />
-          <h5>Transações OCO ({{ tradesOCO.length }})</h5>
-          <table class="table table-sm table-striped table-hover table-bordered small-font">
-            <thead>
-              <tr>
-                <th scope="col">Ativo</th>
-                <th scope="col">Data</th>
-                <th scope="col">Evento</th>
-                <th scope="col">Qtd</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Taxas</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let trade of tradesOCO">
-                <td>{{ trade.symbol }}</td>
-                <td>{{ trade.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-                <td>{{ trade.operType }}</td>
-                <td>{{ trade.qty }}</td>
-                <td>{{ trade.price }}</td>
-                <td>{{ trade.fee }} {{ trade.feeAsset }}</td>
-              </tr>
-              <tr *ngIf="tradesOCO.length === 0">
-                <td colspan="6">Sem dados</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div>
-          <hr />
-          <h5>Transações Spot ({{ trades.length }})</h5>
-          <table class="table table-sm table-striped table-hover table-bordered small-font">
-            <thead>
-              <tr>
-                <th scope="col">Ativo</th>
-                <th scope="col">Data</th>
-                <th scope="col">Evento</th>
-                <th scope="col">Qtd</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Taxas</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let trade of trades">
-                <td>{{ trade.symbol }}</td>
-                <td>{{ trade.date | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
-                <td>{{ trade.operType }}</td>
-                <td>{{ trade.qty }}</td>
-                <td>{{ trade.price }}</td>
-                <td>{{ trade.fee }} {{ trade.feeAsset }}</td>
-              </tr>
-              <tr *ngIf="trades.length === 0">
-                <td colspan="6">Sem dados</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      }
     </div>
   </div>
 </div>

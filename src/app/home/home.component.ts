@@ -7,7 +7,7 @@ import { ExportToolComponent } from './export-tool/export-tool.component';
 import { StatementExportComponent } from './statement-export/statement-export.component';
 import { BrokerageNotesComponent } from './brokerage-notes/brokerage-notes.component';
 import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
-import { NgIf } from '@angular/common';
+
 import { filter } from 'rxjs/operators';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFilePdf, faFileCsv } from '@fortawesome/free-solid-svg-icons';
@@ -30,7 +30,6 @@ const STATEMENTS_TAB = 'extratos' as const;
     BrokerageNotesComponent,
     RouterLink,
     RouterLinkActive,
-    NgIf,
     FaIconComponent,
   ],
 })

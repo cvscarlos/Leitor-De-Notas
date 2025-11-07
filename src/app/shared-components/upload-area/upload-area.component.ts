@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { UploadDirective } from '../../home/upload/upload.directive';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -10,7 +10,7 @@ import { SessionService } from 'src/app/services/session/session.service';
   selector: 'app-upload-area',
   templateUrl: './upload-area.component.html',
   styleUrls: ['./upload-area.component.less'],
-  imports: [NgIf, NgFor, FormsModule, UploadDirective, FaIconComponent],
+  imports: [FormsModule, UploadDirective, FaIconComponent],
 })
 export class UploadAreaComponent {
   sessionService = inject(SessionService);

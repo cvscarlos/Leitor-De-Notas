@@ -41,19 +41,29 @@
     </div>
   </div>
 
-  <app-upload *ngIf="currentTab === NOTES_TAB"></app-upload>
-  <app-statement-upload *ngIf="currentTab === STATEMENTS_TAB"></app-statement-upload>
+  @if (currentTab === NOTES_TAB) {
+    <app-upload></app-upload>
+  }
+  @if (currentTab === STATEMENTS_TAB) {
+    <app-statement-upload></app-statement-upload>
+  }
 </div>
 
-<app-export-tool *ngIf="currentTab === NOTES_TAB"></app-export-tool>
+@if (currentTab === NOTES_TAB) {
+  <app-export-tool></app-export-tool>
+}
 
-<div class="container-fluid" *ngIf="currentTab === NOTES_TAB">
-  <app-brokerage-notes></app-brokerage-notes>
-</div>
+@if (currentTab === NOTES_TAB) {
+  <div class="container-fluid">
+    <app-brokerage-notes></app-brokerage-notes>
+  </div>
+}
 
-<div class="container-fluid" *ngIf="currentTab === STATEMENTS_TAB">
-  <app-statement-export></app-statement-export>
-</div>
+@if (currentTab === STATEMENTS_TAB) {
+  <div class="container-fluid">
+    <app-statement-export></app-statement-export>
+  </div>
+}
 
 <div class="container-fluid">
   <div class="row">

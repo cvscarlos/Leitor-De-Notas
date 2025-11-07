@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
-import { CommonModule } from '@angular/common';
+
 import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
 
 declare global {
@@ -11,7 +11,7 @@ declare global {
 
 @Component({
   selector: 'app-server-unavailability-message',
-  imports: [CommonModule, SharedDirectivesModule],
+  imports: [SharedDirectivesModule],
   templateUrl: './server-unavailability-message.component.html',
   styleUrls: ['./server-unavailability-message.component.less'],
 })

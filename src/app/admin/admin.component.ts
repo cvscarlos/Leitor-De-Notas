@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
 
 @Component({
   selector: 'app-admin',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './admin.component.html',
 })
 export class AdminComponent {

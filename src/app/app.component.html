@@ -1,45 +1,44 @@
-<nav *ngIf="!isIframe.isIframe()" class="navbar navbar-expand-lg navbar-dark bg-dark mb-2 shadow py-1" style="background-color:#18204D!important;">
-  <div class="container-fluid">
-    <h1 class="navbar-brand h3 p-0 my-0 me-md-auto font-weight-normal ">
-      <a routerLink="/" class="text-white" style="text-decoration: none">
-        <img src="assets/dlp-logo.png" alt="DLP - Logo" class="rounded" style="max-width: 34px;" />
-        DLP - Leitor de Notas
-      </a>
-    </h1>
-
-    <button
-      class="navbar-toggler me-3"
-      type="button"
-      (click)="headerMenuCollapsed = !headerMenuCollapsed"
-      [attr.aria-expanded]="!headerMenuCollapsed"
-      aria-controls="collapseMenu"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div
-      class="collapse navbar-collapse justify-content-end"
-      #collapse="ngbCollapse"
-      [(ngbCollapse)]="headerMenuCollapsed"
-      id="collapseMenu"
-    >
-      <ul class="navbar-nav ms-auto me-2">
-        <li class="nav-item">
-          <a
-            (click)="headerMenuCollapsed = true"
-            class="nav-link px-3"
-            href="https://www.dlpinvest.com.br/"
-            target="_blank"
-          >
-            <fa-icon [icon]="faCalculator"></fa-icon> Calculadora IR
-          </a>
-        </li><li class="nav-item">
+@if (!isIframe.isIframe()) {
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2 shadow py-1" style="background-color:#18204D!important;">
+    <div class="container-fluid">
+      <h1 class="navbar-brand h3 p-0 my-0 me-md-auto font-weight-normal ">
+        <a routerLink="/" class="text-white" style="text-decoration: none">
+          <img src="assets/dlp-logo.png" alt="DLP - Logo" class="rounded" style="max-width: 34px;" />
+          DLP - Leitor de Notas
+        </a>
+      </h1>
+      <button
+        class="navbar-toggler me-3"
+        type="button"
+        (click)="headerMenuCollapsed = !headerMenuCollapsed"
+        [attr.aria-expanded]="!headerMenuCollapsed"
+        aria-controls="collapseMenu"
+        >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        #collapse="ngbCollapse"
+        [(ngbCollapse)]="headerMenuCollapsed"
+        id="collapseMenu"
+        >
+        <ul class="navbar-nav ms-auto me-2">
+          <li class="nav-item">
+            <a
+              (click)="headerMenuCollapsed = true"
+              class="nav-link px-3"
+              href="https://www.dlpinvest.com.br/"
+              target="_blank"
+              >
+              <fa-icon [icon]="faCalculator"></fa-icon> Calculadora IR
+            </a>
+          </li><li class="nav-item">
           <a
             (click)="headerMenuCollapsed = true"
             class="nav-link px-3"
             routerLink="/faq"
             target="_blank"
-          >
+            >
             <fa-icon [icon]="faQuestionCircle"></fa-icon> FAQ / Ajuda
           </a>
         </li>
@@ -54,7 +53,7 @@
             class="nav-link px-3"
             routerLink="/suporte"
             target="_blank"
-          >
+            >
             <fa-icon [icon]="faEnvelope"></fa-icon> Suporte
           </a>
         </li>
@@ -62,6 +61,7 @@
     </div>
   </div>
 </nav>
+}
 
 <div class="container-fluid">
   <app-server-unavailability-message></app-server-unavailability-message>
@@ -70,9 +70,11 @@
 
 <router-outlet (activate)="onActivate()"></router-outlet>
 
-<div *ngIf="showAboutUs" >
-  <app-about-us></app-about-us>
-</div>
+@if (showAboutUs) {
+  <div >
+    <app-about-us></app-about-us>
+  </div>
+}
 
 <div class="container-fluid">
   <div class="row">
@@ -86,6 +88,8 @@
     </div>
   </div>
 
-<app-modal></app-modal>
+  <app-modal></app-modal>
 
-<app-statistics *ngIf="!isIframe.isIframe()"></app-statistics>
+  @if (!isIframe.isIframe()) {
+    <app-statistics></app-statistics>
+  }

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
 
 export interface ErrorLog {
   fileName: string;
@@ -11,7 +10,7 @@ export interface ErrorLog {
 @Component({
   selector: 'app-error-logger',
   templateUrl: './error-logger.component.html',
-  imports: [NgIf, NgFor],
+  imports: [],
 })
 export class ErrorLoggerComponent {
   @Input() errors: ErrorLog[] = [];

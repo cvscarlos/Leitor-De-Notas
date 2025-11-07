@@ -6,10 +6,9 @@
     <div class="row justify-content-center">
       <div class="col col-md-10 col-lg-8 my-5">
         <div>
-          <ng-container *ngIf="!isIframe.isIframe()">
+          @if (!isIframe.isIframe()) {
             <h2 class="text-center">Sobre o Leitor de Notas de Corretagem</h2>
             <h4 class="text-center">Chega de digitar suas notas de corretagem!</h4>
-
             <p>
               Com o nosso leitor de notas de corretagem online e gratuito, você pode parar de perder
               tempo digitando e evitar erros. Basta informar seu email e CPF para começar a usar! 🙂
@@ -24,7 +23,7 @@
                 >Calculadora de Imposto de Renda: DLP Invest</a
               >.
             </p>
-          </ng-container>
+          }
 
           <h5>
             Veja a lista de corretoras que já oferecemos suporte para a leitura de notas de

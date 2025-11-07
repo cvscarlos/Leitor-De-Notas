@@ -8,7 +8,7 @@ import {
 } from 'src/app/services/statement/statement-upload.interface';
 import { SlideToggleDirective } from '../../shared-directives/slide-toggle/slide-toggle.directive';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { NgIf, NgFor } from '@angular/common';
+
 import {
   NgbNav,
   NgbNavItem,
@@ -44,8 +44,6 @@ type StatementWithContext = StatementDetail & {
   imports: [
     SlideToggleDirective,
     FaIconComponent,
-    NgIf,
-    NgFor,
     NgbNav,
     NgbNavItem,
     NgbNavItemRole,

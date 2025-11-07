@@ -3,7 +3,7 @@ import { UserComponent } from 'src/app/user/user.component';
 import { faFileInvoice, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NotifyService } from '../services/notify/notify.service';
 import { IsIframeService } from '../services/is-iframe/is-iframe.service';
-import { NgIf, NgFor } from '@angular/common';
+
 import { LoadingComponent } from '../loading/loading.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
@@ -13,7 +13,7 @@ const _15DAYS = 15 * 24 * 60 * 60 * 1000;
 @Component({
   selector: 'app-user-bar',
   templateUrl: './user-bar.component.html',
-  imports: [NgIf, LoadingComponent, FaIconComponent, RouterLink, NgFor],
+  imports: [LoadingComponent, FaIconComponent, RouterLink],
 })
 export class UserBarComponent extends UserComponent implements OnInit {
   private notifyService = inject(NotifyService);

@@ -18,7 +18,6 @@ import {
   NgbNavContent,
   NgbNavOutlet,
 } from '@ng-bootstrap/ng-bootstrap';
-import { NgIf } from '@angular/common';
 
 type DlombelloTrade = {
   brokerage: Note['brokerName'];
@@ -64,7 +63,6 @@ type DlombelloExportObject = {
     NgbNavLink,
     NgbNavLinkBase,
     NgbNavContent,
-    NgIf,
     NgbNavOutlet,
   ],
 })

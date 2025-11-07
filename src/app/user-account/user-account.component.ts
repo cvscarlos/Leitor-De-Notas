@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { UserTransactions } from 'src/types';
 import { LoadingComponent } from '../loading/loading.component';
 import { RouterLink } from '@angular/router';
-import { NgIf, NgFor, DatePipe, KeyValuePipe } from '@angular/common';
+import { DatePipe, KeyValuePipe } from '@angular/common';
 import { SlideToggleDirective } from '../shared-directives/slide-toggle/slide-toggle.directive';
 import { CpfCnpjPipe } from '../shared-pipes/cpf-cnpj/cpf-cnpj.pipe';
 
@@ -25,8 +25,6 @@ type UserUsageHistory = {
   imports: [
     LoadingComponent,
     RouterLink,
-    NgIf,
-    NgFor,
     FormsModule,
     SlideToggleDirective,
     DatePipe,

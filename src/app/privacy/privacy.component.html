@@ -4,13 +4,15 @@
       <div class="col">
         <h3 class="text-center">Termos de Uso e Política de Privacidade</h3>
 
-        <div *ngIf="showAcceptTermsButton">
-          <p class="text-center alert alert-waring">
-            <strong>POR FAVOR LEIA E ACEITE OS TERMOS PARA CONTINUAR UTILIZANDO O SISTEMA</strong
-            ><br /><i>Botão de aceite, encontra-se ao final do texto</i>
-          </p>
-          <hr />
-        </div>
+        @if (showAcceptTermsButton) {
+          <div>
+            <p class="text-center alert alert-waring">
+              <strong>POR FAVOR LEIA E ACEITE OS TERMOS PARA CONTINUAR UTILIZANDO O SISTEMA</strong
+              ><br /><i>Botão de aceite, encontra-se ao final do texto</i>
+            </p>
+            <hr />
+          </div>
+        }
 
         <div>
           <p>
@@ -101,12 +103,14 @@
           </p>
         </div>
 
-        <div *ngIf="showAcceptTermsButton" class="text-center" style="position: relative">
-          <app-loading [show]="loading"></app-loading>
-          <button type="button" class="btn btn-primary" (click)="acceptingTerms()">
-            Confirmo que li e aceito os termos de uso
-          </button>
-        </div>
+        @if (showAcceptTermsButton) {
+          <div class="text-center" style="position: relative">
+            <app-loading [show]="loading"></app-loading>
+            <button type="button" class="btn btn-primary" (click)="acceptingTerms()">
+              Confirmo que li e aceito os termos de uso
+            </button>
+          </div>
+        }
       </div>
     </div>
   </div>

@@ -10,81 +10,88 @@
     </div>
   </div>
 
-  <div *ngIf="statements.length > 0">
-    <ul ngbNav #nav="ngbNav" class="nav-tabs">
-      <li [ngbNavItem]="1">
-        <a ngbNavLink>DLP Invest</a>
-        <ng-template ngbNavContent>
-          <div class="row">
-            <div class="col pure-text-field click-to-copy">
-              <h4 class="text-center my-3">Copiar para DLP Invest</h4>
-              <div class="mb-3">
-                <textarea class="text-to-export form-control" readonly #exportTextarea>{{
-                  exportString
-                }}</textarea>
+  @if (statements.length > 0) {
+    <div>
+      <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>DLP Invest</a>
+          <ng-template ngbNavContent>
+            <div class="row">
+              <div class="col pure-text-field click-to-copy">
+                <h4 class="text-center my-3">Copiar para DLP Invest</h4>
+                <div class="mb-3">
+                  <textarea class="text-to-export form-control" readonly #exportTextarea>{{
+                    exportString
+                  }}</textarea>
+                </div>
+                @if (!isIframe) {
+                  <button class="btn btn-primary" (click)="copyFn(exportTextarea)">
+                    <fa-icon [icon]="faCopy"></fa-icon> Copiar
+                  </button>
+                }
               </div>
-              <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(exportTextarea)">
-                <fa-icon [icon]="faCopy"></fa-icon> Copiar
-              </button>
             </div>
-          </div>
+            @if (isIframe) {
+              <div class="row">
+                <div class="col text-center">
+                  <button
+                    class="btn btn-success btn-lg mt-4"
+                    style="font-size: 1.25rem"
+                    (click)="sendJsonMessage()"
+                  >
+                    <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
+                  </button>
+                </div>
+              </div>
+            }
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav" class="small-font border border-top-0 p-3 pt-0"></div>
+    </div>
+  }
 
-          <div class="row" *ngIf="isIframe">
-            <div class="col text-center">
-              <button
-                class="btn btn-success btn-lg mt-4"
-                style="font-size: 1.25rem"
-                (click)="sendJsonMessage()"
-              >
-                <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
-              </button>
+  @if (statements.length > 0) {
+    <div>
+      <div class="row mt-5">
+        <div class="col small-font">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="mb-0">Resumo dos dividendos</h4>
             </div>
-          </div>
-        </ng-template>
-      </li>
-    </ul>
-
-    <div [ngbNavOutlet]="nav" class="small-font border border-top-0 p-3 pt-0"></div>
-  </div>
-
-  <div *ngIf="statements.length > 0">
-    <div class="row mt-5">
-      <div class="col small-font">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="mb-0">Resumo dos dividendos</h4>
-          </div>
-
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-sm table-striped mb-3">
-                <thead>
-                  <tr>
-                    <th>Ativo</th>
-                    <th>Data</th>
-                    <th>Evento</th>
-                    <th>Valor</th>
-                    <th>IRRF</th>
-                    <th>Moeda</th>
-                    <th>Corretora</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let statement of statements">
-                    <td>{{ statement.stock }}</td>
-                    <td>{{ statement.date }}</td>
-                    <td>{{ statement.dlpType }}</td>
-                    <td>{{ statement.value }}</td>
-                    <td>{{ statement.tax }}</td>
-                    <td>{{ statement.currency }}</td>
-                    <td>{{ statement.broker }}</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-sm table-striped mb-3">
+                  <thead>
+                    <tr>
+                      <th>Ativo</th>
+                      <th>Data</th>
+                      <th>Evento</th>
+                      <th>Valor</th>
+                      <th>IRRF</th>
+                      <th>Moeda</th>
+                      <th>Corretora</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (statement of statements; track statement) {
+                      <tr>
+                        <td>{{ statement.stock }}</td>
+                        <td>{{ statement.date }}</td>
+                        <td>{{ statement.dlpType }}</td>
+                        <td>{{ statement.value }}</td>
+                        <td>{{ statement.tax }}</td>
+                        <td>{{ statement.currency }}</td>
+                        <td>{{ statement.broker }}</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  }
 </div>

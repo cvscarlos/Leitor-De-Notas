@@ -82,23 +82,27 @@
                 dlombelloExportString
               }}</textarea>
             </div>
-            <button *ngIf="!isIframe" class="btn btn-primary" (click)="copyFn(dlombelloTextarea)">
-              <fa-icon [icon]="faCopy"></fa-icon> Copiar
-            </button>
+            @if (!isIframe) {
+              <button class="btn btn-primary" (click)="copyFn(dlombelloTextarea)">
+                <fa-icon [icon]="faCopy"></fa-icon> Copiar
+              </button>
+            }
           </div>
         </div>
 
-        <div class="row" *ngIf="isIframe">
-          <div class="col text-center">
-            <button
-              class="btn btn-success btn-lg mt-4"
-              style="font-size: 1.25rem"
-              (click)="sendJsonMessage()"
-            >
-              <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
-            </button>
+        @if (isIframe) {
+          <div class="row">
+            <div class="col text-center">
+              <button
+                class="btn btn-success btn-lg mt-4"
+                style="font-size: 1.25rem"
+                (click)="sendJsonMessage()"
+              >
+                <fa-icon [icon]="faSquarePlus"></fa-icon> Importar operações
+              </button>
+            </div>
           </div>
-        </div>
+        }
       </ng-template>
     </li>
 

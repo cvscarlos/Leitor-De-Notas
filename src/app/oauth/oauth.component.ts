@@ -1,11 +1,10 @@
 import { ApiService } from 'src/app/services/api/api.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { SessionService } from '../services/session/session.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-oauth',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './oauth.component.html',
 })
 export class OauthComponent implements OnInit {

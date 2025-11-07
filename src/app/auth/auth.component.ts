@@ -10,7 +10,7 @@ import {
 import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
-import { NgIf } from '@angular/common';
+
 import { FullPageLoadingComponent } from '../full-page-loading/full-page-loading.component';
 import { SlideToggleDirective } from '../shared-directives/slide-toggle/slide-toggle.directive';
 import { LoadingComponent } from '../loading/loading.component';
@@ -21,7 +21,6 @@ import { AutofocusDirective } from '../shared-directives/autofocus/autofocus.dir
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.less'],
   imports: [
-    NgIf,
     FullPageLoadingComponent,
     SlideToggleDirective,
     LoadingComponent,
