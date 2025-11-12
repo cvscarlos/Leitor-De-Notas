@@ -9,6 +9,6 @@ Na maioria dos casos, ambos os formatos podem ser utilizados normalmente. Mas ex
 
 Então se encontrar erros na leitura de seu arquivo, tente novamente com a versão do Home Broker.
 
-| Nota enviada por email ✅                                                                                | Nota do Home Broker ✅                                                                                   |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| <div><figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure></div> | <div><figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure></div> |
+| Nota enviada por email ✅                                                                                     | Nota do Home Broker ✅                                                                                        |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| <div><figure><img src="../.gitbook/assets/cm-capital-02.png" alt=""><figcaption></figcaption></figure></div> | <div><figure><img src="../.gitbook/assets/cm-capital-01.png" alt=""><figcaption></figcaption></figure></div> |
