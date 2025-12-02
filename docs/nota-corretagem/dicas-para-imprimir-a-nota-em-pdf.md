@@ -28,15 +28,15 @@ Use o **Google Chrome**, para imprimir sua nota em PDF.
 
 Se mesmo após estes ajustes a nota ainda apresentar erros de leitura, tente as seguintes **configurações alternativas**:
 
-- "**Escala**", mude para "_Personalizado_" e vá alterando o valor padrão que é 100, coloque 105 por exemplo, sempre tomando o cuidado da nota continuar cabendo em apenas 1 página.
-- "**Margens**", altere entre qualquer uma das opções disponíveis.
+* "**Escala**", mude para "_Personalizado_" e vá alterando o valor padrão que é 100, coloque 105 por exemplo, sempre tomando o cuidado da nota continuar cabendo em apenas 1 página.
+* "**Margens**", altere entre qualquer uma das opções disponíveis.
 
 A cada alteração que fizer nas configurações, gere o PDF e tente importar no Leitor de Notas novamente.
 
 Não existe uma configuração única que resolve todos os casos, você deve encontrar a que melhor se encaixa com a sua corretora.
 
-![](../.gitbook/assets/7ab14171ee7ab07e1a8af0d979fc63f8.png)
+![](../.gitbook/assets/dica-imprimir-nota.png)
 
-Se mesmo após todos os ajustes, o erro ainda persistir, por favor nos envie uma mensagem através do [formulário de suporte](https://leitordenotas.com.br/suporte.html).&#x20;
+Se mesmo após todos os ajustes, o erro ainda persistir, por favor nos envie uma mensagem através do [formulário de suporte](https://leitordenotas.com.br/suporte.html).
 
 ⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).

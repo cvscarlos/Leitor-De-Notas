@@ -8,4 +8,4 @@ Caso não consiga obter a nota através da área logada ou do Homer Broker, voc�
 
 Mas caso queira conferir se sua nota está no formato suportado pelo Leitor de Notas, compare com a imagem abaixo:
 
-![](../.gitbook/assets/a1ec64b7d5dfe9055339a239c478b138.png)
+![](../.gitbook/assets/toro-notas-01.png)

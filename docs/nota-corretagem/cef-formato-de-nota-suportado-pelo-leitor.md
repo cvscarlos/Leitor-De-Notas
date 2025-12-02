@@ -1,4 +1,4 @@
-# Caixa Econômica Federal (CEF) - Formato de nota suportado pelo Leitor de Notas
+# Caixa Econômica Federal (CEF) - Formato de nota suportado pelo Leitor
 
 Abaixo está um exemplo do formato de nota compatível com o Leitor de Notas.
 
@@ -10,4 +10,4 @@ Evite utilizar a opção de **impressão do navegador**, pois o arquivo resultan
 
 ### **Versão de Nota suportada ✅**
 
-<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/caixa-nota-01.png" alt=""><figcaption></figcaption></figure>

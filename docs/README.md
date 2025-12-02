@@ -1,5 +1,19 @@
 ---
 description: Principais problemas e soluções para a leitura das Notas de Corretagem
+layout:
+  width: wide
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: false
+  metadata:
+    visible: false
 ---
 
 # Home
@@ -44,3 +58,7 @@ Principais problemas e soluções para a leitura das Notas de Corretagem
 * [Caixa Econômica Federal (CEF) - Formato de nota suportado pelo Leitor](nota-corretagem/cef-formato-de-nota-suportado-pelo-leitor.md)
 * [Charles Schwab - Formato de nota suportado pelo Leitor](charles-schwab-formato-de-nota-suportado-pelo-leitor.md)
 * [Itaú - Formato de nota suportado pelo Leitor](itau-formato-de-nota-suportado-pelo-leitor.md)
+
+## 📋 Extratos
+
+* [BTG - Formato de extrato suportado pelo Leitor](extrato/btg-formato-de-extrato-suportado-pelo-leitor.md)

@@ -14,4 +14,4 @@ Não exporto através do menu "Minha Conta" > "Movimentações", pois, ele costu
 
 Mas caso queira conferir se sua nota está no formato suportado pelo Leitor de Notas, compare com a imagem abaixo:
 
-![](../.gitbook/assets/d5f2050c233465eba9f145da60f8cdfd.png)
+![](../.gitbook/assets/ativa-notas.png)

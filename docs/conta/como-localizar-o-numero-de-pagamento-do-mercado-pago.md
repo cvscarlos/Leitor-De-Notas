@@ -8,7 +8,7 @@ Você pode encontrar esse número tanto no email de confirmação enviado pelo M
 
 No **comprovante do PIX** (atenção, nem todos os bancos trazem essa informação no comprovante):
 
-![](../.gitbook/assets/8f6891a3a5f11af7af190af857e2546c.png)
+![](../.gitbook/assets/mercado-pago-referencia-pagamento-02.png)
 
 #### No comprovante PIX (exemplo B)
 
@@ -20,12 +20,12 @@ No **comprovante do PIX** (atenção, nem todos os bancos trazem essa informaç�
 
 No **email enviado pelo Mercado Pago:**
 
-![](../.gitbook/assets/9395dee817226f5bad00e6c6833ba488.png)
+![](../.gitbook/assets/mercado-pago-referencia-pagamento-01.png)
 
 #### No site do Mercado Pago
 
 Na **sua conta dentro do Mercado Pago:**
 
-![](../.gitbook/assets/250fb2483dfc25f541fafb38c28b69a1.png)
+![](../.gitbook/assets/mercado-pago-referencia-pagamento-03.png)
 
 ⬅️ Voltar para o [Leitor de Notas](https://leitordenotas.com.br/).
