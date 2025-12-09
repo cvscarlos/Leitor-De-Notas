@@ -97,5 +97,6 @@ export type UserTransactions = {
     paymentNumber: number;
     reference: string;
     inUse: boolean;
+    forceNotification: boolean;
   }[];
 };

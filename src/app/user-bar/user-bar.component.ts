@@ -8,8 +8,6 @@ import { LoadingComponent } from '../loading/loading.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
 
-const _15DAYS = 15 * 24 * 60 * 60 * 1000;
-
 @Component({
   selector: 'app-user-bar',
   templateUrl: './user-bar.component.html',
@@ -75,10 +73,6 @@ export class UserBarComponent extends UserComponent implements OnInit {
   }
 
   private async modalAvailablePayments() {
-    const sawAvailablePayment = sessionStorage.getItem('bgggSawAvailablePayment');
-    if (sawAvailablePayment && Date.now() < Number(sawAvailablePayment)) return;
-    sessionStorage.setItem('bgggSawAvailablePayment', String(Date.now() + _15DAYS));
-
     const [trx, user] = await Promise.all([
       this.apiService.userTransactions(),
       this.apiService.userMe(),
@@ -90,10 +84,16 @@ export class UserBarComponent extends UserComponent implements OnInit {
     const availablePayment = trx.response.find((transaction) => !transaction.inUse);
     if (!availablePayment) return;
 
-    const hidePaymentNotification = new Date(
-      user?.settings?.hidePaymentNotificationUntil || Date.now() - 1000,
+    const hasForceNotification = trx.response.some(
+      (transaction) => !transaction.inUse && transaction.forceNotification,
     );
-    if (hidePaymentNotification > new Date()) return;
+
+    if (!hasForceNotification) {
+      const hidePaymentNotification = new Date(
+        user?.settings?.hidePaymentNotificationUntil || Date.now() - 1000,
+      );
+      if (hidePaymentNotification > new Date()) return;
+    }
 
     const { isConfirmed, value } = await this.notifyService.confirm(
       'Você possui um pagamento disponível!',
