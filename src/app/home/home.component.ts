@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   currentTab: typeof NOTES_TAB | typeof STATEMENTS_TAB = NOTES_TAB;
   faFilePdf = faFilePdf;
   faFileCsv = faFileCsv;
+  isInIframe = window.self !== window.top;
 
   ngOnInit(): void {
     this.updateCurrentTab();

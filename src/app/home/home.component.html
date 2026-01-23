@@ -24,19 +24,21 @@
             <fa-icon [icon]="faFilePdf"></fa-icon> Notas de Corretagem
           </a>
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link px-3 py-2"
-            [class.active]="currentTab === STATEMENTS_TAB"
-            [class.text-purple]="currentTab === STATEMENTS_TAB"
-            [class.text-body-emphasis]="currentTab !== STATEMENTS_TAB"
-            [class.border-purple]="currentTab === STATEMENTS_TAB"
-            [routerLink]="'/extratos'"
-            routerLinkActive="active"
-          >
-            <fa-icon [icon]="faFileCsv"></fa-icon> Extratos
-          </a>
-        </li>
+        @if (!isInIframe) {
+          <li class="nav-item">
+            <a
+              class="nav-link px-3 py-2"
+              [class.active]="currentTab === STATEMENTS_TAB"
+              [class.text-purple]="currentTab === STATEMENTS_TAB"
+              [class.text-body-emphasis]="currentTab !== STATEMENTS_TAB"
+              [class.border-purple]="currentTab === STATEMENTS_TAB"
+              [routerLink]="'/extratos'"
+              routerLinkActive="active"
+            >
+              <fa-icon [icon]="faFileCsv"></fa-icon> Extratos
+            </a>
+          </li>
+        }
       </ul>
     </div>
   </div>
