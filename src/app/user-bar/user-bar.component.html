@@ -1,4 +1,4 @@
-@if (this.sessionService.isAuthenticated) {
+@if (this.sessionService.isAuthenticated && user.sessionProvider !== 'DLPINVEST') {
   <div style="position: relative">
     <app-loading [show]="loading"></app-loading>
     <div class="d-flex justify-content-center align-items-center flex-column flex-md-row">

@@ -22,6 +22,7 @@ export class UserComponent implements OnInit {
     userDoc: '',
     expiresIn: '',
     isFreePlan: true,
+    sessionProvider: null,
   };
 
   constructor() {}

@@ -20,6 +20,7 @@ export type UserData = {
   userDoc: string;
   expiresIn: string;
   isFreePlan: boolean;
+  sessionProvider: string | null;
 };
 
 export type NoteTrade = {
