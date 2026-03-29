@@ -26,10 +26,6 @@ export class UploadAreaComponent {
   @Output() onBrokerChange = new EventEmitter<string>();
   @Output() onFileInput = new EventEmitter<Event>();
 
-  get backgroundColor() {
-    return this.uploadType === 'statements' ? '#a146f4' : undefined;
-  }
-
   get fileIcon() {
     return this.uploadType === 'statements' ? faFileCsv : faFilePdf;
   }

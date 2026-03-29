@@ -1,11 +1,11 @@
 .drop-files {
   margin-bottom: 16px;
   outline-offset: -10px;
-  outline: 2px dashed #92b0b3;
+  outline: 2px dashed var(--app-border-hover);
   padding: 20px;
 
   &.statements-border {
-    outline-color: #6a1b9a; // Dark purple for statements
+    outline-color: var(--app-accent);
   }
 
   input {
@@ -17,12 +17,32 @@
   }
 }
 
+.upload-drop-area {
+  background-color: var(--app-upload-bg);
+  color: var(--app-upload-text);
+  outline-color: var(--app-upload-border);
+
+  &.statements-upload {
+    background-color: var(--purple-9);
+    color: white;
+    outline-color: var(--purple-10);
+  }
+}
+
+:host-context(.dark-theme) .upload-drop-area {
+  &.statements-upload {
+    background-color: var(--purple-5);
+    color: var(--purple-12);
+    outline-color: var(--purple-8);
+  }
+}
+
 .upload-wrapper {
   position: relative;
 }
 
 .upload-overlay {
-  background-color: white;
+  background-color: var(--app-bg);
   bottom: 0;
   left: 0;
   opacity: 0.7;

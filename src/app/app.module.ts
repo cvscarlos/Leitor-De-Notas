@@ -23,6 +23,7 @@ import { ServerUnavailabilityMessageComponent } from './server-unavailability-me
 import { SentryErrorHandler } from './services/sentry-error-handler.service';
 import { RedirectComponent } from './redirect/redirect.component';
 import { AdminComponent } from './admin/admin.component';
+import { ThemeToggleComponent } from './shared-components/theme-toggle/theme-toggle.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -46,6 +47,7 @@ import { AdminComponent } from './admin/admin.component';
     StatisticsComponent,
     UserBarComponent,
     USAModalComponent,
+    ThemeToggleComponent,
   ],
   providers: [
     provideEnvironmentNgxMask(),

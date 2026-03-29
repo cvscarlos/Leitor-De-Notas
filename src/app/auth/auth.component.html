@@ -7,7 +7,7 @@
 } @else {
   @if (!sessionService.isAuthenticated || loginSlideState !== 'hidden') {
     <div
-      class="row m-3 mb-5 p-2 bg-light rounded mx-auto text-center shadow border"
+      class="row m-3 mb-5 p-2 bg-body-tertiary rounded mx-auto text-center shadow border"
       id="login"
       style="display: none"
       [appSlideToggle]="!sessionService.isAuthenticated"
@@ -72,7 +72,7 @@
         <div>
           <div class="mb-3">
             <button
-              class="btn btn-light btn-lg border rounded border-primary"
+              class="btn btn-outline-secondary btn-lg rounded"
               (click)="redirectToOAuth('google')"
             >
               <img src="/assets/google.png" alt="Google" class="align-text-bottom" width="24" /> |
@@ -81,7 +81,7 @@
           </div>
           <div class="mb-3">
             <button
-              class="btn btn-light btn-lg border rounded border-primary"
+              class="btn btn-outline-secondary btn-lg rounded"
               (click)="redirectToOAuth('microsoft')"
             >
               <img

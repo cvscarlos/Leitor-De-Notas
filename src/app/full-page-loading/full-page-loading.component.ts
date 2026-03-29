@@ -5,7 +5,7 @@ import { LoadingModule } from '../loading/loading.module';
   selector: 'app-full-page-loading',
   imports: [LoadingModule],
   template: `
-    <div class="bg-white fixed-top h-100 w-100 z-1">
+    <div class="bg-body fixed-top h-100 w-100 z-1">
       <app-loading [show]="true"></app-loading>
     </div>
   `,

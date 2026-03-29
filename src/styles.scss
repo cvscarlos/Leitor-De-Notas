@@ -2,6 +2,40 @@
 
 @use './app/usage-limit/usage-limit.component.scss';
 
+/* Radix Colors - Light (default) */
+@import '@radix-ui/colors/slate.css';
+@import '@radix-ui/colors/purple.css';
+@import '@radix-ui/colors/indigo.css';
+
+/* Radix Colors - Dark (activated by .dark-theme) */
+@import '@radix-ui/colors/slate-dark.css';
+@import '@radix-ui/colors/purple-dark.css';
+@import '@radix-ui/colors/indigo-dark.css';
+
+:root {
+  --app-bg: var(--slate-1);
+  --app-bg-subtle: var(--slate-2);
+  --app-bg-component: var(--slate-3);
+  --app-bg-surface: var(--slate-2);
+  --app-bg-elevated: var(--slate-3);
+  --app-border: var(--slate-6);
+  --app-border-hover: var(--slate-8);
+  --app-text: var(--slate-12);
+  --app-text-secondary: var(--slate-11);
+  --app-accent: var(--purple-9);
+  --app-accent-hover: var(--purple-10);
+  --app-navbar-bg: #18204D;
+  --app-upload-bg: var(--bs-primary);
+  --app-upload-text: white;
+  --app-upload-border: var(--bs-primary);
+}
+
+.dark-theme {
+  --app-upload-bg: var(--indigo-5);
+  --app-upload-text: var(--indigo-12);
+  --app-upload-border: var(--indigo-8);
+}
+
 .small-font {
   &,
   .btn,
@@ -26,6 +60,7 @@ a {
 
 .custom-panel {
   max-width: 980px;
+  background-color: var(--app-bg-surface);
   @extend .rounded;
   @extend .shadow-sm;
   @extend .border;
@@ -50,5 +85,5 @@ a {
 }
 
 .form-control[readonly] {
-  background-color: #e9ecef;
+  background-color: var(--app-bg-component);
 }

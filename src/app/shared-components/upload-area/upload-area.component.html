@@ -6,15 +6,14 @@
       }
 
       <div
-        class="drop-files"
+        class="drop-files upload-drop-area"
         [class.statements-border]="uploadType === 'statements'"
-        [style.background-color]="backgroundColor"
-        [class.bg-primary]="!backgroundColor"
+        [class.statements-upload]="uploadType === 'statements'"
         appUpload
         [uploadType]="uploadType"
         [broker]="selectedBroker"
       >
-        <div class="text-white">
+        <div>
           @if (showBrokerSelect) {
             <div class="mb-3 row align-items-center justify-content-center">
               <label for="broker-select" class="col-auto col-form-label h5 mb-0">Corretora:</label>

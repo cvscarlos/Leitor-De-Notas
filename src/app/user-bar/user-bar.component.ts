@@ -107,7 +107,7 @@ export class UserBarComponent extends UserComponent implements OnInit {
         showCancelButton: false,
         showDenyButton: true,
         denyButtonText: 'Agora não',
-        denyButtonColor: '#6e7881',
+        denyButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--slate-9').trim(),
       },
     );
 

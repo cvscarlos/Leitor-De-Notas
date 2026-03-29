@@ -1,7 +1,7 @@
 @use 'bootstrap';
 
 .limit-box {
-  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  background-image: linear-gradient(120deg, var(--app-bg) 0%, var(--app-bg-component) 100%);
   align-items: center;
   transition: ease-in-out 0.1s;
 

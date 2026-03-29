@@ -1,5 +1,5 @@
 @if (!isIframe.isIframe()) {
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2 shadow py-1" style="background-color:#18204D!important;">
+  <nav class="navbar navbar-expand-lg navbar-dark mb-2 shadow py-1 app-navbar">
     <div class="container-fluid">
       <h1 class="navbar-brand h3 p-0 my-0 me-md-auto font-weight-normal ">
         <a routerLink="/" class="text-white" style="text-decoration: none">
@@ -93,3 +93,5 @@
   @if (!isIframe.isIframe()) {
     <app-statistics></app-statistics>
   }
+
+  <app-theme-toggle></app-theme-toggle>

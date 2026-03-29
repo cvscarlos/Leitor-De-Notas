@@ -10,6 +10,7 @@ import { filter } from 'rxjs';
 
 import { IsIframeService } from './services/is-iframe/is-iframe.service';
 import { IframeHeightService } from './services/iframe-height/iframe-height.service';
+import { ThemeService } from './services/theme/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private iframeHeightService = inject(IframeHeightService);
+  private themeService = inject(ThemeService);
 
   public faQuestionCircle = faQuestionCircle;
   public faEnvelope = faEnvelope;
