@@ -184,6 +184,10 @@ export class ApiService {
     return firstValueFrom(this.request('/pvt/user/connect-usa-account', { cpfCnpj, usaAccount }));
   }
 
+  public logoutSession(): void {
+    this.request('/logout', null, 'post', false).subscribe();
+  }
+
   public async getSessionsInfo(): Promise<API.SessionItem[]> {
     const sessions = this.sessionService.getSessionList()?.split(',');
     if (!sessions) return [];

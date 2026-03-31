@@ -60,6 +60,7 @@ export class UserBarComponent extends UserComponent implements OnInit {
   }
 
   public logout(): void {
+    this.apiService.logoutSession();
     this.sessionService.logout();
     window.location.href = '/';
   }
