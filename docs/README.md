@@ -1,19 +1,5 @@
 ---
 description: Principais problemas e soluções para a leitura das Notas de Corretagem
-layout:
-  width: wide
-  title:
-    visible: true
-  description:
-    visible: true
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: false
-  metadata:
-    visible: false
 ---
 
 # Home

@@ -46,3 +46,4 @@
 
 * [BTG - Formato de extrato suportado pelo Leitor](extrato/btg-formato-de-extrato-suportado-pelo-leitor.md)
 * [XP - Formato de extrato suportado pelo Leitor](extrato/xp-formato-de-extrato-suportado-pelo-leitor.md)
+* [Charles Schwab - Formato de extrato suportado pelo Leitor](extrato/charles-schwab-formato-de-extrato-suportado-pelo-leitor.md)
