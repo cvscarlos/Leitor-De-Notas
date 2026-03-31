@@ -47,4 +47,6 @@ Principais problemas e soluções para a leitura das Notas de Corretagem
 
 ## 📋 Extratos
 
-* [BTG - Formato de extrato suportado pelo Leitor](extrato/btg-formato-de-extrato-suportado-pelo-leitor.md)
+* [btg-formato-de-extrato-suportado-pelo-leitor.md](extrato/btg-formato-de-extrato-suportado-pelo-leitor.md "mention")
+* [xp-formato-de-extrato-suportado-pelo-leitor.md](extrato/xp-formato-de-extrato-suportado-pelo-leitor.md "mention")
+* [charles-schwab-formato-de-extrato-suportado-pelo-leitor.md](extrato/charles-schwab-formato-de-extrato-suportado-pelo-leitor.md "mention")
