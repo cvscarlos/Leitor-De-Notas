@@ -33,6 +33,8 @@ export class ThemeService implements OnDestroy {
   }
 
   private getStoredMode(): ThemeMode {
+    const override = new URLSearchParams(window.location.search).get('theme');
+    if (override === 'light' || override === 'dark') return override;
     const stored = localStorage.getItem(this.STORAGE_KEY);
     if (stored === 'light' || stored === 'dark' || stored === 'system') return stored;
     return 'system';
