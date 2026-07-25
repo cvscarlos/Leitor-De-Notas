@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { AccountMember } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
 import { FormsModule, UntypedFormGroup } from '@angular/forms';
@@ -11,6 +11,7 @@ import { SharedPipesModule } from '../shared-pipes/shared-pipes.module';
   selector: 'app-manage-members',
   imports: [CommonModule, FormsModule, LoadingModule, SharedPipesModule],
   templateUrl: './manage-members.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./manage-members.component.less'],
 })
 export class ManageMembersComponent implements OnInit {

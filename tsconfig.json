@@ -2,7 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "paths": { "src/*": ["./src/*"] },
     "outDir": "./out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import packageJson from '../../../package.json';
 
 @Component({
   selector: 'app-statistics',
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './statistics.component.html',
 })
 export class StatisticsComponent implements OnInit {

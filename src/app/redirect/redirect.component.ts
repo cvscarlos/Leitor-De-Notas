@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-redirect',
   standalone: true,
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `<p class="text-center my-5 mx-2">
     <a href="{{ externalUrl }}">redirecionando...</a>
   </p>`,

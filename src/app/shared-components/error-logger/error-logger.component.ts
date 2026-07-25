@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 export interface ErrorLog {
   fileName: string;
@@ -10,6 +10,7 @@ export interface ErrorLog {
 @Component({
   selector: 'app-error-logger',
   templateUrl: './error-logger.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [],
 })
 export class ErrorLoggerComponent {

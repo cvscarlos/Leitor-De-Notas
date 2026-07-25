@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { UserComponent } from 'src/app/user/user.component';
 import { faFileInvoice, faUser } from '@fortawesome/free-solid-svg-icons';
 import { NotifyService } from '../services/notify/notify.service';
@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-user-bar',
   templateUrl: './user-bar.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [LoadingComponent, FaIconComponent, RouterLink],
 })
 export class UserBarComponent extends UserComponent implements OnInit {
@@ -108,7 +109,9 @@ export class UserBarComponent extends UserComponent implements OnInit {
         showCancelButton: false,
         showDenyButton: true,
         denyButtonText: 'Agora não',
-        denyButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--slate-9').trim(),
+        denyButtonColor: getComputedStyle(document.documentElement)
+          .getPropertyValue('--slate-9')
+          .trim(),
       },
     );
 

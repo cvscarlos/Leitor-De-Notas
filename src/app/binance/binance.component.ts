@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
@@ -9,6 +9,7 @@ import { LoadingModule } from '../loading/loading.module';
   selector: 'app-binance',
   imports: [CommonModule, FormsModule, ReactiveFormsModule, LoadingModule],
   templateUrl: './binance.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./binance.component.less'],
 })
 export class BinanceComponent implements OnInit {

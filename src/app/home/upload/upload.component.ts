@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
 import { UploadInterface } from 'src/app/services/brokerage-notes/upload.interface';
 import { UploadAreaComponent } from '../../shared-components/upload-area/upload-area.component';
@@ -7,6 +7,7 @@ import { UploadAreaComponent } from '../../shared-components/upload-area/upload-
   selector: 'app-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.less'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [UploadAreaComponent],
 })
 export class UploadComponent implements OnInit {

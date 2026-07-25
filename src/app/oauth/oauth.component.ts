@@ -1,10 +1,11 @@
 import { ApiService } from 'src/app/services/api/api.service';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { SessionService } from '../services/session/session.service';
 
 @Component({
   selector: 'app-oauth',
   imports: [],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './oauth.component.html',
 })
 export class OauthComponent implements OnInit {

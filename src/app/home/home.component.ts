@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { AuthComponent } from '../auth/auth.component';
 import { UserDocumentComponent } from './user-document/user-document.component';
 import { UploadComponent } from './upload/upload.component';
@@ -20,6 +20,7 @@ const STATEMENTS_TAB = 'extratos' as const;
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.less',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     AuthComponent,
     UserDocumentComponent,

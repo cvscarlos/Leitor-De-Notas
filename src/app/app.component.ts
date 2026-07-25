@@ -4,7 +4,7 @@ import {
   faQuestionCircle,
   faCircleDollarToSlot,
 } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -16,6 +16,7 @@ import { ThemeService } from './services/theme/theme.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   standalone: false,
 })
 export class AppComponent implements OnInit, OnDestroy {

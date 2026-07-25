@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../services/api/api.service';
@@ -7,6 +7,7 @@ import { NotifyService } from '../services/notify/notify.service';
 @Component({
   selector: 'app-admin',
   imports: [ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './admin.component.html',
 })
 export class AdminComponent {

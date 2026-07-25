@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 import { UntypedFormGroup, FormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ type UserUsageHistory = {
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     LoadingComponent,
     RouterLink,

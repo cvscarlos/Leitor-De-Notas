@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 
 import { SharedDirectivesModule } from '../shared-directives/shared-directives.module';
@@ -13,6 +13,7 @@ declare global {
   selector: 'app-server-unavailability-message',
   imports: [SharedDirectivesModule],
   templateUrl: './server-unavailability-message.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./server-unavailability-message.component.less'],
 })
 export class ServerUnavailabilityMessageComponent implements OnInit {

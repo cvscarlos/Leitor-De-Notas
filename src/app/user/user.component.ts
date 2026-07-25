@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/services/session/session.service';
@@ -6,6 +6,7 @@ import { UserData } from 'src/types';
 
 @Component({
   selector: 'app-user',
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: '<b>User Component</b>',
 })
 export class UserComponent implements OnInit {

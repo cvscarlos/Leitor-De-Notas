@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit, inject } from '@angular/core';
+import { Component, DoCheck, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { NoteDetails, NoteError } from 'src/types';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
@@ -9,6 +9,7 @@ import { ErrorLoggerComponent } from 'src/app/shared-components/error-logger/err
 @Component({
   selector: 'app-brokerage-notes',
   templateUrl: './brokerage-notes.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [ErrorLoggerComponent],
 })
 export class BrokerageNotesComponent implements OnInit, DoCheck {

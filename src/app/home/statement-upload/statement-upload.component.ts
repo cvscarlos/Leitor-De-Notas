@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { StatementService } from 'src/app/services/statement/statement.service';
 import { StatementUploadInterface } from 'src/app/services/statement/statement-upload.interface';
 import { UploadAreaComponent } from '../../shared-components/upload-area/upload-area.component';
@@ -7,6 +7,7 @@ import { UploadAreaComponent } from '../../shared-components/upload-area/upload-
   selector: 'app-statement-upload',
   templateUrl: './statement-upload.component.html',
   styleUrls: ['./statement-upload.component.less'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [UploadAreaComponent],
 })
 export class StatementUploadComponent implements OnInit {

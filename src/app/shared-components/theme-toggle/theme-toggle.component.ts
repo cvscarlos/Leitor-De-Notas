@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faSun, faMoon, faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import { ThemeService } from '../../services/theme/theme.service';
@@ -7,6 +7,7 @@ import { ThemeService } from '../../services/theme/theme.service';
   selector: 'app-theme-toggle',
   imports: [FaIconComponent],
   templateUrl: './theme-toggle.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './theme-toggle.component.less',
 })
 export class ThemeToggleComponent {

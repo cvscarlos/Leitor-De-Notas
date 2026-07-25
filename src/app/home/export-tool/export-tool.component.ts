@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { faCopy, faSquarePlus, faTrashAlt, faFileExcel } from '@fortawesome/free-regular-svg-icons';
 import { Note, NoteTrade } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
@@ -54,6 +54,7 @@ type DlombelloExportObject = {
   selector: 'app-export-tool',
   templateUrl: './export-tool.component.html',
   styleUrls: ['./export-tool.component.less'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     SlideToggleDirective,
     FaIconComponent,

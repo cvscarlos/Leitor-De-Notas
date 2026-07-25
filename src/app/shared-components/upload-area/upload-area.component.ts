@@ -1,4 +1,11 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  inject,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { UploadDirective } from '../../home/upload/upload.directive';
@@ -10,6 +17,7 @@ import { SessionService } from 'src/app/services/session/session.service';
   selector: 'app-upload-area',
   templateUrl: './upload-area.component.html',
   styleUrls: ['./upload-area.component.less'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormsModule, UploadDirective, FaIconComponent],
 })
 export class UploadAreaComponent {

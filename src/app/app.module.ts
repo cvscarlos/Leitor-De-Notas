@@ -4,7 +4,7 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import * as Sentry from '@sentry/angular';
 
 import { USAModalComponent } from './usa-modal/usa-modal.component';
@@ -51,7 +51,7 @@ import { ThemeToggleComponent } from './shared-components/theme-toggle/theme-tog
   ],
   providers: [
     provideEnvironmentNgxMask(),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
     {
       provide: ErrorHandler,
       useClass: SentryErrorHandler,

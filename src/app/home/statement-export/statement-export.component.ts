@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { faCopy, faTrashAlt, faSquarePlus } from '@fortawesome/free-regular-svg-icons';
 import { StatementService } from 'src/app/services/statement/statement.service';
 import {
@@ -41,6 +41,7 @@ type StatementWithContext = StatementDetail & {
   selector: 'app-statement-export',
   templateUrl: './statement-export.component.html',
   styleUrls: ['./statement-export.component.less'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     SlideToggleDirective,
     FaIconComponent,

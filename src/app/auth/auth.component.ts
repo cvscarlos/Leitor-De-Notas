@@ -1,5 +1,5 @@
 import { ApiService } from 'src/app/services/api/api.service';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
@@ -20,6 +20,7 @@ import { AutofocusDirective } from '../shared-directives/autofocus/autofocus.dir
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.less'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     FullPageLoadingComponent,
     SlideToggleDirective,

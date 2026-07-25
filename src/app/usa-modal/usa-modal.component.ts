@@ -1,4 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  inject,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { AccountMember } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
 import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
@@ -11,6 +18,7 @@ import { LoadingComponent } from '../loading/loading.component';
   selector: 'app-modal',
   templateUrl: './usa-modal.component.html',
   providers: [CpfCnpjPipe],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [LoadingComponent, CpfCnpjPipe],
 })
 export class USAModalComponent implements OnInit {

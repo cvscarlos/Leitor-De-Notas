@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { LoadingModule } from '../loading/loading.module';
 
 @Component({
   selector: 'app-full-page-loading',
   imports: [LoadingModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   template: `
     <div class="bg-body fixed-top h-100 w-100 z-1">
       <app-loading [show]="true"></app-loading>

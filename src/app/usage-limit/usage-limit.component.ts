@@ -1,5 +1,5 @@
 import { ApiService } from 'src/app/services/api/api.service';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { SessionService } from 'src/app/services/session/session.service';
 
@@ -8,6 +8,7 @@ import { LoadingModule } from '../loading/loading.module';
 @Component({
   selector: 'app-usage-limit',
   imports: [LoadingModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './usage-limit.component.html',
 })
 export class UsageLimitComponent {

@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from '../services/api/api.service';
 import { NotifyService } from '../services/notify/notify.service';
 import { SessionService } from '../services/session/session.service';
@@ -8,6 +8,7 @@ import { LoadingModule } from '../loading/loading.module';
 @Component({
   imports: [LoadingModule],
   selector: 'app-privacy',
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './privacy.component.html',
 })
 export class PrivacyComponent implements OnInit {
