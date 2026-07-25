@@ -160,6 +160,8 @@ export class StatementExportComponent implements OnInit {
         exportObject.dlpType,
         exportObject.value.toString().replace('.', ','),
         exportObject.tax.toString().replace('.', ','),
+        // Coluna "Taxas" da planilha da DLP: os extratos ainda não trazem os custos de intermediação
+        '',
         exportObject.currency,
         exportObject.broker,
       ].join('\t');
