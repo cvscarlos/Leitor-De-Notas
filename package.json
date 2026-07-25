@@ -4,6 +4,7 @@
   "license": "CC BY-NC-ND",
   "scripts": {
     "ng": "ng",
+    "prepare": "git config core.hooksPath .githooks || true",
     "start": "ng serve",
     "dev": "npm run start",
     "build": "ng build --configuration production",

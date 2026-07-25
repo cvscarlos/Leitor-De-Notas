@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -n "$staged" ] || exit 0
+
+# ESLint covers .ts and .html, and enforces Prettier on them through prettier/prettier.
+lintable=$(printf '%s\n' "$staged" | grep -E '\.(ts|html)$' || true)
+if [ -n "$lintable" ]; then
+  printf '%s\n' "$lintable" | xargs npx eslint --no-warn-ignored
+fi
+
+formattable=$(printf '%s\n' "$staged" | grep -E '\.(json|md|less|css|scss|ya?ml|mjs|cjs|js)$' || true)
+if [ -n "$formattable" ]; then
+  printf '%s\n' "$formattable" | xargs npx prettier --check
+fi

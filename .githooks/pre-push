@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+
+# The production build is the only full-project gate available: it type-checks the app
+# and compiles every template. There is no test target in angular.json.
+npm run build
