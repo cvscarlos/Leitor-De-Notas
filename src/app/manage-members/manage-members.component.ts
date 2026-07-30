@@ -2,6 +2,7 @@ import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/cor
 import { AccountMember } from 'src/types';
 import { ApiService } from 'src/app/services/api/api.service';
 import { FormsModule, UntypedFormGroup } from '@angular/forms';
+import { NgxMaskDirective } from 'ngx-mask';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { CommonModule } from '@angular/common';
 import { LoadingModule } from '../loading/loading.module';
@@ -9,7 +10,7 @@ import { SharedPipesModule } from '../shared-pipes/shared-pipes.module';
 
 @Component({
   selector: 'app-manage-members',
-  imports: [CommonModule, FormsModule, LoadingModule, SharedPipesModule],
+  imports: [CommonModule, FormsModule, LoadingModule, SharedPipesModule, NgxMaskDirective],
   templateUrl: './manage-members.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./manage-members.component.less'],

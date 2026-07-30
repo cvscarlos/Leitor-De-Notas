@@ -1,70 +1,94 @@
 <ng-template #modalContent let-modal>
   <div class="modal-header">
-    <h5 class="modal-title">Cadastro EUA</h5>
+    <h5 class="modal-title">Vincular conta dos EUA a um CPF</h5>
   </div>
   <div class="modal-body">
     <p>
-      Para realizar a leitura de notas dos EUA você precisa primeiro associar sua conta dos EUA com
-      o seu CPF.
+      A conta
+      <span class="d-inline-block fw-semibold bg-body-secondary rounded px-2 text-nowrap">{{
+        usaAccount
+      }}</span>
+      foi identificada nesta nota. Escolha o CPF a que ela pertence:
     </p>
-    <p>
-      Caso sua conta possua mais de 1 CPF, escolha qual CPF deve ser associado a cada conta dos EUA.
-    </p>
-    <p>
-      ATENÇÃO, você só poderá fazer essa associação uma única vez por CORRETORA, portanto verifique
-      todos os dados antes de prosseguir. Assegure-se de que o número da conta dos EUA exibido
-      abaixo é o mesmo que consta em sua nota.
-    </p>
-    <p>Não é possível desfazer ou editar uma associação entre conta dos EUA e CPF no futuro.</p>
+
+    <div class="alert alert-warning small">
+      Todas as notas desta conta passarão a ser atribuídas ao CPF escolhido. O vínculo é definitivo:
+      não pode ser alterado nem desfeito. Cada CPF pode ter apenas uma conta por corretora.
+    </div>
 
     <div style="position: relative">
       <app-loading [show]="loading"></app-loading>
 
-      <hr />
-      <span
-        >Conta EUA desta nota: <strong>{{ usaAccount }}</strong></span
-      >
-      <table class="table table-hover w-auto">
-        <thead>
-          <tr>
-            <th>Conta EUA</th>
-            <th>CPF/CNPJ</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (member of membersList; track member) {
-            <tr>
-              <td>
-                <a href="javascript:void(0)" (click)="associateAccount(member)">associar c/ CPF</a>
-              </td>
-              <td>{{ member.cpf | cpfCnpj }}</td>
-            </tr>
-          }
-        </tbody>
-      </table>
-
-      <hr />
-      <div class="text-small">
-        <span>Contas já associadas:</span>
-        <table class="table table-hover w-auto table-sm">
-          <thead>
-            <tr>
-              <th>Conta EUA</th>
-              <th>CPF/CNPJ</th>
-            </tr>
-          </thead>
+      <h6 class="border-bottom pb-2">Escolher um CPF já cadastrado</h6>
+      <div class="mb-4 overflow-auto" style="max-height: 14rem">
+        <table class="table table-sm table-hover align-middle w-auto mb-0">
           <tbody>
             @for (member of membersList; track member) {
-              @for (usaAccount of member.usaAccounts; track usaAccount) {
-                <tr>
-                  <td>{{ usaAccount }}</td>
-                  <td>{{ member.cpf | cpfCnpj }}</td>
-                </tr>
-              }
+              <tr>
+                <td class="pe-4">{{ member.cpf | cpfCnpj }}</td>
+                <td class="py-1">
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-primary py-0 px-2"
+                    (click)="associateAccount(member)"
+                  >
+                    Associar
+                  </button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td class="text-body-secondary">Nenhum CPF cadastrado.</td>
+              </tr>
             }
           </tbody>
         </table>
       </div>
+
+      @if (membersLimit > membersList.length) {
+        <h6 class="border-bottom pb-2">Associar a um novo CPF</h6>
+        <label class="form-label mb-1" for="newMemberDoc">CPF / CNPJ</label>
+        <div class="d-flex flex-wrap gap-2">
+          <input
+            type="tel"
+            class="form-control flex-grow-1"
+            style="max-width: 16rem"
+            id="newMemberDoc"
+            mask="000.000.000-00||00.000.000/0000-00"
+            placeholder="000.000.000-00"
+            [(ngModel)]="newMemberDoc"
+            (keyup.enter)="associateNewMember()"
+          />
+          <button type="button" class="btn btn-primary" (click)="associateNewMember()">
+            Adicionar
+          </button>
+        </div>
+        <div class="form-text mb-4">
+          Este CPF será cadastrado em sua conta e não poderá ser editado depois.
+        </div>
+      }
+
+      @if (existingLinks.length) {
+        <h6 class="border-bottom pb-2 text-body-secondary">Contas já vinculadas</h6>
+        <div class="table-responsive">
+          <table class="table table-sm w-auto small border mb-0">
+            <thead>
+              <tr>
+                <th class="bg-body-secondary text-body-secondary pe-3">Conta EUA</th>
+                <th class="bg-body-secondary text-body-secondary text-end">CPF/CNPJ</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (link of existingLinks; track link.usaAccount) {
+                <tr>
+                  <td class="pe-3">{{ link.usaAccount }}</td>
+                  <td class="text-end text-nowrap">{{ link.cpf | cpfCnpj }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
     </div>
   </div>
 </ng-template>
