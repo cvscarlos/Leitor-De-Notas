@@ -12,27 +12,34 @@ import { UploadDirective } from '../../home/upload/upload.directive';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faFilePdf, faFileCsv } from '@fortawesome/free-solid-svg-icons';
 import { SessionService } from 'src/app/services/session/session.service';
+import { FileNamePartPipe } from 'src/app/shared-pipes/file-name/file-name-part.pipe';
+
+type UploadStatus = {
+  filename: string;
+  responseComplete: boolean;
+  serverError: boolean;
+};
 
 @Component({
   selector: 'app-upload-area',
   templateUrl: './upload-area.component.html',
   styleUrls: ['./upload-area.component.less'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [FormsModule, UploadDirective, FaIconComponent],
+  imports: [FormsModule, UploadDirective, FaIconComponent, FileNamePartPipe],
 })
 export class UploadAreaComponent {
   sessionService = inject(SessionService);
 
   @Input() uploadType: 'notes' | 'statements' = 'notes';
   @Input() selectedBroker = '';
-  @Input() uploads: any[] = [];
+  @Input() uploads: UploadStatus[] = [];
   @Input() hasFiles = false;
   @Input() hasErrors = false;
   @Input() errorMessages: string[] = [];
   @Input() isInvalid = false;
 
-  @Output() onBrokerChange = new EventEmitter<string>();
-  @Output() onFileInput = new EventEmitter<Event>();
+  @Output() brokerChange = new EventEmitter<string>();
+  @Output() fileInput = new EventEmitter<Event>();
 
   get fileIcon() {
     return this.uploadType === 'statements' ? faFileCsv : faFilePdf;

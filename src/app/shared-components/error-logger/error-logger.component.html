@@ -12,7 +12,13 @@
                 </span>
               }
               <span
-                >Arquivo: <strong>{{ error.fileName }}</strong></span
+                >Arquivo:
+                <strong class="d-inline-flex mw-100" [title]="error.fileName">
+                  <span class="text-truncate">{{ error.fileName | fileNamePart }}</span>
+                  <span class="flex-shrink-0">{{
+                    error.fileName | fileNamePart: 'extension'
+                  }}</span>
+                </strong></span
               >
               @if (error.number) {
                 <span>

@@ -23,7 +23,7 @@
                   class="form-select"
                   [class.is-invalid]="isInvalid"
                   [(ngModel)]="selectedBroker"
-                  (ngModelChange)="onBrokerChange.emit($event)"
+                  (ngModelChange)="brokerChange.emit($event)"
                 >
                   <option value="">Selecione</option>
                   <option value="AVENUE">Avenue</option>
@@ -58,7 +58,7 @@
                 [name]="inputName"
                 class="form-control"
                 multiple
-                (change)="onFileInput.emit($event)"
+                (change)="fileInput.emit($event)"
                 (click)="$event.stopPropagation()"
                 #uploadInput
               />
@@ -73,14 +73,16 @@
         >
           @for (upload of uploads; track upload) {
             <span
-              class="badge me-0 m-1"
+              class="badge me-0 m-1 d-inline-flex mw-100 align-middle"
               [class.bg-secondary]="!upload.responseComplete"
               [class.bg-danger]="upload.serverError"
               [class.bg-success]="upload.responseComplete && !upload.serverError"
+              [title]="upload.filename"
             >
-              {{ upload.filename }}
+              <span class="text-truncate">{{ upload.filename | fileNamePart }}</span>
+              <span class="flex-shrink-0">{{ upload.filename | fileNamePart: 'extension' }}</span>
               @if (!upload.responseComplete) {
-                <img src="../../assets/ajax-loader.gif" alt="Loading" />
+                <img class="flex-shrink-0 ms-1" src="../../assets/ajax-loader.gif" alt="Loading" />
               }
             </span>
           }

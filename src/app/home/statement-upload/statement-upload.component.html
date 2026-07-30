@@ -6,6 +6,6 @@
   [hasErrors]="hasServerErrors()"
   [errorMessages]="getErrorMessages()"
   [isInvalid]="brokerSelectIsInvalid"
-  (onBrokerChange)="onBrokerChange($event)"
-  (onFileInput)="handleFileInput($event)"
+  (brokerChange)="onBrokerChange($event)"
+  (fileInput)="handleFileInput($event)"
 ></app-upload-area>
