@@ -4,6 +4,7 @@ import {
   StatementUploadInterface,
   StatementDetail,
   StatementError,
+  StatementPosition,
   StatementResponse,
   StatementApiResponse,
   StatementBatch,
@@ -14,6 +15,7 @@ type StatementsArray = {
   statementsList: StatementUploadInterface[];
   statementDetails: StatementDetail[];
   statementErrors: StatementError[];
+  statementPositions: StatementPosition[];
 };
 
 @Injectable({
@@ -26,6 +28,7 @@ export class StatementService extends UploadBaseService<
   StatementBatch
 > {
   private api = inject(ApiService);
+  private positionsList: StatementPosition[] = [];
 
   constructor() {
     super();
@@ -46,7 +49,13 @@ export class StatementService extends UploadBaseService<
       statementsList: this.uploadsList,
       statementDetails: this.detailsList,
       statementErrors: this.errorsList,
+      statementPositions: this.positionsList,
     };
+  }
+
+  public override clean(): void {
+    super.clean();
+    this.positionsList.splice(0, this.positionsList.length);
   }
 
   public statementCallback(callback: (batch: StatementBatch) => void): void {
@@ -89,6 +98,7 @@ export class StatementService extends UploadBaseService<
       this.errorsList.push(error);
       this.notifyCallbacks({
         details: [],
+        positions: [],
         broker: '',
         fileName: apiResponse.uploadGenericError.fileName,
       });
@@ -113,6 +123,26 @@ export class StatementService extends UploadBaseService<
       this.detailsList.push(detail);
     }
 
+    const positions: StatementPosition[] = [];
+
+    for (const item of response.positions || []) {
+      const position: StatementPosition = {
+        asset: item.asset,
+        cnpj: item.cnpj,
+        name: item.name,
+        sourceType: item.sourceType,
+        date: item.date,
+        quantity: item.quantity,
+        price: item.price,
+        value: item.value,
+        index: item.index,
+        indexPercent: item.indexPercent,
+        additionalRate: item.additionalRate,
+      };
+      positions.push(position);
+      this.positionsList.push(position);
+    }
+
     // Handle errors array from response
     if (response.errors && response.errors.length > 0) {
       const error: StatementError = {
@@ -124,6 +154,7 @@ export class StatementService extends UploadBaseService<
 
     const batch: StatementBatch = {
       details,
+      positions,
       broker: response.broker,
       fileName: response.fileName || fileName,
     };

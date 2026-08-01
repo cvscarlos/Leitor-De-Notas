@@ -4,8 +4,10 @@ import { StatementService } from 'src/app/services/statement/statement.service';
 import {
   StatementDetail,
   StatementError,
+  StatementPosition,
   StatementBatch,
 } from 'src/app/services/statement/statement-upload.interface';
+import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 import { SlideToggleDirective } from '../../shared-directives/slide-toggle/slide-toggle.directive';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
@@ -37,6 +39,18 @@ type StatementWithContext = StatementDetail & {
   fileName: string;
 };
 
+type PositionRow = {
+  asset: string;
+  type: string;
+  date: string;
+  quantity: string;
+  price: string;
+  value: string;
+  rateType: string;
+  rateValue: string;
+  broker: string;
+};
+
 @Component({
   selector: 'app-statement-export',
   templateUrl: './statement-export.component.html',
@@ -59,6 +73,7 @@ export class StatementExportComponent implements OnInit {
   private statementService = inject(StatementService);
   private isIframeService = inject(IsIframeService);
   private notifyService = inject(NotifyService);
+  private numberFmt = inject(NumberFormatService);
 
   public faCopy = faCopy;
   public faTrashAlt = faTrashAlt;
@@ -67,6 +82,7 @@ export class StatementExportComponent implements OnInit {
   public exportString = '';
   public enableExport = false;
   public statements: StatementWithContext[] = [];
+  public positions: PositionRow[] = [];
   public statementErrors: StatementError[] = [];
   public isIframe = false;
   private statementExportObjects: StatementExportObject[] = [];
@@ -101,6 +117,7 @@ export class StatementExportComponent implements OnInit {
   public cleanStatements(): void {
     this.statementService.clean();
     this.statements = [];
+    this.positions = [];
     this.statementErrors = [];
     this.exportString = '';
     this.statementExportObjects = [];
@@ -132,12 +149,46 @@ export class StatementExportComponent implements OnInit {
       }));
 
       this.statements = [...this.statements, ...detailsWithContext];
+      this.positions = [
+        ...this.positions,
+        ...this.buildPositionRows(batch.positions || [], batch.broker),
+      ];
       this.statementErrors = this.statementService.getStatements().statementErrors;
       this.generateExportString();
       this.enableExport = this.exportString.length > 0;
     } catch (error) {
       console.error(error);
     }
+  }
+
+  /**
+   * Renda fixa e fundos só são exibidos: a DLP ainda não importa essas posições,
+   * então não entram na área de exportação.
+   */
+  private buildPositionRows(positions: StatementPosition[], broker: string): PositionRow[] {
+    return positions.map((position) => ({
+      // fundo é identificado pelo CNPJ, Tesouro pelo código da DLP, os demais pelo papel
+      asset: position.cnpj || position.asset || position.name,
+      type: position.sourceType,
+      date: position.date,
+      quantity: this.numberFmt.br(position.quantity, 8, 0),
+      price: this.numberFmt.br(position.price, 8, 2),
+      value: this.numberFmt.br(position.value),
+      rateType: position.index || '-',
+      rateValue: this.rateValue(position),
+      broker,
+    }));
+  }
+
+  private rateValue(position: StatementPosition): string {
+    // percentual do índice ("110% do CDI") x taxa somada a ele ("IPCA + 7,74%")
+    if (position.indexPercent) {
+      return `${this.numberFmt.br(position.indexPercent, 2, 0)}%`;
+    }
+    if (!position.additionalRate) return '-';
+
+    const rate = `${this.numberFmt.br(position.additionalRate)}%`;
+    return position.index === 'PRE' ? rate : `+ ${rate}`;
   }
 
   private generateExportString(): void {
@@ -161,7 +212,7 @@ export class StatementExportComponent implements OnInit {
         exportObject.dlpType,
         exportObject.value.toString().replace('.', ','),
         exportObject.tax.toString().replace('.', ','),
-        // Coluna "Taxas" da planilha da DLP: os extratos ainda não trazem os custos de intermediação
+        // Coluna "Taxas" da DLP: os extratos não trazem custos de intermediação
         '',
         exportObject.currency,
         exportObject.broker,
