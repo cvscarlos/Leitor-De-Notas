@@ -167,9 +167,10 @@ export class StatementExportComponent implements OnInit {
    */
   private buildPositionRows(positions: StatementPosition[], broker: string): PositionRow[] {
     return positions.map((position) => ({
-      // fundo é identificado pelo CNPJ, Tesouro pelo código da DLP, os demais pelo papel
-      asset: position.cnpj || position.asset || position.name,
-      type: position.sourceType,
+      // o código da DLP (CVM:/TD:/DEB:) quando existe; senão o papel do extrato,
+      // que é o nome sugerido para o ativo a cadastrar
+      asset: position.dlpCode || position.name,
+      type: position.type,
       date: position.date,
       quantity: this.numberFmt.br(position.quantity, 8, 0),
       price: this.numberFmt.br(position.price, 8, 2),

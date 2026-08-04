@@ -18,10 +18,9 @@ export interface StatementDetail {
 
 /** Renda fixa e fundos: um item por compra, sem agregação. */
 export interface StatementPosition {
-  asset: string;
-  cnpj: string;
+  type: string;
+  dlpCode: string;
   name: string;
-  sourceType: string;
   date: string;
   quantity: number;
   price: number;

@@ -127,10 +127,9 @@ export class StatementService extends UploadBaseService<
 
     for (const item of response.positions || []) {
       const position: StatementPosition = {
-        asset: item.asset,
-        cnpj: item.cnpj,
+        type: item.type,
+        dlpCode: item.dlpCode,
         name: item.name,
-        sourceType: item.sourceType,
         date: item.date,
         quantity: item.quantity,
         price: item.price,
