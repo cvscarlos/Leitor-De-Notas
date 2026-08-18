@@ -43,6 +43,7 @@ type PositionRow = {
   asset: string;
   type: string;
   date: string;
+  dueDate: string;
   quantity: string;
   price: string;
   value: string;
@@ -172,6 +173,7 @@ export class StatementExportComponent implements OnInit {
       asset: position.dlpCode || position.name,
       type: position.type,
       date: position.date,
+      dueDate: position.dueDate,
       quantity: this.numberFmt.br(position.quantity, 8, 0),
       price: this.numberFmt.br(position.price, 8, 2),
       value: this.numberFmt.br(position.value),

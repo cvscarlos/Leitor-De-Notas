@@ -110,7 +110,8 @@
                     <tr>
                       <th>Ativo</th>
                       <th>Tipo</th>
-                      <th>Data</th>
+                      <th>Aquisição</th>
+                      <th>Vencimento</th>
                       <th class="text-end">Qtd.</th>
                       <th class="text-end">Valor unitário</th>
                       <th class="text-end">Valor total</th>
@@ -125,6 +126,7 @@
                         <td>{{ position.asset }}</td>
                         <td>{{ position.type }}</td>
                         <td>{{ position.date }}</td>
+                        <td>{{ position.dueDate || '-' }}</td>
                         <td class="text-end">{{ position.quantity }}</td>
                         <td class="text-end">{{ position.price }}</td>
                         <td class="text-end">{{ position.value }}</td>

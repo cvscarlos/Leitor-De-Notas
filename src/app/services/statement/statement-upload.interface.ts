@@ -22,6 +22,7 @@ export interface StatementPosition {
   dlpCode: string;
   name: string;
   date: string;
+  dueDate: string;
   quantity: number;
   price: number;
   value: number;

@@ -131,6 +131,7 @@ export class StatementService extends UploadBaseService<
         dlpCode: item.dlpCode,
         name: item.name,
         date: item.date,
+        dueDate: item.dueDate,
         quantity: item.quantity,
         price: item.price,
         value: item.value,
