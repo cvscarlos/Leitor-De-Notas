@@ -57,7 +57,7 @@
         <div class="col small-font">
           <div class="card">
             <div class="card-header">
-              <h4 class="mb-0">Resumo dos extratos</h4>
+              <h4 class="mb-0">Lançamentos</h4>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -67,8 +67,8 @@
                       <th>Ativo</th>
                       <th>Data</th>
                       <th>Evento</th>
-                      <th>Valor</th>
-                      <th>IRRF</th>
+                      <th class="text-end">Valor</th>
+                      <th class="text-end">IRRF</th>
                       <th>Moeda</th>
                       <th>Corretora</th>
                     </tr>
@@ -79,8 +79,8 @@
                         <td>{{ statement.stock }}</td>
                         <td>{{ statement.date }}</td>
                         <td>{{ statement.dlpType }}</td>
-                        <td>{{ statement.value }}</td>
-                        <td>{{ statement.tax }}</td>
+                        <td class="text-end">{{ br(statement.value) }}</td>
+                        <td class="text-end">{{ br(statement.tax) }}</td>
                         <td>{{ statement.currency }}</td>
                         <td>{{ statement.broker }}</td>
                       </tr>

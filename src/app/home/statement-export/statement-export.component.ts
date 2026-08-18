@@ -110,6 +110,11 @@ export class StatementExportComponent implements OnInit {
     }
   }
 
+  // ponytail: formatação no template; a tabela é pequena e o CD é eager
+  public br(value: number): string {
+    return this.numberFmt.br(value);
+  }
+
   public async copyFn(textarea: HTMLTextAreaElement): Promise<void> {
     textarea.select();
     await navigator.clipboard.writeText(textarea.value);
