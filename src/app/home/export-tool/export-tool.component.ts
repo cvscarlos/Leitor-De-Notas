@@ -362,7 +362,7 @@ export class ExportToolComponent implements OnInit {
       const { brokerageTax, tran, others } = trade.fees || {};
 
       groupedTrades[tradesGroupId] = groupedTrades[tradesGroupId] || {
-        tax: brokerageTax !== undefined ? brokerageTax + (tran || 0) + (others || 0) : 0,
+        tax: 0,
         currency: note.currency,
         noteNumber: note.isFakeNumber ? 'N/D' : note.number,
         // Cód. do Ativo
@@ -382,6 +382,13 @@ export class ExportToolComponent implements OnInit {
         // Tipo de operação: compra ou venda
         BS: trade.BS, // eslint-disable-line @typescript-eslint/naming-convention
       };
+
+      // Taxa é por negócio: soma a cada negócio do grupo, não só o primeiro (a corretagem
+      // pode vir numa linha que não a primeira do agrupamento).
+      groupedTrades[tradesGroupId].tax = NP.plus(
+        groupedTrades[tradesGroupId].tax,
+        (brokerageTax || 0) + (tran || 0) + (others || 0),
+      );
 
       groupedTrades[tradesGroupId].quantity += trade.quantity;
       groupedTrades[tradesGroupId].itemTotal += trade.itemTotal;

@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "7.7.1",
+  "version": "7.7.2",
   "license": "CC BY-NC-ND",
   "scripts": {
     "ng": "ng",
