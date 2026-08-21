@@ -37,14 +37,15 @@ type GroupedTrades = {
   [groupId: string]: DlombelloTrade & { itemTotal: number; priceTotal: number };
 };
 
+// A planilha da DLP espera vírgula decimal, então os números são exportados como string em pt-BR.
 type DlombelloExportObject = {
   broker: Note['brokerName'];
   currency: Note['currency'];
   date: Note['date'];
-  irrf: number;
-  price: number;
-  quantity: number;
-  tax: number;
+  irrf: string;
+  price: string;
+  quantity: string;
+  tax: string;
   ticker: NoteTrade['symbol'];
   type: NoteTrade['dlombelloOperationType'];
   noteNumber: string;
@@ -383,16 +384,23 @@ export class ExportToolComponent implements OnInit {
         BS: trade.BS, // eslint-disable-line @typescript-eslint/naming-convention
       };
 
-      // Taxa é por negócio: soma a cada negócio do grupo, não só o primeiro (a corretagem
-      // pode vir numa linha que não a primeira do agrupamento).
       groupedTrades[tradesGroupId].tax = NP.plus(
         groupedTrades[tradesGroupId].tax,
         (brokerageTax || 0) + (tran || 0) + (others || 0),
       );
 
-      groupedTrades[tradesGroupId].quantity += trade.quantity;
-      groupedTrades[tradesGroupId].itemTotal += trade.itemTotal;
-      groupedTrades[tradesGroupId].priceTotal += NP.times(trade.quantity, trade.price);
+      groupedTrades[tradesGroupId].quantity = NP.plus(
+        groupedTrades[tradesGroupId].quantity,
+        trade.quantity,
+      );
+      groupedTrades[tradesGroupId].itemTotal = NP.plus(
+        groupedTrades[tradesGroupId].itemTotal,
+        trade.itemTotal,
+      );
+      groupedTrades[tradesGroupId].priceTotal = NP.plus(
+        groupedTrades[tradesGroupId].priceTotal,
+        NP.times(trade.quantity, trade.price),
+      );
 
       if (
         !this.dlombelloTaxIgnoredTrades.includes(
@@ -452,11 +460,15 @@ export class ExportToolComponent implements OnInit {
           ticker: dlombelloTrade.symbol,
           date: dlombelloTrade.date,
           type: dlombelloTrade.operationType,
-          quantity: dlombelloTrade.BS === 'C' ? dlombelloTrade.quantity : -dlombelloTrade.quantity,
-          price: dlombelloTrade.price,
-          tax: dlombelloTrade.tax,
+          quantity: this.numberFmt.commaOnly(
+            dlombelloTrade.BS === 'C' ? dlombelloTrade.quantity : -dlombelloTrade.quantity,
+            10,
+            0,
+          ),
+          price: this.numberFmt.commaOnly(dlombelloTrade.price, 6, 2),
+          tax: this.numberFmt.commaOnly(dlombelloTrade.tax),
           broker: dlombelloTrade.brokerage,
-          irrf: dlombelloTrade.IR || 0,
+          irrf: this.numberFmt.commaOnly(dlombelloTrade.IR || null),
           currency: dlombelloTrade.currency,
           noteNumber: dlombelloTrade.noteNumber,
         };
@@ -466,11 +478,11 @@ export class ExportToolComponent implements OnInit {
           exportObject.ticker,
           exportObject.date,
           exportObject.type,
-          this.numberFmt.commaOnly(exportObject.quantity, 10, 0),
-          this.numberFmt.commaOnly(exportObject.price, 6, 2),
-          this.numberFmt.commaOnly(exportObject.tax),
+          exportObject.quantity,
+          exportObject.price,
+          exportObject.tax,
           exportObject.broker,
-          this.numberFmt.commaOnly(exportObject.irrf || null),
+          exportObject.irrf,
           exportObject.currency,
           `NC:${exportObject.noteNumber}`,
         ]

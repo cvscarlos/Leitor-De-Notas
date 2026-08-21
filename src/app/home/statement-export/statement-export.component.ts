@@ -7,6 +7,7 @@ import {
   StatementPosition,
   StatementBatch,
 } from 'src/app/services/statement/statement-upload.interface';
+import NP from 'number-precision';
 import { NumberFormatService } from 'src/app/services/number-format/number-format.service';
 import { SlideToggleDirective } from '../../shared-directives/slide-toggle/slide-toggle.directive';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
@@ -24,12 +25,13 @@ import { IsIframeService } from 'src/app/services/is-iframe/is-iframe.service';
 import { NotifyService } from 'src/app/services/notify/notify.service';
 import { ErrorLoggerComponent } from 'src/app/shared-components/error-logger/error-logger.component';
 
+// A planilha da DLP espera vírgula decimal, então os números são exportados como string em pt-BR.
 type StatementExportObject = {
   stock: string;
   code: string;
   dlpType: string;
-  value: number;
-  tax: number;
+  value: string;
+  tax: string;
   broker: string;
   currency: string;
 };
@@ -207,8 +209,8 @@ export class StatementExportComponent implements OnInit {
         stock: detail.stock,
         code: detail.date,
         dlpType: detail.dlpType,
-        value: detail.value || 0,
-        tax: detail.tax || 0,
+        value: this.commaDecimal(detail.value || 0),
+        tax: this.commaDecimal(detail.tax || 0),
         broker: detail.broker,
         currency: detail.currency,
       };
@@ -218,8 +220,8 @@ export class StatementExportComponent implements OnInit {
         exportObject.stock,
         exportObject.code,
         exportObject.dlpType,
-        exportObject.value.toString().replace('.', ','),
-        exportObject.tax.toString().replace('.', ','),
+        exportObject.value,
+        exportObject.tax,
         // Coluna "Taxas" da DLP: os extratos não trazem custos de intermediação
         '',
         exportObject.currency,
@@ -229,5 +231,9 @@ export class StatementExportComponent implements OnInit {
 
     this.statementExportObjects = newStatementExportObjects;
     this.exportString = lines.join('\n');
+  }
+
+  private commaDecimal(value: number): string {
+    return NP.strip(value, 10).toString().replace('.', ',');
   }
 }
