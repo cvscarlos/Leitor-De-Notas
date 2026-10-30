@@ -132,15 +132,22 @@ export class AuthComponent implements OnInit {
       const loginWindow = window.open(data.url);
 
       const htmlSpin =
-        '<div><div class="spinner-border" role="status"><span class="visually-hidden">Carregando...</span></div></div>';
+        '<div><div class="spinner-border" role="status">' +
+        '<span class="visually-hidden">Carregando...</span></div></div>';
       this.notifyService.infoForceOpened(
         'Aguardando a autorização',
-        `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, esta página irá atualizar automaticamente.`,
+        `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, ` +
+          'esta página irá atualizar automaticamente.',
       );
 
       const intervalId = setInterval(() => {
-        const bgggSessionId = loginWindow?.localStorage?.getItem('bgggSessionId');
-        if (bgggSessionId) this.sessionService.id = bgggSessionId;
+        try {
+          const bgggSessionId = loginWindow?.localStorage?.getItem('bgggSessionId');
+          if (bgggSessionId) this.sessionService.id = bgggSessionId;
+        } catch {
+          // A aba ainda está no Google/Microsoft: o navegador bloqueia ler o localStorage
+          // de outra origem até o login voltar para o Leitor de Notas
+        }
 
         if (this.sessionService.isAuthenticated || loginWindow?.closed) {
           clearInterval(intervalId);
