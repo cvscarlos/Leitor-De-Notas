@@ -2,7 +2,6 @@ import { ErrorHandler, NgModule, provideAppInitializer, inject } from '@angular/
 import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import * as Sentry from '@sentry/angular';
@@ -30,7 +29,6 @@ import { ThemeToggleComponent } from './shared-components/theme-toggle/theme-tog
   bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
-    BrowserAnimationsModule,
     BrowserModule,
     FontAwesomeModule,
     NgbCollapseModule,
