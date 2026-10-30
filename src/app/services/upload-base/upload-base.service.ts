@@ -1,3 +1,10 @@
+import * as Sentry from '@sentry/angular';
+
+const UNREADABLE_FILE_MESSAGE =
+  'Não foi possível ler o arquivo. Salve o PDF no aparelho e selecione-o de novo.';
+const NO_RESPONSE_MESSAGE =
+  'O Leitor de Notas não recebeu resposta do servidor. Verifique sua conexão e tente de novo.';
+
 interface UploadObject {
   responseComplete: boolean;
   serverError: boolean;
@@ -45,9 +52,18 @@ export abstract class UploadBaseService<
   protected uploadFile(file: File, uploadObject: TUpload, ...additionalArgs: unknown[]): void {
     this.uploadsList.push(uploadObject);
 
-    const formData = this.createFormData(file, ...additionalArgs);
-
-    this.uploadToApi(formData)
+    // Arquivo escolhido de e-mail ou nuvem no celular pode não ser legível na hora do envio,
+    // e o upload falha sem resposta. Ler antes separa esse caso de uma falha de rede
+    file
+      .arrayBuffer()
+      .catch((readError) => {
+        Sentry.captureException(readError);
+        throw { error: { _message: UNREADABLE_FILE_MESSAGE } };
+      })
+      .then((bytes) => {
+        const fileCopy = new File([bytes], file.name, { type: file.type });
+        return this.uploadToApi(this.createFormData(fileCopy, ...additionalArgs));
+      })
       .then((res) => {
         const content = (res as { data?: unknown }).data || res;
         uploadObject.server = content;
@@ -55,7 +71,7 @@ export abstract class UploadBaseService<
       })
       .catch((err) => {
         uploadObject.serverError = true;
-        uploadObject.error = err;
+        uploadObject.error = err?.status === 0 ? { error: { _message: NO_RESPONSE_MESSAGE } } : err;
       })
       .finally(() => {
         uploadObject.responseComplete = true;
