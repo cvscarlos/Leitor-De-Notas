@@ -224,9 +224,17 @@ export class ApiService {
     const httpReq = this.http.request(method, apiUrl, options).pipe(share());
 
     httpReq.subscribe({
-      error: (e) => {
+      error: (e: HttpErrorResponse) => {
         console.error('__LN Error:', e);
-        Sentry.captureException(e);
+        // 4xx é mensagem para o usuário, já exibida. HttpErrorResponse não é um Error, e
+        // sem o fingerprint todas as falhas, de qualquer endpoint, viram uma issue só
+        if (e.status < 400 || e.status >= 500) {
+          const path = new URL(apiUrl, location.href).pathname;
+          Sentry.captureException(new Error(`${method.toUpperCase()} ${path}: ${e.status}`), {
+            fingerprint: ['http-error', method, path, String(e.status)],
+            extra: { message: e.message },
+          });
+        }
         if (handleError) this.requestErrorHandler(e);
       },
     });
