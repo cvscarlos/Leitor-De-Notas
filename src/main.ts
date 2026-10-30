@@ -1,5 +1,5 @@
 import { enableProdMode, provideZoneChangeDetection } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { platformBrowser } from '@angular/platform-browser';
 import * as Sentry from '@sentry/angular';
 
 import { AppModule } from './app/app.module';
@@ -17,7 +17,6 @@ Sentry.init({
     Sentry.replayIntegration(),
     Sentry.consoleLoggingIntegration({ levels: ['info', 'warn', 'error'] }),
   ],
-  enableLogs: true,
   environment: environment.isProduction ? 'production' : 'development',
   release: `${packageJson.name}@${packageJson.version}`,
   // Tracing
@@ -29,8 +28,8 @@ Sentry.init({
     'https://api-upload.leitordenotas.com.br',
   ],
   // Session Replay
-  replaysSessionSampleRate: 0.2, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
-  replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+  replaysSessionSampleRate: 0.2, // 20% das sessões
+  replaysOnErrorSampleRate: 1.0, // 100% das sessões com erro
   beforeSendLog: (log) => (environment.isProduction ? null : log),
   beforeSend(event, hint) {
     try {
@@ -56,6 +55,6 @@ Sentry.init({
   },
 });
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule, { applicationProviders: [provideZoneChangeDetection()], })
+platformBrowser()
+  .bootstrapModule(AppModule, { applicationProviders: [provideZoneChangeDetection()] })
   .catch((err) => console.error(err));

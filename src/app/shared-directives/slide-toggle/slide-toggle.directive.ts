@@ -1,11 +1,4 @@
 import {
-  AnimationBuilder,
-  AnimationFactory,
-  AnimationPlayer,
-  animate,
-  style,
-} from '@angular/animations';
-import {
   Directive,
   ElementRef,
   EventEmitter,
@@ -17,7 +10,6 @@ import {
 
 @Directive({ selector: '[appSlideToggle]', standalone: true })
 export class SlideToggleDirective {
-  private animBuilder = inject(AnimationBuilder);
   private elemRef = inject(ElementRef);
   private renderer2 = inject(Renderer2);
 
@@ -37,48 +29,44 @@ export class SlideToggleDirective {
 
   private state = '';
 
-  private player: AnimationPlayer | undefined;
-
-  constructor() {}
+  private animation: Animation | undefined;
 
   animate(): void {
-    let factory: AnimationFactory;
-    const elem = this.elemRef.nativeElement;
+    const elem: HTMLElement = this.elemRef.nativeElement;
+
+    if (this.state !== 'down' && this.state !== 'up') {
+      return;
+    }
+
+    this.animation?.cancel();
 
     if (this.state === 'down') {
       this.appSlideState.emit('showing');
       this.renderer2.setStyle(elem, 'display', 'block');
-      factory = this.animBuilder.build([
-        style({ height: '0', overflow: 'hidden' }),
-        animate(400, style({ height: '*' })),
-      ]);
-    } else if (this.state === 'up') {
-      factory = this.animBuilder.build([
-        style({ height: '*', overflow: 'hidden' }),
-        animate(400, style({ height: '0' })),
-      ]);
-    } else {
-      return;
     }
 
-    if (this.player) {
-      this.player.destroy();
-    }
-    this.player = factory.create(elem);
+    const height = `${elem.offsetHeight}px`;
+    const [from, to] = this.state === 'down' ? ['0', height] : [height, '0'];
+    const frames = [
+      { height: from, overflow: 'hidden' },
+      { height: to, overflow: 'hidden' },
+    ];
+    // fill: 'forwards' segura a altura 0 até o display: none entrar, sem piscar o conteúdo
+    const animation = elem.animate(frames, { duration: 400, fill: 'forwards' });
+    this.animation = animation;
 
-    this.player.onDone(() => {
+    animation.onfinish = () => {
       if (this.state === 'up') {
         this.renderer2.setStyle(elem, 'display', 'none');
 
         this.appSlideState.emit('hidden');
       }
 
-      if (this.state === 'down' && this.player) {
-        this.player.reset();
+      if (this.state === 'down') {
+        // Solta a altura fixa para o conteúdo voltar a crescer/encolher sozinho
+        animation.cancel();
         this.appSlideState.emit('showed');
       }
-    });
-
-    this.player.play();
+    };
   }
 }
