@@ -97,7 +97,10 @@ export class USAModalComponent implements OnInit {
 
     this.loading = true;
     try {
-      await this.apiService.userMemberSave(memberDoc);
+      // Conta ainda sem CPF/CNPJ: o digitado vira o da conta
+      const me = await this.apiService.userMe();
+      if (me?.userDoc) await this.apiService.userMemberSave(memberDoc);
+      else await this.apiService.userDocumentSave(memberDoc);
     } catch {
       // o ApiService já exibe a mensagem de erro do servidor
       return;

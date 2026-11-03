@@ -43,6 +43,7 @@ export type Note = {
   _errorCode?: number;
   _messages: string[];
   _noteReadCompletely: boolean;
+  documentOnlyNumbers?: string;
   _page?: number;
   allFees: number;
   ANATax: number;
@@ -85,7 +86,7 @@ export type UploadGenericError = {
   fileName: string;
   _messages: string[];
   _error: boolean;
-  _errorCode: string | null;
+  _errorCode: number | null;
 };
 
 export type UserTransactions = {

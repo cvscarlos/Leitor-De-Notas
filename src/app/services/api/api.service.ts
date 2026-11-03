@@ -80,8 +80,9 @@ export class ApiService {
     );
   }
 
-  public async userMe(): Promise<UserData | null> {
+  public async userMe(refresh = false): Promise<UserData | null> {
     if (!this.sessionService.isAuthenticated) return null;
+    if (refresh) delete this.requestCache['/pvt/user/me'];
 
     try {
       return await firstValueFrom(this.cachedRequest('/pvt/user/me', false));

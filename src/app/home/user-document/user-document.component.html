@@ -1,13 +1,14 @@
 <ng-template #modalContent let-modal>
   <div class="modal-header">
-    <h5 class="modal-title">Dados do usuário</h5>
+    <h5 class="modal-title">PDF com senha</h5>
+    <button type="button" class="btn-close" aria-label="Fechar" (click)="modal.dismiss()"></button>
   </div>
   <div class="modal-body">
     <app-loading [show]="loading"></app-loading>
 
     <p>
-      Olá, para continuar utilizando o sistema é necessário que você informe o CPF/CNPJ. Lembre-se
-      que este será o mesmo CPF/CNPJ no qual as suas notas devem ser enviadas.
+      Para desbloquear a nota, informe o CPF/CNPJ do titular. Ele será vinculado à sua conta e não
+      poderá ser editado depois.
     </p>
 
     <form class="form" #f="ngForm" (ngSubmit)="submitUserDocumentForm(f.form)" ngNativeValidate>
@@ -28,10 +29,5 @@
         <button type="submit" class="btn btn-lg btn-primary">Salvar</button>
       </div>
     </form>
-
-    <hr />
-    <div class="text-center font-small">
-      <a href="javascript:void(0);" (click)="accountDelete()" class="text-danger">excluir conta</a>
-    </div>
   </div>
 </ng-template>

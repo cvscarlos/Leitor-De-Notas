@@ -7,11 +7,11 @@ import {
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { ApiService } from 'src/app/services/api/api.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { BrokerageNotesService } from 'src/app/services/brokerage-notes/brokerage-notes.service';
+import { CpfCnpjPipe } from 'src/app/shared-pipes/cpf-cnpj/cpf-cnpj.pipe';
 import { NotifyService } from 'src/app/services/notify/notify.service';
-import { SessionService } from 'src/app/services/session/session.service';
 import { UntypedFormGroup, FormsModule } from '@angular/forms';
-import { UserService } from 'src/app/services/user/user.service';
 import { LoadingComponent } from '../../loading/loading.component';
 
 @Component({
@@ -19,39 +19,48 @@ import { LoadingComponent } from '../../loading/loading.component';
   templateUrl: './user-document.component.html',
   styleUrls: ['./user-document.component.less'],
   changeDetection: ChangeDetectionStrategy.Eager,
+  providers: [CpfCnpjPipe],
   imports: [LoadingComponent, FormsModule],
 })
 export class UserDocumentComponent implements OnInit {
   private apiService = inject(ApiService);
   private notifyService = inject(NotifyService);
-  private userService = inject(UserService);
-  sessionService = inject(SessionService);
   private modalService = inject(NgbModal);
+  private notesService = inject(BrokerageNotesService);
+  private cpfCnpj = inject(CpfCnpjPipe);
 
   @ViewChild('modalContent') modalContent: ElementRef | undefined;
 
   public loading = false;
   public valid = true;
+  private asking = false;
+  private modal?: NgbModalRef;
 
   constructor() {}
 
   ngOnInit(): void {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.apiService.userMe().then((data: any) => {
-      const showModal = this.sessionService.isAuthenticated && !data.userDoc;
-      if (showModal) {
-        this.modalService.open(this.modalContent, { backdrop: 'static', keyboard: false });
+    // A conta não pede CPF/CNPJ no cadastro: ele vem da primeira nota enviada
+    this.notesService.onDocRequest(async (doc) => {
+      if (this.asking) return;
+      this.asking = true;
+
+      if (!doc) {
+        this.modal = this.modalService.open(this.modalContent);
+        this.modal.result.catch(() => null).finally(() => (this.asking = false));
+        return;
       }
+
+      const confirm = await this.notifyService.confirm(
+        'Vincular este CPF/CNPJ à sua conta?',
+        `CPF/CNPJ da nota: ${this.cpfCnpj.transform(doc)}<br/><br/>` +
+          'As notas só são exibidas depois do vínculo, e o CPF/CNPJ não poderá ser editado depois.',
+      );
+      if (confirm.isConfirmed) await this.saveDoc(doc);
+      this.asking = false;
     });
   }
 
-  public accountDelete(): void {
-    this.userService.accountDelete(() => {
-      this.loading = true;
-    });
-  }
-
-  public submitUserDocumentForm(form: UntypedFormGroup) {
+  public async submitUserDocumentForm(form: UntypedFormGroup) {
     if (form.status !== 'VALID') {
       const error = new Error('CPF/CNPJ inválido');
       console.error(error);
@@ -59,21 +68,24 @@ export class UserDocumentComponent implements OnInit {
       return;
     }
 
+    if (await this.saveDoc(form.value.userDoc)) this.modal?.close();
+  }
+
+  private async saveDoc(doc: string): Promise<boolean> {
     this.loading = true;
-    this.apiService
-      .userDocumentSave(form.value.userDoc)
-      .then((data) => {
-        if (data.error)
-          this.notifyService
-            .success(data._messages.join('\n'))
-            .then(() => window.location.reload());
-        else
-          this.notifyService
-            .success('Dados atualizados com sucesso!')
-            .then(() => window.location.reload());
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+    try {
+      await this.apiService.userDocumentSave(doc);
+      // O plano da conta só é montado quando o /me vê o CPF/CNPJ
+      await this.apiService.userMe(true);
+    } catch {
+      // o ApiService já exibe a mensagem de erro do servidor
+      return false;
+    } finally {
+      this.loading = false;
+    }
+
+    this.notifyService.success('CPF/CNPJ vinculado à sua conta!');
+    this.notesService.resendFilesAwaitingDoc();
+    return true;
   }
 }
