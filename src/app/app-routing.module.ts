@@ -1,6 +1,5 @@
 import { RouterModule, Routes, UrlSegment } from '@angular/router';
 import { AuthService } from './auth/auth.service';
-import { BinanceComponent } from './binance/binance.component';
 import { HomeComponent } from './home/home.component';
 import { IsIframeService } from './services/is-iframe/is-iframe.service';
 import { ManageMembersComponent } from './manage-members/manage-members.component';
@@ -71,7 +70,6 @@ const routes: Routes = [
   { path: 'oauth', component: OauthComponent, data: { hideAboutUs: true } },
   { path: 'oauth.html', component: OauthComponent, data: { hideAboutUs: true } },
   { path: 'oauth-i.html', component: OauthComponent, data: { hideAboutUs: true } },
-  { path: 'binance', component: BinanceComponent, canActivate: [AuthService] },
   { path: 'loading', component: FullPageLoadingComponent, data: { hideAboutUs: true } },
   {
     path: 'faq',
