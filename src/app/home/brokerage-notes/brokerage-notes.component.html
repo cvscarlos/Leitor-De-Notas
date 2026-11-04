@@ -20,18 +20,20 @@
         </thead>
         <tbody>
           @for (note of noteDetails; track note) {
-            <tr>
-              <td>{{ note.brokerName }}</td>
-              <td>{{ note.number }}</td>
-              <td class="text-end">{{ this.numberFormatService.br(note.tradesTotal) }}</td>
-              <td class="text-end">
-                {{ this.numberFormatService.br(note.allFees + note.ISSTax) }}
-              </td>
-              <td class="text-end">{{ this.numberFormatService.br(note.IRRF) }}</td>
-              <td class="text-end">{{ this.numberFormatService.br(note.irrfDtProvisioned) }}</td>
-              <td class="text-end">{{ this.numberFormatService.br(note.irrfStProvisioned) }}</td>
-              <td class="text-end">{{ this.numberFormatService.br(note.futureNetAmount) }}</td>
-            </tr>
+            @if (note.showNote) {
+              <tr>
+                <td>{{ note.brokerName }}</td>
+                <td>{{ note.number }}</td>
+                <td class="text-end">{{ this.numberFormatService.br(note.tradesTotal) }}</td>
+                <td class="text-end">
+                  {{ this.numberFormatService.br(note.allFees + note.ISSTax) }}
+                </td>
+                <td class="text-end">{{ this.numberFormatService.br(note.IRRF) }}</td>
+                <td class="text-end">{{ this.numberFormatService.br(note.irrfDtProvisioned) }}</td>
+                <td class="text-end">{{ this.numberFormatService.br(note.irrfStProvisioned) }}</td>
+                <td class="text-end">{{ this.numberFormatService.br(note.futureNetAmount) }}</td>
+              </tr>
+            }
           }
         </tbody>
       </table>

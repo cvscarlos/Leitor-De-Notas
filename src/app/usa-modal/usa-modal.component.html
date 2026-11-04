@@ -45,7 +45,7 @@
         </table>
       </div>
 
-      @if (membersLimit > membersList.length) {
+      @if (!membersList.length || membersLimit > membersList.length) {
         <h6 class="border-bottom pb-2">Associar a um novo CPF</h6>
         <label class="form-label mb-1" for="newMemberDoc">CPF / CNPJ</label>
         <div class="d-flex flex-wrap gap-2">
