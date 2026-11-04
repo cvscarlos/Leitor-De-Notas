@@ -34,6 +34,7 @@ export class UserDocumentComponent implements OnInit {
   public loading = false;
   public valid = true;
   private asking = false;
+  private linked = false;
   private modal?: NgbModalRef;
 
   constructor() {}
@@ -41,6 +42,8 @@ export class UserDocumentComponent implements OnInit {
   ngOnInit(): void {
     // A conta não pede CPF/CNPJ no cadastro: ele vem da primeira nota enviada
     this.notesService.onDocRequest(async (doc) => {
+      // nota que chegou depois do vínculo: só reenvia
+      if (this.linked) return this.notesService.resendFilesAwaitingDoc();
       if (this.asking) return;
       this.asking = true;
 
@@ -50,12 +53,7 @@ export class UserDocumentComponent implements OnInit {
         return;
       }
 
-      const confirm = await this.notifyService.confirm(
-        'Vincular este CPF/CNPJ à sua conta?',
-        `CPF/CNPJ da nota: ${this.cpfCnpj.transform(doc)}<br/><br/>` +
-          'As notas só são exibidas depois do vínculo, e o CPF/CNPJ não poderá ser editado depois.',
-      );
-      if (confirm.isConfirmed) await this.saveDoc(doc);
+      await this.saveDoc(doc);
       this.asking = false;
     });
   }
@@ -84,7 +82,8 @@ export class UserDocumentComponent implements OnInit {
       this.loading = false;
     }
 
-    this.notifyService.success('CPF/CNPJ vinculado à sua conta!');
+    this.linked = true;
+    this.notifyService.success(`CPF/CNPJ ${this.cpfCnpj.transform(doc)} vinculado à sua conta!`);
     this.notesService.resendFilesAwaitingDoc();
     return true;
   }
