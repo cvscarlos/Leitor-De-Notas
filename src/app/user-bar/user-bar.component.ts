@@ -80,8 +80,9 @@ export class UserBarComponent extends UserComponent implements OnInit {
       this.apiService.userMe(),
     ]);
 
-    const isUnlimited = user?.limit === 'Ilimitado';
-    if (isUnlimited) return;
+    // Sem CPF/CNPJ a API ainda não lista os pagamentos da conta; os da DLP Invest são
+    // vinculados sozinhos quando o CPF/CNPJ chega com a primeira nota
+    if (!user?.userDoc || user.limit === 'Ilimitado') return;
 
     const availablePayment = trx.response.find((transaction) => !transaction.inUse);
     if (!availablePayment) return;
