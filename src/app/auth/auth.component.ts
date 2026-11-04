@@ -122,39 +122,33 @@ export class AuthComponent implements OnInit {
     const isIframe = this.isIframeService.isIframe();
 
     if (!isIframe) {
-      this.api.oAuthUrl(provider, false, (data) => {
-        window.location.href = data.url;
-      });
+      window.location.href = `/oauth.html?start=${provider}`;
       return;
     }
 
-    this.api.oAuthUrl(provider, isIframe, (data) => {
-      const loginWindow = window.open(data.url);
+    const loginWindow = window.open(`/oauth-i.html?start=${provider}`);
 
-      const htmlSpin =
-        '<div><div class="spinner-border" role="status">' +
-        '<span class="visually-hidden">Carregando...</span></div></div>';
-      this.notifyService.infoForceOpened(
-        'Aguardando a autorização',
-        `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, ` +
-          'esta página irá atualizar automaticamente.',
-      );
+    const htmlSpin =
+      '<div><div class="spinner-border" role="status">' +
+      '<span class="visually-hidden">Carregando...</span></div></div>';
+    this.notifyService.infoForceOpened(
+      'Aguardando a autorização',
+      `${htmlSpin}Faça a autenticação na nova aba e quando estiver pronto, ` +
+        'esta página irá atualizar automaticamente.',
+    );
 
-      const intervalId = setInterval(() => {
-        try {
-          const bgggSessionId = loginWindow?.localStorage?.getItem('bgggSessionId');
-          if (bgggSessionId) this.sessionService.id = bgggSessionId;
-        } catch {
-          // A aba ainda está no Google/Microsoft: o navegador bloqueia ler o localStorage
-          // de outra origem até o login voltar para o Leitor de Notas
-        }
-
-        if (this.sessionService.isAuthenticated || loginWindow?.closed) {
-          clearInterval(intervalId);
-          window.location.reload();
-        }
-      }, 500);
+    // A aba de login manda a sessão nova quando termina (OauthComponent)
+    window.addEventListener('message', (event) => {
+      if (event.source !== loginWindow || event.origin !== location.origin) return;
+      this.sessionService.id = event.data.bgggSessionId;
+      window.location.reload();
     });
+
+    const intervalId = setInterval(() => {
+      if (!loginWindow?.closed) return;
+      clearInterval(intervalId);
+      window.location.reload();
+    }, 500);
   }
 
   private async autoAuthenticateUser() {
