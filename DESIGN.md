@@ -103,7 +103,7 @@ Ao criar um token novo, calcule o contraste contra **todos** os fundos onde ele 
 ## Tipografia
 
 - Família: **Inter**, com fallback `system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif`, igual ao DLP Invest. Servida pelo próprio app: o arquivo variável (pesos 100–900) fica em `src/assets/fonts/inter/`, com a licença OFL ao lado.
-- Títulos com `letter-spacing: -0.015em`. `.small-font` reduz textos e controles para `0.75rem` (tabelas de resultado); nessa escala vale a regra de 4,5:1, nunca a de texto grande.
+- Títulos com `letter-spacing: -0.015em`. `.small-font` reduz textos e controles para `0.75rem`. É a escala das áreas densas (tabelas de resultado e de transações, listas de upload, logs) e é uma escolha deliberada: mantenha onde existe e use em tabelas novas. Nessa escala vale a regra de 4,5:1, nunca a de texto grande.
 - Valores numéricos em tabelas com `font-variant-numeric: tabular-nums`.
 - Tamanhos em `rem`, para o texto acompanhar o zoom do navegador (1.4.4).
 
