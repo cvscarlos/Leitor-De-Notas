@@ -13,7 +13,6 @@ import { UserData, UserTransactions } from 'src/types';
 
 type Callback = (data: any) => void;
 type RequestMethod = 'post' | 'delete' | 'patch' | 'get';
-type BinanceCredentials = { binanceApiKey: string; binanceApiSecret: string };
 
 @Injectable({
   providedIn: 'root',
@@ -144,26 +143,6 @@ export class ApiService {
 
   public userSettings(settings: UserData['settings']) {
     return firstValueFrom(this.request('/pvt/user/settings', { settings }));
-  }
-
-  public binanceFiatPayments(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return firstValueFrom(this.request('/pvt/binance/fiat-pay', credentials, 'post', false));
-  }
-
-  public binanceFiatOrders(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return firstValueFrom(this.request('/pvt/binance/fiat-order', credentials, 'post', false));
-  }
-
-  public binanceTradesOCO(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return firstValueFrom(this.request('/pvt/binance/trades-oco', credentials, 'post', false));
-  }
-
-  public binanceTrades(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return firstValueFrom(this.request('/pvt/binance/trades', credentials, 'post', false));
-  }
-
-  public binanceConversions(credentials: BinanceCredentials): Promise<API.BinanceResponse> {
-    return firstValueFrom(this.request('/pvt/binance/conversions', credentials, 'post', false));
   }
 
   public getMercadoPagoLink(linkType: string, callback: Callback) {
