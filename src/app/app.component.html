@@ -70,10 +70,8 @@
 
 <router-outlet (activate)="onActivate()"></router-outlet>
 
-@if (showAboutUs) {
-  <div >
-    <app-about-us></app-about-us>
-  </div>
+@if (showAboutUs && !isIframe.isIframe()) {
+  <app-about-us></app-about-us>
 }
 
 <div class="container-fluid">

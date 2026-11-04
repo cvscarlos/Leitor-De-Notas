@@ -1,5 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
-import { IsIframeService } from '../services/is-iframe/is-iframe.service';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-about-us',
@@ -8,6 +7,4 @@ import { IsIframeService } from '../services/is-iframe/is-iframe.service';
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './about-us.component.less',
 })
-export class AboutUsComponent {
-  public isIframe = inject(IsIframeService);
-}
+export class AboutUsComponent {}
