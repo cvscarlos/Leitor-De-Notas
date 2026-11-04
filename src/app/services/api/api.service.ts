@@ -145,19 +145,8 @@ export class ApiService {
     return firstValueFrom(this.request('/pvt/user/settings', { settings }));
   }
 
-  public getMercadoPagoLink(
-    linkType: string,
-    quantity: number,
-    cpfList: Set<string> | null,
-    callback: Callback,
-  ) {
-    const payload = {
-      quantity,
-      cpfList: cpfList ? [...cpfList] : [],
-    };
-    return this.request(`/pvt/mercado-pago/link/${linkType}`, payload).subscribe((data) =>
-      callback(data),
-    );
+  public getMercadoPagoLink(linkType: string, callback: Callback) {
+    return this.request(`/pvt/mercado-pago/link/${linkType}`).subscribe((data) => callback(data));
   }
 
   public connectUSAAccount(cpfCnpj: string, usaAccount: string) {

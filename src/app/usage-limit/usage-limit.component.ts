@@ -23,7 +23,7 @@ export class UsageLimitComponent {
   public getOptionLink(limitType: string) {
     if (this.sessionService.isAuthenticated) {
       this.loading = true;
-      this.api.getMercadoPagoLink(limitType, 1, null, (data) => {
+      this.api.getMercadoPagoLink(limitType, (data) => {
         window.location.href = data.link;
       });
     } else {
