@@ -49,9 +49,6 @@
                   <th class="align-middle" scope="col">#</th>
                   <th class="align-middle" scope="col">CPF / CNPJ</th>
                   <th class="align-middle" scope="col">Validade</th>
-                  @if (pendingMembers) {
-                    <th class="align-middle text-center" scope="col">+ limite</th>
-                  }
                 </tr>
               </thead>
               <tbody>
@@ -60,40 +57,10 @@
                     <th scope="row">{{ ndx + 1 }}</th>
                     <td>{{ member.cpf | cpfCnpj }}</td>
                     <td>{{ member.expires | date: 'dd/MM/yyyy' }}</td>
-                    @if (pendingMembers) {
-                      <td class="text-center">
-                        @if (!member.expires.length) {
-                          <input
-                            checked
-                            type="checkbox"
-                            (change)="membersListToggle($event, member.cpf)"
-                          />
-                        }
-                      </td>
-                    }
                   </tr>
                 }
               </tbody>
             </table>
-
-            @if (pendingMembers) {
-              <div style="position: relative">
-                <app-loading [show]="loading"></app-loading>
-                <hr />
-                <button
-                  class="btn btn-success"
-                  (click)="getOptionLink()"
-                  [disabled]="!membersCpfList.size"
-                >
-                  <img
-                    src="https://www.mercadopago.com.br/favicon.ico"
-                    alt="Mercado Pago"
-                    style="max-height: 24px"
-                  />
-                  - Adicionar Limite p/ <strong>{{ membersCpfList.size }}</strong> membros avulsos
-                </button>
-              </div>
-            }
           </div>
         </div>
       </div>

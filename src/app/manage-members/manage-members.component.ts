@@ -21,9 +21,7 @@ export class ManageMembersComponent implements OnInit {
 
   public loading = false;
   public membersList: AccountMember[] = [];
-  public membersCpfList: Set<string> = new Set();
   public membersLimit = 1;
-  public pendingMembers = 0;
 
   constructor() {}
 
@@ -50,41 +48,13 @@ export class ManageMembersComponent implements OnInit {
       .finally(() => (this.loading = false));
   }
 
-  public getOptionLink() {
-    this.loading = true;
-    this.apiService.getMercadoPagoLink(
-      'LN_001_EMA_A',
-      this.membersCpfList.size,
-      this.membersCpfList,
-      (data) => {
-        window.location.href = data.link;
-      },
-    );
-  }
-
-  public membersListToggle(event: Event, cpf: string) {
-    const elem = event.target as HTMLInputElement;
-    if (elem?.checked) {
-      this.membersCpfList.add(cpf);
-    } else {
-      this.membersCpfList.delete(cpf);
-    }
-  }
-
   private getMembers() {
     this.loading = true;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.apiService.userMembersList((data: any) => {
       this.membersList = data.members;
-      this.pendingMembers = data.pendingPayment;
       this.membersLimit = data.membersLimit;
       this.loading = false;
-
-      this.membersList.forEach((item) => {
-        if (!item.expires?.length) {
-          this.membersCpfList.add(item.cpf);
-        }
-      });
     });
   }
 }
