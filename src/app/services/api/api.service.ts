@@ -195,10 +195,14 @@ export class ApiService {
     httpReq.subscribe({
       error: (e: HttpErrorResponse) => {
         console.error('__LN Error:', e);
-        // 4xx é mensagem para o usuário, já exibida. HttpErrorResponse não é um Error, e
-        // sem o fingerprint todas as falhas, de qualquer endpoint, viram uma issue só
-        if (e.status < 400 || e.status >= 500) {
-          const path = new URL(apiUrl, location.href).pathname;
+        // 4xx é mensagem para o usuário, já exibida, e status 0 é o aparelho sem conexão.
+        // O upload é a exceção: lá o status 0 é a falha que interessa acompanhar.
+        // HttpErrorResponse não é um Error, e sem o fingerprint todas as falhas, de
+        // qualquer endpoint, viram uma issue só
+        const path = new URL(apiUrl, location.href).pathname;
+        const isClientError = e.status >= 400 && e.status < 500;
+        const isOffline = e.status === 0 && !path.startsWith('/pvt/upload');
+        if (!isClientError && !isOffline) {
           Sentry.captureException(new Error(`${method.toUpperCase()} ${path}: ${e.status}`), {
             fingerprint: ['http-error', method, path, String(e.status)],
             extra: { message: e.message },
