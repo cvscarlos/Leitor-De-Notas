@@ -1,16 +1,16 @@
 <div class="container-fluid px-3 px-md-4 py-4" style="max-width: 800px">
   <div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
-      <h2 class="text-center mb-4 fw-semibold text-dark">Painel Administrativo</h2>
+      <h2 class="text-center mb-4 fw-semibold">Painel Administrativo</h2>
 
       <div class="card shadow-sm mb-4">
-        <div class="card-header bg-light border-bottom">
-          <h5 class="mb-0 fw-semibold text-secondary">Entrar como usuário</h5>
+        <div class="card-header bg-body-tertiary border-bottom">
+          <h5 class="mb-0 fw-semibold text-body-secondary">Entrar como usuário</h5>
         </div>
         <div class="card-body p-4">
           <form [formGroup]="userSwitchForm" (ngSubmit)="onUserSwitch()">
             <div class="mb-3">
-              <label for="emailOrCpf" class="form-label fw-medium text-secondary"
+              <label for="emailOrCpf" class="form-label fw-medium text-body-secondary"
                 >Email ou CPF/CNPJ:</label
               >
               <input
@@ -58,14 +58,14 @@
       </div>
 
       <div class="card shadow-sm">
-        <div class="card-header bg-light border-bottom">
-          <h5 class="mb-0 fw-semibold text-secondary">Desvincular pagamento</h5>
+        <div class="card-header bg-body-tertiary border-bottom">
+          <h5 class="mb-0 fw-semibold text-body-secondary">Desvincular pagamento</h5>
         </div>
         <div class="card-body p-4">
           <form [formGroup]="unlinkPaymentForm" (ngSubmit)="onUnlinkPayment()">
             <div class="mb-3">
               <p>Libere um pagamento para que possa ser vinculado novamente a qualquer usuário.</p>
-              <label for="paymentId" class="form-label fw-medium text-secondary"
+              <label for="paymentId" class="form-label fw-medium text-body-secondary"
                 >ID do Pagamento:</label
               >
               <input
