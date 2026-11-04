@@ -53,7 +53,14 @@ export class UserDocumentComponent implements OnInit {
         return;
       }
 
+      this.notifyService.infoForceOpened(
+        'Vinculando o CPF/CNPJ da nota à sua conta',
+        '<div class="spinner-border my-3" role="status"></div>' +
+          `<p>${this.cpfCnpj.transform(doc)}<br />Aguarde, a nota vai aparecer em seguida.</p>`,
+      );
       await this.saveDoc(doc);
+      // fecha o aviso de espera; o de sucesso ou de erro, que ficou na fila, aparece em seguida
+      this.notifyService.close();
       this.asking = false;
     });
   }

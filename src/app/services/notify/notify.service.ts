@@ -36,6 +36,10 @@ export class NotifyService {
     });
   }
 
+  public close() {
+    Swal.close();
+  }
+
   public warning(title: string, message?: string) {
     return this.addToQueue('warning', title, message);
   }
