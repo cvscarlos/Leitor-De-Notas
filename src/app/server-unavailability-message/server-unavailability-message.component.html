@@ -3,7 +3,7 @@
     <div class="col">
       <div class="text-center border rounded shadow mx-auto m-3" style="max-width: 640px">
         @if (serverStatus < 4) {
-          <div class="bg-warning p-3">
+          <div class="text-bg-warning p-3">
             <span id="msg-30s" [appSlideToggle]="serverStatus === 1" style="display: none">
               <span class="spinner-grow spinner-grow-sm" role="status"
                 ><span class="visually-hidden"></span
@@ -39,11 +39,7 @@
             </span>
           </div>
         }
-        <div
-          class="bg-danger text-white p-3"
-          [appSlideToggle]="serverStatus === 4"
-          style="display: none"
-        >
+        <div class="text-bg-danger p-3" [appSlideToggle]="serverStatus === 4" style="display: none">
           <span id="msg-120s">
             <svg
               class="bi bi-exclamation-triangle-fill h1"

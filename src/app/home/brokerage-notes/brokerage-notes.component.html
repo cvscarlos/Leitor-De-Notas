@@ -48,7 +48,7 @@
     @if (note.showNote) {
       <div class="row mt-5">
         <div class="col small-font">
-          <div class="card" [class.bg-danger]="!note.proofIsValid">
+          <div class="card" [class.text-bg-danger]="!note.proofIsValid">
             <div class="card-header">
               <h4 class="mb-0">
                 Nota: nº {{ note.number }} de {{ note.date }} | Corretora: {{ note.brokerName }}

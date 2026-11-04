@@ -1,6 +1,6 @@
 {
   "name": "leitor-de-notas",
-  "version": "7.10.4",
+  "version": "7.11.0",
   "license": "CC BY-NC-ND",
   "scripts": {
     "ng": "ng",
@@ -27,7 +27,6 @@
     "@fortawesome/free-solid-svg-icons": "^7.3.1",
     "@ng-bootstrap/ng-bootstrap": "^21.0.0",
     "@popperjs/core": "^2.11.8",
-    "@radix-ui/colors": "^3.0.0",
     "@sentry/angular": "^11.10.0",
     "bootstrap": "^5.3.8",
     "ngx-mask": "^22.2.5",

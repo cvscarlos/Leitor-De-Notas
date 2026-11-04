@@ -1,39 +1,169 @@
-@use 'bootstrap';
+// Palette and contrast rules: see DESIGN.md. Every text/background pair passes WCAG 2.2 AA.
+@use 'bootstrap/scss/bootstrap' with (
+  $primary: #2563eb,
+  $secondary: #5b6577,
+  $success: #047857,
+  $danger: #b91c1c,
+  $warning: #fbbf24,
+  $body-color: #0f172a,
+  $body-bg: #ffffff,
+  $body-secondary-color: #5b6577,
+  $body-secondary-bg: #f1f4f9,
+  $body-tertiary-bg: #f6f7fb,
+  $border-color: #e5e9f0,
+  $body-color-dark: #e6eaf2,
+  $body-bg-dark: #111827,
+  $body-secondary-color-dark: #8b97ab,
+  $body-secondary-bg-dark: #1a2232,
+  $body-tertiary-bg-dark: #1a2232,
+  $border-color-dark: #1f2937,
+  $link-color-dark: #60a5fa,
+  $input-border-color: var(--app-input-border),
+  $input-focus-border-color: #2563eb,
+  $form-check-input-border: 1px solid var(--app-input-border),
+  $font-family-sans-serif: (
+    Inter,
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif,
+  ),
+  $border-radius-sm: 7px,
+  $border-radius: 10px,
+  $border-radius-lg: 14px,
+  $badge-border-radius: 50rem,
+  $box-shadow-sm: (
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 1px 3px rgba(15, 23, 42, 0.04),
+  )
+);
 
 @use './app/usage-limit/usage-limit.component.scss';
 
-/* Radix Colors - Light (default) */
-@import '@radix-ui/colors/slate.css';
-@import '@radix-ui/colors/purple.css';
-@import '@radix-ui/colors/indigo.css';
-
-/* Radix Colors - Dark (activated by .dark-theme) */
-@import '@radix-ui/colors/slate-dark.css';
-@import '@radix-ui/colors/purple-dark.css';
-@import '@radix-ui/colors/indigo-dark.css';
+// Self-hosted so no visitor request goes to a third-party font CDN.
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/inter/InterVariable.woff2') format('woff2');
+}
 
 :root {
-  --app-bg: var(--slate-1);
-  --app-bg-subtle: var(--slate-2);
-  --app-bg-component: var(--slate-3);
-  --app-bg-surface: var(--slate-2);
-  --app-bg-elevated: var(--slate-3);
-  --app-border: var(--slate-6);
-  --app-border-hover: var(--slate-8);
-  --app-text: var(--slate-12);
-  --app-text-secondary: var(--slate-11);
-  --app-accent: var(--purple-9);
-  --app-accent-hover: var(--purple-10);
-  --app-navbar-bg: #18204D;
-  --app-upload-bg: var(--bs-primary);
-  --app-upload-text: white;
-  --app-upload-border: var(--bs-primary);
+  --app-bg: #ffffff;
+  --app-bg-surface: #f6f7fb;
+  --app-bg-component: #f1f4f9;
+  --app-text: #0f172a;
+  --app-text-secondary: #5b6577;
+  --app-border: #e5e9f0;
+  --app-input-border: #7d889a;
+  --app-primary: #2563eb;
+  --app-primary-hover: #1d4ed8;
+  --app-primary-text: #2563eb;
+  --app-primary-soft: #eaf1ff;
+  --app-focus: #2563eb;
+  --app-navbar-bg: #18204d;
+  --app-statements: #7c3aed;
+  --app-statements-hover: #6d28d9;
+  --app-statements-soft: #f3edff;
+  --app-success: #047857;
+  --app-danger: #b91c1c;
+  --app-warning: #b45309;
+  --app-upload-bg: #2563eb;
+  --app-upload-text: #ffffff;
+  --app-upload-border: #1d4ed8;
+  --app-upload-statements-bg: #7c3aed;
+  --app-upload-statements-text: #ffffff;
+  --app-upload-statements-border: #6d28d9;
 }
 
 .dark-theme {
-  --app-upload-bg: var(--indigo-5);
-  --app-upload-text: var(--indigo-12);
-  --app-upload-border: var(--indigo-8);
+  --app-bg: #111827;
+  --app-bg-surface: #1a2232;
+  --app-bg-component: #1a2232;
+  --app-text: #e6eaf2;
+  --app-text-secondary: #8b97ab;
+  --app-border: #1f2937;
+  --app-input-border: #63738a;
+  --app-primary-text: #60a5fa;
+  --app-primary-soft: rgba(59, 130, 246, 0.14);
+  --app-focus: #60a5fa;
+  --app-statements: #a78bfa;
+  --app-statements-hover: #c4b5fd;
+  --app-statements-soft: rgba(139, 92, 246, 0.14);
+  --app-success: #34d399;
+  --app-danger: #f87171;
+  --app-warning: #fbbf24;
+  --app-upload-bg: #1e3a8a;
+  --app-upload-text: #bfdbfe;
+  --app-upload-border: #3b82f6;
+  --app-upload-statements-bg: #2e1f5e;
+  --app-upload-statements-text: #c4b5fd;
+  --app-upload-statements-border: #8b5cf6;
+}
+
+// Bootstrap keeps these at one value for both themes; the light value fails AA on the dark background.
+.text-primary {
+  color: var(--app-primary-text) !important;
+}
+.text-success {
+  color: var(--app-success) !important;
+}
+.text-danger {
+  color: var(--app-danger) !important;
+}
+.text-warning {
+  color: var(--app-warning) !important;
+}
+.dark-theme .btn-outline-secondary {
+  --bs-btn-color: var(--app-text-secondary);
+  --bs-btn-border-color: var(--app-input-border);
+}
+
+// Bootstrap's 25% focus glow is below the 3:1 non-text contrast; a solid outline is not.
+:focus-visible,
+.btn:focus-visible,
+.btn-close:focus-visible,
+.nav-link:focus-visible,
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.swal2-container {
+  --swal2-background: var(--app-bg);
+  --swal2-color: var(--app-text);
+  --swal2-border: 1px solid var(--app-border);
+  --swal2-border-radius: 14px;
+  --swal2-footer-border-color: var(--app-border);
+  --swal2-confirm-button-background-color: var(--app-primary);
+  --swal2-confirm-button-color: #ffffff;
+  --swal2-cancel-button-background-color: var(--app-bg-component);
+  --swal2-cancel-button-color: var(--app-text);
+  --swal2-deny-button-background-color: var(--app-bg-component);
+  --swal2-deny-button-color: var(--app-text);
+  --swal2-input-background: var(--app-bg);
+  --swal2-input-border: 1px solid var(--app-input-border);
+  --swal2-outline: 0 0 0 2px var(--app-bg), 0 0 0 4px var(--app-focus);
+
+  .swal2-cancel,
+  .swal2-deny {
+    border: 1px solid var(--app-input-border);
+  }
 }
 
 .small-font {
@@ -51,6 +181,25 @@
   }
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  letter-spacing: -0.015em;
+}
+
+table {
+  font-variant-numeric: tabular-nums;
+}
+
 a {
   text-decoration: underline;
   svg {
@@ -61,7 +210,7 @@ a {
 .custom-panel {
   max-width: 980px;
   background-color: var(--app-bg-surface);
-  @extend .rounded;
+  border-radius: var(--bs-border-radius-lg);
   @extend .shadow-sm;
   @extend .border;
   @extend .my-1;
@@ -81,7 +230,7 @@ a {
 
 ::placeholder {
   font-style: italic;
-  color: gray !important;
+  color: var(--app-text-secondary) !important;
 }
 
 .form-control[readonly] {

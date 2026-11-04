@@ -6,7 +6,6 @@ import { UploadAreaComponent } from '../../shared-components/upload-area/upload-
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.less'],
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [UploadAreaComponent],
 })

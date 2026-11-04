@@ -23,7 +23,9 @@
             </p>
             @if (user.allowManageMembers) {
               <p>
-                <a routerLink="/gerenciar-membros" class="btn btn-info">Gerenciar membros</a>
+                <a routerLink="/gerenciar-membros" class="btn btn-outline-primary"
+                  >Gerenciar membros</a
+                >
               </p>
             }
           </div>
@@ -52,7 +54,9 @@
                     <td>{{ transaction.dateApproved | date: 'dd/MM/yy' }}</td>
                     <td>
                       {{ transaction.desc }}
-                      <sup class="badge fw-light text-bg-light">{{ transaction.reference }}</sup>
+                      <sup class="badge fw-light text-bg-secondary">{{
+                        transaction.reference
+                      }}</sup>
                     </td>
                     <td>{{ transaction.paymentNumber }}</td>
                     <td>
