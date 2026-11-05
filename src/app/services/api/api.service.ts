@@ -27,10 +27,13 @@ export class ApiService {
 
   constructor() {}
 
-  public upload(requestBody: any): Promise<any> {
-    return firstValueFrom(
+  public async upload(requestBody: any): Promise<any> {
+    const response = await firstValueFrom(
       this.request({ url: `${environment.apiUpload}/pvt/upload` }, requestBody, 'post', false),
     );
+    // O upload pode vincular o CPF/CNPJ da nota e atualizar o plano da conta
+    delete this.requestCache['/pvt/user/me'];
+    return response;
   }
 
   public uploadStatement(requestBody: any): Promise<any> {
