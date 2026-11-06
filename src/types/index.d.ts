@@ -48,6 +48,7 @@ export type Note = {
   allFees: number;
   ANATax: number;
   usaAccount?: string;
+  suggestedDoc?: string;
   bovespaOthers: number;
   bovespaTotal: number;
   brokerageTax: number;
