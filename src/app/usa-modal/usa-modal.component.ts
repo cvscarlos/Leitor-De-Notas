@@ -50,6 +50,7 @@ export class USAModalComponent implements OnInit {
       if (!this.showApexModal) return;
 
       this.usaAccount = note.usaAccount;
+      this.newMemberDoc = note.suggestedDoc ?? '';
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       this.apiService.userMembersList((data: any) => {
